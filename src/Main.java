@@ -1,26 +1,23 @@
 import GraphicsEngine.Coordinate;
-import GraphicsEngine.GameImage;
+import GraphicsEngine.MenuDuJeu;
 import GraphicsEngine.VisualObject;
-import controller.Controller;
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import GraphicsEngine.MenuChoixDuJeu;
 
-import java.util.HashSet;
-
-import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
+
+import java.nio.file.Paths;
 
 
 public class Main extends Application {
     private final int xMax = 800;
     private final int yMax = 500;
+
+
     @Override
     public void start(Stage primaryStage) {
         Pane root = new Pane();//Creation groupe
@@ -35,11 +32,29 @@ public class Main extends Application {
         b.setFill(Color.BLUE);
         Controller a = new Controller(b,scene,root,primaryStage);
         a.controle();*/
+        //Menu menu = new Menu();
         VisualObject visualObject = new VisualObject("./data/pacmanOuvert2.png", new Coordinate(0, 0), scene, root, new Coordinate(xMax, yMax));
         root.getChildren().add(visualObject.getImageView());
         root.setStyle("-fx-background-color: black;");
         System.out.println(scene.heightProperty());
         primaryStage.setScene(scene);
+        MenuChoixDuJeu menuChoixDuJeu = new MenuChoixDuJeu(primaryStage);
+
+        MenuDuJeu menuPacMan = new MenuDuJeu(primaryStage, "../../data/pacmanFermee.png");
+        MenuDuJeu menuCasseBrique = new MenuDuJeu(primaryStage,null);
+
+        menuChoixDuJeu.getRectangleJeu2().getRectangle().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                menuChoixDuJeu.changerScene(menuCasseBrique.getMenuDuJeuScene());
+            }
+        });
+        menuChoixDuJeu.getRectangleJeu1().getRectangle().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                menuChoixDuJeu.changerScene(menuPacMan.getMenuDuJeuScene());
+            }
+        });
         primaryStage.show();
     }
 
