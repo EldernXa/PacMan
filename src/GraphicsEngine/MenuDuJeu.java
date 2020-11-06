@@ -1,5 +1,4 @@
 package GraphicsEngine;
-
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,7 +22,7 @@ public class MenuDuJeu {
     //ImageView imageView = new ImageView(new Image("data/Logos/settings.png"));
     Scene menuDuJeuScene;
 
-    public MenuDuJeu(Stage stage,boolean bool) {
+    public MenuDuJeu(Stage stage,String name,boolean bool) {
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
@@ -31,18 +30,11 @@ public class MenuDuJeu {
         double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
         menuDuJeuScene = new Scene(pane, screenWidth,screenHeight);
         menuDuJeuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
-        try {
-            ImageViewSizePos fondEcran;
-            if(bool) {
-                fondEcran = new ImageViewSizePos("./data/Logos/pacmanmenudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
-            }
-            else{
-                fondEcran = new ImageViewSizePos("./data/Logos/cassebriquemenudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
-            }
-            pane.getChildren().add(fondEcran.getImageView());
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+
+
+        ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Logos/" + name + "menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
+        pane.getChildren().add(fondEcran.getImageView());
+
         singlePlayer.setPrefWidth(buttonContainers.getPrefWidth());
         multiPlayer.setPrefWidth(buttonContainers.getPrefWidth());
         retouner.setPrefWidth(buttonContainers.getPrefWidth());
@@ -51,7 +43,7 @@ public class MenuDuJeu {
 
         System.out.println(buttonContainers.getAlignment());
 
-        MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage);
+        MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, name);
 
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
