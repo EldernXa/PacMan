@@ -21,6 +21,7 @@ public class MenuChoixDuJeu {
     private ImageViewSizePos imageJeu1;
     private ImageViewSizePos imageJeu2;
 
+
     public MenuChoixDuJeu(Stage stage) {
         System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
@@ -32,8 +33,8 @@ public class MenuChoixDuJeu {
         imageJeu2.setCoordinate(coordImageJeu2);
 
 
-        MenuDuJeu menuPacMan = new MenuDuJeu(stage, "./data/Logos/pacmanmenudujeu.jpg",true);
-        MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"./data/Logos/cassebriquemenudujeu.jpg",false);
+        MenuDuJeu menuPacMan = new MenuDuJeu(stage, true);
+        MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,false);
 
         imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -70,11 +71,9 @@ public class MenuChoixDuJeu {
         stage.setScene(scene);
     }
 
-
-
-
-
-
+    public Scene getMenuScene() {
+        return menuScene;
+    }
 
     public Pane getPane() {
         return pane;

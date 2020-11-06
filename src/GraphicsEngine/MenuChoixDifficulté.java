@@ -18,6 +18,7 @@ public class MenuChoixDifficulté {
     ImageView moyen;
     ImageView difficile;
     ImageView expert;
+    ImageViewSizePos revenir ;
     private Scene scene;
 
     public MenuChoixDifficulté(Stage stage) {
@@ -28,19 +29,19 @@ public class MenuChoixDifficulté {
 
 
 
-
+        revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
         facile = new ImageView(new Image(new File("./data/Font/facile.png").toURI().toString()));
         moyen = new ImageView(new Image(new File("./data/Font/moyen.png").toURI().toString()));
         difficile = new ImageView(new Image(new File("./data/Font/difficile.png").toURI().toString()));
         expert = new ImageView(new Image(new File("./data/Font/expert.png").toURI().toString()));
-        Coordinate coordFacile = new Coordinate(scene.getWidth()/2-600,scene.getHeight()/2-150);
-        Coordinate coordMoyen = new Coordinate(scene.getWidth()/2-300,scene.getHeight()/2-150);
+        Coordinate coordFacile = new Coordinate(scene.getWidth()/2-700,scene.getHeight()/2-150);
+        Coordinate coordMoyen = new Coordinate(scene.getWidth()/2-350,scene.getHeight()/2-150);
         Coordinate coordDifficile = new Coordinate(scene.getWidth()/2,scene.getHeight()/2-150);
-        Coordinate coordExptert = new Coordinate(scene.getWidth()/2+300,scene.getHeight()/2-150);
-        RectanglePos rectFacile = new RectanglePos(170,240, Color.LIGHTBLUE,coordFacile);
-        RectanglePos rectMoyen = new RectanglePos(170,240,Color.ORANGE,coordMoyen);
-        RectanglePos rectDifficile = new RectanglePos(170,240,Color.RED,coordDifficile);
-        RectanglePos rectExpert = new RectanglePos(170,240,Color.BLACK,coordExptert);
+        Coordinate coordExptert = new Coordinate(scene.getWidth()/2+350,scene.getHeight()/2-150);
+        RectanglePos rectFacile = new RectanglePos(210,270, Color.LIGHTBLUE,new Coordinate(coordFacile.getX()-10,coordFacile.getY()));
+        RectanglePos rectMoyen = new RectanglePos(210,270,Color.ORANGE,new Coordinate(coordMoyen.getX()-10,coordMoyen.getY()));
+        RectanglePos rectDifficile = new RectanglePos(210,270,Color.RED,new Coordinate(coordDifficile.getX()-10,coordDifficile.getY()));
+        RectanglePos rectExpert = new RectanglePos(210,270,Color.BLACK,new Coordinate(coordExptert.getX()-10,coordExptert.getY()));
         facile.setTranslateX(coordFacile.getX());
         facile.setTranslateY(coordFacile.getY());
         facile.setFitWidth(250);
@@ -62,10 +63,11 @@ public class MenuChoixDifficulté {
         expert.setFitHeight(200);
 
         Pane paneFacile = new Pane();
+        pane.setMaxSize(270,210);
         paneFacile.getChildren().addAll(rectFacile.getRectangle(),facile);
-        pane.getChildren().addAll(paneFacile,rectMoyen.getRectangle(),rectDifficile.getRectangle(),rectExpert.getRectangle(),moyen,difficile,expert);
+        pane.getChildren().addAll(paneFacile,rectMoyen.getRectangle(),rectDifficile.getRectangle(),rectExpert.getRectangle(),moyen,difficile,expert,revenir.getImageView());
 
-        paneFacile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        facile.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Pane root = new Pane();//Creation groupe
@@ -78,6 +80,14 @@ public class MenuChoixDifficulté {
             }
         });
 
+        revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,true);
+
+                stage.setScene(menuDuJeu.getMenuDuJeuScene());
+            }
+        });
         stage.setScene(scene);
     }
 
