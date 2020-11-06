@@ -30,6 +30,7 @@ public class MenuChoixDuJeu {
 
 
         pane.getChildren().addAll(rectangleJeu1.getRectangle(),rectangleJeu2.getRectangle());
+
         stage.setScene(menuScene);
         this.stage = stage ;
     }

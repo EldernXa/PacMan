@@ -53,6 +53,7 @@ public class Main extends Application {
                 menuChoixDuJeu.changerScene(menuPacMan.getMenuDuJeuScene());
             }
         });
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
