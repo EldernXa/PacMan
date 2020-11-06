@@ -41,13 +41,13 @@ public class Main extends Application {
         MenuDuJeu menuPacMan = new MenuDuJeu(primaryStage, "./data/Logos/pacmanmenudujeu.jpg");
         MenuDuJeu menuCasseBrique = new MenuDuJeu(primaryStage,"./data/Logos/cassebriquemenudujeu.jpg");
 
-        menuChoixDuJeu.getRectangleJeu2().getRectangle().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        menuChoixDuJeu.getImageJeu1().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 menuChoixDuJeu.changerScene(menuCasseBrique.getMenuDuJeuScene());
             }
         });
-        menuChoixDuJeu.getRectangleJeu1().getRectangle().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        menuChoixDuJeu.getImageJeu2().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 menuChoixDuJeu.changerScene(menuPacMan.getMenuDuJeuScene());
