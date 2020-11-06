@@ -22,8 +22,7 @@ public class GameImage {
         this.coordinate = coordinate;
         imgView.setX(coordinate.getX());
         imgView.setY(coordinate.getY());
-        /*imgView.setScaleX(-1);
-        imgView.setScaleY(1);*/
+
     }
 
     public int getValueMove(){
