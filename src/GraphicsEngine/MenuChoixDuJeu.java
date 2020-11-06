@@ -27,6 +27,7 @@ public class MenuChoixDuJeu {
     private Button buttonExit = new Button("Quitter le menu");
     private ImageViewSizePos imageJeu1;
     private ImageViewSizePos imageJeu2;
+    private ImageViewSizePos imageFond;
     Label choixDuJeuLabel = new Label("Choisissez votre Jeu :");
 
 
@@ -42,6 +43,7 @@ public class MenuChoixDuJeu {
         choixDuJeuLabel.setPadding(new Insets(7));
         choixDuJeuLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,null,null)));
 
+        imageFond =  new ImageViewSizePos("./data/Logos/menuchoixdujeu.jpg",menuScene.getWidth(),menuScene.getHeight());
         imageJeu1 = new ImageViewSizePos("./data/Logos/pacmanmenuchoixdujeu.jpg",500,250);
         Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getImageView().getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getImageView().getFitHeight()/2));
         imageJeu1.setCoordinate(coordImageJeu1);
@@ -76,7 +78,7 @@ public class MenuChoixDuJeu {
             }
         });
 
-        pane.getChildren().addAll(imageJeu1.getImageView(), imageJeu2.getImageView(), choixDuJeuLabel,buttonExit);
+        pane.getChildren().addAll(imageFond.getImageView(),imageJeu1.getImageView(), imageJeu2.getImageView(), choixDuJeuLabel,buttonExit);
 
         stage.setScene(menuScene);
         this.stage = stage ;
