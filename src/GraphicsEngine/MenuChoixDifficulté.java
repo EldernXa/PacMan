@@ -26,7 +26,6 @@ public class MenuChoixDifficulté {
 
     public MenuChoixDifficulté(Stage stage) {
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
-
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
 
         RectanglePos rectFacile = new RectanglePos(180,270, Color.LIGHTBLUE);
@@ -54,6 +53,7 @@ public class MenuChoixDifficulté {
         ObjectsInPane expertObj = new ObjectsInPane(expertList, coordExpert,rectExpert.getRectangle().getWidth(),rectExpert.getRectangle().getHeight());
 
         pane.getChildren().addAll(facileObj.getPane(),moyenObj.getPane(),difficileObj.getPane(),expertObj.getPane(), revenir.getImageView());
+
 
         facileObj.getPane().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

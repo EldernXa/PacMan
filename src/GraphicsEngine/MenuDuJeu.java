@@ -24,8 +24,7 @@ public class MenuDuJeu {
     Scene menuDuJeuScene;
 
     public MenuDuJeu(Stage stage,boolean bool) {
-
-        buttonContainers.setPrefWidth(500);
+        buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
         double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();

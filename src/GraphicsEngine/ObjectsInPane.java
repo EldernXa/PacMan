@@ -1,11 +1,14 @@
 package GraphicsEngine;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+
 import java.util.List;
 
 public class ObjectsInPane {
-    Pane pane = new Pane();
+    StackPane pane = new StackPane();
     List<Node> nodeList;
 
     public ObjectsInPane(List<Node> nodeList, Coordinate coordinate, double width, double height){
@@ -13,6 +16,7 @@ public class ObjectsInPane {
         for (Node node : nodeList){
             pane.getChildren().add(node);
         }
+        pane.setAlignment(Pos.CENTER);
         pane.setTranslateX(coordinate.getX());
         pane.setTranslateY(coordinate.getY());
         pane.setMaxSize(width,height);
