@@ -19,6 +19,13 @@ public class RectanglePos {
         this.rectangle.setStroke(Color.BLACK);
     }
 
+    public RectanglePos(int hauteur, int largeur, Color color) {
+        this.rectangle.setFill(color);
+        this.rectangle.setHeight(hauteur);
+        this.rectangle.setWidth(largeur);
+        this.rectangle.setStroke(Color.BLACK);
+    }
+
     public Rectangle getRectangle() {
         return rectangle;
     }

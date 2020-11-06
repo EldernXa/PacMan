@@ -1,6 +1,7 @@
 package GraphicsEngine;
 
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,63 +12,50 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class MenuChoixDifficulté {
     private Pane pane = new Pane();
-    ImageView facile;
-    ImageView moyen;
-    ImageView difficile;
-    ImageView expert;
+    ImageViewSizePos facile;
+    ImageViewSizePos moyen;
+    ImageViewSizePos difficile;
+    ImageViewSizePos expert;
     ImageViewSizePos revenir ;
     private Scene scene;
 
     public MenuChoixDifficulté(Stage stage) {
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
 
-
-
-
-
-
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
-        facile = new ImageView(new Image(new File("./data/Font/facile.png").toURI().toString()));
-        moyen = new ImageView(new Image(new File("./data/Font/moyen.png").toURI().toString()));
-        difficile = new ImageView(new Image(new File("./data/Font/difficile.png").toURI().toString()));
-        expert = new ImageView(new Image(new File("./data/Font/expert.png").toURI().toString()));
+
         Coordinate coordFacile = new Coordinate(scene.getWidth()/2-700,scene.getHeight()/2-150);
+        RectanglePos rectFacile = new RectanglePos(180,270, Color.LIGHTBLUE);
+        facile = new ImageViewSizePos("./data/Font/facile.png",250,170);
+        List<Node> facileList = Arrays.asList(rectFacile.getRectangle(),facile.getImageView());
+        ObjectsInPane facileObj = new ObjectsInPane(facileList, coordFacile,rectFacile.getRectangle().getWidth(),rectFacile.getRectangle().getHeight());
+
         Coordinate coordMoyen = new Coordinate(scene.getWidth()/2-350,scene.getHeight()/2-150);
+        RectanglePos rectMoyen = new RectanglePos(180,270,Color.ORANGE);
+        moyen = new ImageViewSizePos("./data/Font/moyen.png",250,170);
+        List<Node> moyenList = Arrays.asList(rectMoyen.getRectangle(),moyen.getImageView());
+        ObjectsInPane moyenObj = new ObjectsInPane(moyenList, coordMoyen,rectMoyen.getRectangle().getWidth(),rectMoyen.getRectangle().getHeight());
+
         Coordinate coordDifficile = new Coordinate(scene.getWidth()/2,scene.getHeight()/2-150);
-        Coordinate coordExptert = new Coordinate(scene.getWidth()/2+350,scene.getHeight()/2-150);
-        RectanglePos rectFacile = new RectanglePos(180,270, Color.LIGHTBLUE,new Coordinate(coordFacile.getX()-10,coordFacile.getY()));
-        RectanglePos rectMoyen = new RectanglePos(180,270,Color.ORANGE,new Coordinate(coordMoyen.getX()-10,coordMoyen.getY()));
-        RectanglePos rectDifficile = new RectanglePos(180,270,Color.RED,new Coordinate(coordDifficile.getX()-10,coordDifficile.getY()));
-        RectanglePos rectExpert = new RectanglePos(180,270,Color.BLACK,new Coordinate(coordExptert.getX()-10,coordExptert.getY()));
-        facile.setTranslateX(coordFacile.getX());
-        facile.setTranslateY(coordFacile.getY());
-        facile.setFitWidth(250);
-        facile.setFitHeight(170);
+        RectanglePos rectDifficile = new RectanglePos(180,270,Color.RED);
+        difficile = new ImageViewSizePos("./data/Font/difficile.png",250,170);
+        List<Node> difficileList = Arrays.asList(rectDifficile.getRectangle(),difficile.getImageView());
+        ObjectsInPane difficileObj = new ObjectsInPane(difficileList, coordDifficile,rectDifficile.getRectangle().getWidth(),rectDifficile.getRectangle().getHeight());
 
-        moyen.setTranslateX(coordMoyen.getX());
-        moyen.setTranslateY(coordMoyen.getY());
-        moyen.setFitWidth(250);
-        moyen.setFitHeight(170);
+        Coordinate coordExpert = new Coordinate(scene.getWidth()/2+350,scene.getHeight()/2-150);
+        RectanglePos rectExpert = new RectanglePos(180,270,Color.BLACK);
+        expert = new ImageViewSizePos("./data/Font/expert.png",250,170);
+        List<Node> expertList = Arrays.asList(rectExpert.getRectangle(),expert.getImageView());
+        ObjectsInPane expertObj = new ObjectsInPane(expertList, coordExpert,rectExpert.getRectangle().getWidth(),rectExpert.getRectangle().getHeight());
 
-        difficile.setTranslateX(coordDifficile.getX());
-        difficile.setTranslateY(coordDifficile.getY());
-        difficile.setFitWidth(250);
-        difficile.setFitHeight(170);
+        pane.getChildren().addAll(facileObj.getPane(),moyenObj.getPane(),difficileObj.getPane(),expertObj.getPane());
 
-        expert.setTranslateX(coordExptert.getX());
-        expert.setTranslateY(coordExptert.getY());
-        expert.setFitWidth(250);
-        expert.setFitHeight(170);
-
-        Pane paneFacile = new Pane();
-        pane.setMaxSize(270,210);
-        paneFacile.getChildren().addAll(rectFacile.getRectangle(),facile);
-        pane.getChildren().addAll(paneFacile,rectMoyen.getRectangle(),rectDifficile.getRectangle(),rectExpert.getRectangle(),moyen,difficile,expert,revenir.getImageView());
-
-        facile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Pane root = new Pane();//Creation groupe
@@ -83,7 +71,7 @@ public class MenuChoixDifficulté {
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,true);
+                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,true); //a revoir lier avec le menu du choix du jeu
 
                 stage.setScene(menuDuJeu.getMenuDuJeuScene());
             }
@@ -91,19 +79,19 @@ public class MenuChoixDifficulté {
         stage.setScene(scene);
     }
 
-    public ImageView getFacile() {
+    public ImageViewSizePos getFacile() {
         return facile;
     }
 
-    public ImageView getMoyen() {
+    public ImageViewSizePos getMoyen() {
         return moyen;
     }
 
-    public ImageView getDifficile() {
+    public ImageViewSizePos getDifficile() {
         return difficile;
     }
 
-    public ImageView getExpert() {
+    public ImageViewSizePos getExpert() {
         return expert;
     }
 
