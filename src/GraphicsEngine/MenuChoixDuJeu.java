@@ -18,54 +18,48 @@ public class MenuChoixDuJeu {
     private Stage stage;
     private Scene menuScene;
     private Button buttonExit = new Button("Quitter le menu");
-    private ImageView imageJeu1;
-    private ImageView imageJeu2;
+    private ImageViewSizePos imageJeu1;
+    private ImageViewSizePos imageJeu2;
 
     public MenuChoixDuJeu(Stage stage) {
         System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
-        imageJeu1 = new ImageView(new Image(new File("./data/Logos/pacmanmenuchoixdujeu.jpg").toURI().toString()));
-        imageJeu1.setFitWidth(500);
-        imageJeu1.setFitHeight(250);
-        imageJeu2 = new ImageView(new Image(new File("./data/Logos/cassebriquemenuchoixdujeu.jpg").toURI().toString()));
-        imageJeu2.setFitWidth(500);
-        imageJeu2.setFitHeight(250);
-        Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getFitHeight()/2));
-        imageJeu1.setTranslateX(coordImageJeu1.getX());
-        imageJeu1.setTranslateY(coordImageJeu1.getY());
-        Coordinate coordImageJeu2 = new Coordinate(menuScene.getWidth()/2-(imageJeu2.getFitWidth()/2)+(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu2.getFitHeight()/2));
-        imageJeu2.setTranslateX(coordImageJeu2.getX());
-        imageJeu2.setTranslateY(coordImageJeu2.getY());
+        imageJeu1 = new ImageViewSizePos("./data/Logos/pacmanmenuchoixdujeu.jpg",500,250);
+        Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getImageView().getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getImageView().getFitHeight()/2));
+        imageJeu1.setCoordinate(coordImageJeu1);
+        imageJeu2 = new ImageViewSizePos("./data/Logos/cassebriquemenuchoixdujeu.jpg",500,250);
+        Coordinate coordImageJeu2 = new Coordinate(menuScene.getWidth()/2-(imageJeu2.getImageView().getFitWidth()/2)+(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu2.getImageView().getFitHeight()/2));
+        imageJeu2.setCoordinate(coordImageJeu2);
 
 
         MenuDuJeu menuPacMan = new MenuDuJeu(stage, "./data/Logos/pacmanmenudujeu.jpg");
         MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"./data/Logos/cassebriquemenudujeu.jpg");
 
-        imageJeu1.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 changerScene(menuPacMan.getMenuDuJeuScene());
             }
         });
-        imageJeu2.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        imageJeu2.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 changerScene(menuCasseBrique.getMenuDuJeuScene());
             }
         });
 
-        pane.getChildren().addAll(imageJeu1, imageJeu2);
+        pane.getChildren().addAll(imageJeu1.getImageView(), imageJeu2.getImageView());
 
         stage.setScene(menuScene);
         this.stage = stage ;
     }
 
     public ImageView getImageJeu1() {
-        return imageJeu1;
+        return imageJeu1.getImageView();
     }
 
     public ImageView getImageJeu2() {
-        return imageJeu2;
+        return imageJeu2.getImageView();
     }
 
     public Stage getStage() {
