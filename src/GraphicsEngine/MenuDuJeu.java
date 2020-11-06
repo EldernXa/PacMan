@@ -26,7 +26,7 @@ public class MenuDuJeu {
     //ImageView imageView = new ImageView(new Image("data/Logos/settings.png"));
     Scene menuDuJeuScene;
 
-    public MenuDuJeu(Stage stage, String pathImage) {
+    public MenuDuJeu(Stage stage, String pathImage,boolean bool) {
 
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
@@ -45,10 +45,19 @@ public class MenuDuJeu {
         System.out.println(buttonContainers.getAlignment());
 
         MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage);
+
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                stage.setScene(menuChoixDifficulté.getScene());;
+                if(bool)
+                    stage.setScene(menuChoixDifficulté.getScene());
+                else{
+                    ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",(int)screenWidth,(int)screenHeight);
+                    pane.getChildren().clear();
+                    pane.getChildren().add(imageViewSizePos.getImageView());
+                    stage.setScene(menuDuJeuScene);
+
+                }
             }
         });
         pane.getChildren().addAll(buttonContainers);

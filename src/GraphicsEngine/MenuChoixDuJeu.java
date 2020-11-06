@@ -32,8 +32,8 @@ public class MenuChoixDuJeu {
         imageJeu2.setCoordinate(coordImageJeu2);
 
 
-        MenuDuJeu menuPacMan = new MenuDuJeu(stage, "./data/Logos/pacmanmenudujeu.jpg");
-        MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"./data/Logos/cassebriquemenudujeu.jpg");
+        MenuDuJeu menuPacMan = new MenuDuJeu(stage, "./data/Logos/pacmanmenudujeu.jpg",true);
+        MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"./data/Logos/cassebriquemenudujeu.jpg",false);
 
         imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

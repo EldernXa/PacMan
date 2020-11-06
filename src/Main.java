@@ -23,14 +23,6 @@ public class Main extends Application {
         root.setMaxWidth(xMax);
         root.setMinSize(0, 0);
         Scene scene = new Scene(root,xMax,yMax);//Creation fenetre de taille 400 sur 400 pixels
-        /*Circle b = new Circle();
-        b.setCenterX(400);
-        b.setCenterY(250);
-        b.setRadius(10);
-        b.setFill(Color.BLUE);
-        Controller a = new Controller(b,scene,root,primaryStage);
-        a.controle();*/
-        //Menu menu = new Menu();
         VisualObject visualObject = new VisualObject("./data/pacmanOuvert2.png", new Coordinate(0, 0), scene, root, new Coordinate(xMax, yMax));
         root.getChildren().add(visualObject.getImageView());
         root.setStyle("-fx-background-color: black;");
