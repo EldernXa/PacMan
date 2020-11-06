@@ -22,7 +22,7 @@ public class MenuDuJeu {
     //ImageView imageView = new ImageView(new Image("data/Logos/settings.png"));
     Scene menuDuJeuScene;
 
-    public MenuDuJeu(Stage stage,String name,boolean bool) {
+    public MenuDuJeu(Stage stage,String name) {
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
@@ -48,7 +48,7 @@ public class MenuDuJeu {
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(bool)
+                if(name.equals("pacman"))
                     stage.setScene(menuChoixDifficulté.getScene());
                 else{
                     ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",(int)screenWidth,(int)screenHeight);

@@ -69,7 +69,7 @@ public class MenuChoixDifficulté {
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,name ,true); //a revoir lier avec le menu du choix du jeu
+                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,name ); //a revoir lier avec le menu du choix du jeu
 
                 stage.setScene(menuDuJeu.getMenuDuJeuScene());
             }

@@ -1,5 +1,6 @@
 package GraphicsEngine;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -16,6 +17,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 
 public class MenuChoixDuJeu {
     private Pane pane = new Pane();
@@ -30,7 +33,7 @@ public class MenuChoixDuJeu {
     public MenuChoixDuJeu(Stage stage) {
         System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
-
+        menuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         choixDuJeuLabel.setFont(Font.font("Avenir Next", 45));
         choixDuJeuLabel.setUnderline(true);
         choixDuJeuLabel.setTranslateX(menuScene.getWidth()/2-220);
@@ -47,8 +50,9 @@ public class MenuChoixDuJeu {
         imageJeu2.setCoordinate(coordImageJeu2);
 
 
-        MenuDuJeu menuPacMan = new MenuDuJeu(stage,"pacman", true);
-        MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"cassebrique",false);
+
+        MenuDuJeu menuPacMan = new MenuDuJeu(stage,"pacman");
+        MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"cassebrique");
 
         imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -62,8 +66,17 @@ public class MenuChoixDuJeu {
                 changerScene(menuCasseBrique.getMenuDuJeuScene());
             }
         });
+        buttonExit.setTranslateX(menuScene.getWidth()/2-100);
+        buttonExit.setTranslateY(menuScene.getHeight()/2 + 250);
+        buttonExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
 
-        pane.getChildren().addAll(imageJeu1.getImageView(), imageJeu2.getImageView(), choixDuJeuLabel);
+        pane.getChildren().addAll(imageJeu1.getImageView(), imageJeu2.getImageView(), choixDuJeuLabel,buttonExit);
 
         stage.setScene(menuScene);
         this.stage = stage ;
