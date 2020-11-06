@@ -37,8 +37,7 @@ public class Main extends Application {
         System.out.println(scene.heightProperty());
         primaryStage.setScene(scene);
         MenuChoixDuJeu menuChoixDuJeu = new MenuChoixDuJeu(primaryStage);
-
-
+        
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
