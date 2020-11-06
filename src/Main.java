@@ -38,21 +38,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         MenuChoixDuJeu menuChoixDuJeu = new MenuChoixDuJeu(primaryStage);
 
-        MenuDuJeu menuPacMan = new MenuDuJeu(primaryStage, "./data/Logos/pacmanmenudujeu.jpg");
-        MenuDuJeu menuCasseBrique = new MenuDuJeu(primaryStage,"./data/Logos/cassebriquemenudujeu.jpg");
 
-        menuChoixDuJeu.getImageJeu1().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                menuChoixDuJeu.changerScene(menuCasseBrique.getMenuDuJeuScene());
-            }
-        });
-        menuChoixDuJeu.getImageJeu2().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                menuChoixDuJeu.changerScene(menuPacMan.getMenuDuJeuScene());
-            }
-        });
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
