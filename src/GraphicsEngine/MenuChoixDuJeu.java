@@ -1,16 +1,22 @@
 package GraphicsEngine;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 
 public class MenuChoixDuJeu {
@@ -20,11 +26,21 @@ public class MenuChoixDuJeu {
     private Button buttonExit = new Button("Quitter le menu");
     private ImageViewSizePos imageJeu1;
     private ImageViewSizePos imageJeu2;
+    Label choixDuJeuLabel = new Label("Choissisez votre Jeu :");
 
 
     public MenuChoixDuJeu(Stage stage) {
         System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
+
+        choixDuJeuLabel.setFont(Font.font("Avenir Next", 45));
+        choixDuJeuLabel.setUnderline(true);
+        choixDuJeuLabel.setTranslateX(menuScene.getWidth()/2-220);
+        choixDuJeuLabel.setTranslateY(70);
+        choixDuJeuLabel.setStyle("-fx-border-color: black;");
+        choixDuJeuLabel.setPadding(new Insets(7));
+        choixDuJeuLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,null,null)));
+
         imageJeu1 = new ImageViewSizePos("./data/Logos/pacmanmenuchoixdujeu.jpg",500,250);
         Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getImageView().getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getImageView().getFitHeight()/2));
         imageJeu1.setCoordinate(coordImageJeu1);
@@ -49,7 +65,7 @@ public class MenuChoixDuJeu {
             }
         });
 
-        pane.getChildren().addAll(imageJeu1.getImageView(), imageJeu2.getImageView());
+        pane.getChildren().addAll(imageJeu1.getImageView(), imageJeu2.getImageView(), choixDuJeuLabel);
 
         stage.setScene(menuScene);
         this.stage = stage ;
