@@ -9,7 +9,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.nio.file.Path;
 
 public class MenuDuJeu {
     Pane pane = new Pane();
@@ -19,7 +18,12 @@ public class MenuDuJeu {
     Scene menuDuJeuScene;
 
     public MenuDuJeu(Stage stage, String pathImage) {
-        //pane.getChildren().add(new ImageView(getClass().getResource(pathImage).toString()));
+        try {
+            ImageView fondEcran = new ImageView(new Image(new File(pathImage).toURI().toString()));
+            pane.getChildren().add(fondEcran);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         menuDuJeuScene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
 
         menuDuJeuScene.setRoot(pane);

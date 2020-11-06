@@ -10,8 +10,6 @@ import GraphicsEngine.MenuChoixDuJeu;
 
 import javafx.scene.Scene;
 
-import java.nio.file.Paths;
-
 
 public class Main extends Application {
     private final int xMax = 800;
@@ -40,8 +38,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         MenuChoixDuJeu menuChoixDuJeu = new MenuChoixDuJeu(primaryStage);
 
-        MenuDuJeu menuPacMan = new MenuDuJeu(primaryStage, "../../data/pacmanFermee.png");
-        MenuDuJeu menuCasseBrique = new MenuDuJeu(primaryStage,null);
+        MenuDuJeu menuPacMan = new MenuDuJeu(primaryStage, "./data/Logos/pacman.png");
+        MenuDuJeu menuCasseBrique = new MenuDuJeu(primaryStage,"./data/Logos/pacman.png");
 
         menuChoixDuJeu.getRectangleJeu2().getRectangle().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
