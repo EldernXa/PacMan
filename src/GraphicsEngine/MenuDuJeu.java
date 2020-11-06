@@ -30,16 +30,18 @@ public class MenuDuJeu {
 
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
+        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+        menuDuJeuScene = new Scene(pane, screenWidth,screenHeight);
         try {
             ImageView fondEcran = new ImageView(new Image(new File(pathImage).toURI().toString()));
+            fondEcran.setFitWidth(menuDuJeuScene.getWidth());
+            fondEcran.setFitHeight(menuDuJeuScene.getHeight());
             pane.getChildren().add(fondEcran);
         }catch(Exception e){
             e.printStackTrace();
         }
-        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
         buttonContainers.getChildren().addAll(singlePlayer,multiPlayer);
-        menuDuJeuScene = new Scene(pane, screenWidth,screenHeight);
         System.out.println(buttonContainers.getAlignment());
         pane.getChildren().addAll(buttonContainers);
         buttonContainers.setAlignment(Pos.CENTER);
