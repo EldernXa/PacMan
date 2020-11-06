@@ -18,6 +18,9 @@ public class MenuDuJeu {
     Scene menuDuJeuScene;
 
     public MenuDuJeu(Stage stage, String pathImage) {
+
+        System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
+        System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
         try {
             ImageView fondEcran = new ImageView(new Image(new File(pathImage).toURI().toString()));
             pane.getChildren().add(fondEcran);

@@ -38,8 +38,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         MenuChoixDuJeu menuChoixDuJeu = new MenuChoixDuJeu(primaryStage);
 
-        MenuDuJeu menuPacMan = new MenuDuJeu(primaryStage, "./data/Logos/pacman.png");
-        MenuDuJeu menuCasseBrique = new MenuDuJeu(primaryStage,"./data/Logos/cassebrique.png");
+        MenuDuJeu menuPacMan = new MenuDuJeu(primaryStage, "./data/Logos/pacmanmenudujeu.jpg");
+        MenuDuJeu menuCasseBrique = new MenuDuJeu(primaryStage,"./data/Logos/cassebriquemenudujeu.jpg");
 
         menuChoixDuJeu.getRectangleJeu2().getRectangle().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
