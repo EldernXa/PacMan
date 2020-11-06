@@ -43,6 +43,14 @@ public class MenuDuJeu {
         }
         buttonContainers.getChildren().addAll(singlePlayer,multiPlayer);
         System.out.println(buttonContainers.getAlignment());
+
+        MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage);
+        singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stage.setScene(menuChoixDifficulté.getScene());;
+            }
+        });
         pane.getChildren().addAll(buttonContainers);
         buttonContainers.setAlignment(Pos.CENTER);
         menuDuJeuScene.setRoot(pane);
@@ -51,4 +59,5 @@ public class MenuDuJeu {
     public Scene getMenuDuJeuScene() {
         return menuDuJeuScene;
     }
+
 }
