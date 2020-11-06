@@ -32,16 +32,14 @@ public class MenuDuJeu {
         menuDuJeuScene = new Scene(pane, screenWidth,screenHeight);
         menuDuJeuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         try {
-            ImageView fondEcran;
+            ImageViewSizePos fondEcran;
             if(bool) {
-                fondEcran = new ImageView(new Image(new File("./data/Logos/pacmanmenudujeu.jpg").toURI().toString()));
+                fondEcran = new ImageViewSizePos("./data/Logos/pacmanmenudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
             }
             else{
-                fondEcran = new ImageView(new Image(new File("./data/Logos/cassebriquemenudujeu.jpg").toURI().toString()));
+                fondEcran = new ImageViewSizePos("./data/Logos/cassebriquemenudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
             }
-            fondEcran.setFitWidth(menuDuJeuScene.getWidth());
-            fondEcran.setFitHeight(menuDuJeuScene.getHeight());
-            pane.getChildren().add(fondEcran);
+            pane.getChildren().add(fondEcran.getImageView());
         }catch(Exception e){
             e.printStackTrace();
         }
