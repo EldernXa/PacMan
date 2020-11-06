@@ -16,8 +16,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.io.File;
 
 public class MenuChoixDuJeu {
     private Pane pane = new Pane();
@@ -26,7 +24,7 @@ public class MenuChoixDuJeu {
     private Button buttonExit = new Button("Quitter le menu");
     private ImageViewSizePos imageJeu1;
     private ImageViewSizePos imageJeu2;
-    Label choixDuJeuLabel = new Label("Choissisez votre Jeu :");
+    Label choixDuJeuLabel = new Label("Choisissez votre Jeu :");
 
 
     public MenuChoixDuJeu(Stage stage) {
