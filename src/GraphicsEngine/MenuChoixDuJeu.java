@@ -24,18 +24,19 @@ public class MenuChoixDuJeu {
     public MenuChoixDuJeu(Stage stage) {
         System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
-        Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-584,menuScene.getHeight()/2-150);
         imageJeu1 = new ImageView(new Image(new File("./data/Logos/pacmanmenuchoixdujeu.jpg").toURI().toString()));
+        imageJeu1.setFitWidth(500);
+        imageJeu1.setFitHeight(250);
+        imageJeu2 = new ImageView(new Image(new File("./data/Logos/cassebriquemenuchoixdujeu.jpg").toURI().toString()));
+        imageJeu2.setFitWidth(500);
+        imageJeu2.setFitHeight(250);
+        Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getFitHeight()/2));
         imageJeu1.setTranslateX(coordImageJeu1.getX());
         imageJeu1.setTranslateY(coordImageJeu1.getY());
-        imageJeu1.setFitWidth(400);
-        imageJeu1.setFitHeight(300);
-        Coordinate coordImageJeu2 = new Coordinate(menuScene.getWidth()/2+184,menuScene.getHeight()/2-150);
-        imageJeu2 = new ImageView(new Image(new File("./data/Logos/cassebriquemenuchoixdujeu.jpg").toURI().toString()));
+        Coordinate coordImageJeu2 = new Coordinate(menuScene.getWidth()/2-(imageJeu2.getFitWidth()/2)+(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu2.getFitHeight()/2));
         imageJeu2.setTranslateX(coordImageJeu2.getX());
         imageJeu2.setTranslateY(coordImageJeu2.getY());
-        imageJeu2.setFitWidth(400);
-        imageJeu2.setFitHeight(300);
+
 
         MenuDuJeu menuPacMan = new MenuDuJeu(stage, "./data/Logos/pacmanmenudujeu.jpg");
         MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"./data/Logos/cassebriquemenudujeu.jpg");
