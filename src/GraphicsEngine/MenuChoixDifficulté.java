@@ -53,9 +53,9 @@ public class MenuChoixDifficulté {
         List<Node> expertList = Arrays.asList(rectExpert.getRectangle(),expert.getImageView());
         ObjectsInPane expertObj = new ObjectsInPane(expertList, coordExpert,rectExpert.getRectangle().getWidth(),rectExpert.getRectangle().getHeight());
 
-        pane.getChildren().addAll(facileObj.getPane(),moyenObj.getPane(),difficileObj.getPane(),expertObj.getPane());
+        pane.getChildren().addAll(facileObj.getPane(),moyenObj.getPane(),difficileObj.getPane(),expertObj.getPane(), revenir.getImageView());
 
-        pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        facileObj.getPane().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Pane root = new Pane();//Creation groupe

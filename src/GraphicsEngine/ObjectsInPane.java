@@ -16,7 +16,6 @@ public class ObjectsInPane {
         pane.setTranslateX(coordinate.getX());
         pane.setTranslateY(coordinate.getY());
         pane.setMaxSize(width,height);
-        //pane.setCenterShape(true);
     }
 
     public List<Node> getNodeList() {
