@@ -87,6 +87,7 @@ public class MenuChoixDuJeu {
     }
 
     public ImageView getImageJeu2() {
+        System.out.println("coco");
         return imageJeu2.getImageView();
     }
 

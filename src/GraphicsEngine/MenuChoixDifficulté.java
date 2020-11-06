@@ -25,7 +25,7 @@ public class MenuChoixDifficulté {
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
 
 
-        ImageViewSizePos fond = new ImageViewSizePos("./data/Logos/"+ name + "menudujeu.jpg",(int)scene.getWidth(),(int)scene.getHeight());
+        ImageViewSizePos fond = new ImageViewSizePos("./data/Logos/"+ name + "menudujeu.jpg",scene.getWidth(),scene.getHeight());
         RectanglePos rectFacile = new RectanglePos(180,270, Color.LIGHTBLUE);
         Coordinate coordFacile = new Coordinate(scene.getWidth()/8-(rectFacile.getRectangle().getWidth()/2),scene.getHeight()/2-(rectFacile.getRectangle().getHeight()/2));
         facile = new ImageViewSizePos("./data/Font/facile.png",250,170);
