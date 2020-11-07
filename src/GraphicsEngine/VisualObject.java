@@ -6,6 +6,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * Class for all object who are displayed. There are a GameImage (for display the image) and
+ * a Action (for all the action he can do).
+ */
 public class VisualObject {
     private final GameImage gameImage;
     private final Action action;

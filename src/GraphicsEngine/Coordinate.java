@@ -1,5 +1,8 @@
 package GraphicsEngine;
 
+/**
+ * Class who represent position of all things in the game.
+ */
 public class Coordinate {
     private double x;
     private double y;
