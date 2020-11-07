@@ -3,12 +3,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 
@@ -47,8 +50,6 @@ public class MenuDuJeu {
         hbox.setAlignment(Pos.CENTER);
         buttonContainers.getChildren().addAll(singlePlayer,multiPlayer,retouner, hbox);
 
-        System.out.println(buttonContainers.getAlignment());
-
         MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, name);
 
         sound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -58,6 +59,11 @@ public class MenuDuJeu {
                 hbox.getChildren().add(nosound.getImageView());
             }
         });
+        ImageViewSizePos revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50, new Coordinate(2,2));
+        Tooltip tooltip_revenir=new Tooltip("Revenir en arrière");
+        tooltip_revenir.setStyle(" -fx-background-color: gray;");
+        tooltip_revenir.setShowDelay(new Duration(0));
+        Tooltip.install(revenir.getImageView(),tooltip_revenir);
         nosound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -73,16 +79,25 @@ public class MenuDuJeu {
                 else{
                     ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",screenWidth,screenHeight);
                     pane.getChildren().clear();
-                    pane.getChildren().addAll(imageViewSizePos.getImageView(),retouner);
+                    pane.getChildren().addAll(imageViewSizePos.getImageView(),revenir.getImageView());
+                    pane.setAlignment(Pos.TOP_LEFT);
                     stage.setScene(menuDuJeuScene);
                 }
             }
         });
+
         retouner.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MenuChoixDuJeu menuChoixDuJeu  = new MenuChoixDuJeu(stage);
                 stage.setScene(menuChoixDuJeu.getMenuScene());
+            }
+        });
+        revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,name);
+                stage.setScene(menuDuJeu.getMenuDuJeuScene());
             }
         });
         pane.getChildren().addAll(buttonContainers);
