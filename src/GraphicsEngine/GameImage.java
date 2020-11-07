@@ -7,6 +7,9 @@ import javafx.scene.layout.Pane;
 
 import java.io.File;
 
+/**
+ * class for display image for character.
+ */
 public class GameImage {
     private Coordinate coordinate;
     private final ImageView imgView;
@@ -14,6 +17,13 @@ public class GameImage {
     private final int valueMove;
     private final String path;
 
+    /**
+     *
+     * @param path image String
+     * @param coordinate this position
+     * @param valueMove the value of move (speed or other thing)
+     * @param root Pane from javafx (we will display the image on it)
+     */
     public GameImage(String path, Coordinate coordinate, int valueMove, Pane root){
         this.root = root;
         this.path = path;
@@ -37,21 +47,33 @@ public class GameImage {
         return coordinate;
     }
 
+    /**
+     * Decrease y coordinate for the image and display it
+     */
     public void monter(){
         coordinate.setY(imgView.getY()-valueMove);
         imgView.setY(coordinate.getY());
     }
 
+    /**
+     * Increase y coordinate for the image and display it.
+     */
     public void descendre(){
         coordinate.setY(imgView.getY()+valueMove);
         imgView.setY(coordinate.getY());
     }
 
+    /**
+     * Decrease x coordinate for the image and display it.
+     */
     public void gauche(){
         coordinate.setX(imgView.getX()-valueMove);
         imgView.setX(coordinate.getX());
     }
 
+    /**
+     * Increase x coordinate for the image and display it.
+     */
     public void droite(){
         coordinate.setX(imgView.getX()+valueMove);
         imgView.setX(coordinate.getX());
