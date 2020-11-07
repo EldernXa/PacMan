@@ -3,6 +3,7 @@ package GraphicsEngine;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -24,7 +25,9 @@ public class MenuChoixDifficulté {
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
 
-
+        Tooltip tooltip_revenir=new Tooltip("Revenir en arrière");
+        tooltip_revenir.setStyle(" -fx-background-color: gray;");
+        Tooltip.install(revenir.getImageView(),tooltip_revenir);
         ImageViewSizePos fond = new ImageViewSizePos("./data/Logos/"+ name + "menudujeu.jpg",scene.getWidth(),scene.getHeight());
         RectanglePos rectFacile = new RectanglePos(180,270, Color.LIGHTBLUE);
         Coordinate coordFacile = new Coordinate(scene.getWidth()/8-(rectFacile.getRectangle().getWidth()/2),scene.getHeight()/2-(rectFacile.getRectangle().getHeight()/2));

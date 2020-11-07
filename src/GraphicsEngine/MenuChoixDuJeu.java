@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -51,8 +52,6 @@ public class MenuChoixDuJeu {
         Coordinate coordImageJeu2 = new Coordinate(menuScene.getWidth()/2-(imageJeu2.getImageView().getFitWidth()/2)+(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu2.getImageView().getFitHeight()/2));
         imageJeu2.setCoordinate(coordImageJeu2);
 
-
-
         MenuDuJeu menuPacMan = new MenuDuJeu(stage,"pacman");
         MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"cassebrique");
 
@@ -89,7 +88,6 @@ public class MenuChoixDuJeu {
     }
 
     public ImageView getImageJeu2() {
-        System.out.println("coco");
         return imageJeu2.getImageView();
     }
 
