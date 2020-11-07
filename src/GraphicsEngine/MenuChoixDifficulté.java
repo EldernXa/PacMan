@@ -33,27 +33,27 @@ public class MenuChoixDifficulté {
         Tooltip.install(revenir.getImageView(),tooltip_revenir);
 
         ImageViewSizePos fond = new ImageViewSizePos("./data/Logos/"+ name + "menudujeu.jpg",scene.getWidth(),scene.getHeight());
-        RectanglePos rectFacile = new RectanglePos(180,270, Color.LIGHTBLUE);
+        RectanglePos rectFacile = new RectanglePos(62,322, Color.LIGHTBLUE);
         Coordinate coordFacile = new Coordinate(scene.getWidth()/8-(rectFacile.getRectangle().getWidth()/2),scene.getHeight()/2-(rectFacile.getRectangle().getHeight()/2));
-        facile = new ImageViewSizePos("./data/Font/facile.png",250,170);
+        facile = new ImageViewSizePos("./data/Font/facile.png",322,62);
         List<Node> facileList = Arrays.asList(rectFacile.getRectangle(),facile.getImageView());
         ObjectsInPane facileObj = new ObjectsInPane(facileList, coordFacile,rectFacile.getRectangle().getWidth(),rectFacile.getRectangle().getHeight());
 
-        RectanglePos rectMoyen = new RectanglePos(180,270,Color.ORANGE);
+        RectanglePos rectMoyen = new RectanglePos(62,305,Color.ORANGE);
         Coordinate coordMoyen = new Coordinate((3*scene.getWidth()/8)-(rectMoyen.getRectangle().getWidth()/2),scene.getHeight()/2-(rectMoyen.getRectangle().getHeight()/2));
-        moyen = new ImageViewSizePos("./data/Font/moyen.png",250,170);
+        moyen = new ImageViewSizePos("./data/Font/moyen.png",305,62);
         List<Node> moyenList = Arrays.asList(rectMoyen.getRectangle(),moyen.getImageView());
         ObjectsInPane moyenObj = new ObjectsInPane(moyenList, coordMoyen,rectMoyen.getRectangle().getWidth(),rectMoyen.getRectangle().getHeight());
 
-        RectanglePos rectDifficile = new RectanglePos(180,270,Color.RED);
+        RectanglePos rectDifficile = new RectanglePos(62,438,Color.RED);
         Coordinate coordDifficile = new Coordinate((5*scene.getWidth()/8)-(rectDifficile.getRectangle().getWidth()/2),scene.getHeight()/2-(rectDifficile.getRectangle().getHeight()/2));
-        difficile = new ImageViewSizePos("./data/Font/difficile.png",250,170);
+        difficile = new ImageViewSizePos("./data/Font/difficile.png",438,62);
         List<Node> difficileList = Arrays.asList(rectDifficile.getRectangle(),difficile.getImageView());
         ObjectsInPane difficileObj = new ObjectsInPane(difficileList, coordDifficile,rectDifficile.getRectangle().getWidth(),rectDifficile.getRectangle().getHeight());
 
-        RectanglePos rectExpert = new RectanglePos(180,270,Color.BLACK);
+        RectanglePos rectExpert = new RectanglePos(62,359,Color.BLACK);
         Coordinate coordExpert = new Coordinate((7*scene.getWidth()/8)-(rectExpert.getRectangle().getWidth()/2),scene.getHeight()/2-(rectExpert.getRectangle().getHeight()/2));
-        expert = new ImageViewSizePos("./data/Font/expert.png",250,170);
+        expert = new ImageViewSizePos("./data/Font/expert.png",359,62);
         List<Node> expertList = Arrays.asList(rectExpert.getRectangle(),expert.getImageView());
         ObjectsInPane expertObj = new ObjectsInPane(expertList, coordExpert,rectExpert.getRectangle().getWidth(),rectExpert.getRectangle().getHeight());
 
