@@ -12,24 +12,10 @@ import javafx.scene.Scene;
 
 
 public class Main extends Application {
-    private final int xMax = 800;
-    private final int yMax = 500;
-
 
     @Override
     public void start(Stage primaryStage) {
-        Pane root = new Pane();//Creation groupe
-        root.setMaxHeight(yMax);
-        root.setMaxWidth(xMax);
-        root.setMinSize(0, 0);
-        Scene scene = new Scene(root,xMax,yMax);//Creation fenetre de taille 400 sur 400 pixels
-        VisualObject visualObject = new VisualObject("./data/pacmanOuvert2.png", new Coordinate(0, 0), scene, root, new Coordinate(xMax, yMax));
-        root.getChildren().add(visualObject.getImageView());
-        root.setStyle("-fx-background-color: black;");
-        System.out.println(scene.heightProperty());
-        primaryStage.setScene(scene);
         MenuChoixDuJeu menuChoixDuJeu = new MenuChoixDuJeu(primaryStage);
-        
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
