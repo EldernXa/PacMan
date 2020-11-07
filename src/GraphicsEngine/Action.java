@@ -1,5 +1,6 @@
 package GraphicsEngine;
 
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -17,14 +18,20 @@ public class Action {
         this.gameImage = gameImage;
     }
     public void runEvent(){
-        scene.setOnKeyPressed(keyEvent -> {
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
             if(keyEvent.getCode().getChar().toLowerCase().compareTo("z")==0)
                 monter();
-            else if(keyEvent.getCode().getChar().toLowerCase().compareTo("s")==0)
+        });
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
+            if(keyEvent.getCode().getChar().toLowerCase().compareTo("s")==0)
                 descendre();
-            else if(keyEvent.getCode().getChar().toLowerCase().compareTo("q")==0)
+        });
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
+            if(keyEvent.getCode().getChar().toLowerCase().compareTo("q")==0)
                 gauche();
-            else if(keyEvent.getCode().getChar().toLowerCase().compareTo("d")==0)
+        });
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
+            if(keyEvent.getCode().getChar().toLowerCase().compareTo("d")==0)
                 droite();
         });
     }
