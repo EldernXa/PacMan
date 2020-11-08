@@ -3,9 +3,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -23,7 +21,7 @@ public class MenuDuJeu {
     VBox buttonContainers = new VBox(15);
     Button retouner = new Button("Retourner au choix du jeu".toUpperCase());
     ImageViewSizePos param;
-    ImageViewSizePos soundAndNosSound;
+    ImageViewSizePos soundAndNoSound;
     Scene menuDuJeuScene;
     HBox hbox = new HBox(20);
 
@@ -36,12 +34,12 @@ public class MenuDuJeu {
         menuDuJeuScene = new Scene(pane, screenWidth,screenHeight);
         menuDuJeuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
 
-        param =new ImageViewSizePos("data/Logos/settings.png",40, 40);
-        soundAndNosSound = new ImageViewSizePos("data/Logos/sound.png",40,40);
+        param = new ImageViewSizePos("./data/Logos/settings.png",40, 40);
+        soundAndNoSound = new ImageViewSizePos("./data/Logos/sound.png",40,40);
         ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Logos/" + name + "menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
         pane.getChildren().add(fondEcran.getImageView());
 
-        hbox.getChildren().addAll(param.getImageView(),soundAndNosSound.getImageView());
+        hbox.getChildren().addAll(param.getImageView(), soundAndNoSound.getImageView());
         singlePlayer.setPrefWidth(buttonContainers.getPrefWidth());
         multiPlayer.setPrefWidth(buttonContainers.getPrefWidth());
         retouner.setPrefWidth(buttonContainers.getPrefWidth());
@@ -51,49 +49,50 @@ public class MenuDuJeu {
 
         MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, name);
 
-        soundAndNosSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                switch (soundAndNosSound.getImageView().getImage().getUrl()){
-                    case "file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/sound.png":
-                        soundAndNosSound.setImageView("data/Logos/nosound.png");
+                System.out.println(soundAndNoSound.getPathImage() + "path null");
+                switch (soundAndNoSound.getPathImage()){
+                    case "./data/Logos/sound.png":
+                        soundAndNoSound.setImageView("./data/Logos/nosound.png");
                         break;
 
-                    case "file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosound.png":
-                        soundAndNosSound.setImageView("data/Logos/nosound.png");
+                    case "./data/Logos/nosound.png":
+                        soundAndNoSound.setImageView("./data/Logos/nosound.png");
                         break;
 
-                    case "file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/soundhover.png":
-                        soundAndNosSound.setImageView("data/Logos/nosoundhover.png");
+                    case "./data/Logos/soundhover.png":
+                        soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
                         break;
 
-                    case "file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosoundhover.png":
-                        soundAndNosSound.setImageView("data/Logos/soundhover.png");
+                    case "./data/Logos/nosoundhover.png":
+                        soundAndNoSound.setImageView("./data/Logos/soundhover.png");
                         break;
                 }
             }
         });
 
-        soundAndNosSound.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+        soundAndNoSound.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/sound.png")){
-                    soundAndNosSound.setImageView("data/Logos/soundhover.png");
+                if(soundAndNoSound.getPathImage().equals("./data/Logos/sound.png")){
+                    soundAndNoSound.setImageView("./data/Logos/soundhover.png");
                 }
                 else{
-                    soundAndNosSound.setImageView("data/Logos/nosoundhover.png");
+                    soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
                 }
             }
         });
 
-        soundAndNosSound.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
+        soundAndNoSound.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/soundhover.png")){
-                    soundAndNosSound.setImageView("data/Logos/sound.png");
+                if(soundAndNoSound.getPathImage().equals("./data/Logos/soundhover.png")){
+                    soundAndNoSound.setImageView("./data/Logos/sound.png");
                 }
                 else{
-                    soundAndNosSound.setImageView("data/Logos/nosound.png");
+                    soundAndNoSound.setImageView("./data/Logos/nosound.png");
                 }
             }
         });
@@ -101,14 +100,14 @@ public class MenuDuJeu {
         param.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                param.setImageView("data/Logos/settingshover.png");
+                param.setImageView("./data/Logos/settingshover.png");
             }
         });
 
         param.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                param.setImageView("data/Logos/settings.png");
+                param.setImageView("./data/Logos/settings.png");
 
             }
         });

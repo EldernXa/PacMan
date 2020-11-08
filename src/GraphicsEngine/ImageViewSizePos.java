@@ -8,8 +8,10 @@ import java.io.File;
 public class ImageViewSizePos {
     private ImageView imageView;
     private Coordinate coordinate;
+    String pathImage;
 
     public ImageViewSizePos(String pathImage, double width, double height, Coordinate coordinate){
+        this.pathImage = pathImage;
         this.coordinate = coordinate;
         imageView = new ImageView(new Image(new File(pathImage).toURI().toString()));
         imageView.setFitWidth(width);
@@ -17,7 +19,12 @@ public class ImageViewSizePos {
         setCoordinate(coordinate);
     }
 
+    public String getPathImage() {
+        return pathImage;
+    }
+
     public ImageViewSizePos(String pathImage, double width, double height){
+        this.pathImage = pathImage;
         imageView = new ImageView(new Image(new File(pathImage).toURI().toString()));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
@@ -38,6 +45,7 @@ public class ImageViewSizePos {
     }
 
     public void setImageView(String pathImage) {
+        this.pathImage = pathImage;
         this.imageView.setImage(new Image(new File(pathImage).toURI().toString()));
     }
 }
