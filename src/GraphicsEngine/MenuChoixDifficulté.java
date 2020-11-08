@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,7 +26,25 @@ public class MenuChoixDifficulté {
 
     public MenuChoixDifficulté(Stage stage, String name) {
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
+
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
+
+        revenir.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                revenir.setImageView("./data/Logos/returnhover.png");
+                System.out.println("in");
+            }
+        });
+
+        revenir.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                revenir.setImageView("./data/Logos/return.png");
+                System.out.println("out");
+
+            }
+        });
 
         Tooltip tooltip_revenir=new Tooltip("Revenir en arrière");
         tooltip_revenir.setStyle(" -fx-background-color: gray;");

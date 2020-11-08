@@ -37,7 +37,7 @@ public class ImageViewSizePos {
         return imageView;
     }
 
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
+    public void setImageView(String pathImage) {
+        this.imageView.setImage(new Image(new File(pathImage).toURI().toString()));
     }
 }
