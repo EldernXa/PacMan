@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -53,17 +54,22 @@ public class MenuDuJeu {
         soundAndNosSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/sound.png")){
-                    soundAndNosSound.setImageView("data/Logos/nosound.png");
-                }
-                else if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/soundhover.png")){
-                    soundAndNosSound.setImageView("data/Logos/nosoundhover.png");
-                }
-                else if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosoundhover.png")){
-                    soundAndNosSound.setImageView("data/Logos/soundhover.png");
-                }
-                else if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosound.png")){
-                    soundAndNosSound.setImageView("data/Logos/sound.png");
+                switch (soundAndNosSound.getImageView().getImage().getUrl()){
+                    case "file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/sound.png":
+                        soundAndNosSound.setImageView("data/Logos/nosound.png");
+                        break;
+
+                    case "file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosound.png":
+                        soundAndNosSound.setImageView("data/Logos/nosound.png");
+                        break;
+
+                    case "file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/soundhover.png":
+                        soundAndNosSound.setImageView("data/Logos/nosoundhover.png");
+                        break;
+
+                    case "file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosoundhover.png":
+                        soundAndNosSound.setImageView("data/Logos/soundhover.png");
+                        break;
                 }
             }
         });
