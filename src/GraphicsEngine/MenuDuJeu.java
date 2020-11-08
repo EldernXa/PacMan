@@ -83,7 +83,6 @@ public class MenuDuJeu {
                 else{
                     soundAndNosSound.setImageView("data/Logos/nosoundhover.png");
                 }
-
             }
         });
 
@@ -93,10 +92,9 @@ public class MenuDuJeu {
                 if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/soundhover.png")){
                     soundAndNosSound.setImageView("data/Logos/sound.png");
                 }
-                else if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosoundhover.png")){
+                else{
                     soundAndNosSound.setImageView("data/Logos/nosound.png");
                 }
-
             }
         });
 
