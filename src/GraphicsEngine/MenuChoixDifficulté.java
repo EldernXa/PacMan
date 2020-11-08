@@ -33,7 +33,6 @@ public class MenuChoixDifficulté {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 revenir.setImageView("./data/Logos/returnhover.png");
-                System.out.println("in");
             }
         });
 
@@ -41,7 +40,6 @@ public class MenuChoixDifficulté {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 revenir.setImageView("./data/Logos/return.png");
-                System.out.println("out");
 
             }
         });

@@ -22,8 +22,7 @@ public class MenuDuJeu {
     VBox buttonContainers = new VBox(15);
     Button retouner = new Button("Retourner au choix du jeu".toUpperCase());
     ImageViewSizePos param;
-    ImageViewSizePos sound;
-    ImageViewSizePos nosound;
+    ImageViewSizePos soundAndNosSound;
     Scene menuDuJeuScene;
     HBox hbox = new HBox(20);
 
@@ -37,12 +36,11 @@ public class MenuDuJeu {
         menuDuJeuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
 
         param =new ImageViewSizePos("data/Logos/settings.png",40, 40);
-        sound = new ImageViewSizePos("data/Logos/sound.png",40,40);
-        nosound = new ImageViewSizePos("data/Logos/nosound.png",40,40);
+        soundAndNosSound = new ImageViewSizePos("data/Logos/sound.png",40,40);
         ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Logos/" + name + "menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
         pane.getChildren().add(fondEcran.getImageView());
 
-        hbox.getChildren().addAll(param.getImageView(),sound.getImageView());
+        hbox.getChildren().addAll(param.getImageView(),soundAndNosSound.getImageView());
         singlePlayer.setPrefWidth(buttonContainers.getPrefWidth());
         multiPlayer.setPrefWidth(buttonContainers.getPrefWidth());
         retouner.setPrefWidth(buttonContainers.getPrefWidth());
@@ -52,25 +50,72 @@ public class MenuDuJeu {
 
         MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, name);
 
-        sound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+        soundAndNosSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                hbox.getChildren().remove(sound.getImageView());
-                hbox.getChildren().add(nosound.getImageView());
+                if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/sound.png")){
+                    soundAndNosSound.setImageView("data/Logos/nosound.png");
+                }
+                else if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/soundhover.png")){
+                    soundAndNosSound.setImageView("data/Logos/nosoundhover.png");
+                }
+                else if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosoundhover.png")){
+                    soundAndNosSound.setImageView("data/Logos/soundhover.png");
+                }
+                else if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosound.png")){
+                    soundAndNosSound.setImageView("data/Logos/sound.png");
+                }
             }
         });
+
+        soundAndNosSound.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/sound.png")){
+                    soundAndNosSound.setImageView("data/Logos/soundhover.png");
+                }
+                else{
+                    soundAndNosSound.setImageView("data/Logos/nosoundhover.png");
+                }
+
+            }
+        });
+
+        soundAndNosSound.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/soundhover.png")){
+                    soundAndNosSound.setImageView("data/Logos/sound.png");
+                }
+                else if(soundAndNosSound.getImageView().getImage().getUrl().equals("file:/home/farouk-comp/Documents/2020-2021/GL/PacMan/PacMan/data/Logos/nosoundhover.png")){
+                    soundAndNosSound.setImageView("data/Logos/nosound.png");
+                }
+
+            }
+        });
+
+        param.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                param.setImageView("data/Logos/settingshover.png");
+            }
+        });
+
+        param.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                param.setImageView("data/Logos/settings.png");
+
+            }
+        });
+
+
         ImageViewSizePos revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50, new Coordinate(2,2));
         Tooltip tooltip_revenir=new Tooltip("Revenir en arrière");
         tooltip_revenir.setStyle(" -fx-background-color: gray;");
         tooltip_revenir.setShowDelay(new Duration(0));
         Tooltip.install(revenir.getImageView(),tooltip_revenir);
-        nosound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                hbox.getChildren().remove(nosound.getImageView());
-                hbox.getChildren().add(sound.getImageView());
-            }
-        });
+
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -93,11 +138,27 @@ public class MenuDuJeu {
                 stage.setScene(menuChoixDuJeu.getMenuScene());
             }
         });
+
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MenuDuJeu menuDuJeu = new MenuDuJeu(stage,name);
                 stage.setScene(menuDuJeu.getMenuDuJeuScene());
+            }
+        });
+
+        revenir.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                revenir.setImageView("./data/Logos/returnhover.png");
+            }
+        });
+
+        revenir.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                revenir.setImageView("./data/Logos/return.png");
+
             }
         });
         pane.getChildren().addAll(buttonContainers);
