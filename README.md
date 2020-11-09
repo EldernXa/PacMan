@@ -11,7 +11,9 @@ Utilisez la commande suivante dans le dossier.
 ```
 ### Windows
 
-Lancer le .exe .
+```bash
+./runWindows.sh
+```
 
 ## Les contributeurs
 Ce projet est effectué par le groupe de Projet EQ36 composé de :
