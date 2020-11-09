@@ -7,12 +7,12 @@
 Utilisez la commande suivante dans le dossier.
 
 ```bash
-./runLinux.sh
+./run_linux.sh
 ```
 ### Windows
 
 ```bash
-./runWindows.sh
+./run_windows.sh
 ```
 
 ## Les contributeurs
