@@ -1,10 +1,8 @@
 # PacMan
 
 ## Comment l'éxécuter
-
-### Linux
-
 Utilisez la commande suivante dans le dossier.
+### Linux
 
 ```bash
 ./run_linux.sh
