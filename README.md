@@ -23,4 +23,4 @@ Ce projet est effectué par le groupe de Projet EQ36 composé de :
 
 
 ## Année d'étude et filiere
-[Master 1 Informatique Aix-Marseille à Luminy](https://formations.univ-amu.fr/ME5SIN.html)
+[M1 Informatique Aix-Marseille](https://formations.univ-amu.fr/ME5SIN.html) à Luminy.
