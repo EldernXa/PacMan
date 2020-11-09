@@ -25,4 +25,4 @@ Ce projet est effectué par le groupe de Projet EQ36 composé de :
 
 
 ## Licence
-Lience Informatique Aix-Marseille
+Master 1 Informatique Aix-Marseille à Luminy
