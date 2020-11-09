@@ -22,5 +22,5 @@ Ce projet est effectué par le groupe de Projet EQ36 composé de :
 - TREMAS Loumi
 
 
-## Licence
+## Année d'étude et filiere
 Master 1 Informatique Aix-Marseille à Luminy
