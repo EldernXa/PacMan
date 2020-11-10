@@ -43,6 +43,8 @@ public class MenuChoixDuJeu {
         choixDuJeuLabel.setPadding(new Insets(7));
         choixDuJeuLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,null,null)));
 
+
+
         imageFond =  new ImageViewSizePos("./data/Logos/menuchoixdujeu.jpg",menuScene.getWidth(),menuScene.getHeight());
         imageJeu1 = new ImageViewSizePos("./data/Logos/pacmanmenuchoixdujeu.jpg",500,250);
         Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getImageView().getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getImageView().getFitHeight()/2));
