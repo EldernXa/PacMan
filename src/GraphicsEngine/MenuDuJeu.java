@@ -35,7 +35,7 @@ public class MenuDuJeu {
         menuDuJeuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
 
         param = new ImageViewSizePos("./data/Logos/settings.png",40, 40);
-        soundAndNoSound = new ImageViewSizePos("./data/Logos/soundcontour.png",40,40);
+        soundAndNoSound = new ImageViewSizePos("./data/Logos/sound.png",40,40);
         ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Logos/" + name + "menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
         pane.getChildren().add(fondEcran.getImageView());
 
@@ -54,20 +54,20 @@ public class MenuDuJeu {
             public void handle(MouseEvent mouseEvent) {
                 System.out.println(soundAndNoSound.getPathImage() + "path null");
                 switch (soundAndNoSound.getPathImage()){
-                    case "./data/Logos/soundcontour.png":
-                        soundAndNoSound.setImageView("./data/Logos/nosoundcontour.png");
+                    case "./data/Logos/sound.png":
+                        soundAndNoSound.setImageView("./data/Logos/nosound.png");
                         break;
 
-                    case "./data/Logos/nosoundcontour.png":
-                        soundAndNoSound.setImageView("./data/Logos/nosoundcontour.png");
+                    case "./data/Logos/nosound.png":
+                        soundAndNoSound.setImageView("./data/Logos/nosound.png");
                         break;
 
-                    case "./data/Logos/soundhovercontour.png":
-                        soundAndNoSound.setImageView("./data/Logos/nosoundhovercontour.png");
+                    case "./data/Logos/soundhover.png":
+                        soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
                         break;
 
-                    case "./data/Logos/nosoundhovercontour.png":
-                        soundAndNoSound.setImageView("./data/Logos/soundhovercontour.png");
+                    case "./data/Logos/nosoundhover.png":
+                        soundAndNoSound.setImageView("./data/Logos/soundhover.png");
                         break;
                 }
             }
@@ -76,11 +76,11 @@ public class MenuDuJeu {
         soundAndNoSound.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(soundAndNoSound.getPathImage().equals("./data/Logos/soundcontour.png")){
-                    soundAndNoSound.setImageView("./data/Logos/soundhovercontour.png");
+                if(soundAndNoSound.getPathImage().equals("./data/Logos/sound.png")){
+                    soundAndNoSound.setImageView("./data/Logos/soundhover.png");
                 }
                 else{
-                    soundAndNoSound.setImageView("./data/Logos/nosoundhovercontour.png");
+                    soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
                 }
             }
         });
@@ -89,11 +89,11 @@ public class MenuDuJeu {
         soundAndNoSound.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(soundAndNoSound.getPathImage().equals("./data/Logos/soundhovercontour.png")){
-                    soundAndNoSound.setImageView("./data/Logos/soundcontour.png");
+                if(soundAndNoSound.getPathImage().equals("./data/Logos/soundhover.png")){
+                    soundAndNoSound.setImageView("./data/Logos/sound.png");
                 }
                 else{
-                    soundAndNoSound.setImageView("./data/Logos/nosoundcontour.png");
+                    soundAndNoSound.setImageView("./data/Logos/nosound.png");
                 }
             }
         });
