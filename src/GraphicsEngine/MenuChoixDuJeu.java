@@ -43,27 +43,28 @@ public class MenuChoixDuJeu {
         choixDuJeuLabel.setPadding(new Insets(7));
         choixDuJeuLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,null,null)));
 
-
-
         imageFond =  new ImageViewSizePos("./data/Logos/menuchoixdujeu.jpg",menuScene.getWidth(),menuScene.getHeight());
+
         imageJeu1 = new ImageViewSizePos("./data/Logos/pacmanmenuchoixdujeu.jpg",500,250);
         Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getImageView().getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getImageView().getFitHeight()/2));
         imageJeu1.setCoordinate(coordImageJeu1);
         imageJeu2 = new ImageViewSizePos("./data/Logos/cassebriquemenuchoixdujeu.jpg",500,250);
         Coordinate coordImageJeu2 = new Coordinate(menuScene.getWidth()/2-(imageJeu2.getImageView().getFitWidth()/2)+(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu2.getImageView().getFitHeight()/2));
         imageJeu2.setCoordinate(coordImageJeu2);
-        MenuDuJeu menuPacMan = new MenuDuJeu(stage,"pacman");
-        MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"cassebrique");
+
+
         recupJeux();
         imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                MenuDuJeu menuPacMan = new MenuDuJeu(stage,"pacman");
                 changerScene(menuPacMan.getMenuDuJeuScene());
             }
         });
         imageJeu2.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"Casse-Brique");
                 changerScene(menuCasseBrique.getMenuDuJeuScene());
             }
         });

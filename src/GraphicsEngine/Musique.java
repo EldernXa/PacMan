@@ -7,19 +7,33 @@ import java.io.File;
 
 public class Musique {
     String path;
-    MediaPlayer mediaPlayer;
+    static MediaPlayer mediaPlayer;
     int indexMusique = 100;
+    boolean playing = false;
 
 
     public Musique(String path) {
-        System.out.println(path);
+        //System.out.println(path);
         Media media = new Media(new File(path).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         this.path = path;
+        mediaPlayer.play();
+
     }
 
-    void lancerMusique(){
-        mediaPlayer.play();
+    void lancerMusique()
+    {
+
+        System.out.println(mediaPlayer);
+        if(!playing) {
+            mediaPlayer.play();
+            mediaPlayer.setOnEndOfMedia(() -> {
+                System.out.println("coo");
+                mediaPlayer.stop();
+                mediaPlayer.play();
+            });
+            playing= true;
+        }
     }
     void modifMusique(Media nomMedia){
         mediaPlayer.stop();

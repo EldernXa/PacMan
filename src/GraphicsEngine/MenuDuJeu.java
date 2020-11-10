@@ -26,7 +26,7 @@ public class MenuDuJeu {
     HBox hbox = new HBox(20);
 
     public MenuDuJeu(Stage stage,String name) {
-        Musique pacman = new Musique("./data/Jeux/Pacman/musiqueMenu.mp3");
+        Musique pacman = new Musique("./data/Jeux/"+name+"/menu.wav");
         pacman.lancerMusique();
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
@@ -49,7 +49,7 @@ public class MenuDuJeu {
         hbox.setAlignment(Pos.CENTER);
         buttonContainers.getChildren().addAll(singlePlayer,multiPlayer,retouner, hbox);
 
-        MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, name);
+        MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, name,menuDuJeuScene);
 
         soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

@@ -23,12 +23,13 @@ public class MenuChoixDifficulté {
     ImageViewSizePos expert;
     ImageViewSizePos revenir ;
     private Scene scene;
+    private Scene sceneBack;
 
-    public MenuChoixDifficulté(Stage stage, String name) {
+    public MenuChoixDifficulté(Stage stage, String name,Scene scenep) {
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
 
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
-
+        sceneBack= scenep;
         revenir.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -88,6 +89,7 @@ public class MenuChoixDifficulté {
                 VisualObject visualObject = new VisualObject("./data/pacmanOuvert2.png", new Coordinate(0, 0), scene, root, new Coordinate(getScene().getWidth(),getScene().getHeight()));
                 root.getChildren().add(visualObject.getImageView());
                 root.setStyle("-fx-background-color: black;");
+                Musique.mediaPlayer.stop();
                 stage.setScene(scene);
             }
         });
@@ -95,9 +97,9 @@ public class MenuChoixDifficulté {
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,name ); //a revoir lier avec le menu du choix du jeu
+                 //a revoir lier avec le menu du choix du jeu
 
-                stage.setScene(menuDuJeu.getMenuDuJeuScene());
+                stage.setScene(sceneBack);
             }
         });
         stage.setScene(scene);
