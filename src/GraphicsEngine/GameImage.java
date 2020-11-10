@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import java.io.File;
 
 /**
- * class for display image for character.
+ * class for display image.
  */
 public class GameImage {
     private Coordinate coordinate;

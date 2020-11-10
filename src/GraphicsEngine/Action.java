@@ -12,29 +12,36 @@ public class Action {
     private final Scene scene;
     private final Coordinate maxCoord;
 
-    public Action(GameImage gameImage, Scene scene, Coordinate maxCoord){
+    public Action(GameImage gameImage, Scene scene, Coordinate maxCoord, String carac, char dir, int valueMove){
         this.maxCoord = maxCoord;
         this.scene = scene;
         this.gameImage = gameImage;
+        runEvent(scene, carac, valueMove, dir);
     }
-    public void runEvent(){
+
+    private void runEvent(Scene scene, String carac, int valueMove, char dir){
         scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
-            if(keyEvent.getCode().getChar().toLowerCase().compareTo("z")==0)
-                monter();
+            if(keyEvent.getCode().getChar().toLowerCase().compareTo(
+                    carac.toLowerCase())==0){
+                choiceMove(valueMove, dir);
+            }
         });
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
-            if(keyEvent.getCode().getChar().toLowerCase().compareTo("s")==0)
-                descendre();
-        });
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
-            if(keyEvent.getCode().getChar().toLowerCase().compareTo("q")==0)
+    }
+
+    public void choiceMove(int valueMove, char carac){
+        if(carac=='x'){
+            if(valueMove<0)
                 gauche();
-        });
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
-            if(keyEvent.getCode().getChar().toLowerCase().compareTo("d")==0)
+            else
                 droite();
-        });
+        }
+        else if(carac=='y')
+            if(valueMove<0)
+                monter();
+            else
+                descendre();
     }
+
     private void monter(){
         if(gameImage.getCoordinate().getY()-gameImage.getValueMove()>=0)
             gameImage.monter();
