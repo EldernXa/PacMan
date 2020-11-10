@@ -26,6 +26,8 @@ public class MenuDuJeu {
     HBox hbox = new HBox(20);
 
     public MenuDuJeu(Stage stage,String name) {
+        Musique pacman = new Musique("./data/Jeux/Pacman/musiqueMenu.mp3");
+        pacman.lancerMusique();
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
