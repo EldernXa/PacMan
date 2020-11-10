@@ -6,8 +6,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -17,8 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
 import java.io.File;
+import java.util.ArrayList;
 
 
 public class MenuChoixDuJeu {
@@ -30,6 +28,7 @@ public class MenuChoixDuJeu {
     private ImageViewSizePos imageJeu2;
     private ImageViewSizePos imageFond;
     Label choixDuJeuLabel = new Label("Choisissez votre Jeu :");
+    ArrayList<Game> listJeux = new ArrayList<>();
 
 
     public MenuChoixDuJeu(Stage stage) {
@@ -51,10 +50,9 @@ public class MenuChoixDuJeu {
         imageJeu2 = new ImageViewSizePos("./data/Logos/cassebriquemenuchoixdujeu.jpg",500,250);
         Coordinate coordImageJeu2 = new Coordinate(menuScene.getWidth()/2-(imageJeu2.getImageView().getFitWidth()/2)+(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu2.getImageView().getFitHeight()/2));
         imageJeu2.setCoordinate(coordImageJeu2);
-
         MenuDuJeu menuPacMan = new MenuDuJeu(stage,"pacman");
         MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"cassebrique");
-
+        recupJeux();
         imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -81,6 +79,23 @@ public class MenuChoixDuJeu {
 
         stage.setScene(menuScene);
         this.stage = stage ;
+    }
+
+    public void recupJeux(){
+        File directoryPath = new File("./data/Jeux");
+        String contents[] = directoryPath.list();
+        for(String content :contents){
+            listJeux.add(new Game(content));
+        }
+
+
+
+    }
+    public void creerJeu(ArrayList<ImageView> imageViews){
+
+    }
+    public void afficherListJeux(){
+
     }
 
     public ImageView getImageJeu1() {
