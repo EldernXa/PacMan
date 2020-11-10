@@ -14,6 +14,7 @@ public class Musique {
 
     public Musique(String path) {
         //System.out.println(path);
+        System.out.println(path);
         Media media = new Media(new File(path).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         this.path = path;
