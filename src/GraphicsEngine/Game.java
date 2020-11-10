@@ -36,4 +36,24 @@ public class Game {
 
 
     }
+
+    public ImageViewSizePos getImageJeu() {
+        return imageJeu;
+    }
+
+    public ArrayList<Musique> getListMusiques() {
+        return listMusiques;
+    }
+
+    public void setListMusiques(ArrayList<Musique> listMusiques) {
+        this.listMusiques = listMusiques;
+    }
+
+    public void setImageJeu(ImageViewSizePos imageJeu) {
+        this.imageJeu = imageJeu;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -21,6 +21,10 @@ public class Musique {
 
     }
 
+    public String getPath() {
+        return path;
+    }
+
     void lancerMusique()
     {
 

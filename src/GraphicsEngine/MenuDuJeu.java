@@ -38,7 +38,7 @@ public class MenuDuJeu {
 
         param = new ImageViewSizePos("./data/Logos/settings.png",40, 40);
         soundAndNoSound = new ImageViewSizePos("./data/Logos/sound.png",40,40);
-        ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Logos/" + name + "menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
+        ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Jeux/" + name + "menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
         pane.getChildren().add(fondEcran.getImageView());
 
         hbox.getChildren().addAll(param.getImageView(), soundAndNoSound.getImageView());

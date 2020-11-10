@@ -16,22 +16,37 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.File;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
 public class MenuChoixDuJeu {
+    ArrayList<Game> gameList = new ArrayList<>();
+
     private Pane pane = new Pane();
     private Stage stage;
     private Scene menuScene;
     private Button buttonExit = new Button("Quitter le menu");
     private ImageViewSizePos imageJeu1;
     private ImageViewSizePos imageJeu2;
+
+    private ImageViewSizePos previousGame;
+    private ImageViewSizePos currentGame;
+    private ImageViewSizePos nextGame;
+
     private ImageViewSizePos imageFond;
     Label choixDuJeuLabel = new Label("Choisissez votre Jeu :");
     ArrayList<Game> listJeux = new ArrayList<>();
 
 
     public MenuChoixDuJeu(Stage stage) {
+
+        remplirListGame();
+        remplirListGame();
+
         System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
         menuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
@@ -45,7 +60,7 @@ public class MenuChoixDuJeu {
 
         imageFond =  new ImageViewSizePos("./data/Logos/menuchoixdujeu.jpg",menuScene.getWidth(),menuScene.getHeight());
 
-        imageJeu1 = new ImageViewSizePos("./data/Logos/pacmanmenuchoixdujeu.jpg",500,250);
+        imageJeu1 = new ImageViewSizePos("./data/Jeux/Pacman/Pacmanmenuchoixdujeu.jpg",500,250);
         Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getImageView().getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getImageView().getFitHeight()/2));
         imageJeu1.setCoordinate(coordImageJeu1);
         imageJeu2 = new ImageViewSizePos("./data/Logos/cassebriquemenuchoixdujeu.jpg",500,250);
@@ -57,14 +72,14 @@ public class MenuChoixDuJeu {
         imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuPacMan = new MenuDuJeu(stage,"pacman");
+                MenuDuJeu menuPacMan = new MenuDuJeu(stage,"Pacman/Pacman");
                 changerScene(menuPacMan.getMenuDuJeuScene());
             }
         });
         imageJeu2.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"Casse-Brique");
+                MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"Casse-Brique/Casse-Brique");
                 changerScene(menuCasseBrique.getMenuDuJeuScene());
             }
         });
@@ -84,6 +99,38 @@ public class MenuChoixDuJeu {
         this.stage = stage ;
     }
 
+    private void remplirListGame(){
+        File gameDirectoryPath = new File("./data/Jeux");
+        String listGameDirectory[] = gameDirectoryPath.list();
+        for(String gameName : gameDirectoryPath.list()){
+            gameList.add(new Game(gameName));
+        }
+    }
+
+    private void remplirGamesAttributs(){
+        File gameDirectoryPath = new File("./data/Jeux");
+        for(Game game : gameList){
+            game.setImageJeu(new ImageViewSizePos("./data/Jeux/"+game.getName()+"/"+game +"/menuchoixdujeu",500,250));
+            for(String string : new File("./data/Jeux/"+game.getName()).list()){
+                if(string.substring(0,7).equals("musique")){
+                    game.getListMusiques().add(new Musique("./data/Jeux/"+game+string));
+                }
+            }
+        }
+
+        for (Game game : gameList){
+            System.out.println(game.getName() + " a pour image : " + game.getImageJeu().getPathImage());
+            System.out.println("Et pour liste de musiques : ");
+            for(Musique musique : game.getListMusiques()){
+                System.out.println("- " + musique.getPath());
+            }
+        }
+    }
+
+    public ArrayList<Game> getGameList() {
+        return gameList;
+    }
+
     public void recupJeux(){
         File directoryPath = new File("./data/Jeux");
         String contents[] = directoryPath.list();
@@ -92,9 +139,6 @@ public class MenuChoixDuJeu {
         }
 
 
-
-    }
-    public void creerJeu(ArrayList<ImageView> imageViews){
 
     }
     public void afficherListJeux(){
