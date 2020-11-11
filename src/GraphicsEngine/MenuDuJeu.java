@@ -135,7 +135,7 @@ public class MenuDuJeu {
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(name.equals("pacman"))
+                if(name.toLowerCase().equals("pacman"))
                     stage.setScene(menuChoixDifficulté.getScene());
                 else{
                     ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",screenWidth,screenHeight);

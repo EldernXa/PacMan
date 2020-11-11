@@ -1,14 +1,6 @@
-import GraphicsEngine.Coordinate;
-import GraphicsEngine.MenuDuJeu;
-import GraphicsEngine.VisualObject;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import GraphicsEngine.MenuChoixDuJeu;
-
-import javafx.scene.Scene;
 
 
 public class Main extends Application {
