@@ -11,4 +11,5 @@ public class Decor extends UnmouvingObj{
         super(path, coordinate, scene, root);
     }
 
+
 }

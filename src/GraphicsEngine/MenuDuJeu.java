@@ -25,7 +25,7 @@ public class MenuDuJeu {
     Scene menuDuJeuScene;
     HBox hbox = new HBox(20);
 
-    public MenuDuJeu(Stage stage,String name, Musique music) {
+    public MenuDuJeu(Stage stage,String name, Musique music,Scene sceneBack) {
 
         music.lancerMusique();
         buttonContainers.setPrefWidth(400);
@@ -120,8 +120,8 @@ public class MenuDuJeu {
         param.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuParametres parametres = new MenuParametres(stage,menuDuJeuScene);
-                stage.setScene(parametres.getScene());
+                MenuParametres parametres = new MenuParametres();
+
             }
         });
 
@@ -147,20 +147,13 @@ public class MenuDuJeu {
             }
         });
 
+
         retouner.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuChoixDuJeu menuChoixDuJeu  = new MenuChoixDuJeu(stage);
-                stage.setScene(menuChoixDuJeu.getMenuScene());
-            }
-        });
 
-        revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,name,music);
                 music.stopMusique();
-                stage.setScene(menuDuJeu.getMenuDuJeuScene());
+                stage.setScene(sceneBack);
             }
         });
 

@@ -6,27 +6,24 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.awt.*;
 
 public class MenuParametres {
     private Scene scene;
-    private Scene sceneBack;
     private StackPane pane = new StackPane();
     private Slider volumeSlider = new Slider();
     ImageViewSizePos revenir ;
+    private Stage stage = new Stage();
 
 
-    public MenuParametres(Stage stage,Scene sceneBack) {
-        this.sceneBack = sceneBack;
+    public MenuParametres() {
+
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/2,Screen.getPrimary().getVisualBounds().getHeight()/2);
 
         /*ToggleGroup group = new ToggleGroup();
@@ -34,9 +31,10 @@ public class MenuParametres {
         button1.setToggleGroup(group);
         button1.setSelected(true);
 
-// Radio 3: Female.
+        // Radio 3: Female.
         RadioButton button2 = new RadioButton("Female");
         button2.setToggleGroup(group); */
+
         volumeSlider.setValue(Musique.mediaPlayer.getVolume() *100);
         volumeSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
@@ -52,7 +50,7 @@ public class MenuParametres {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                stage.setScene(sceneBack);
+                stage.close();
             }
         });
         revenir.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -73,7 +71,10 @@ public class MenuParametres {
         volumeSlider.setMaxSize(100,100);
         volumeSlider.setOrientation(Orientation.VERTICAL);
         StackPane.setAlignment(volumeSlider, Pos.CENTER_RIGHT);
+
+
         stage.setScene(scene);
+        stage.show();
     }
 
     public Scene getScene() {
