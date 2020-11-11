@@ -134,7 +134,7 @@ public class MenuChoixDuJeu {
                 }
             });
 
-            pane.getChildren().add(previousGame.getImageJeu().getImageView());
+            //pane.getChildren().add(previousGame.getImageJeu().getImageView());
         }
     }
 
