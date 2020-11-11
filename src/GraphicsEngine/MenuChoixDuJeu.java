@@ -108,7 +108,7 @@ public class MenuChoixDuJeu {
         currentGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu currentGameMenu = new MenuDuJeu(stage,currentGame.getName(),new Musique("./data/Jeux/"+currentGame.getName()+"/musiquemenu.wav"));
+                MenuDuJeu currentGameMenu = new MenuDuJeu(stage,currentGame.getName(),new Musique("./data/Jeux/"+currentGame.getName()+"/musiquemenu.wav"),menuScene);
                 changerScene(currentGameMenu.getMenuDuJeuScene());
             }
         });
