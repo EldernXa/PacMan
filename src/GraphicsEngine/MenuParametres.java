@@ -43,7 +43,7 @@ public class MenuParametres {
             }
         });
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
-
+        pane.setStyle("-fx-background-color: gray");
         pane.getChildren().addAll(volumeSlider,revenir.getImageView());
 
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {

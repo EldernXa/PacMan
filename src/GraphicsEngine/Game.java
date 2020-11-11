@@ -21,6 +21,7 @@ public class Game {
             Scanner myReader = new Scanner(myObj);
 
         while (myReader.hasNextLine()) {
+            //les difficultés sont écrites par ordre croissant
             listDifficultes.add(new Difficulte(myReader.nextLine()));
 
         }
@@ -33,8 +34,10 @@ public class Game {
             System.out.println(listDifficultes.get(i).getName());
         }
 
+    }
 
-
+    public ArrayList<Difficulte> getListDifficultes() {
+        return listDifficultes;
     }
 
     public ImageViewSizePos getImageJeu() {
