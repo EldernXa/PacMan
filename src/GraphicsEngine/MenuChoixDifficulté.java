@@ -86,7 +86,7 @@ public class MenuChoixDifficulté {
                 Pane root = new Pane();//Creation groupe
                 root.setMinSize(0, 0);
                 Scene scene = new Scene(root,getScene().getWidth(),getScene().getHeight());//Creation fenetre de taille 400 sur 400 pixels
-                VisualObject visualObject = new VisualObject("./data/pacmanOuvert2.png", new Coordinate(0, 0), scene, root, new Coordinate(getScene().getWidth(),getScene().getHeight()));
+                VisualObject visualObject = new VisualObject("./data/pacmanOuvert2.png", new Coordinate(0, 0), scene, root);
                 root.getChildren().add(visualObject.getImageView());
                 root.setStyle("-fx-background-color: black;");
                 Musique.mediaPlayer.stop();
