@@ -10,10 +10,8 @@ public class Action {
 
     private final GameImage gameImage;
     private final Scene scene;
-    private final Coordinate maxCoord;
 
-    public Action(GameImage gameImage, Scene scene, Coordinate maxCoord, String carac, char dir, int valueMove){
-        this.maxCoord = maxCoord;
+    public Action(GameImage gameImage, Scene scene, String carac, char dir, int valueMove){
         this.scene = scene;
         this.gameImage = gameImage;
         runEvent(scene, carac, valueMove, dir);
