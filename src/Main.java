@@ -1,6 +1,6 @@
+import GraphicsEngine.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import GraphicsEngine.MenuChoixDuJeu;
 
 
 public class Main extends Application {

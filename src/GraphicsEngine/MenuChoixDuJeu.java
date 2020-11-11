@@ -30,12 +30,11 @@ public class MenuChoixDuJeu {
     private Stage stage;
     private Scene menuScene;
     private Button buttonExit = new Button("Quitter le menu");
-    private ImageViewSizePos imageJeu1;
-    private ImageViewSizePos imageJeu2;
 
-    private ImageViewSizePos previousGame;
-    private ImageViewSizePos currentGame;
-    private ImageViewSizePos nextGame;
+    private Game previousGame;
+    private Game currentGame;
+    private Game nextGame;
+    int index;
 
     private ImageViewSizePos imageFond;
     Label choixDuJeuLabel = new Label("Choisissez votre Jeu :");
@@ -44,6 +43,7 @@ public class MenuChoixDuJeu {
 
     public MenuChoixDuJeu(Stage stage) {
 
+        index = 0;
         remplirListGame();
         remplirGamesAttributs();
         System.out.println("hey");
@@ -61,34 +61,58 @@ public class MenuChoixDuJeu {
 
         imageFond =  new ImageViewSizePos("./data/Logos/menuchoixdujeu.jpg",menuScene.getWidth(),menuScene.getHeight());
 
-        imageJeu1 = new ImageViewSizePos("./data/Jeux/Pacman/menuchoixdujeu.jpg",500,250);
-        Coordinate coordImageJeu1 = new Coordinate(menuScene.getWidth()/2-(imageJeu1.getImageView().getFitWidth()/2)-(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu1.getImageView().getFitHeight()/2));
-        imageJeu1.setCoordinate(coordImageJeu1);
-        imageJeu2 = new ImageViewSizePos("./data/Logos/cassebriquemenuchoixdujeu.jpg",500,250);
-        Coordinate coordImageJeu2 = new Coordinate(menuScene.getWidth()/2-(imageJeu2.getImageView().getFitWidth()/2)+(menuScene.getWidth()/4),menuScene.getHeight()/2-(imageJeu2.getImageView().getFitHeight()/2));
-        imageJeu2.setCoordinate(coordImageJeu2);
+        pane.getChildren().add(imageFond.getImageView());
+
+        setCurrentGame(index);
+
+        if(currentGame != null) {
+            currentGame.setImageJeu(new ImageViewSizePos(gameList.get(index).getImageJeu().getPathImage(), 500, 250));
+            Coordinate coordCurrentGame = new Coordinate(menuScene.getWidth() / 2 - (currentGame.getImageJeu().getImageView().getFitWidth() / 2), menuScene.getHeight() / 2 - (currentGame.getImageJeu().getImageView().getFitHeight() / 2));
+            currentGame.getImageJeu().setCoordinate(coordCurrentGame);
+        }
+
+        if(previousGame != null) {
+            previousGame.setImageJeu(new ImageViewSizePos(gameList.get(Math.abs(index - 1) % gameList.size()).getImageJeu().getPathImage(), 500, 250));
+            Coordinate coordPreviousGame = new Coordinate(menuScene.getWidth() / 6 - (currentGame.getImageJeu().getImageView().getFitWidth() / 2), menuScene.getHeight() / 2 - (currentGame.getImageJeu().getImageView().getFitHeight() / 2));
+            previousGame.getImageJeu().setCoordinate(coordPreviousGame);
+
+            previousGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    setCurrentGame((Math.abs(index-1))%gameList.size());
+                }
+            });
+
+            pane.getChildren().add(previousGame.getImageJeu().getImageView());
+        }
+
+        if(nextGame != null) {
+            nextGame.setImageJeu(new ImageViewSizePos(gameList.get((index + 1) % gameList.size()).getImageJeu().getPathImage(), 500, 250));
+            Coordinate coordNextGame = new Coordinate(5 * (menuScene.getWidth() / 6) - (currentGame.getImageJeu().getImageView().getFitWidth() / 2), menuScene.getHeight() / 2 - (currentGame.getImageJeu().getImageView().getFitHeight() / 2));
+            nextGame.getImageJeu().setCoordinate(coordNextGame);
 
 
+            nextGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    setCurrentGame((index+1)%gameList.size());
+                    System.out.println("Click next");
+                }
+            });
 
+            pane.getChildren().add(nextGame.getImageJeu().getImageView());
+        }
 
         recupJeux();
-        imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+        currentGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuPacMan = new MenuDuJeu(stage,"Pacman",new Musique("./data/Jeux/Pacman/musiquemenu" +
-                        ".wav"));
-                changerScene(menuPacMan.getMenuDuJeuScene());
+                MenuDuJeu currentGameMenu = new MenuDuJeu(stage,currentGame.getName(),new Musique("./data/Jeux/"+currentGame.getName()+"/musiquemenu.wav"));
+                changerScene(currentGameMenu.getMenuDuJeuScene());
             }
         });
 
-        imageJeu2.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"Casse-Brique",new Musique("./data/Jeux/Pacman/musiquemenu" +
-                        ".wav"));
-                changerScene(menuCasseBrique.getMenuDuJeuScene());
-            }
-        });
         buttonExit.setTranslateX(menuScene.getWidth()/2-100);
         buttonExit.setTranslateY(menuScene.getHeight()/2 + 250);
         buttonExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -99,10 +123,52 @@ public class MenuChoixDuJeu {
             }
         });
 
-        pane.getChildren().addAll(imageFond.getImageView(),imageJeu1.getImageView(), imageJeu2.getImageView(), choixDuJeuLabel,buttonExit);
+        System.out.println(currentGame.getImageJeu().getPathImage());
+        pane.getChildren().addAll(currentGame.getImageJeu().getImageView(), choixDuJeuLabel,buttonExit);
 
         stage.setScene(menuScene);
         this.stage = stage ;
+    }
+
+    public void setCurrentGame(int index) {
+        this.currentGame = gameList.get(index);
+        if(gameList.size() < 3){
+            if(index == 0){
+                this.previousGame = null;
+                //mettre une image noire pour previous
+            }
+            else{
+                this.previousGame = gameList.get(index-1);
+            }
+            if(index == gameList.size()){
+                //mettre une image noir pour next
+            }
+            else{
+                this.nextGame = gameList.get((index+1)%gameList.size());
+            }
+        }
+        else{
+            if(index == 0){
+                if((!gameList.get(gameList.size()).getName().equals(this.nextGame.getName()) )&&(!gameList.get(gameList.size()).getName().equals(this.currentGame.getName()))){
+                    this.previousGame = gameList.get(gameList.size());
+                }
+                else{
+                    //mettre une image noire
+                }
+            }
+            else if(index == gameList.size()){
+                if((!gameList.get(0).getName().equals(this.previousGame.getName()))&&(!gameList.get(0).getName().equals(this.currentGame.getName()))){
+                    this.nextGame = gameList.get(0);
+                }
+                else{
+                    //mettre une image noire
+                }
+            }
+            else{
+                this.previousGame = gameList.get(index-1);
+                this.nextGame = gameList.get(index+1);
+            }
+        }
     }
 
     private void remplirListGame(){
@@ -116,7 +182,7 @@ public class MenuChoixDuJeu {
     private void remplirGamesAttributs(){
         File gameDirectoryPath = new File("./data/Jeux");
         for(Game game : gameList){
-            game.setImageJeu(new ImageViewSizePos("./data/Jeux/"+game.getName() +"/menuchoixdujeu",500,250));
+            game.setImageJeu(new ImageViewSizePos("./data/Jeux/"+game.getName() +"/menudujeu.jpg",500,250));
             for(String string : new File("./data/Jeux/"+game.getName()).list()){
                 if(string.substring(0,7).equals("musique")){
                     System.out.println(game.getName());
@@ -151,14 +217,6 @@ public class MenuChoixDuJeu {
     }
     public void afficherListJeux(){
 
-    }
-
-    public ImageView getImageJeu1() {
-        return imageJeu1.getImageView();
-    }
-
-    public ImageView getImageJeu2() {
-        return imageJeu2.getImageView();
     }
 
     public Stage getStage() {
