@@ -15,7 +15,7 @@ Utilisez la commande suivante dans le dossier.
 
 ## Les contributeurs
 Ce projet est effectué par le groupe de Projet EQ36 composé de :
-- LEMAIRE Anthony
+- LEMAIRE Anthony (Chef de Projet)
 - KEDADI Farouk
 - LORENZATTI Johan
 - TNIFAS Saber
