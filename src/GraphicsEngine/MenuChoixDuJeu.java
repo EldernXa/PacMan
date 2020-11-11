@@ -46,6 +46,7 @@ public class MenuChoixDuJeu {
 
         remplirListGame();
         remplirGamesAttributs();
+        System.out.println("hey");
 
         System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
