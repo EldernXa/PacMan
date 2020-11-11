@@ -76,7 +76,7 @@ public class MenuChoixDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MenuDuJeu menuPacMan = new MenuDuJeu(stage,"Pacman",new Musique("./data/Jeux/Pacman/musiquemenu" +
-                        ".wav"));
+                        ".wav"),menuScene);
                 changerScene(menuPacMan.getMenuDuJeuScene());
             }
         });
@@ -85,7 +85,7 @@ public class MenuChoixDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"Casse-Brique",new Musique("./data/Jeux/Pacman/musiquemenu" +
-                        ".wav"));
+                        ".wav"),menuScene);
                 changerScene(menuCasseBrique.getMenuDuJeuScene());
             }
         });
