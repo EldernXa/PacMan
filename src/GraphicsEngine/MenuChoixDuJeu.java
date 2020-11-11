@@ -95,8 +95,15 @@ public class MenuChoixDuJeu {
             nextGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+                    System.out.println("current image link = " + currentGame.getImageJeu().getPathImage());
+                    System.out.println("next image link = " + nextGame.getImageJeu().getPathImage());
                     setCurrentGame((index+1)%gameList.size());
                     System.out.println("Click next");
+                    System.out.println("current image link = " + currentGame.getImageJeu().getPathImage());
+                    //System.out.println("next image link = " + nextGame.getImageJeu().getPathImage());
+                    System.out.println("previous image link = " + previousGame.getImageJeu().getPathImage());
+
+
                 }
             });
 
@@ -138,9 +145,10 @@ public class MenuChoixDuJeu {
                 //mettre une image noire pour previous
             }
             else{
-                this.previousGame = gameList.get(index-1);
+                this.previousGame = gameList.get(Math.abs(index-1)%gameList.size());
             }
             if(index == gameList.size()-1){
+                this.nextGame = null;
                 //mettre une image noir pour next
             }
             else{

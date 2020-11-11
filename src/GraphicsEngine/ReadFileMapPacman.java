@@ -13,15 +13,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class ReadFileMapPacman {
 
 
-    String file[];
-    String mapSize;
-    ArrayList<UnmouvingObj> unmouvingObjs = new ArrayList<>();
+    private  String file[];
+    private ArrayList<String> line;
+    private String mapSize;
+    static ArrayList<VisualObject> visualObjects = new ArrayList<>();
+    private Scene scene;
+    private Pane pane;
 
-    public ReadFileMapPacman() {
-        ArrayList<String> line = new ArrayList<>();
+    public ReadFileMapPacman(Scene scene, Pane pane) {
+        this.scene = scene;
+        this.pane = pane;
+        line = new ArrayList<>();
         Path path = Paths.get("./data/Map/PacmanMap1");
         try {
             this.file = Files.readString(path).split("\n");
@@ -34,40 +40,56 @@ public class ReadFileMapPacman {
     }
 
 
+
+
     public void decrypt() {
 
+        for(int i = 1 ; i < file.length ; i++) {
 
-        for (int i = 1; i < file.length; i++) {
+            try {
+                String line[] = file[i].split("\\s+");
 
+                Class aClass = Class.forName("GraphicsEngine." + line[0]);
+                Class[] parameters = new Class[]{String.class, Coordinate.class, Scene.class, Pane.class};
+                Constructor constructor = aClass.getConstructor(parameters);
+                Object o = constructor.newInstance(line[3], new Coordinate(Integer.parseInt(line[1]), Integer.parseInt(line[2])), scene, pane);
+                //((Decor) o).afficher();
+
+                visualObjects.add((Decor) o);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
 
 
-        String line[] = file[1].split(" ");
-        System.out.println(line[0]);
-        try {
-            Class test = Class.forName("GraphicsEngine." + line[0]);
-/*
-
-            // I need an array as follows to describe the signature
-            Class[] parameters = new Class[] {String.class , Coordinate.class, Scene.class, Pane.class};
-
-// Now I can get a reference to the right constructor
-            Constructor constructor = test.getConstructor(parameters);
-
-// And I can use that Constructor to instantiate the class
-            Object o = constructor.newInstance(null,null,null,null);
-
-// To prove it's really there...
-
-*/
-
-            System.out.println(test.getClass());
-
-            System.out.println(test.getConstructor().getParameterCount());
-
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
     }
+
+
+    public String[] getFile() {
+        return file;
+    }
+
+    public ArrayList<String> getLine() {
+        return line;
+    }
+
+    public String getMapSize() {
+        return mapSize;
+    }
+
+    public ArrayList<VisualObject> getVisualObjects() {
+        return visualObjects;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public Pane getPane() {
+        return pane;
+    }
+
+
 }
