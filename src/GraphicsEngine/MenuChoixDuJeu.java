@@ -139,9 +139,6 @@ public class MenuChoixDuJeu {
     }
 
     public void setCurrentGame(int index) {
-        if(index == -1){
-            index = 0;
-        }
         this.currentGame = gameList.get(index);
         if(gameList.size() < 3){
             if(index == 0){
