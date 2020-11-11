@@ -69,11 +69,14 @@ public class MenuChoixDuJeu {
         imageJeu2.setCoordinate(coordImageJeu2);
 
 
+
+
         recupJeux();
         imageJeu1.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuPacMan = new MenuDuJeu(stage,"Pacman");
+                MenuDuJeu menuPacMan = new MenuDuJeu(stage,"Pacman",new Musique("./data/Jeux/Pacman/musiquemenu" +
+                        ".wav"));
                 changerScene(menuPacMan.getMenuDuJeuScene());
             }
         });
@@ -81,7 +84,8 @@ public class MenuChoixDuJeu {
         imageJeu2.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"Casse-Brique");
+                MenuDuJeu menuCasseBrique = new MenuDuJeu(stage,"Casse-Brique",new Musique("./data/Jeux/Pacman/musiquemenu" +
+                        ".wav"));
                 changerScene(menuCasseBrique.getMenuDuJeuScene());
             }
         });

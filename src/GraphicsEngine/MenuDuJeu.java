@@ -25,9 +25,9 @@ public class MenuDuJeu {
     Scene menuDuJeuScene;
     HBox hbox = new HBox(20);
 
-    public MenuDuJeu(Stage stage,String name) {
-        Musique pacman = new Musique("./data/Jeux/"+name+"/musiquemenu.wav");
-        pacman.lancerMusique();
+    public MenuDuJeu(Stage stage,String name, Musique music) {
+
+        music.lancerMusique();
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
@@ -57,18 +57,21 @@ public class MenuDuJeu {
                 System.out.println(soundAndNoSound.getPathImage() + "path null");
                 switch (soundAndNoSound.getPathImage()){
                     case "./data/Logos/sound.png":
+
                         soundAndNoSound.setImageView("./data/Logos/nosound.png");
                         break;
 
                     case "./data/Logos/nosound.png":
-                        soundAndNoSound.setImageView("./data/Logos/nosound.png");
+                        soundAndNoSound.setImageView("./data/Logos/sound.png");
                         break;
 
                     case "./data/Logos/soundhover.png":
+                        music.mute(true);
                         soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
                         break;
 
                     case "./data/Logos/nosoundhover.png":
+                        music.mute(false);
                         soundAndNoSound.setImageView("./data/Logos/soundhover.png");
                         break;
                 }
@@ -155,7 +158,8 @@ public class MenuDuJeu {
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,name);
+                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,name,music);
+                music.stopMusique();
                 stage.setScene(menuDuJeu.getMenuDuJeuScene());
             }
         });

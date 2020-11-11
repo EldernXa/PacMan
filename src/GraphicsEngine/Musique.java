@@ -8,7 +8,6 @@ import java.io.File;
 public class Musique {
     String path;
     static MediaPlayer mediaPlayer;
-    int indexMusique = 100;
     boolean playing = false;
 
 
@@ -44,6 +43,9 @@ public class Musique {
     }
     void stopMusique(){
         mediaPlayer.stop();
+    }
+    void mute(boolean mute){
+        mediaPlayer.setMute(mute);
     }
 
 }
