@@ -140,7 +140,7 @@ public class MenuChoixDuJeu {
             else{
                 this.previousGame = gameList.get(index-1);
             }
-            if(index == gameList.size()){
+            if(index == gameList.size()-1){
                 //mettre une image noir pour next
             }
             else{
@@ -156,7 +156,7 @@ public class MenuChoixDuJeu {
                     //mettre une image noire
                 }
             }
-            else if(index == gameList.size()){
+            else if(index == gameList.size()-1){
                 if((!gameList.get(0).getName().equals(this.previousGame.getName()))&&(!gameList.get(0).getName().equals(this.currentGame.getName()))){
                     this.nextGame = gameList.get(0);
                 }
