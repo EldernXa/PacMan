@@ -18,8 +18,6 @@ public class Musique {
         Media media = new Media(new File(path).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         this.path = path;
-        mediaPlayer.play();
-
     }
 
     public String getPath() {

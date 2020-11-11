@@ -77,6 +77,7 @@ public class MenuChoixDuJeu {
                 changerScene(menuPacMan.getMenuDuJeuScene());
             }
         });
+
         imageJeu2.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
