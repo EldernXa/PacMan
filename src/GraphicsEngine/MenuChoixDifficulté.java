@@ -87,7 +87,7 @@ public class MenuChoixDifficulté {
                 Pane root = new Pane();//Creation groupe
                 root.setMinSize(0, 0);
                 Scene scene = new Scene(root,getScene().getWidth()/2,getScene().getHeight()/2);//Creation fenetre de taille 400 sur 400 pixels
-                PacMan visualObject = new PacMan("./data/pacmanOuvert2.png", new Coordinate(0, 0), scene, root);
+                PacMan visualObject = new PacMan("./data/pacmanOuvert2.png", new Coordinate(150, 20), scene, root);
                 root.getChildren().add(visualObject.getImageView());
                 ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root);
                 readFileMapPacman.decrypt();
