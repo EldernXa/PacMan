@@ -91,12 +91,8 @@ public class MenuChoixDifficulté {
                 root.getChildren().add(visualObject.getImageView());
                 ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root);
                 readFileMapPacman.decrypt();
-                System.out.println("-------------------");
-                System.out.println(readFileMapPacman.getVisualObjects().size());
+
                 for(int i = 0; i < readFileMapPacman.getVisualObjects().size() ; i++){
-                    System.out.println("-------------------");
-                    System.out.println(readFileMapPacman.getVisualObjects().get(i));
-                    System.out.println(readFileMapPacman.getVisualObjects().get(i).getImageView().getY());
                     root.getChildren().add(readFileMapPacman.getVisualObjects().get(i).getImageView());
                 }
 

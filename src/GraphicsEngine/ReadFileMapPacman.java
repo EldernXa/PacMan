@@ -20,7 +20,7 @@ public class ReadFileMapPacman {
     private  String file[];
     private ArrayList<String> line;
     private String mapSize;
-    private ArrayList<VisualObject> visualObjects = new ArrayList<>();
+    static ArrayList<VisualObject> visualObjects = new ArrayList<>();
     private Scene scene;
     private Pane pane;
 

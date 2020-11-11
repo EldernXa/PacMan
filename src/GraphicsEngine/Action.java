@@ -2,9 +2,12 @@ package GraphicsEngine;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class Action {
 
@@ -40,24 +43,66 @@ public class Action {
                 descendre();
     }
 
-    private void monter(){
-        if(gameImage.getCoordinate().getY()-gameImage.getValueMove()>=0)
+    private void monter() {
+        if (gameImage.getCoordinate().getY() - gameImage.getValueMove() >= 0) {
+
             gameImage.monter();
+
+            if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+
+                gameImage.descendre();
+            }
+
+        }
+
     }
 
-    private void descendre(){
-        if(gameImage.getCoordinate().getY()+gameImage.getValueMove()<=scene.getHeight())
+    private void descendre() {
+        if (gameImage.getCoordinate().getY() + gameImage.getValueMove() <= scene.getHeight())
+
             gameImage.descendre();
+        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+
+            gameImage.monter();
+        }
     }
 
-    private void gauche(){
-        if(gameImage.getCoordinate().getX()-gameImage.getValueMove()>=0)
+    private void gauche() {
+        if (gameImage.getCoordinate().getX() - gameImage.getValueMove() >= 0)
+
             gameImage.gauche();
+
+        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+
+            gameImage.droite();
+        }
     }
 
-    private void droite(){
-        if(gameImage.getCoordinate().getX()+gameImage.getValueMove()<=scene.getWidth())
+    private void droite() {
+        if (gameImage.getCoordinate().getX() + gameImage.getValueMove() <= scene.getWidth())
+
             gameImage.droite();
+
+        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+
+            gameImage.gauche();
+        }
     }
+
+
+    public boolean collision(ImageView a, ArrayList<VisualObject> b) {
+        for (int i = 0; i < b.size(); i++) {
+           if(b.get(i).getClass() == Decor.class){
+               if (a.getBoundsInParent().intersects(b.get(i).getImageView().getBoundsInParent())) {
+
+                   return true;
+               }
+
+           }
+
+        }
+        return false;
+    }
+
 
 }
