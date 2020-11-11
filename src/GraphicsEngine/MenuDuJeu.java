@@ -120,8 +120,8 @@ public class MenuDuJeu {
         param.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuParametres parametres = new MenuParametres(stage,menuDuJeuScene);
-                stage.setScene(parametres.getScene());
+                MenuParametres parametres = new MenuParametres();
+
             }
         });
 
