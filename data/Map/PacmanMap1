@@ -1,4 +1,6 @@
 400 400
+
+
 Decor 0 0 ./data/Murs/murH.png
 Decor 100 0 ./data/Murs/murH.png
 Decor 200 0 ./data/Murs/murH.png
@@ -32,10 +34,25 @@ Decor 0 300 ./data/Murs/murV.png
 Decor 0 400 ./data/Murs/murV.png
 Decor 0 500 ./data/Murs/murV.png
 Decor 0 600 ./data/Murs/murV.png
-Decor 1282 0 ./data/Murs/murV.png
-Decor 1282 100 ./data/Murs/murV.png
-Decor 1282 200 ./data/Murs/murV.png
-Decor 1282 300 ./data/Murs/murV.png
-Decor 1282 400 ./data/Murs/murV.png
-Decor 1282 500 ./data/Murs/murV.png
-Decor 1282 600 ./data/Murs/murV.png
+Decor 1281 0 ./data/Murs/murV.png
+Decor 1281 100 ./data/Murs/murV.png
+Decor 1281 200 ./data/Murs/murV.png
+Decor 1281 300 ./data/Murs/murV.png
+Decor 1281 400 ./data/Murs/murV.png
+Decor 1281 500 ./data/Murs/murV.png
+Decor 1281 600 ./data/Murs/murV.png
+
+
+
+
+
+
+
+
+
+
+Decor 55 18 ./data/Murs/murV.png
+Decor 55 118 ./data/Murs/murV.png
+Decor 100 218 ./data/Murs/murV25.png
+Decor 55 218 ./data/Murs/murH50.png
+Decor 55 118 ./data/Murs/murH.png
