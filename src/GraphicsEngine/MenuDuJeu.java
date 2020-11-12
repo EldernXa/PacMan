@@ -29,7 +29,10 @@ public class MenuDuJeu {
 
     public MenuDuJeu(Stage stage,Game game,Scene sceneBack) {
         jeu = game;
-        game.getListMusiques().get(0).lancerMusique();
+        if(!game.getListMusiques().isEmpty()) {
+
+            game.getListMusiques().get(0).lancerMusique();
+        }
         //music.lancerMusique();
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
@@ -58,25 +61,27 @@ public class MenuDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 System.out.println(soundAndNoSound.getPathImage() + "path null");
-                switch (soundAndNoSound.getPathImage()){
-                    case "./data/Logos/sound.png":
+                if (!game.getListMusiques().isEmpty()) {
+                    switch (soundAndNoSound.getPathImage()) {
+                        case "./data/Logos/sound.png":
 
-                        soundAndNoSound.setImageView("./data/Logos/nosound.png");
-                        break;
+                            soundAndNoSound.setImageView("./data/Logos/nosound.png");
+                            break;
 
-                    case "./data/Logos/nosound.png":
-                        soundAndNoSound.setImageView("./data/Logos/sound.png");
-                        break;
+                        case "./data/Logos/nosound.png":
+                            soundAndNoSound.setImageView("./data/Logos/sound.png");
+                            break;
 
-                    case "./data/Logos/soundhover.png":
-                        game.getListMusiques().get(0).mute(true);
-                        soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
-                        break;
+                        case "./data/Logos/soundhover.png":
+                            game.getListMusiques().get(0).mute(true);
+                            soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
+                            break;
 
-                    case "./data/Logos/nosoundhover.png":
-                        game.getListMusiques().get(0).mute(false);
-                        soundAndNoSound.setImageView("./data/Logos/soundhover.png");
-                        break;
+                        case "./data/Logos/nosoundhover.png":
+                            game.getListMusiques().get(0).mute(false);
+                            soundAndNoSound.setImageView("./data/Logos/soundhover.png");
+                            break;
+                    }
                 }
             }
         });
@@ -138,17 +143,8 @@ public class MenuDuJeu {
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(jeu.getName().toLowerCase().equals("pacman"))
-                    stage.setScene(menuChoixDifficulté.getScene());
-                else{
-                    StackPane newPane = new StackPane();
-                    Scene scenetemp = new Scene(newPane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
-                    ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",screenWidth,screenHeight);
-                    newPane.getChildren().clear();
-                    newPane.getChildren().addAll(imageViewSizePos.getImageView(),revenir.getImageView());
-                    newPane.setAlignment(Pos.TOP_LEFT);
-                    stage.setScene(scenetemp);
-                }
+
+                diff(game,stage,menuChoixDifficulté,revenir,screenWidth,screenHeight);
             }
         });
 
@@ -157,7 +153,9 @@ public class MenuDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                game.getListMusiques().get(0).stopMusique();
+                if(!game.getListMusiques().isEmpty()){
+                    game.getListMusiques().get(0).stopMusique();
+                }
                 stage.setScene(sceneBack);
             }
         });
@@ -190,7 +188,24 @@ public class MenuDuJeu {
     public Scene getMenuDuJeuScene() {
         return menuDuJeuScene;
     }
+    public void diff(Game game, Stage stage,MenuChoixDifficulté menuChoixDifficulté, ImageViewSizePos revenir, double screenWidth, double screenHeight){
+            File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
+            String contents[] = directoryPath.list();
+            boolean bool = false;
+            for(String content :contents){
+                if(content.equals("notyet.txt")){
+                    StackPane newPane = new StackPane();
+                    Scene scenetemp = new Scene(newPane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
+                    ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",screenWidth,screenHeight);
+                    newPane.getChildren().addAll(imageViewSizePos.getImageView(),revenir.getImageView());
+                    newPane.setAlignment(Pos.TOP_LEFT);
+                    stage.setScene(scenetemp);
+                    bool = true;
+                }
+            }
+            if(!bool)
+                stage.setScene(menuChoixDifficulté.getScene());
 
+        }
+    }
 
-
-}

@@ -26,15 +26,14 @@ public class Musique {
     void lancerMusique()
     {
 
-        System.out.println(mediaPlayer);
         if(!playing) {
             mediaPlayer.play();
+            playing= true;
             mediaPlayer.setOnEndOfMedia(() -> {
-                System.out.println("coo");
                 mediaPlayer.stop();
                 mediaPlayer.play();
             });
-            playing= true;
+
         }
     }
     void modifMusique(Media nomMedia){
@@ -43,6 +42,8 @@ public class Musique {
     }
     void stopMusique(){
         mediaPlayer.stop();
+        playing=false;
+        mediaPlayer.setMute(false);
     }
     void mute(boolean mute){
         mediaPlayer.setMute(mute);
