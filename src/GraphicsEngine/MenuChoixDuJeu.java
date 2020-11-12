@@ -79,6 +79,10 @@ public class MenuChoixDuJeu {
                     System.out.println("On lance : " + currentGame.getName());
                     System.out.println("Index réel: " + index);
 
+                    System.out.println("current img : " + currentGame.getImageJeu().getPathImage());
+                    System.out.println("previous img : " + previousGame.getImageJeu().getPathImage());
+                    System.out.println("next game img :  " + nextGame.getImageJeu().getPathImage());
+
                 }
             });
         }
@@ -101,6 +105,10 @@ public class MenuChoixDuJeu {
                     System.out.println("previous game : " + previousGame.getName());
                     System.out.println("next game link :  " + nextGame.getName());
                     System.out.println("Index réel: " + index);
+
+                    System.out.println("current img : " + currentGame.getImageJeu().getPathImage());
+                    System.out.println("previous img : " + previousGame.getImageJeu().getPathImage());
+                    System.out.println("next game img :  " + nextGame.getImageJeu().getPathImage());
 
 
                 }
@@ -128,6 +136,13 @@ public class MenuChoixDuJeu {
                     System.out.println("previous game : " + previousGame.getName());
                     System.out.println("next game link :  " + nextGame.getName());
                     System.out.println("Index réel: " + index);
+
+
+                    System.out.println("current img : " + currentGame.getImageJeu().getPathImage());
+                    System.out.println("previous img : " + previousGame.getImageJeu().getPathImage());
+                    System.out.println("next game img :  " + nextGame.getImageJeu().getPathImage());
+
+
 
 
                 }
