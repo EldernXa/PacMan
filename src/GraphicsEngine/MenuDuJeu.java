@@ -27,9 +27,10 @@ public class MenuDuJeu {
     Scene menuDuJeuScene;
     HBox hbox = new HBox(20);
 
-    public MenuDuJeu(Stage stage,Game game, Musique music,Scene sceneBack) {
+    public MenuDuJeu(Stage stage,Game game,Scene sceneBack) {
         jeu = game;
-        music.lancerMusique();
+        game.getListMusiques().get(0).lancerMusique();
+        //music.lancerMusique();
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
@@ -68,12 +69,12 @@ public class MenuDuJeu {
                         break;
 
                     case "./data/Logos/soundhover.png":
-                        music.mute(true);
+                        game.getListMusiques().get(0).mute(true);
                         soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
                         break;
 
                     case "./data/Logos/nosoundhover.png":
-                        music.mute(false);
+                        game.getListMusiques().get(0).mute(false);
                         soundAndNoSound.setImageView("./data/Logos/soundhover.png");
                         break;
                 }
@@ -156,7 +157,7 @@ public class MenuDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                music.stopMusique();
+                game.getListMusiques().get(0).stopMusique();
                 stage.setScene(sceneBack);
             }
         });
