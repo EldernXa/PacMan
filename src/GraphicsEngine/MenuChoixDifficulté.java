@@ -14,6 +14,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+
 
 public class MenuChoixDifficulté {
     private StackPane pane = new StackPane();
@@ -24,6 +26,7 @@ public class MenuChoixDifficulté {
 
     public MenuChoixDifficulté(Stage stage, Game game,Scene scenep) {
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
+        scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         hbox.setPrefWidth(800);
         hbox.setPrefHeight(100);
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
@@ -46,7 +49,7 @@ public class MenuChoixDifficulté {
             Button button = new Button(difficulte.getName());
             button.setPrefWidth(hbox.getPrefWidth());
             button.setPrefHeight(hbox.getPrefHeight());
-            style(button);
+            button.getStyleClass().add("diff");
             hbox.getChildren().add(button);
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -69,22 +72,7 @@ public class MenuChoixDifficulté {
                     stage.centerOnScreen();
                 }
             });
-            button.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    button.setStyle(" -fx-background-color: \n" +
-                            "        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),\n" +
-                            "        #9d4024,\n" +
-                            "        #d86e3a,\n" +
-                            "        radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);");
-                }
-            });
-            button.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    style(button);
-                }
-            });
+
         }
 
         Tooltip tooltip_revenir=new Tooltip("Revenir en arrière");
@@ -116,19 +104,5 @@ public class MenuChoixDifficulté {
     public Scene getScene() {
         return scene;
     }
-    public void style(Button button){
-        button.setStyle("-fx-padding: 8 15 15 15;\n" +
-                "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n" +
-                "    -fx-background-radius: 8;\n" +
-                "    -fx-background-color: \n" +
-                "        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),\n" +
-                "        #9d4024,\n" +
-                "        #d86e3a,\n" +
-                "        radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);\n" +
-                "    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n" +
-                "    -fx-font-weight: bold;\n" +
-                "    -fx-font-size: 1.1em;");
 
-
-    }
 }
