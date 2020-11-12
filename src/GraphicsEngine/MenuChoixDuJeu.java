@@ -192,7 +192,7 @@ public class MenuChoixDuJeu {
         }
         else {
             if (index == 0) {
-                if ((!gameList.get(gameList.size()-1).getName().equals(this.nextGame.getName())) && (!gameList.get(gameList.size()).getName().equals(this.currentGame.getName()))) {
+                if ((!gameList.get(gameList.size()-1).getName().equals(this.nextGame.getName())) && (!gameList.get(gameList.size()-1).getName().equals(this.currentGame.getName()))) {
                     this.previousGame = gameList.get(gameList.size() - 1);
                     this.nextGame = gameList.get(index + 1);
                 } else {
