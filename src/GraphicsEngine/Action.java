@@ -58,7 +58,7 @@ public class Action {
     }
 
     private void descendre() {
-        if (gameImage.getCoordinate().getY() + gameImage.getValueMove() <= scene.getHeight())
+        if (gameImage.getCoordinate().getY() + gameImage.getValueMove() <= (scene.getHeight()-gameImage.getImgView().getImage().getHeight()))
 
             gameImage.descendre();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
@@ -79,7 +79,7 @@ public class Action {
     }
 
     private void droite() {
-        if (gameImage.getCoordinate().getX() + gameImage.getValueMove() <= scene.getWidth())
+        if (gameImage.getCoordinate().getX() + gameImage.getValueMove() <= (scene.getWidth()-gameImage.getImgView().getImage().getWidth()))
 
             gameImage.droite();
 
