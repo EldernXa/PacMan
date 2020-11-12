@@ -2,33 +2,33 @@ package GraphicsEngine;
 
 import GamePlay.PacMan;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.util.Arrays;
-import java.util.List;
+import java.io.File;
+
 
 public class MenuChoixDifficulté {
-    private Pane pane = new Pane();
-    ImageViewSizePos facile;
-    ImageViewSizePos moyen;
-    ImageViewSizePos difficile;
-    ImageViewSizePos expert;
+    private StackPane pane = new StackPane();
+    HBox hbox = new HBox(20);
     ImageViewSizePos revenir ;
     private Scene scene;
     private Scene sceneBack;
 
-    public MenuChoixDifficulté(Stage stage, String name,Scene scenep) {
+    public MenuChoixDifficulté(Stage stage, Game game,Scene scenep) {
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
-
+        scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
+        hbox.setPrefWidth(800);
+        hbox.setPrefHeight(100);
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
         sceneBack= scenep;
         revenir.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -45,6 +45,35 @@ public class MenuChoixDifficulté {
 
             }
         });
+        for(Difficulte difficulte : game.getListDifficultes()){
+            Button button = new Button(difficulte.getName());
+            button.setPrefWidth(hbox.getPrefWidth());
+            button.setPrefHeight(hbox.getPrefHeight());
+            button.getStyleClass().add("diff");
+            hbox.getChildren().add(button);
+            button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Pane root = new Pane();//Creation groupe
+                    root.setMinSize(0, 0);
+                    Scene scene = new Scene(root,getScene().getWidth()/2,getScene().getHeight()/2);//Creation fenetre de taille 400 sur 400 pixels
+                    PacMan visualObject = new PacMan("./data/pacmanOuvert2.png", new Coordinate(0, 0), scene, root);
+                    root.getChildren().add(visualObject.getImageView());
+                    ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root);
+                    readFileMapPacman.decrypt();
+
+                    for(int i = 0; i < readFileMapPacman.getVisualObjects().size() ; i++){
+                        root.getChildren().add(readFileMapPacman.getVisualObjects().get(i).getImageView());
+                    }
+
+                    root.setStyle("-fx-background-color: black;");
+                    Musique.mediaPlayer.stop();
+                    stage.setScene(scene);
+                    stage.centerOnScreen();
+                }
+            });
+
+        }
 
         Tooltip tooltip_revenir=new Tooltip("Revenir en arrière");
         tooltip_revenir.setStyle(" -fx-background-color: gray;");
@@ -52,57 +81,14 @@ public class MenuChoixDifficulté {
         Tooltip.install(revenir.getImageView(),tooltip_revenir);
 
 
-
-        ImageViewSizePos fond = new ImageViewSizePos("./data/Logos/"+ name + "menudujeu.jpg",scene.getWidth(),scene.getHeight());
-        RectanglePos rectFacile = new RectanglePos(62,322, Color.LIGHTBLUE);
-        Coordinate coordFacile = new Coordinate(scene.getWidth()/8-(rectFacile.getRectangle().getWidth()/2),scene.getHeight()/2-(rectFacile.getRectangle().getHeight()/2));
-        facile = new ImageViewSizePos("./data/Font/facile.png",322,62);
-        List<Node> facileList = Arrays.asList(rectFacile.getRectangle(),facile.getImageView());
-        ObjectsInPane facileObj = new ObjectsInPane(facileList, coordFacile,rectFacile.getRectangle().getWidth(),rectFacile.getRectangle().getHeight());
-
-        RectanglePos rectMoyen = new RectanglePos(62,305,Color.ORANGE);
-        Coordinate coordMoyen = new Coordinate((3*scene.getWidth()/8)-(rectMoyen.getRectangle().getWidth()/2),scene.getHeight()/2-(rectMoyen.getRectangle().getHeight()/2));
-        moyen = new ImageViewSizePos("./data/Font/moyen.png",305,62);
-        List<Node> moyenList = Arrays.asList(rectMoyen.getRectangle(),moyen.getImageView());
-        ObjectsInPane moyenObj = new ObjectsInPane(moyenList, coordMoyen,rectMoyen.getRectangle().getWidth(),rectMoyen.getRectangle().getHeight());
-
-        RectanglePos rectDifficile = new RectanglePos(62,438,Color.RED);
-        Coordinate coordDifficile = new Coordinate((5*scene.getWidth()/8)-(rectDifficile.getRectangle().getWidth()/2),scene.getHeight()/2-(rectDifficile.getRectangle().getHeight()/2));
-        difficile = new ImageViewSizePos("./data/Font/difficile.png",438,62);
-        List<Node> difficileList = Arrays.asList(rectDifficile.getRectangle(),difficile.getImageView());
-        ObjectsInPane difficileObj = new ObjectsInPane(difficileList, coordDifficile,rectDifficile.getRectangle().getWidth(),rectDifficile.getRectangle().getHeight());
-
-        RectanglePos rectExpert = new RectanglePos(62,359,Color.BLACK);
-        Coordinate coordExpert = new Coordinate((7*scene.getWidth()/8)-(rectExpert.getRectangle().getWidth()/2),scene.getHeight()/2-(rectExpert.getRectangle().getHeight()/2));
-        expert = new ImageViewSizePos("./data/Font/expert.png",359,62);
-        List<Node> expertList = Arrays.asList(rectExpert.getRectangle(),expert.getImageView());
-        ObjectsInPane expertObj = new ObjectsInPane(expertList, coordExpert,rectExpert.getRectangle().getWidth(),rectExpert.getRectangle().getHeight());
-
-        pane.getChildren().addAll(fond.getImageView(),facileObj.getPane(),moyenObj.getPane(),difficileObj.getPane(),expertObj.getPane(), revenir.getImageView());
+        ImageViewSizePos fond = new ImageViewSizePos("./data/Logos/"+ game.getName() + "menudujeu.jpg",scene.getWidth(),scene.getHeight());
 
 
-        facileObj.getPane().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Pane root = new Pane();//Creation groupe
-                root.setMinSize(0, 0);
-                Scene scene = new Scene(root,getScene().getWidth()/2,getScene().getHeight()/2);//Creation fenetre de taille 400 sur 400 pixels
-                PacMan visualObject = new PacMan("./data/pacmanOuvert2.png", new Coordinate(150, 20), scene, root);
-                root.getChildren().add(visualObject.getImageView());
-                ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root);
-                readFileMapPacman.decrypt();
-
-                for(int i = 0; i < readFileMapPacman.getVisualObjects().size() ; i++){
-                    root.getChildren().add(readFileMapPacman.getVisualObjects().get(i).getImageView());
-                }
-
-                root.setStyle("-fx-background-color: black;");
-                Musique.mediaPlayer.stop();
-                stage.setScene(scene);
-                stage.centerOnScreen();
-            }
-        });
-
+        pane.getChildren().addAll(fond.getImageView(),hbox, revenir.getImageView());
+        StackPane.setAlignment(revenir.getImageView(),Pos.TOP_LEFT);
+        //StackPane.setAlignment(hbox,Pos.BOTTOM_CENTER);
+        hbox.setAlignment(Pos.CENTER);
+        System.out.println(hbox.getAlignment());
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -111,26 +97,12 @@ public class MenuChoixDifficulté {
                 stage.setScene(sceneBack);
             }
         });
+        pane.setStyle("-fx-background-color: black");
         stage.setScene(scene);
-    }
-
-    public ImageViewSizePos getFacile() {
-        return facile;
-    }
-
-    public ImageViewSizePos getMoyen() {
-        return moyen;
-    }
-
-    public ImageViewSizePos getDifficile() {
-        return difficile;
-    }
-
-    public ImageViewSizePos getExpert() {
-        return expert;
     }
 
     public Scene getScene() {
         return scene;
     }
+
 }

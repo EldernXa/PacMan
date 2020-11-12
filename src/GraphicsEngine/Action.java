@@ -24,9 +24,13 @@ public class Action {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
             if(keyEvent.getCode().getChar().toLowerCase().compareTo(
                     carac.toLowerCase())==0){
-                choiceMove(valueMove, dir);
+                doWhenEventOccur(valueMove, dir);
             }
         });
+    }
+
+    public void doWhenEventOccur(int valueMove, char dir){
+        choiceMove(valueMove, dir);
     }
 
     public void choiceMove(int valueMove, char carac){
@@ -43,6 +47,10 @@ public class Action {
                 descendre();
     }
 
+    void doWhenBlock(){
+
+    }
+
     private void monter() {
         if (gameImage.getCoordinate().getY() - gameImage.getValueMove() >= 0) {
 
@@ -51,19 +59,25 @@ public class Action {
             if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
 
                 gameImage.descendre();
+                doWhenBlock();
             }
 
+        }else{
+            doWhenBlock();
         }
 
     }
 
     private void descendre() {
-        if (gameImage.getCoordinate().getY() + gameImage.getValueMove() <= scene.getHeight())
+        if (gameImage.getCoordinate().getY() + gameImage.getValueMove() <= (scene.getHeight()-gameImage.getImgView().getImage().getHeight()))
 
             gameImage.descendre();
+        else
+            doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
 
             gameImage.monter();
+            doWhenBlock();
         }
     }
 
@@ -71,21 +85,25 @@ public class Action {
         if (gameImage.getCoordinate().getX() - gameImage.getValueMove() >= 0)
 
             gameImage.gauche();
-
+        else
+            doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
 
             gameImage.droite();
+            doWhenBlock();
         }
     }
 
     private void droite() {
-        if (gameImage.getCoordinate().getX() + gameImage.getValueMove() <= scene.getWidth())
+        if (gameImage.getCoordinate().getX() + gameImage.getValueMove() <= (scene.getWidth()-gameImage.getImgView().getImage().getWidth()))
 
             gameImage.droite();
-
+        else
+            doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
 
             gameImage.gauche();
+            doWhenBlock();
         }
     }
 

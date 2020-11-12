@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
@@ -21,13 +22,15 @@ public class MenuDuJeu {
     VBox buttonContainers = new VBox(15);
     Button retouner = new Button("Retourner au choix du jeu".toUpperCase());
     ImageViewSizePos param;
+    Game jeu;
     ImageViewSizePos soundAndNoSound;
     Scene menuDuJeuScene;
     HBox hbox = new HBox(20);
 
-    public MenuDuJeu(Stage stage,String name, Musique music,Scene sceneBack) {
-
-        music.lancerMusique();
+    public MenuDuJeu(Stage stage,Game game,Scene sceneBack) {
+        jeu = game;
+        game.getListMusiques().get(0).lancerMusique();
+        //music.lancerMusique();
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
         System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
@@ -38,7 +41,7 @@ public class MenuDuJeu {
 
         param = new ImageViewSizePos("./data/Logos/settings.png",40, 40);
         soundAndNoSound = new ImageViewSizePos("./data/Logos/sound.png",40,40);
-        ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Jeux/" + name + "/menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
+        ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Jeux/" + jeu.getName() + "/menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
         pane.getChildren().add(fondEcran.getImageView());
 
         hbox.getChildren().addAll(param.getImageView(), soundAndNoSound.getImageView());
@@ -49,7 +52,7 @@ public class MenuDuJeu {
         hbox.setAlignment(Pos.CENTER);
         buttonContainers.getChildren().addAll(singlePlayer,multiPlayer,retouner, hbox);
 
-        MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, name,menuDuJeuScene);
+        MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, jeu,menuDuJeuScene);
 
         soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -66,12 +69,12 @@ public class MenuDuJeu {
                         break;
 
                     case "./data/Logos/soundhover.png":
-                        music.mute(true);
+                        game.getListMusiques().get(0).mute(true);
                         soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
                         break;
 
                     case "./data/Logos/nosoundhover.png":
-                        music.mute(false);
+                        game.getListMusiques().get(0).mute(false);
                         soundAndNoSound.setImageView("./data/Logos/soundhover.png");
                         break;
                 }
@@ -135,14 +138,16 @@ public class MenuDuJeu {
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(name.toLowerCase().equals("pacman"))
+                if(jeu.getName().toLowerCase().equals("pacman"))
                     stage.setScene(menuChoixDifficulté.getScene());
                 else{
+                    StackPane newPane = new StackPane();
+                    Scene scenetemp = new Scene(newPane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
                     ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",screenWidth,screenHeight);
-                    pane.getChildren().clear();
-                    pane.getChildren().addAll(imageViewSizePos.getImageView(),revenir.getImageView());
-                    pane.setAlignment(Pos.TOP_LEFT);
-                    stage.setScene(menuDuJeuScene);
+                    newPane.getChildren().clear();
+                    newPane.getChildren().addAll(imageViewSizePos.getImageView(),revenir.getImageView());
+                    newPane.setAlignment(Pos.TOP_LEFT);
+                    stage.setScene(scenetemp);
                 }
             }
         });
@@ -152,8 +157,14 @@ public class MenuDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                music.stopMusique();
+                game.getListMusiques().get(0).stopMusique();
                 stage.setScene(sceneBack);
+            }
+        });
+        revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stage.setScene(menuDuJeuScene);
             }
         });
 
