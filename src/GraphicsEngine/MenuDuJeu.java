@@ -61,25 +61,27 @@ public class MenuDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 System.out.println(soundAndNoSound.getPathImage() + "path null");
-                switch (soundAndNoSound.getPathImage()){
-                    case "./data/Logos/sound.png":
+                if (!game.getListMusiques().isEmpty()) {
+                    switch (soundAndNoSound.getPathImage()) {
+                        case "./data/Logos/sound.png":
 
-                        soundAndNoSound.setImageView("./data/Logos/nosound.png");
-                        break;
+                            soundAndNoSound.setImageView("./data/Logos/nosound.png");
+                            break;
 
-                    case "./data/Logos/nosound.png":
-                        soundAndNoSound.setImageView("./data/Logos/sound.png");
-                        break;
+                        case "./data/Logos/nosound.png":
+                            soundAndNoSound.setImageView("./data/Logos/sound.png");
+                            break;
 
-                    case "./data/Logos/soundhover.png":
-                        game.getListMusiques().get(0).mute(true);
-                        soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
-                        break;
+                        case "./data/Logos/soundhover.png":
+                            game.getListMusiques().get(0).mute(true);
+                            soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
+                            break;
 
-                    case "./data/Logos/nosoundhover.png":
-                        game.getListMusiques().get(0).mute(false);
-                        soundAndNoSound.setImageView("./data/Logos/soundhover.png");
-                        break;
+                        case "./data/Logos/nosoundhover.png":
+                            game.getListMusiques().get(0).mute(false);
+                            soundAndNoSound.setImageView("./data/Logos/soundhover.png");
+                            break;
+                    }
                 }
             }
         });
