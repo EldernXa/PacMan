@@ -6,14 +6,14 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 
 public class ImageViewSizePos {
-    private ImageView imageView;
+    private ImageView imageView = new ImageView();
     private Coordinate coordinate;
     String pathImage;
 
     public ImageViewSizePos(String pathImage, double width, double height, Coordinate coordinate){
         this.pathImage = pathImage;
         this.coordinate = coordinate;
-        imageView = new ImageView(new Image(new File(pathImage).toURI().toString()));
+        imageView.setImage(new Image(new File(pathImage).toURI().toString()));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         setCoordinate(coordinate);
@@ -25,7 +25,7 @@ public class ImageViewSizePos {
 
     public ImageViewSizePos(String pathImage, double width, double height){
         this.pathImage = pathImage;
-        imageView = new ImageView(new Image(new File(pathImage).toURI().toString()));
+        imageView.setImage(new Image(new File(pathImage).toURI().toString()));
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
     }
