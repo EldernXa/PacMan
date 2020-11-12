@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -25,7 +26,8 @@ public class MenuParametres {
     public MenuParametres() {
 
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/2,Screen.getPrimary().getVisualBounds().getHeight()/2);
-
+        Label titre = new Label("Parametres");
+        titre.setStyle("-fx-font-size: 30px");
         /*ToggleGroup group = new ToggleGroup();
         RadioButton button1 = new RadioButton("Male");
         button1.setToggleGroup(group);
@@ -44,7 +46,8 @@ public class MenuParametres {
         });
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
         pane.setStyle("-fx-background-color: gray");
-        pane.getChildren().addAll(volumeSlider,revenir.getImageView());
+
+        pane.getChildren().addAll(volumeSlider,revenir.getImageView(),titre);
 
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -71,7 +74,7 @@ public class MenuParametres {
         volumeSlider.setMaxSize(100,100);
         volumeSlider.setOrientation(Orientation.VERTICAL);
         StackPane.setAlignment(volumeSlider, Pos.CENTER_RIGHT);
-
+        StackPane.setAlignment(titre,Pos.TOP_CENTER);
 
         stage.setScene(scene);
         stage.show();
