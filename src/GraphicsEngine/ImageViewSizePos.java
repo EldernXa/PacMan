@@ -10,6 +10,9 @@ public class ImageViewSizePos {
     private Coordinate coordinate;
     String pathImage;
 
+    public ImageViewSizePos(){
+    }
+
     public ImageViewSizePos(String pathImage, double width, double height, Coordinate coordinate){
         this.pathImage = pathImage;
         this.coordinate = coordinate;
@@ -21,6 +24,10 @@ public class ImageViewSizePos {
 
     public String getPathImage() {
         return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
     }
 
     public ImageViewSizePos(String pathImage, double width, double height){
