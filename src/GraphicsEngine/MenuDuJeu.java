@@ -3,12 +3,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -33,6 +36,7 @@ public class MenuDuJeu {
 
             game.getListMusiques().get(0).lancerMusique();
         }
+
         //music.lancerMusique();
         buttonContainers.setPrefWidth(400);
         System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
@@ -44,6 +48,7 @@ public class MenuDuJeu {
 
         param = new ImageViewSizePos("./data/Logos/settings.png",40, 40);
         soundAndNoSound = new ImageViewSizePos("./data/Logos/sound.png",40,40);
+
         ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Jeux/" + jeu.getName() + "/menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
         pane.getChildren().add(fondEcran.getImageView());
 
@@ -133,7 +138,7 @@ public class MenuDuJeu {
             }
         });
 
-
+        setmusic(game);
         ImageViewSizePos revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50, new Coordinate(2,2));
         Tooltip tooltip_revenir=new Tooltip("Revenir en arrière");
         tooltip_revenir.setStyle(" -fx-background-color: gray;");
@@ -188,6 +193,34 @@ public class MenuDuJeu {
     public Scene getMenuDuJeuScene() {
         return menuDuJeuScene;
     }
+    public void setmusic(Game game){
+        File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
+        String contents[] = directoryPath.list();
+        boolean music = false;
+        for(String content :contents){
+            if(content.contains("musique")){
+                music = true;
+            }
+        }
+        if(!music){
+            System.out.println("on est dedans");
+            soundAndNoSound.setImageView("./data/Logos/nosound.png");
+            soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Label label = new Label("Il n'y a pas encore de musique disponible");
+                    label.setFont(Font.font("Arial", 42));
+                    label.setTextFill(Color.WHITE);
+                    label.setStyle("-fx-background-color: black");
+                    pane.setAlignment(label,Pos.TOP_CENTER);
+                    if(!pane.getChildren().contains(label)) {
+                        pane.getChildren().add(label);
+                    }
+                }
+            });
+        }
+
+    }
     public void diff(Game game, Stage stage,MenuChoixDifficulté menuChoixDifficulté, ImageViewSizePos revenir, double screenWidth, double screenHeight){
             File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
             String contents[] = directoryPath.list();
@@ -202,6 +235,7 @@ public class MenuDuJeu {
                     stage.setScene(scenetemp);
                     bool = true;
                 }
+
             }
             if(!bool)
                 stage.setScene(menuChoixDifficulté.getScene());
