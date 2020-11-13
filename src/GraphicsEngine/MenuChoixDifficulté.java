@@ -55,13 +55,17 @@ public class MenuChoixDifficulté {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     Pane root = new Pane();//Creation groupe
-                    root.setMinSize(0, 0);
-                    Scene scene = new Scene(root,getScene().getWidth()/2,getScene().getHeight()/2);//Creation fenetre de taille 400 sur 400 pixels
+                    stage.setFullScreen(false);
+                    Scene scene = new Scene(root,655,365);//Creation fenetre de taille 400 sur 400 pixels
+                    root.setMinHeight(scene.getHeight());
+                    root.setMaxHeight(scene.getHeight());
+                    root.setPrefHeight(scene.getHeight());
+                    root.setMinWidth(scene.getWidth());
+                    root.setMaxWidth(scene.getWidth());
+                    root.setPrefWidth(scene.getWidth());
                     PacMan visualObject = new PacMan("./data/pacmanOuvert2.png", new Coordinate(385, 20), scene, root);
                     root.getChildren().add(visualObject.getImageView());
-                    stage.setResizable(false);
-                    root.setMaxWidth(getScene().getWidth()/2);
-                    root.setMaxHeight(getScene().getHeight()/2);
+                    stage.setMaximized(false);
                     ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root);
                     readFileMapPacman.decrypt();
 
@@ -73,6 +77,8 @@ public class MenuChoixDifficulté {
                     Musique.mediaPlayer.stop();
                     stage.setScene(scene);
                     stage.centerOnScreen();
+                    //stage.setResizable(false);
+                    stage.sizeToScene();
                 }
             });
 
