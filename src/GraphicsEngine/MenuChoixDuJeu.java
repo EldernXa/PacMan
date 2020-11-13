@@ -88,7 +88,7 @@ public class MenuChoixDuJeu {
         }
 
         if(previousGame != null) {
-            previousGame.setImageJeu(new ImageViewSizePos(gameList.get(Math.abs(index - 1) % gameList.size()).getImageJeu().getPathImage(), 500, 250));
+            previousGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(-1,index)).getImageJeu().getPathImage(), 500, 250));
             Coordinate coordPreviousGame = new Coordinate(menuScene.getWidth() / 6 - (currentGame.getImageJeu().getImageView().getFitWidth() / 4), menuScene.getHeight() / 2 - (currentGame.getImageJeu().getImageView().getFitHeight() / 2));
             previousGame.getImageJeu().setCoordinate(coordPreviousGame);
 
@@ -99,7 +99,8 @@ public class MenuChoixDuJeu {
                     System.out.println("previous game : " + previousGame.getName());
                     System.out.println("next game link :  " + nextGame.getName());
                     index = calculFollowingCurrentIndex(-1,index);
-                    setCurrentGame((Math.abs(index))%gameList.size());
+                    setCurrentGame(index);
+
                     System.out.println("Previous");
                     System.out.println("current game : " + currentGame.getName());
                     System.out.println("previous game : " + previousGame.getName());
@@ -114,11 +115,12 @@ public class MenuChoixDuJeu {
                 }
             });
 
+
             pane.getChildren().add(previousGame.getImageJeu().getImageView());
         }
 
         if(nextGame != null) {
-            nextGame.setImageJeu(new ImageViewSizePos(gameList.get((index + 1) % gameList.size()).getImageJeu().getPathImage(), 500, 250));
+            nextGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(1,index)).getImageJeu().getPathImage(), 500, 250));
             Coordinate coordNextGame = new Coordinate(5 * (menuScene.getWidth() / 6) - 3*(currentGame.getImageJeu().getImageView().getFitWidth() / 4), menuScene.getHeight() / 2 - (currentGame.getImageJeu().getImageView().getFitHeight() / 2));
             nextGame.getImageJeu().setCoordinate(coordNextGame);
 
@@ -129,8 +131,14 @@ public class MenuChoixDuJeu {
                     System.out.println("current game : " + currentGame.getName());
                     System.out.println("previous game : " + previousGame.getName());
                     System.out.println("next game link :  " + nextGame.getName());
-                    index = calculFollowingCurrentIndex(1,index)%gameList.size();
-                    setCurrentGame((index)%gameList.size());
+                    index = calculFollowingCurrentIndex(1,index);
+                    setCurrentGame(index);
+                    System.out.println("Lien !!! " +gameList.get(index).getImageJeu().getPathImage());
+                    /*previousGame.getImageJeu().getImageView().setImage(gameList.get(index).getImageJeu().getImageView().getImage());
+                    currentGame.getImageJeu().getImageView().setImage(gameList.get(calculFollowingCurrentIndex(1,index)).getImageJeu().getImageView().getImage());
+                    nextGame.getImageJeu().getImageView().setImage(gameList.get(calculFollowingCurrentIndex(1,calculFollowingCurrentIndex(1,index))).getImageJeu().getImageView().getImage());
+*/
+
                     System.out.println("next");
                     System.out.println("current game : " + currentGame.getName());
                     System.out.println("previous game : " + previousGame.getName());
@@ -170,6 +178,47 @@ public class MenuChoixDuJeu {
         this.stage = stage ;
     }
 
+    public void setCurrentGame(int index) {
+        this.currentGame = gameList.get(index);
+        if(gameList.size() < 3){
+            if(index == 0){
+                this.previousGame = null;
+                //mettre une image noire pour previous
+            }
+            else{
+                this.previousGame = gameList.get(calculFollowingCurrentIndex(-1,index)%gameList.size());
+            }
+            if(index == gameList.size()-1){
+                this.nextGame = null;
+                //mettre une image noir pour next
+            }
+            else{
+                this.nextGame = gameList.get(calculFollowingCurrentIndex(1,index)%gameList.size());
+
+            }
+        }
+        else {
+            if (index == 0) {
+                if ((!gameList.get(gameList.size()-1).getName().equals(this.nextGame.getName())) && (!gameList.get(gameList.size()-1).getName().equals(this.currentGame.getName()))) {
+                    this.previousGame = gameList.get(calculFollowingCurrentIndex(-1,index));
+                    this.nextGame = gameList.get(calculFollowingCurrentIndex(1,index));
+                } else {
+                    //mettre une image noire
+                }
+            } else if (index == gameList.size() - 1) {
+                if ((!gameList.get(0).getName().equals(this.previousGame.getName())) && (!gameList.get(0).getName().equals(this.currentGame.getName()))) {
+                    this.nextGame = gameList.get(calculFollowingCurrentIndex(1,index));
+                    this.previousGame = gameList.get(calculFollowingCurrentIndex(-1,index));
+                } else {
+                    //mettre une image noire
+                }
+            } else {
+                this.previousGame = gameList.get(calculFollowingCurrentIndex(-1,index));
+                this.nextGame = gameList.get(calculFollowingCurrentIndex(1,index));
+            }
+        }
+    }
+
     public int calculFollowingCurrentIndex(int plusoumoins1, int currentIndex){
         if(plusoumoins1 == 1){
             if(currentIndex == gameList.size()-1){
@@ -185,51 +234,8 @@ public class MenuChoixDuJeu {
         }
     }
 
-    public void setCurrentGame(int index) {
-        System.out.println("Index calculé : " + index);
-        this.currentGame = gameList.get(index);
-        if(gameList.size() < 3){
-            if(index == 0){
-                this.previousGame = null;
-                //mettre une image noire pour previous
-            }
-            else{
-                this.previousGame = gameList.get(Math.abs(index-1)%gameList.size());
-            }
-            if(index == gameList.size()-1){
-                this.nextGame = null;
-                //mettre une image noir pour next
-            }
-            else{
-                this.nextGame = gameList.get((index+1)%gameList.size());
-
-            }
-        }
-        else {
-            if (index == 0) {
-                if ((!gameList.get(gameList.size()-1).getName().equals(this.nextGame.getName())) && (!gameList.get(gameList.size()-1).getName().equals(this.currentGame.getName()))) {
-                    this.previousGame = gameList.get(gameList.size() - 1);
-                    this.nextGame = gameList.get(index + 1);
-                } else {
-                    //mettre une image noire
-                }
-            } else if (index == gameList.size() - 1) {
-                if ((!gameList.get(0).getName().equals(this.previousGame.getName())) && (!gameList.get(0).getName().equals(this.currentGame.getName()))) {
-                    this.nextGame = gameList.get(0);
-                    this.previousGame = gameList.get(index - 1);
-                } else {
-                    //mettre une image noire
-                }
-            } else {
-                this.previousGame = gameList.get(index - 1);
-                this.nextGame = gameList.get(index + 1);
-            }
-        }
-    }
-
     private void remplirListGame(){
         File gameDirectoryPath = new File("./data/Jeux");
-        String listGameDirectory[] = gameDirectoryPath.list();
         for(String gameName : gameDirectoryPath.list()){
             gameList.add(new Game(gameName));
         }
