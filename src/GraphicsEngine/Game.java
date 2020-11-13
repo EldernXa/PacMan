@@ -33,9 +33,19 @@ public class Game {
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
+                boolean egale = false;
+                String difficulteStr = myReader.nextLine();
                 //les difficultés sont écrites par ordre croissant
-                listDifficultes.add(new Difficulte(myReader.nextLine()));
 
+                for(Difficulte diff : listDifficultes){
+                    if(diff.getName().equals(difficulteStr)){
+                        egale = true;
+                    }
+                }
+
+                if(!egale){
+                    listDifficultes.add(new Difficulte(difficulteStr));
+                }
             }
             myReader.close();
         } catch (FileNotFoundException e){

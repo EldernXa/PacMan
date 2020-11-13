@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -15,11 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 import java.io.File;
-import java.nio.file.DirectoryIteratorException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -47,7 +43,6 @@ public class MenuChoixDuJeu {
 
         remplirListGame();
         remplirGamesAttributs();
-        System.out.println("hey");
 
         System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
@@ -83,13 +78,6 @@ public class MenuChoixDuJeu {
                 public void handle(MouseEvent mouseEvent) {
                     MenuDuJeu currentGameMenu = new MenuDuJeu(stage,currentGame,menuScene);
                     changerScene(currentGameMenu.getMenuDuJeuScene());
-                    System.out.println("Play");
-                    System.out.println("On lance : " + currentGame.getName());
-                    System.out.println("Index réel: " + index);
-
-                    System.out.println("current img : " + currentGame.getImageJeu().getPathImage());
-                    System.out.println("previous img : " + previousGame.getImageJeu().getPathImage());
-                    System.out.println("next game img :  " + nextGame.getImageJeu().getPathImage());
 
                 }
             });
@@ -102,23 +90,8 @@ public class MenuChoixDuJeu {
             previousGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    System.out.println("current game : " + currentGame.getName());
-                    System.out.println("previous game : " + previousGame.getName());
-                    System.out.println("next game link :  " + nextGame.getName());
                     index = calculFollowingCurrentIndex(-1,index);
                     setCurrentGame(index);
-
-                    System.out.println("Previous");
-                    System.out.println("current game : " + currentGame.getName());
-                    System.out.println("previous game : " + previousGame.getName());
-                    System.out.println("next game link :  " + nextGame.getName());
-                    System.out.println("Index réel: " + index);
-
-                    System.out.println("current img : " + currentGame.getImageJeu().getPathImage());
-                    System.out.println("previous img : " + previousGame.getImageJeu().getPathImage());
-                    System.out.println("next game img :  " + nextGame.getImageJeu().getPathImage());
-
-
                 }
             });
 
@@ -139,26 +112,6 @@ public class MenuChoixDuJeu {
                     System.out.println("next game link :  " + nextGame.getName());
                     index = calculFollowingCurrentIndex(1,index);
                     setCurrentGame(index);
-                    System.out.println("Lien !!! " +gameList.get(index).getImageJeu().getPathImage());
-                    /*previousGame.getImageJeu().getImageView().setImage(gameList.get(index).getImageJeu().getImageView().getImage());
-                    currentGame.getImageJeu().getImageView().setImage(gameList.get(calculFollowingCurrentIndex(1,index)).getImageJeu().getImageView().getImage());
-                    nextGame.getImageJeu().getImageView().setImage(gameList.get(calculFollowingCurrentIndex(1,calculFollowingCurrentIndex(1,index))).getImageJeu().getImageView().getImage());
-*/
-
-                    System.out.println("next");
-                    System.out.println("current game : " + currentGame.getName());
-                    System.out.println("previous game : " + previousGame.getName());
-                    System.out.println("next game link :  " + nextGame.getName());
-                    System.out.println("Index réel: " + index);
-
-
-                    System.out.println("current img : " + currentGame.getImageJeu().getPathImage());
-                    System.out.println("previous img : " + previousGame.getImageJeu().getPathImage());
-                    System.out.println("next game img :  " + nextGame.getImageJeu().getPathImage());
-
-
-
-
                 }
             });
 
@@ -176,8 +129,6 @@ public class MenuChoixDuJeu {
                 System.exit(0);
             }
         });
-
-        System.out.println(currentGame.getImageJeu().getPathImage());
         pane.getChildren().addAll(currentGame.getImageJeu().getImageView(), choixDuJeuLabel,buttonExit);
         printArrows();
         stage.setScene(menuScene);
@@ -196,8 +147,6 @@ public class MenuChoixDuJeu {
 
     public void setCurrentGame(int index) {
         game1GetGam1Attributs(currentGame,gameList.get(index));
-        System.out.println("Current Game : " + currentGame.getName() + "\nCurrent Game image : " + currentGame.getImageJeu().getPathImage() +
-                "\nCurrent Game image coordonnées : x : " + currentGame.getImageJeu().getCoordinate().getX() + ", y : " +currentGame.getImageJeu().getCoordinate().getX());
         if(gameList.size() < 3){
             if(index == 0){
                 this.previousGame = null;
@@ -265,18 +214,8 @@ public class MenuChoixDuJeu {
             game.setImageJeu(new ImageViewSizePos("./data/Jeux/"+game.getName() +"/menuchoixdujeu.jpg",width,height));
             for(String string : new File("./data/Jeux/"+game.getName()).list()){
                 if(string.substring(0,7).equals("musique")){
-                    System.out.println(game.getName());
-                    System.out.println(string);
                     game.getListMusiques().add(new Musique("./data/Jeux/"+game.getName()+"/"+string));
                 }
-            }
-        }
-
-        for (Game game : gameList){
-            System.out.println(game.getName() + " a pour image : " + game.getImageJeu().getPathImage());
-            System.out.println("Et pour liste de musiques : ");
-            for(Musique musique : game.getListMusiques()){
-                System.out.println("- " + musique.getPath());
             }
         }
     }
@@ -327,8 +266,5 @@ public class MenuChoixDuJeu {
                 setCurrentGame(index-1);
             }
         });
-
     }
-
-
 }
