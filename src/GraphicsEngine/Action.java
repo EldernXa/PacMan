@@ -33,6 +33,10 @@ public class Action {
         choiceMove(valueMove, dir);
     }
 
+    public void doInverseWhenEventOccur(int valueMove, char dir){
+        choiceInverseMove(valueMove, dir);
+    }
+
     public void choiceMove(int valueMove, char carac){
         if(carac=='x'){
             if(valueMove<0)
@@ -47,6 +51,20 @@ public class Action {
                 descendre();
     }
 
+    public void choiceInverseMove(int valueMove, char carac){
+        if(carac=='x'){
+            if(valueMove<0)
+                droite();
+            else
+                gauche();
+        }else if(carac=='y'){
+            if(valueMove<0)
+                descendre();
+            else
+                monter();
+        }
+    }
+
     void doWhenBlock(){
 
     }
@@ -57,9 +75,7 @@ public class Action {
             gameImage.monter();
 
             if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
-
                 gameImage.descendre();
-                doWhenBlock();
             }
 
         }else{
@@ -70,14 +86,11 @@ public class Action {
 
     private void descendre() {
         if (gameImage.getCoordinate().getY() + gameImage.getValueMove() <= (scene.getHeight()-gameImage.getImgView().getImage().getHeight()))
-
             gameImage.descendre();
         else
             doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
-
             gameImage.monter();
-            doWhenBlock();
         }
     }
 
@@ -88,9 +101,7 @@ public class Action {
         else
             doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
-
             gameImage.droite();
-            doWhenBlock();
         }
     }
 
@@ -101,10 +112,12 @@ public class Action {
         else
             doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
-
             gameImage.gauche();
-            doWhenBlock();
         }
+    }
+
+    public GameImage getGameImage(){
+        return gameImage;
     }
 
 
