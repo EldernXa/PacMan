@@ -55,7 +55,6 @@ public class MenuParametres {
             }
         });
         son.getChildren().addAll(labelSon,volumeSlider);
-        //son.setAlignment(Pos.CENTER_LEFT);
         paramList.getChildren().addAll(son);
         paramList.setAlignment(Pos.CENTER_LEFT);
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
