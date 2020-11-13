@@ -57,3 +57,6 @@
     -fx-fill: white;
     -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
 }
+.slider{-fx-control-inner-background: gray!important;}
+
+.slider .thumb{-fx-background-color: #1354cb!important;}

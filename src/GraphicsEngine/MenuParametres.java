@@ -9,10 +9,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 public class MenuParametres {
@@ -21,11 +26,13 @@ public class MenuParametres {
     private Slider volumeSlider = new Slider();
     ImageViewSizePos revenir ;
     private Stage stage = new Stage();
-
+    HBox son = new HBox(10);
+    VBox paramList = new VBox(20);
 
     public MenuParametres() {
 
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/2,Screen.getPrimary().getVisualBounds().getHeight()/2);
+        scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         Label titre = new Label("Parametres");
         titre.setStyle("-fx-font-size: 30px");
         /*ToggleGroup group = new ToggleGroup();
@@ -36,7 +43,10 @@ public class MenuParametres {
         // Radio 3: Female.
         RadioButton button2 = new RadioButton("Female");
         button2.setToggleGroup(group); */
-
+        Label labelSon = new Label("Régler le niveau du son :");
+        labelSon.setFont(Font.font("Arial",15));
+        labelSon.setStyle("-fx-font-weight: bold");
+        labelSon.setTextFill(Color.BLACK);
         volumeSlider.setValue(Musique.mediaPlayer.getVolume() *100);
         volumeSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
@@ -44,10 +54,14 @@ public class MenuParametres {
                 Musique.mediaPlayer.setVolume(volumeSlider.getValue()/100);
             }
         });
+        son.getChildren().addAll(labelSon,volumeSlider);
+        //son.setAlignment(Pos.CENTER_LEFT);
+        paramList.getChildren().addAll(son);
+        paramList.setAlignment(Pos.CENTER_LEFT);
         revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
-        pane.setStyle("-fx-background-color: gray");
+        pane.setStyle("-fx-background-color: lightgray");
+        pane.getChildren().addAll(paramList,titre,revenir.getImageView());
 
-        pane.getChildren().addAll(volumeSlider,revenir.getImageView(),titre);
 
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -71,8 +85,9 @@ public class MenuParametres {
             }
         });
         StackPane.setAlignment(revenir.getImageView(),Pos.TOP_LEFT);
-        volumeSlider.setMaxSize(100,100);
-        volumeSlider.setOrientation(Orientation.VERTICAL);
+        volumeSlider.setMaxSize(70,70);
+        volumeSlider.setOrientation(Orientation.HORIZONTAL);
+        volumeSlider.getStyleClass().add("slider");
         StackPane.setAlignment(volumeSlider, Pos.CENTER_RIGHT);
         StackPane.setAlignment(titre,Pos.TOP_CENTER);
 
