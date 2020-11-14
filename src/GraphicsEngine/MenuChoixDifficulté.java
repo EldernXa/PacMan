@@ -64,10 +64,10 @@ public class MenuChoixDifficulté {
                     root.setMinWidth(scene.getWidth());
                     root.setMaxWidth(scene.getWidth());
                     root.setPrefWidth(scene.getWidth());
-                    PacMan visualObject = new PacMan("./data/pacmanOuvert2.png", new Coordinate(385, 20), scene, root);
-                    visualObject.addSprite("./data/pacmanOuvert1.png");
-                    visualObject.addSprite("./data/pacmanFermee.png");
-                    visualObject.addSprite("./data/pacmanOuvert1.png");
+                    PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/pacmanOuvert2.png", new Coordinate(385, 20), scene, root);
+                    visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanOuvert1.png");
+                    visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanFermee.png");
+                    visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanOuvert1.png");
                     root.getChildren().add(visualObject.getImageView());
                     stage.setMaximized(false);
                     ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root);
