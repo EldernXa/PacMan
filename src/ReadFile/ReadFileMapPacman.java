@@ -39,8 +39,6 @@ public class ReadFileMapPacman {
             width = Integer.parseInt(mapSize[0]);
             height = Integer.parseInt(mapSize[1]);
 
-            System.out.println(width);
-            System.out.println(height);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +61,7 @@ public class ReadFileMapPacman {
                         Class[] parameters = new Class[]{String.class, Coordinate.class, Scene.class, Pane.class};
                         Constructor constructor = aClass.getConstructor(parameters);
                         Object o = constructor.newInstance(line[3], new Coordinate(Integer.parseInt(line[1]), Integer.parseInt(line[2])), scene, pane);
-                        //((Decor) o).afficher();
+
                         visualObjects.add((Decor) o);
                     }
                 }
