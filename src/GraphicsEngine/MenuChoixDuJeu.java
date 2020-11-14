@@ -6,9 +6,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -25,6 +28,7 @@ public class MenuChoixDuJeu {
     private Pane pane = new Pane();
     private Stage stage;
     private Scene menuScene;
+    private TextField zoneDeRecherche = new TextField();
     private Button buttonExit = new Button("Quitter le menu");
 
     private Game previousGame = new Game();
@@ -46,6 +50,21 @@ public class MenuChoixDuJeu {
 
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
         menuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
+
+        zoneDeRecherche.setPromptText("Rentrez le nom du jeu");
+        zoneDeRecherche.setFocusTraversable(false);
+        zoneDeRecherche.setTranslateX(3*(menuScene.getWidth()/4));
+        zoneDeRecherche.setTranslateY(menuScene.getHeight()/16);
+        zoneDeRecherche.setMinSize(300,35);
+        zoneDeRecherche.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
+        System.out.println(zoneDeRecherche.getStylesheets());
+//        zoneDeRecherche.setStyle();
+        /*zoneDeRecherche.setStyle("background-color: white;\n" +
+                "  background-image: url('/data/Logos/research.png');\n" +
+                "  background-position: 10px 10px;\n" +
+                "  background-repeat: no-repeat;\n" +
+                "  padding-left: 40px;");*/
+
         choixDuJeuLabel.setFont(Font.font("Avenir Next", 45));
         choixDuJeuLabel.setUnderline(true);
         choixDuJeuLabel.setTranslateX(menuScene.getWidth()/2-220);
@@ -125,7 +144,7 @@ public class MenuChoixDuJeu {
                 System.exit(0);
             }
         });
-        pane.getChildren().addAll(currentGame.getImageJeu().getImageView(), choixDuJeuLabel,buttonExit);
+        pane.getChildren().addAll(currentGame.getImageJeu().getImageView(), choixDuJeuLabel,zoneDeRecherche,buttonExit);
         printArrows();
         stage.setScene(menuScene);
         this.stage = stage ;
