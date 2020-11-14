@@ -68,6 +68,7 @@ public class MenuChoixDifficulté {
                     visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanOuvert1.png");
                     visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanFermee.png");
                     visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanOuvert1.png");
+
                     root.getChildren().add(visualObject.getImageView());
                     stage.setMaximized(false);
                     ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root);
