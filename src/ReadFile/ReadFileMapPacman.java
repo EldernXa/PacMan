@@ -1,5 +1,8 @@
-package GraphicsEngine;
+package ReadFile;
 
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.Decor;
+import GraphicsEngine.VisualObject;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
@@ -21,7 +24,7 @@ public class ReadFileMapPacman {
     private ArrayList<String> line;
     private int width;
     private int height;
-    static ArrayList<VisualObject> visualObjects = new ArrayList<>();
+    public static ArrayList<VisualObject> visualObjects = new ArrayList<>();
     private Scene scene;
     private Pane pane;
 
@@ -54,13 +57,15 @@ public class ReadFileMapPacman {
 
             try {
                 String line[] = file[i].split("\\s+");
-                if (line[0].compareTo("")!=0 && line[0].charAt(0)!='/') {
-                    Class aClass = Class.forName("GraphicsEngine." + line[0]);
-                    Class[] parameters = new Class[]{String.class, Coordinate.class, Scene.class, Pane.class};
-                    Constructor constructor = aClass.getConstructor(parameters);
-                    Object o = constructor.newInstance(line[3], new Coordinate(Integer.parseInt(line[1]), Integer.parseInt(line[2])), scene, pane);
-                    //((Decor) o).afficher();
-                    visualObjects.add((Decor) o);
+                if(line.length!=0) {
+                    if (line[0].compareTo("") != 0 && line[0].charAt(0) != '/') {
+                        Class aClass = Class.forName("GraphicsEngine." + line[0]);
+                        Class[] parameters = new Class[]{String.class, Coordinate.class, Scene.class, Pane.class};
+                        Constructor constructor = aClass.getConstructor(parameters);
+                        Object o = constructor.newInstance(line[3], new Coordinate(Integer.parseInt(line[1]), Integer.parseInt(line[2])), scene, pane);
+                        //((Decor) o).afficher();
+                        visualObjects.add((Decor) o);
+                    }
                 }
 
             } catch (Exception e) {

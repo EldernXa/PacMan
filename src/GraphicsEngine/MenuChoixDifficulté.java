@@ -1,6 +1,7 @@
 package GraphicsEngine;
 
 import GamePlay.PacMan;
+import ReadFile.ReadFileMapPacman;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

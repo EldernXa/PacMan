@@ -1,11 +1,9 @@
 package GraphicsEngine;
 
-import javafx.event.ActionEvent;
+import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
