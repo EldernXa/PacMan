@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,87 +18,140 @@ import javafx.util.Duration;
 import java.io.File;
 
 public class MenuDuJeu {
-    StackPane pane = new StackPane();
-    Button singlePlayer = new Button("SinglePlayer".toUpperCase());
-    Button multiPlayer = new Button("MultiPlayer".toUpperCase());
-    VBox buttonContainers = new VBox(15);
-    Button retouner = new Button("Retourner au choix du jeu".toUpperCase());
-    ImageViewSizePos param;
-    Game jeu;
-    ImageViewSizePos soundAndNoSound;
-    Scene menuDuJeuScene;
-    HBox hbox = new HBox(20);
+    private final StackPane pane = new StackPane();
+    private final Button singlePlayer = new Button("SinglePlayer".toUpperCase());
+    private final Button multiPlayer = new Button("MultiPlayer".toUpperCase());
+    private final VBox buttonContainers = new VBox(15);
+    private final Button retouner = new Button("Retourner au choix du jeu".toUpperCase());
+    private final ImageViewSizePos param = new ImageViewSizePos("./data/Logos/settings.png",40, 40);
+    private final Game jeu;
+    private final ImageViewSizePos soundAndNoSound = new ImageViewSizePos("./data/Logos/sound.png",40,40);;
+    private final HBox hbox = new HBox(20);
+    private final ImageViewSizePos revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50, new Coordinate(2,2));
+    private final Stage stage;
+    private final double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+    private final double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+    private final Scene menuDuJeuScene= new Scene(pane, screenWidth,screenHeight);
+
 
     public MenuDuJeu(Stage stage,Game game,Scene sceneBack) {
+        this.stage = stage;
         jeu = game;
+
+        menuDuJeuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
+
         if(!game.getListMusiques().isEmpty()) {
             game.getListMusiques().get(0).lancerMusique();
         }
 
-        //music.lancerMusique();
-        buttonContainers.setPrefWidth(400);
-        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
-        menuDuJeuScene = new Scene(pane, screenWidth,screenHeight);
-        menuDuJeuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
-
-        param = new ImageViewSizePos("./data/Logos/settings.png",40, 40);
-        soundAndNoSound = new ImageViewSizePos("./data/Logos/sound.png",40,40);
-
         ImageViewSizePos fondEcran = new ImageViewSizePos("./data/Jeux/" + jeu.getName() + "/menudujeu.jpg",menuDuJeuScene.getWidth(),menuDuJeuScene.getHeight());
+
         pane.getChildren().add(fondEcran.getImageView());
+        setButtonContainers();
+        clickSound();
+        enterSound();
+        exitSound();
+        enterParam();
+        exitParam();
+        clickParam();
+        setmusic(game);
+        setTooltip();
+        enterRevenir();
+        clickRetourner(sceneBack);
+        clickRevenir();
+        clickSingle();
+        exitRevenir();
 
-        hbox.getChildren().addAll(param.getImageView(), soundAndNoSound.getImageView());
-        singlePlayer.setPrefWidth(buttonContainers.getPrefWidth());
-        multiPlayer.setPrefWidth(buttonContainers.getPrefWidth());
-        retouner.setPrefWidth(buttonContainers.getPrefWidth());
-        hbox.setPrefWidth(buttonContainers.getPrefWidth());
-        hbox.setAlignment(Pos.CENTER);
-        buttonContainers.getChildren().addAll(singlePlayer,multiPlayer,retouner, hbox);
+        pane.getChildren().add(buttonContainers);
+    }
 
-        MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, jeu,menuDuJeuScene);
 
-        soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+    public Scene getMenuDuJeuScene() {
+        return menuDuJeuScene;
+    }
+
+
+    public void clickRetourner(Scene sceneBack){
+        retouner.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (!game.getListMusiques().isEmpty()) {
-                    switch (soundAndNoSound.getPathImage()) {
-                        case "./data/Logos/sound.png":
 
-                            soundAndNoSound.setImageView("./data/Logos/nosound.png");
-                            break;
-
-                        case "./data/Logos/nosound.png":
-                            soundAndNoSound.setImageView("./data/Logos/sound.png");
-                            break;
-
-                        case "./data/Logos/soundhover.png":
-                            game.getListMusiques().get(0).mute(true);
-                            soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
-                            break;
-
-                        case "./data/Logos/nosoundhover.png":
-                            game.getListMusiques().get(0).mute(false);
-                            soundAndNoSound.setImageView("./data/Logos/soundhover.png");
-                            break;
-                    }
+                if(!jeu.getListMusiques().isEmpty()){
+                    jeu.getListMusiques().get(0).stopMusique();
                 }
+                stage.setScene(sceneBack);
             }
         });
+    }
 
-        soundAndNoSound.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+    public void clickSingle(){
+        singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(soundAndNoSound.getPathImage().equals("./data/Logos/sound.png")){
-                    soundAndNoSound.setImageView("./data/Logos/soundhover.png");
-                }
-                else{
-                    soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
-                }
+                MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, jeu,menuDuJeuScene);
+                diff(jeu,stage, menuChoixDifficulte,revenir,screenWidth,screenHeight);
             }
         });
+    }
+    public void enterRevenir(){
+        revenir.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                revenir.setImageView("./data/Logos/returnhover.png");
+            }
+        });
+    }
+    public void exitRevenir(){
+        revenir.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                revenir.setImageView("./data/Logos/return.png");
 
+            }
+        });
+    }
+    public void clickRevenir(){
+        revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stage.setScene(menuDuJeuScene);
+            }
+        });
+    }
 
+    public void enterParam(){
+        param.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                param.setImageView("./data/Logos/settingshover.png");
+            }
+        });
+    }
+    public void exitParam(){
+        param.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                param.setImageView("./data/Logos/settings.png");
+
+            }
+        });
+    }
+    public void clickParam(){
+        param.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                MenuParametres parametres = new MenuParametres();
+                if(jeu.getListMusiques().isEmpty()){
+                    parametres.getVolumeSlider().setValue(0);
+                    parametres.getVolumeSlider().setDisable(true);
+                }
+
+            }
+        });
+    }
+
+    public void exitSound(){
         soundAndNoSound.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -111,88 +163,70 @@ public class MenuDuJeu {
                 }
             }
         });
+    }
 
-        param.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
+    public void enterSound(){
+        soundAndNoSound.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                param.setImageView("./data/Logos/settingshover.png");
-            }
-        });
-
-        param.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                param.setImageView("./data/Logos/settings.png");
-
-            }
-        });
-        param.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                MenuParametres parametres = new MenuParametres();
-                if(game.getListMusiques().isEmpty()){
-                    parametres.getVolumeSlider().setValue(0);
-                    parametres.getVolumeSlider().setDisable(true);
+                if(soundAndNoSound.getPathImage().equals("./data/Logos/sound.png")){
+                    soundAndNoSound.setImageView("./data/Logos/soundhover.png");
                 }
-
+                else{
+                    soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
+                }
             }
         });
+    }
+    public void clickSound(){
+        soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (!jeu.getListMusiques().isEmpty()) {
+                    switch (soundAndNoSound.getPathImage()) {
+                        case "./data/Logos/sound.png":
 
-        setmusic(game);
-        ImageViewSizePos revenir  = new ImageViewSizePos("./data/Logos/return.png",50,50, new Coordinate(2,2));
+                            soundAndNoSound.setImageView("./data/Logos/nosound.png");
+                            break;
+
+                        case "./data/Logos/nosound.png":
+                            soundAndNoSound.setImageView("./data/Logos/sound.png");
+                            break;
+
+                        case "./data/Logos/soundhover.png":
+                            jeu.getListMusiques().get(0).mute(true);
+                            soundAndNoSound.setImageView("./data/Logos/nosoundhover.png");
+                            break;
+
+                        case "./data/Logos/nosoundhover.png":
+                            jeu.getListMusiques().get(0).mute(false);
+                            soundAndNoSound.setImageView("./data/Logos/soundhover.png");
+                            break;
+                    }
+                }
+            }
+        });
+    }
+    public void setTooltip(){
         Tooltip tooltip_revenir=new Tooltip("Revenir en arrière");
         tooltip_revenir.setStyle(" -fx-background-color: gray;");
         tooltip_revenir.setShowDelay(new Duration(0));
         Tooltip.install(revenir.getImageView(),tooltip_revenir);
+    }
 
-        singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+    public void setButtonContainers() {
+        buttonContainers.setPrefWidth(400);
+        hbox.getChildren().addAll(param.getImageView(), soundAndNoSound.getImageView());
+        singlePlayer.setPrefWidth(buttonContainers.getPrefWidth());
+        multiPlayer.setPrefWidth(buttonContainers.getPrefWidth());
+        retouner.setPrefWidth(buttonContainers.getPrefWidth());
+        hbox.setPrefWidth(buttonContainers.getPrefWidth());
+        hbox.setAlignment(Pos.CENTER);
+        buttonContainers.getChildren().addAll(singlePlayer,multiPlayer,retouner, hbox);
 
-                diff(game,stage,menuChoixDifficulté,revenir,screenWidth,screenHeight);
-            }
-        });
-
-
-        retouner.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-
-                if(!game.getListMusiques().isEmpty()){
-                    game.getListMusiques().get(0).stopMusique();
-                }
-                stage.setScene(sceneBack);
-            }
-        });
-        revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                stage.setScene(menuDuJeuScene);
-            }
-        });
-
-        revenir.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                revenir.setImageView("./data/Logos/returnhover.png");
-            }
-        });
-
-        revenir.getImageView().setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                revenir.setImageView("./data/Logos/return.png");
-
-            }
-        });
-        pane.getChildren().addAll(buttonContainers);
         buttonContainers.setAlignment(Pos.CENTER);
-        menuDuJeuScene.setRoot(pane);
     }
 
-    public Scene getMenuDuJeuScene() {
-        return menuDuJeuScene;
-    }
     public void setmusic(Game game){
         File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
         String contents[] = directoryPath.list();
@@ -220,7 +254,7 @@ public class MenuDuJeu {
         }
 
     }
-    public void diff(Game game, Stage stage,MenuChoixDifficulté menuChoixDifficulté, ImageViewSizePos revenir, double screenWidth, double screenHeight){
+    public void diff(Game game, Stage stage, MenuChoixDifficulte menuChoixDifficulte, ImageViewSizePos revenir, double screenWidth, double screenHeight){
             File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
             String contents[] = directoryPath.list();
             boolean bool = false;
@@ -237,7 +271,7 @@ public class MenuDuJeu {
 
             }
             if(!bool)
-                stage.setScene(menuChoixDifficulté.getScene());
+                stage.setScene(menuChoixDifficulte.getScene());
 
         }
     }
