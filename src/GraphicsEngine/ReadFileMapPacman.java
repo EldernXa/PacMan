@@ -19,7 +19,8 @@ public class ReadFileMapPacman {
 
     private  String file[];
     private ArrayList<String> line;
-    private String mapSize;
+    private int width;
+    private int height;
     static ArrayList<VisualObject> visualObjects = new ArrayList<>();
     private Scene scene;
     private Pane pane;
@@ -31,7 +32,12 @@ public class ReadFileMapPacman {
         Path path = Paths.get("./data/Map/PacmanMap1");
         try {
             this.file = Files.readString(path).split("\n");
-            mapSize = file[0];
+            String mapSize[] = file[0].split("\\s+");;
+            width = Integer.parseInt(mapSize[0]);
+            height = Integer.parseInt(mapSize[1]);
+
+            System.out.println(width);
+            System.out.println(height);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,9 +81,7 @@ public class ReadFileMapPacman {
         return line;
     }
 
-    public String getMapSize() {
-        return mapSize;
-    }
+
 
     public ArrayList<VisualObject> getVisualObjects() {
         return visualObjects;
@@ -91,5 +95,11 @@ public class ReadFileMapPacman {
         return pane;
     }
 
+    public int getWidth() {
+        return width;
+    }
 
+    public int getHeight() {
+        return height;
+    }
 }
