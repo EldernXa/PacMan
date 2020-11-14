@@ -15,8 +15,8 @@ public class ActionContinue extends Action{
     private float tps;
     private static Timeline timeline;
 
-    public ActionContinue(GameImage image, Scene scene, String carac, char dir, int valueMove, float tps){
-        super(image, scene, carac, dir, valueMove);
+    public ActionContinue(GameImage image, Scene scene, String carac, char dir, int valueMove, float tps, MouvingObject mouvingObject){
+        super(image, scene, carac, dir, valueMove, mouvingObject);
         this.tps = tps;
     }
 

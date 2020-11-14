@@ -34,6 +34,10 @@ public class GameImage {
         imgView.setY(coordinate.getY());
     }
 
+    public void setImage(Image image){
+        this.imgView.setImage(image);
+    }
+
     public int getValueMove(){
         return valueMove;
     }
