@@ -56,12 +56,6 @@ public class MenuChoixDuJeu {
         zoneDeRecherche.setTranslateX(3*(menuScene.getWidth()/4));
         zoneDeRecherche.setTranslateY(menuScene.getHeight()/16);
         zoneDeRecherche.setMinSize(300,35);
-//        zoneDeRecherche.setStyle();
-        /*zoneDeRecherche.setStyle("background-color: white;\n" +
-                "  background-image: url('/data/Logos/research.png');\n" +
-                "  background-position: 10px 10px;\n" +
-                "  background-repeat: no-repeat;\n" +
-                "  padding-left: 40px;");*/
 
         choixDuJeuLabel.setFont(Font.font("Avenir Next", 45));
         choixDuJeuLabel.setUnderline(true);
