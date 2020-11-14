@@ -33,7 +33,6 @@ public class MenuDuJeu {
     public MenuDuJeu(Stage stage,Game game,Scene sceneBack) {
         jeu = game;
         if(!game.getListMusiques().isEmpty()) {
-
             game.getListMusiques().get(0).lancerMusique();
         }
 
@@ -134,6 +133,10 @@ public class MenuDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MenuParametres parametres = new MenuParametres();
+                if(game.getListMusiques().isEmpty()){
+                    parametres.getVolumeSlider().setValue(0);
+                    parametres.getVolumeSlider().setDisable(true);
+                }
 
             }
         });

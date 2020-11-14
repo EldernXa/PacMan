@@ -94,6 +94,10 @@ public class MenuParametres {
         stage.show();
     }
 
+    public Slider getVolumeSlider() {
+        return volumeSlider;
+    }
+
     public Scene getScene() {
         return scene;
     }
