@@ -12,7 +12,6 @@ public class Musique {
 
 
     public Musique(String path) {
-        //System.out.println(path);
         Media media = new Media(new File(path).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         this.path = path;
@@ -24,17 +23,13 @@ public class Musique {
 
     void lancerMusique()
     {
-
         if(!playing) {
-
             mediaPlayer.play();
             mediaPlayer.setVolume(0.3);
-            playing= true;
             mediaPlayer.setOnEndOfMedia(() -> {
                 mediaPlayer.stop();
                 mediaPlayer.play();
             });
-
         }
     }
     void modifMusique(Media nomMedia){
