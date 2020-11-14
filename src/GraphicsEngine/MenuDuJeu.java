@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -90,8 +89,8 @@ public class MenuDuJeu {
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuChoixDifficulté menuChoixDifficulté = new MenuChoixDifficulté(stage, jeu,menuDuJeuScene);
-                diff(jeu,stage,menuChoixDifficulté,revenir,screenWidth,screenHeight);
+                MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, jeu,menuDuJeuScene);
+                diff(jeu,stage, menuChoixDifficulte,revenir,screenWidth,screenHeight);
             }
         });
     }
@@ -255,7 +254,7 @@ public class MenuDuJeu {
         }
 
     }
-    public void diff(Game game, Stage stage,MenuChoixDifficulté menuChoixDifficulté, ImageViewSizePos revenir, double screenWidth, double screenHeight){
+    public void diff(Game game, Stage stage, MenuChoixDifficulte menuChoixDifficulte, ImageViewSizePos revenir, double screenWidth, double screenHeight){
             File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
             String contents[] = directoryPath.list();
             boolean bool = false;
@@ -272,7 +271,7 @@ public class MenuDuJeu {
 
             }
             if(!bool)
-                stage.setScene(menuChoixDifficulté.getScene());
+                stage.setScene(menuChoixDifficulte.getScene());
 
         }
     }
