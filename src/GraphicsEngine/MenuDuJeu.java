@@ -38,8 +38,6 @@ public class MenuDuJeu {
 
         //music.lancerMusique();
         buttonContainers.setPrefWidth(400);
-        System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
-        System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
         double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
         double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
         menuDuJeuScene = new Scene(pane, screenWidth,screenHeight);
@@ -64,7 +62,6 @@ public class MenuDuJeu {
         soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(soundAndNoSound.getPathImage() + "path null");
                 if (!game.getListMusiques().isEmpty()) {
                     switch (soundAndNoSound.getPathImage()) {
                         case "./data/Logos/sound.png":

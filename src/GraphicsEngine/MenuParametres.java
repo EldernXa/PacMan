@@ -101,4 +101,5 @@ public class MenuParametres {
     public Scene getScene() {
         return scene;
     }
+
 }
