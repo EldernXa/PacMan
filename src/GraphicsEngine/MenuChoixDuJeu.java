@@ -56,8 +56,6 @@ public class MenuChoixDuJeu {
         zoneDeRecherche.setTranslateX(3*(menuScene.getWidth()/4));
         zoneDeRecherche.setTranslateY(menuScene.getHeight()/16);
         zoneDeRecherche.setMinSize(300,35);
-        zoneDeRecherche.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
-        System.out.println(zoneDeRecherche.getStylesheets());
 //        zoneDeRecherche.setStyle();
         /*zoneDeRecherche.setStyle("background-color: white;\n" +
                 "  background-image: url('/data/Logos/research.png');\n" +
