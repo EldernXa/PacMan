@@ -72,10 +72,10 @@ public class Action {
     private void monter() {
         if (gameImage.getCoordinate().getY() - gameImage.getValueMove() >= 0) {
             gameImage.monter();
-            mouvingObject.nextImg();
+            mouvingObject.nextImgDirUp();
             if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
                 gameImage.descendre();
-                mouvingObject.previousImg();
+                mouvingObject.previousImgDirUp();
             }
 
         }else{
@@ -87,39 +87,39 @@ public class Action {
     private void descendre() {
         if (gameImage.getCoordinate().getY() + gameImage.getValueMove() <= (scene.getHeight()-gameImage.getImgView().getImage().getHeight())) {
             gameImage.descendre();
-            mouvingObject.nextImg();
+            mouvingObject.nextImgDirDown();
         }
         else
             doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
             gameImage.monter();
-            mouvingObject.previousImg();
+            mouvingObject.previousImgDirDown();
         }
     }
 
     private void gauche() {
         if (gameImage.getCoordinate().getX() - gameImage.getValueMove() >= 0) {
             gameImage.gauche();
-            mouvingObject.nextImg();
+            mouvingObject.nextImgDirLeft();
         }
         else
             doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
             gameImage.droite();
-            mouvingObject.previousImg();
+            mouvingObject.previousImgDirLeft();
         }
     }
 
     private void droite() {
         if (gameImage.getCoordinate().getX() + gameImage.getValueMove() <= (scene.getWidth()-gameImage.getImgView().getImage().getWidth())) {
             gameImage.droite();
-            mouvingObject.nextImg();
+            mouvingObject.nextImgDirRight();
         }
         else
             doWhenBlock();
         if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
             gameImage.gauche();
-            mouvingObject.previousImg();
+            mouvingObject.previousImgDirRight();
         }
     }
 

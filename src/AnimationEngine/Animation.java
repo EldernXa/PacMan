@@ -39,35 +39,35 @@ public class Animation {
     }
 
     public Image nextImageRight(){
-        return listImageDirRight.get(++ind%(listImageDirRight.size()-1));
+        return listImageDirRight.get(++ind%(listImageDirRight.size()));
     }
 
     public Image nextImageLeft(){
-        return listImageDirLeft.get(++ind%(listImageDirLeft.size()-1));
+        return listImageDirLeft.get(++ind%(listImageDirLeft.size()));
     }
 
     public Image nextImageUp(){
-        return listImageDirUp.get(++ind%(listImageDirUp.size()-1));
+        return listImageDirUp.get(++ind%(listImageDirUp.size()));
     }
 
     public Image nextImageDown(){
-        return listImageDirDown.get(++ind%(listImageDirDown.size()-1));
+        return listImageDirDown.get(++ind%(listImageDirDown.size()));
     }
 
     public Image previousImageRight(){
-        return listImageDirRight.get(Math.abs(--ind)%(listImageDirRight.size()-1));
+        return listImageDirRight.get(Math.abs(--ind)%(listImageDirRight.size()));
     }
 
     public Image previousImageLeft(){
-        return listImageDirLeft.get(Math.abs(--ind)%(listImageDirLeft.size()-1));
+        return listImageDirLeft.get(Math.abs(--ind)%(listImageDirLeft.size()));
     }
 
     public Image previousImageUp(){
-        return listImageDirUp.get(Math.abs(--ind)%(listImageDirUp.size()-1));
+        return listImageDirUp.get(Math.abs(--ind)%(listImageDirUp.size()));
     }
 
     public Image previousImageDown(){
-        return listImageDirDown.get(Math.abs(--ind)%(listImageDirDown.size()-1));
+        return listImageDirDown.get(Math.abs(--ind)%(listImageDirDown.size()));
     }
 
     public Image getInitRight(){

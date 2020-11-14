@@ -80,10 +80,22 @@ public class MenuChoixDifficulte {
                     root.setMinWidth(scene.getWidth());
                     root.setMaxWidth(scene.getWidth());
                     root.setPrefWidth(scene.getWidth());
-                    PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/pacmanOuvert2.png", new Coordinate(385, 20), scene, root);
-                    visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanOuvert1.png");
-                    visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanFermee.png");
-                    visualObject.addSprite("./data/SpriteMouvement/Pacman/pacmanOuvert1.png");
+                    PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/pacmanDroite1.png", new Coordinate(385, 20), scene, root);
+                    visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite2.png");
+                    visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite3.png");
+                    visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite4.png");
+                    visualObject.addSpriteDirDown("./data/SpriteMouvement/Pacman/pacmanBas1.png");
+                    visualObject.addSpriteDirDown("./data/SpriteMouvement/Pacman/pacmanBas2.png");
+                    visualObject.addSpriteDirDown("./data/SpriteMouvement/Pacman/pacmanBas3.png");
+                    visualObject.addSpriteDirDown("./data/SpriteMouvement/Pacman/pacmanBas4.png");
+                    visualObject.addSpriteDirUp("./data/SpriteMouvement/Pacman/pacmanHaut1.png");
+                    visualObject.addSpriteDirUp("./data/SpriteMouvement/Pacman/pacmanHaut2.png");
+                    visualObject.addSpriteDirUp("./data/SpriteMouvement/Pacman/pacmanHaut3.png");
+                    visualObject.addSpriteDirUp("./data/SpriteMouvement/Pacman/pacmanHaut4.png");
+                    visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche1.png");
+                    visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche2.png");
+                    visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche3.png");
+                    visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche4.png");
 
                     root.getChildren().add(visualObject.getImageView());
                     stage.setMaximized(false);
