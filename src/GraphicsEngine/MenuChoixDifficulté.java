@@ -95,9 +95,7 @@ public class MenuChoixDifficulté {
 
         pane.getChildren().addAll(fond.getImageView(),hbox, revenir.getImageView());
         StackPane.setAlignment(revenir.getImageView(),Pos.TOP_LEFT);
-        //StackPane.setAlignment(hbox,Pos.BOTTOM_CENTER);
         hbox.setAlignment(Pos.CENTER);
-        System.out.println(hbox.getAlignment());
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

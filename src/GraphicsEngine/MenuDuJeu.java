@@ -33,14 +33,11 @@ public class MenuDuJeu {
     public MenuDuJeu(Stage stage,Game game,Scene sceneBack) {
         jeu = game;
         if(!game.getListMusiques().isEmpty()) {
-
             game.getListMusiques().get(0).lancerMusique();
         }
 
         //music.lancerMusique();
         buttonContainers.setPrefWidth(400);
-        System.out.println(Screen.getPrimary().getVisualBounds().getWidth());
-        System.out.println(Screen.getPrimary().getVisualBounds().getHeight());
         double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
         double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
         menuDuJeuScene = new Scene(pane, screenWidth,screenHeight);
@@ -65,7 +62,6 @@ public class MenuDuJeu {
         soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(soundAndNoSound.getPathImage() + "path null");
                 if (!game.getListMusiques().isEmpty()) {
                     switch (soundAndNoSound.getPathImage()) {
                         case "./data/Logos/sound.png":
@@ -134,6 +130,10 @@ public class MenuDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 MenuParametres parametres = new MenuParametres();
+                if(game.getListMusiques().isEmpty()){
+                    parametres.getVolumeSlider().setValue(0);
+                    parametres.getVolumeSlider().setDisable(true);
+                }
 
             }
         });
