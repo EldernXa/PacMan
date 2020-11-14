@@ -51,10 +51,6 @@ public class Game {
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }
-
-        for(int i = 0;i<listDifficultes.size();i++){
-            System.out.println(listDifficultes.get(i).getName());
-        }
     }
 
     public void setImage(ImageViewSizePos imageViewSizePos) {

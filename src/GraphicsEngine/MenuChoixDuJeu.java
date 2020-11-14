@@ -30,9 +30,9 @@ public class MenuChoixDuJeu {
     private Game previousGame = new Game();
     private Game currentGame = new Game();
     private Game nextGame = new Game();
-    private double width = 500;
-    private double height = 250;
-    int index = 1;
+    private double imageWidth = 500;
+    private double imageHeight = 250;
+    int firstGameIndex = 0;
 
     private ImageViewSizePos imageFond;
     Label choixDuJeuLabel = new Label("Choisissez votre Jeu :");
@@ -44,7 +44,6 @@ public class MenuChoixDuJeu {
         remplirListGame();
         remplirGamesAttributs();
 
-        System.out.println("width " + Screen.getPrimary().getVisualBounds().getWidth()/4);
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
         menuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         choixDuJeuLabel.setFont(Font.font("Avenir Next", 45));
@@ -59,18 +58,18 @@ public class MenuChoixDuJeu {
 
         pane.getChildren().add(imageFond.getImageView());
 
-        Coordinate coordPreviousGame = new Coordinate(menuScene.getWidth() / 6 - (width / 4), menuScene.getHeight() / 2 - (height / 2));
+        Coordinate coordPreviousGame = new Coordinate(menuScene.getWidth() / 6 - (imageWidth / 4), menuScene.getHeight() / 2 - (imageHeight / 2));
         previousGame.getImageJeu().setCoordinate(coordPreviousGame);
-        Coordinate coordCurrentGame = new Coordinate(menuScene.getWidth() / 2 - (width / 2), menuScene.getHeight() / 2 - (height / 4));
+        Coordinate coordCurrentGame = new Coordinate(menuScene.getWidth() / 2 - (imageWidth / 2), menuScene.getHeight() / 2 - (imageHeight / 4));
         currentGame.getImageJeu().setCoordinate(coordCurrentGame);
-        Coordinate coordNextGame = new Coordinate(5 * (menuScene.getWidth() / 6) - 3*(width / 4), menuScene.getHeight() / 2 - (height / 2));
+        Coordinate coordNextGame = new Coordinate(5 * (menuScene.getWidth() / 6) - 3*(imageWidth / 4), menuScene.getHeight() / 2 - (imageHeight / 2));
         nextGame.getImageJeu().setCoordinate(coordNextGame);
 
-        setCurrentGame(index);
+        setCurrentGame(firstGameIndex);
 
 
         if(currentGame != null) {
-            currentGame.setImageJeu(new ImageViewSizePos(gameList.get(index).getImageJeu().getPathImage(), 500, 250));
+            currentGame.setImageJeu(new ImageViewSizePos(gameList.get(firstGameIndex).getImageJeu().getPathImage(), 500, 250));
             currentGame.getImageJeu().setCoordinate(coordCurrentGame);
 
             currentGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -84,14 +83,14 @@ public class MenuChoixDuJeu {
         }
 
         if(previousGame != null) {
-            previousGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(-1,index)).getImageJeu().getPathImage(), 500, 250));
+            previousGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(-1, firstGameIndex)).getImageJeu().getPathImage(), 500, 250));
             previousGame.getImageJeu().setCoordinate(coordPreviousGame);
 
             previousGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    index = calculFollowingCurrentIndex(-1,index);
-                    setCurrentGame(index);
+                    firstGameIndex = calculFollowingCurrentIndex(-1, firstGameIndex);
+                    setCurrentGame(firstGameIndex);
                 }
             });
 
@@ -100,18 +99,15 @@ public class MenuChoixDuJeu {
         }
 
         if(nextGame != null) {
-            nextGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(1,index)).getImageJeu().getPathImage(), 500, 250));
+            nextGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(1, firstGameIndex)).getImageJeu().getPathImage(), 500, 250));
             nextGame.getImageJeu().setCoordinate(coordNextGame);
 
 
             nextGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    System.out.println("current game : " + currentGame.getName());
-                    System.out.println("previous game : " + previousGame.getName());
-                    System.out.println("next game link :  " + nextGame.getName());
-                    index = calculFollowingCurrentIndex(1,index);
-                    setCurrentGame(index);
+                    firstGameIndex = calculFollowingCurrentIndex(1, firstGameIndex);
+                    setCurrentGame(firstGameIndex);
                 }
             });
 
@@ -211,7 +207,7 @@ public class MenuChoixDuJeu {
     private void remplirGamesAttributs(){
         File gameDirectoryPath = new File("./data/Jeux");
         for(Game game : gameList){
-            game.setImageJeu(new ImageViewSizePos("./data/Jeux/"+game.getName() +"/menuchoixdujeu.jpg",width,height));
+            game.setImageJeu(new ImageViewSizePos("./data/Jeux/"+game.getName() +"/menuchoixdujeu.jpg", imageWidth, imageHeight));
             for(String string : new File("./data/Jeux/"+game.getName()).list()){
                 if(string.substring(0,7).equals("musique")){
                     game.getListMusiques().add(new Musique("./data/Jeux/"+game.getName()+"/"+string));
@@ -224,7 +220,7 @@ public class MenuChoixDuJeu {
         return gameList;
     }
 
-    public void recupJeux(){
+    public void recupJeux(){//Elle ne sert a rien
         File directoryPath = new File("./data/Jeux");
         String contents[] = directoryPath.list();
         for(String content :contents){
@@ -250,20 +246,22 @@ public class MenuChoixDuJeu {
     public Pane getPane() {
         return pane;
     }
+
+
     public void printArrows(){
-        ImageViewSizePos rightArrow = new ImageViewSizePos("./data/Logos/right-arrow.png",75,75,new Coordinate(currentGame.getImageJeu().getCoordinate().getX()+currentGame.getImageJeu().getImageView().getFitWidth(),currentGame.getImageJeu().getCoordinate().getY()+currentGame.getImageJeu().getImageView().getFitHeight()/2 - 30));
-        ImageViewSizePos leftArrow = new ImageViewSizePos("./data/Logos/left-arrow.png",75,75,new Coordinate(currentGame.getImageJeu().getCoordinate().getX()-100,currentGame.getImageJeu().getCoordinate().getY()+currentGame.getImageJeu().getImageView().getFitHeight()/2-30));
+        ImageViewSizePos rightArrow = new ImageViewSizePos("./data/Logos/right-arrow.png",75,75,new Coordinate(currentGame.getImageJeu().getCoordinate().getX()+currentGame.getImageJeu().getImageView().getFitWidth(),currentGame.getImageJeu().getCoordinate().getY()+currentGame.getImageJeu().getImageView().getFitHeight()/2 - 30));//rendre modulable
+        ImageViewSizePos leftArrow = new ImageViewSizePos("./data/Logos/left-arrow.png",75,75,new Coordinate(currentGame.getImageJeu().getCoordinate().getX()-100,currentGame.getImageJeu().getCoordinate().getY()+currentGame.getImageJeu().getImageView().getFitHeight()/2-30));//rendre modulable
         pane.getChildren().addAll(rightArrow.getImageView(),leftArrow.getImageView());
         rightArrow.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                setCurrentGame(index+1);
+                setCurrentGame(firstGameIndex +1);
             }
         });
         leftArrow.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                setCurrentGame(index-1);
+                setCurrentGame(firstGameIndex -1);
             }
         });
     }

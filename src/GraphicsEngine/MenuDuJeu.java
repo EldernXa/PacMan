@@ -203,7 +203,6 @@ public class MenuDuJeu {
             }
         }
         if(!music){
-            System.out.println("on est dedans");
             soundAndNoSound.setImageView("./data/Logos/nosound.png");
             soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
