@@ -94,6 +94,7 @@ public class MenuDuJeu {
             }
         });
     }
+
     public void enterRevenir(){
         revenir.getImageView().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -274,5 +275,16 @@ public class MenuDuJeu {
                 stage.setScene(menuChoixDifficulte.getScene());
 
         }
+
+
+    public Game getJeu() {
+        return jeu;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+
+}
 

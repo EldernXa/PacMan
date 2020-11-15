@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class ReadFileMapPacman {
 
 
-    private  String file[];
+    private String file[];
     private ArrayList<String> line;
     private int width;
     private int height;
@@ -35,7 +35,8 @@ public class ReadFileMapPacman {
         Path path = Paths.get(str);
         try {
             this.file = Files.readString(path).split("\n");
-            String mapSize[] = file[0].split("\\s+");;
+            String mapSize[] = file[0].split("\\s+");
+
             width = Integer.parseInt(mapSize[0]);
             height = Integer.parseInt(mapSize[1]);
 
@@ -47,15 +48,13 @@ public class ReadFileMapPacman {
     }
 
 
-
-
     public void decrypt() {
 
-        for(int i = 1 ; i < file.length ; i++) {
+        for (int i = 1; i < file.length; i++) {
 
             try {
                 String line[] = file[i].split("\\s+");
-                if(line.length!=0) {
+                if (line.length != 0) {
                     if (line[0].compareTo("") != 0 && line[0].charAt(0) != '/') {
                         Class aClass = Class.forName("GraphicsEngine." + line[0]);
                         Class[] parameters = new Class[]{String.class, Coordinate.class, Scene.class, Pane.class};
@@ -83,8 +82,6 @@ public class ReadFileMapPacman {
     public ArrayList<String> getLine() {
         return line;
     }
-
-
 
     public ArrayList<VisualObject> getVisualObjects() {
         return visualObjects;
