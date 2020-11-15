@@ -1,4 +1,4 @@
-655 365
+400 400
 
 //Plafond
 Decor 0 0 ./data/Murs/murH.png
@@ -27,75 +27,75 @@ Decor 0 300 ./data/Murs/murV50.png
 Decor 0 345 ./data/Murs/murV25.png
 
 //Mur Droite
-Decor 635 0 ./data/Murs/murV.png
-Decor 635 100 ./data/Murs/murV.png
-Decor 635 200 ./data/Murs/murV.png
-Decor 635 300 ./data/Murs/murV50.png
-Decor 635 345 ./data/Murs/murV25.png
+Decor 641 0 ./data/Murs/murV.png
+Decor 641 100 ./data/Murs/murV.png
+Decor 641 200 ./data/Murs/murV.png
+Decor 641 300 ./data/Murs/murV50.png
+Decor 641 345 ./data/Murs/murV25.png
 
 //Base fantôme
 
-Decor 239 170 ./data/Murs/murV50.png
-Decor 239 220 ./data/Murs/murH.png
-Decor 274 220 ./data/Murs/murH.png
-Decor 239 152 ./data/Murs/murH25.png
-Decor 251 152 ./data/Murs/murH25.png
-Decor 350 152 ./data/Murs/murH25.png
-Decor 338 152 ./data/Murs/murH25.png
-Decor 357 170 ./data/Murs/murV50.png
+Decor 245 170 ./data/Murs/murV50.png
+Decor 245 220 ./data/Murs/murH.png
+Decor 280 220 ./data/Murs/murH.png
+Decor 245 152 ./data/Murs/murH25.png
+Decor 257 152 ./data/Murs/murH25.png
+Decor 356 152 ./data/Murs/murH25.png
+Decor 344 152 ./data/Murs/murH25.png
+Decor 363 170 ./data/Murs/murV50.png
 
 // Map partie gauche
 
-Decor 53 53 ./data/Murs/murV.png
-Decor 53 153 ./data/Murs/murV.png
-Decor 53 200 ./data/Murs/murV.png
-Decor 115 253 ./data/Murs/murV.png
-Decor 71 200 ./data/Murs/murH.png
-Decor 89 200 ./data/Murs/murH.png
-Decor 179 118 ./data/Murs/murV.png
-Decor 239 238 ./data/Murs/murV50.png
-Decor 239 278 ./data/Murs/murV25.png
-Decor 257 282 ./data/Murs/murH.png
-Decor 179 278 ./data/Murs/murV25.png
-Decor 179 270 ./data/Murs/murV25.png
-Decor 190 258 ./data/Murs/murH50.png
-Decor 179 258 ./data/Murs/murH50.png
-Decor 130 135 ./data/Murs/murH50.png
-Decor 115 135 ./data/Murs/murH25.png
-Decor 115 55 ./data/Murs/murV.png
-Decor 179 18 ./data/Murs/murV25.png
-Decor 179 40 ./data/Murs/murV25.png
-Decor 239 18 ./data/Murs/murV50.png
-Decor 239 58 ./data/Murs/murV50.png
-Decor 257 90 ./data/Murs/murH50.png
+Decor 59 53 ./data/Murs/murV.png
+Decor 59 153 ./data/Murs/murV.png
+Decor 59 200 ./data/Murs/murV.png
+Decor 121 253 ./data/Murs/murV.png
+Decor 77 200 ./data/Murs/murH.png
+Decor 95 200 ./data/Murs/murH.png
+Decor 185 118 ./data/Murs/murV.png
+Decor 245 238 ./data/Murs/murV50.png
+Decor 245 278 ./data/Murs/murV25.png
+Decor 263 282 ./data/Murs/murH.png
+Decor 185 278 ./data/Murs/murV25.png
+Decor 185 270 ./data/Murs/murV25.png
+Decor 196 258 ./data/Murs/murH50.png
+Decor 185 258 ./data/Murs/murH50.png
+Decor 136 135 ./data/Murs/murH50.png
+Decor 121 135 ./data/Murs/murH25.png
+Decor 121 55 ./data/Murs/murV.png
+Decor 185 18 ./data/Murs/murV25.png
+Decor 185 40 ./data/Murs/murV25.png
+Decor 245 18 ./data/Murs/murV50.png
+Decor 245 58 ./data/Murs/murV50.png
+Decor 263 90 ./data/Murs/murH50.png
 
 Decor 307 58 ./data/Murs/murV50.png
 
 // Map partie droite
 
 
-Decor 418 300 ./data/Murs/murV50.png
-Decor 474 282 ./data/Murs/murH.png
-Decor 566 282 ./data/Murs/murH25.png
-Decor 573 220 ./data/Murs/murV50.png
-Decor 573 250 ./data/Murs/murV50.png
-Decor 573 70 ./data/Murs/murV.png
+Decor 424 300 ./data/Murs/murV50.png
+Decor 480 282 ./data/Murs/murH.png
+Decor 572 282 ./data/Murs/murH25.png
+Decor 579 220 ./data/Murs/murV50.png
+Decor 579 250 ./data/Murs/murV50.png
+Decor 579 70 ./data/Murs/murV.png
 
-Decor 438 220 ./data/Murs/murH.png
-Decor 418 220 ./data/Murs/murH.png
-Decor 418 220 ./data/Murs/murV.png
-Decor 350 282 ./data/Murs/murH25.png
+Decor 444 220 ./data/Murs/murH.png
+Decor 424 220 ./data/Murs/murH.png
+Decor 424 220 ./data/Murs/murV.png
+Decor 356 282 ./data/Murs/murH25.png
 
-Decor 473 152 ./data/Murs/murH.png
-Decor 418 152 ./data/Murs/murH.png
+Decor 479 152 ./data/Murs/murH.png
+Decor 424 152 ./data/Murs/murH.png
 
 
-Decor 420 18 ./data/Murs/murV50.png
-Decor 420 58 ./data/Murs/murV50.png
-Decor 438 90 ./data/Murs/murH50.png
-Decor 480 58 ./data/Murs/murV50.png
+Decor 426 18 ./data/Murs/murV50.png
+Decor 426 58 ./data/Murs/murV50.png
+Decor 444 90 ./data/Murs/murH50.png
+Decor 486 58 ./data/Murs/murV50.png
 
-Decor 370 55 ./data/Murs/murH50.png
+Decor 376 55 ./data/Murs/murH50.png
 
 
 
