@@ -7,11 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -140,6 +138,18 @@ public class MenuChoixDuJeu {
         printArrows();
         stage.setScene(menuScene);
         this.stage = stage ;
+    }
+
+    public Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public Game getPreviousGame() {
+        return previousGame;
+    }
+
+    public Game getNextGame() {
+        return nextGame;
     }
 
     public static void game1GetGam1Attributs(Game game1, Game game2){
