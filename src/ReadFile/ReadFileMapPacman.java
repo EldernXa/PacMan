@@ -28,11 +28,11 @@ public class ReadFileMapPacman {
     private Scene scene;
     private Pane pane;
 
-    public ReadFileMapPacman(Scene scene, Pane pane) {
+    public ReadFileMapPacman(Scene scene, Pane pane, String str) {
         this.scene = scene;
         this.pane = pane;
         line = new ArrayList<>();
-        Path path = Paths.get("./data/Map/PacmanMap1");
+        Path path = Paths.get(str);
         try {
             this.file = Files.readString(path).split("\n");
             String mapSize[] = file[0].split("\\s+");;

@@ -99,7 +99,7 @@ public class MenuChoixDifficulte {
 
                     root.getChildren().add(visualObject.getImageView());
                     stage.setMaximized(false);
-                    ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root);
+                    ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
                     readFileMapPacman.decrypt();
 
                     for(int i = 0; i < readFileMapPacman.getVisualObjects().size() ; i++){
