@@ -26,7 +26,7 @@
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
     -fx-font-family: "Arial";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
-    -fx-font-size: 22px;
+    -fx-font-size: 21px;
     -fx-padding: 10 20 10 20;
 }
 .diff {
