@@ -11,10 +11,10 @@ public class Fantome extends MouvingObject {
 
     public Fantome(String path, Coordinate coordinate, Scene scene, Pane pane){
         super(path, coordinate, scene, pane);
-        addAction(new ActionContinue(getGameImage(), scene, "z", 'y', -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "s", 'y', getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "q", 'x', -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "d", 'x', getGameImage().getValueMove(), valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "o", 'y', -getGameImage().getValueMove(), valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "l", 'y', getGameImage().getValueMove(), valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "k", 'x', -getGameImage().getValueMove(), valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "m", 'x', getGameImage().getValueMove(), valueTps, this));
     }
 
 }
