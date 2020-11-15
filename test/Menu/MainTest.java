@@ -1,3 +1,4 @@
+/*
 package Menu;
 
 import GraphicsEngine.MenuChoixDuJeu;
@@ -30,3 +31,4 @@ class MainTest extends ApplicationTest{
 
 
 }
+*/
