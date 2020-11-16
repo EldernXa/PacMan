@@ -99,7 +99,7 @@ public class MenuChoixDifficulte {
                     visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche4.png");
 
                     /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-                    Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/fantomeGrisDroite1.png", new Coordinate(53, 20), scene, root);
+                    Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/fantomeGrisDroite1.png", new Coordinate(385, 20), scene, root);
                     visualObject1.addSpriteDirRight("./data/SpriteMouvement/Fantome/fantomeGrisDroite2.png");
                     visualObject1.addSpriteDirDown("./data/SpriteMouvement/Fantome/fantomeGrisBas1.png");
                     visualObject1.addSpriteDirDown("./data/SpriteMouvement/Fantome/fantomeGrisBas2.png");
