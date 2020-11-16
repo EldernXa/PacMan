@@ -135,7 +135,7 @@ public class MenuChoixDuJeu {
             }
         });
         pane.getChildren().addAll(currentGame.getImageJeu().getImageView(), choixDuJeuLabel,zoneDeRecherche,buttonExit);
-        printArrows();
+
         stage.setScene(menuScene);
         this.stage = stage ;
     }
@@ -241,7 +241,7 @@ public class MenuChoixDuJeu {
         return gameList;
     }
 
-    public void recupJeux(){//Elle ne sert a rien
+    public void recupJeux(){//Elle ne sert a rien tu ne l'as juste pas utilisé
         File directoryPath = new File("./data/Jeux");
         String contents[] = directoryPath.list();
         for(String content :contents){
@@ -269,21 +269,5 @@ public class MenuChoixDuJeu {
     }
 
 
-    public void printArrows(){
-        ImageViewSizePos rightArrow = new ImageViewSizePos("./data/Logos/right-arrow.png",75,75,new Coordinate(currentGame.getImageJeu().getCoordinate().getX()+currentGame.getImageJeu().getImageView().getFitWidth(),currentGame.getImageJeu().getCoordinate().getY()+currentGame.getImageJeu().getImageView().getFitHeight()/2 - 30));//rendre modulable
-        ImageViewSizePos leftArrow = new ImageViewSizePos("./data/Logos/left-arrow.png",75,75,new Coordinate(currentGame.getImageJeu().getCoordinate().getX()-100,currentGame.getImageJeu().getCoordinate().getY()+currentGame.getImageJeu().getImageView().getFitHeight()/2-30));//rendre modulable
-        pane.getChildren().addAll(rightArrow.getImageView(),leftArrow.getImageView());
-        rightArrow.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                setCurrentGame(firstGameIndex +1);
-            }
-        });
-        leftArrow.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                setCurrentGame(firstGameIndex -1);
-            }
-        });
-    }
+
 }
