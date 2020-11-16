@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -32,6 +33,9 @@ public class MenuChoixDuJeu {
     private Game previousGame = new Game();
     private Game currentGame = new Game();
     private Game nextGame = new Game();
+    Coordinate coordPreviousGame;
+    Coordinate coordCurrentGame;
+    Coordinate coordNextGame;
     private double imageWidth = 500;
     private double imageHeight = 250;
     int firstGameIndex = 0;
@@ -49,81 +53,19 @@ public class MenuChoixDuJeu {
         menuScene = new Scene(pane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
         menuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
 
-        zoneDeRecherche.setPromptText("Rentrez le nom du jeu");
-        zoneDeRecherche.setFocusTraversable(false);
-        zoneDeRecherche.setTranslateX(3*(menuScene.getWidth()/4));
-        zoneDeRecherche.setTranslateY(menuScene.getHeight()/16);
-        zoneDeRecherche.setMinSize(300,35);
+        creationZoneDeRecherche();
 
-        choixDuJeuLabel.setFont(Font.font("Avenir Next", 45));
-        choixDuJeuLabel.setUnderline(true);
-        choixDuJeuLabel.setTranslateX(menuScene.getWidth()/2-220);
-        choixDuJeuLabel.setTranslateY(70);
-        choixDuJeuLabel.setStyle("-fx-border-color: black;");
-        choixDuJeuLabel.setPadding(new Insets(7));
-        choixDuJeuLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,null,null)));
+        creationDuJeuLabel();
 
         imageFond =  new ImageViewSizePos("./data/Logos/menuchoixdujeu.jpg",menuScene.getWidth(),menuScene.getHeight());
 
         pane.getChildren().add(imageFond.getImageView());
 
-        Coordinate coordPreviousGame = new Coordinate(menuScene.getWidth() / 6 - (imageWidth / 4), menuScene.getHeight() / 2 - (imageHeight / 2));
-        previousGame.getImageJeu().setCoordinate(coordPreviousGame);
-        Coordinate coordCurrentGame = new Coordinate(menuScene.getWidth() / 2 - (imageWidth / 2), menuScene.getHeight() / 2 - (imageHeight / 4));
-        currentGame.getImageJeu().setCoordinate(coordCurrentGame);
-        Coordinate coordNextGame = new Coordinate(5 * (menuScene.getWidth() / 6) - 3*(imageWidth / 4), menuScene.getHeight() / 2 - (imageHeight / 2));
-        nextGame.getImageJeu().setCoordinate(coordNextGame);
+        setCoordGames();
 
         setCurrentGame(firstGameIndex);
 
-
-        if(currentGame != null) {
-            currentGame.setImageJeu(new ImageViewSizePos(gameList.get(firstGameIndex).getImageJeu().getPathImage(), 500, 250));
-            currentGame.getImageJeu().setCoordinate(coordCurrentGame);
-
-            currentGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    MenuDuJeu currentGameMenu = new MenuDuJeu(stage,currentGame,menuScene);
-                    changerScene(currentGameMenu.getMenuDuJeuScene());
-
-                }
-            });
-        }
-
-        if(previousGame != null) {
-            previousGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(-1, firstGameIndex)).getImageJeu().getPathImage(), 500, 250));
-            previousGame.getImageJeu().setCoordinate(coordPreviousGame);
-
-            previousGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    firstGameIndex = calculFollowingCurrentIndex(-1, firstGameIndex);
-                    setCurrentGame(firstGameIndex);
-                }
-            });
-
-
-            pane.getChildren().add(previousGame.getImageJeu().getImageView());
-        }
-
-        if(nextGame != null) {
-            nextGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(1, firstGameIndex)).getImageJeu().getPathImage(), 500, 250));
-            nextGame.getImageJeu().setCoordinate(coordNextGame);
-
-
-            nextGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    firstGameIndex = calculFollowingCurrentIndex(1, firstGameIndex);
-                    setCurrentGame(firstGameIndex);
-                }
-            });
-
-            pane.getChildren().add(nextGame.getImageJeu().getImageView());
-        }
-
-        recupJeux();
+        initialisationAllGamesImages();
 
         buttonExit.setTranslateX(menuScene.getWidth()/2-100);
         buttonExit.setTranslateY(menuScene.getHeight()/2 + 250);
@@ -135,9 +77,84 @@ public class MenuChoixDuJeu {
             }
         });
         pane.getChildren().addAll(currentGame.getImageJeu().getImageView(), choixDuJeuLabel,zoneDeRecherche,buttonExit);
-
         stage.setScene(menuScene);
         this.stage = stage ;
+    }
+
+    public void creationZoneDeRecherche(){
+        zoneDeRecherche.setPromptText("Rentrez le nom du jeu");
+        zoneDeRecherche.setFocusTraversable(false);
+        zoneDeRecherche.setTranslateX(3*(menuScene.getWidth()/4));
+        zoneDeRecherche.setTranslateY(menuScene.getHeight()/16);
+        zoneDeRecherche.setMinSize(300,35);
+    }
+
+    public void propositionJeu(){
+        zoneDeRecherche.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                
+            }
+        });
+    }
+
+    public void creationDuJeuLabel(){
+        choixDuJeuLabel.setFont(Font.font("Avenir Next", 45));
+        choixDuJeuLabel.setUnderline(true);
+        choixDuJeuLabel.setTranslateX(menuScene.getWidth()/2-220);
+        choixDuJeuLabel.setTranslateY(70);
+        choixDuJeuLabel.setStyle("-fx-border-color: black;");
+        choixDuJeuLabel.setPadding(new Insets(7));
+        choixDuJeuLabel.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,null,null)));
+    }
+
+    public void setCoordGames(){
+        coordPreviousGame = new Coordinate(menuScene.getWidth() / 6 - (imageWidth / 4), menuScene.getHeight() / 2 - (imageHeight / 2));
+        previousGame.getImageJeu().setCoordinate(coordPreviousGame);
+        coordCurrentGame = new Coordinate(menuScene.getWidth() / 2 - (imageWidth / 2), menuScene.getHeight() / 2 - (imageHeight / 4));
+        currentGame.getImageJeu().setCoordinate(coordCurrentGame);
+        coordNextGame = new Coordinate(5 * (menuScene.getWidth() / 6) - 3*(imageWidth / 4), menuScene.getHeight() / 2 - (imageHeight / 2));
+        nextGame.getImageJeu().setCoordinate(coordNextGame);
+    }
+
+    public void initialisationAllGamesImages(){
+        if(currentGame != null) {
+            currentGame.setImageJeu(new ImageViewSizePos(gameList.get(firstGameIndex).getImageJeu().getPathImage(), 500, 250));
+            currentGame.getImageJeu().setCoordinate(coordCurrentGame);
+            currentGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    MenuDuJeu currentGameMenu = new MenuDuJeu(stage,currentGame,menuScene);
+                    changerScene(currentGameMenu.getMenuDuJeuScene());
+                }
+            });
+        }
+
+        if(previousGame != null) {
+            previousGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(-1, firstGameIndex)).getImageJeu().getPathImage(), 500, 250));
+            previousGame.getImageJeu().setCoordinate(coordPreviousGame);
+            previousGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    firstGameIndex = calculFollowingCurrentIndex(-1, firstGameIndex);
+                    setCurrentGame(firstGameIndex);
+                }
+            });
+            pane.getChildren().add(previousGame.getImageJeu().getImageView());
+        }
+
+        if(nextGame != null) {
+            nextGame.setImageJeu(new ImageViewSizePos(gameList.get(calculFollowingCurrentIndex(1, firstGameIndex)).getImageJeu().getPathImage(), 500, 250));
+            nextGame.getImageJeu().setCoordinate(coordNextGame);
+            nextGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    firstGameIndex = calculFollowingCurrentIndex(1, firstGameIndex);
+                    setCurrentGame(firstGameIndex);
+                }
+            });
+            pane.getChildren().add(nextGame.getImageJeu().getImageView());
+        }
     }
 
     public Game getCurrentGame() {
@@ -241,15 +258,7 @@ public class MenuChoixDuJeu {
         return gameList;
     }
 
-    public void recupJeux(){//Elle ne sert a rien tu ne l'as juste pas utilisé
-        File directoryPath = new File("./data/Jeux");
-        String contents[] = directoryPath.list();
-        for(String content :contents){
-            listJeux.add(new Game(content));
-        }
-    }
     public void afficherListJeux(){
-
     }
 
     public Stage getStage() {
@@ -267,7 +276,4 @@ public class MenuChoixDuJeu {
     public Pane getPane() {
         return pane;
     }
-
-
-
 }
