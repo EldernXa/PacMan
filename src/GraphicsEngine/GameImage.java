@@ -12,7 +12,6 @@ import java.io.File;
 public class GameImage {
     private Coordinate coordinate;
     private final ImageView imgView;
-    private final Pane root;
     private final int valueMove;
     private final String path;
 
@@ -21,10 +20,8 @@ public class GameImage {
      * @param path image String
      * @param coordinate this position
      * @param valueMove the value of move (speed or other thing)
-     * @param root Pane from javafx (we will display the image on it)
      */
-    public GameImage(String path, Coordinate coordinate, int valueMove, Pane root){
-        this.root = root;
+    public GameImage(String path, Coordinate coordinate, int valueMove){
         this.path = path;
         this.valueMove = valueMove;
         imgView = new ImageView(new Image(new File(path).toURI().toString()));
