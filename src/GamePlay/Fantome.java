@@ -1,4 +1,4 @@
-package GamePlay.Fantôme;
+package GamePlay;
 
 import GraphicsEngine.ActionContinue;
 import GraphicsEngine.Coordinate;

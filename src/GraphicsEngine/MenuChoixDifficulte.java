@@ -1,6 +1,6 @@
 package GraphicsEngine;
 
-import GamePlay.Fantôme.Fantome;
+import GamePlay.Fantome;
 import GamePlay.PacMan;
 import ReadFile.ReadFileMapPacman;
 import javafx.event.EventHandler;
