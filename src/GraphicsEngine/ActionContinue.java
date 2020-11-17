@@ -14,9 +14,12 @@ public class ActionContinue extends Action{
 
     private float tps;
     private static Timeline timeline;
+    private int indTimeline;
+    private final MouvingObject mouvingObject;
 
     public ActionContinue(GameImage image, Scene scene, String carac, char dir, int valueMove, float tps, MouvingObject mouvingObject){
         super(image, scene, carac, dir, valueMove, mouvingObject);
+        this.mouvingObject = mouvingObject;
         this.tps = tps;
     }
 
@@ -36,7 +39,7 @@ public class ActionContinue extends Action{
         if(!collisionImgView(valueMove, dir)) {
             if (timeline == null)
                 timeline = new Timeline();
-            timeline.stop();
+            VisualObject.stopTimelineParallel();
             timeline.getKeyFrames().clear();
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
@@ -44,14 +47,16 @@ public class ActionContinue extends Action{
                         super.doWhenEventOccur(valueMove, dir);
                     }
             ));
-            timeline.setCycleCount(Animation.INDEFINITE);
-            timeline.play();
+            indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
+            VisualObject.startTimelineParallel();
         }
     }
 
     @Override
     void doWhenBlock(){
-        timeline.stop();
+        VisualObject.stopTimelineParallel();
+        VisualObject.removeTimeline(indTimeline);
+        VisualObject.startTimelineParallel();
     }
 
 }
