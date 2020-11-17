@@ -99,16 +99,20 @@ public class MenuChoixDifficulte {
 
                     root.getChildren().add(visualObject.getImageView());
                     stage.setMaximized(false);
-                    ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
+
+                    Map currentMap = new Map(stage,"./data/Map/PacmanMap.txt");
+
+                    /*ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
                     readFileMapPacman.decrypt();
+
 
                     for(int i = 0; i < readFileMapPacman.getVisualObjects().size() ; i++){
                         root.getChildren().add(readFileMapPacman.getVisualObjects().get(i).getImageView());
-                    }
+                    }*/
 
                     root.setStyle("-fx-background-color: black;");
                     Musique.mediaPlayer.stop();
-                    stage.setScene(scene);
+//                    stage.setScene(scene);
                     stage.centerOnScreen();
                     //stage.setResizable(false);
                     stage.sizeToScene();
