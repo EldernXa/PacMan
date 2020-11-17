@@ -125,7 +125,7 @@ public class MenuChoixDifficulte {
 
                     root.setStyle("-fx-background-color: black;");
                     Musique.mediaPlayer.stop();
-//                    stage.setScene(scene);
+                    stage.setScene(scene);
                     stage.centerOnScreen();
                     //stage.setResizable(false);
                     stage.sizeToScene();
