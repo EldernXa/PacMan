@@ -99,18 +99,18 @@ public class MenuChoixDifficulte {
                     visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche4.png");
 
                     /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-                    Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/fantomeGrisDroite1.png", new Coordinate(385, 20), scene, root);
+                   /* Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/fantomeGrisDroite1.png", new Coordinate(385, 20), scene, root);
                     visualObject1.addSpriteDirRight("./data/SpriteMouvement/Fantome/fantomeGrisDroite2.png");
                     visualObject1.addSpriteDirDown("./data/SpriteMouvement/Fantome/fantomeGrisBas1.png");
                     visualObject1.addSpriteDirDown("./data/SpriteMouvement/Fantome/fantomeGrisBas2.png");
                     visualObject1.addSpriteDirUp("./data/SpriteMouvement/Fantome/fantomeGrisHaut1.png");
                     visualObject1.addSpriteDirUp("./data/SpriteMouvement/Fantome/fantomeGrisHaut2.png");
                     visualObject1.addSpriteDirLeft("./data/SpriteMouvement/Fantome/fantomeGrisGauche1.png");
-                    visualObject1.addSpriteDirLeft("./data/SpriteMouvement/Fantome/fantomeGrisGauche2.png");
+                    visualObject1.addSpriteDirLeft("./data/SpriteMouvement/Fantome/fantomeGrisGauche2.png");*/
 
 
                     root.getChildren().add(visualObject.getImageView());
-                    root.getChildren().add(visualObject1.getImageView());
+                    //root.getChildren().add(visualObject1.getImageView());
                     stage.setMaximized(false);
                     ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
                     readFileMapPacman.decrypt();

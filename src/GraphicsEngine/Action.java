@@ -13,11 +13,18 @@ public class Action {
     private final Scene scene;
     private final MouvingObject mouvingObject;
 
+
     public Action(GameImage gameImage, Scene scene, String carac, char dir, int valueMove, MouvingObject mouvingObject){
         this.mouvingObject = mouvingObject;
         this.scene = scene;
         this.gameImage = gameImage;
         runEvent(scene, carac, valueMove, dir);
+    }
+    public Action(GameImage gameImage,Scene scene, char dir, int valueMove, MouvingObject mouvingObject){
+        this.mouvingObject = mouvingObject;
+        this.gameImage = gameImage;
+        this.scene = scene;
+        runEventWithoutKey( valueMove, dir);
     }
 
     private void runEvent(Scene scene, String carac, int valueMove, char dir){
@@ -27,6 +34,14 @@ public class Action {
                 doWhenEventOccur(valueMove, dir);
             }
         });
+    }
+    private void runEventWithoutKey( int valueMove, char dir){
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
+
+                doWhenEventOccur(valueMove, dir);
+
+        });
+
     }
 
     public void doWhenEventOccur(int valueMove, char dir){

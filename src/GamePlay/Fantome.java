@@ -3,6 +3,7 @@ import GraphicsEngine.ActionContinue;
 import GraphicsEngine.Action;
 import GraphicsEngine.Coordinate;
 import GraphicsEngine.MouvingObject;
+import ReadFile.PosMursAssocies;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
@@ -13,14 +14,15 @@ public class Fantome extends MouvingObject {
     private float valueTps = (float)100;
     private Coordinate goal ;
 
-    public Fantome(String path, Coordinate coordinate, Scene scene, Pane pane){
+    public Fantome(String path, Coordinate coordinate, Scene scene, Pane pane, PosMursAssocies posMursAssocies){
 
         super(path, coordinate, scene, pane);
         setGoal(coordinate);
-        addAction(new ActionContinue(getGameImage(), scene, "o", 'y', -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "l", 'y', getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "k", 'x', -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "m", 'x', getGameImage().getValueMove(), valueTps, this));
+
+        addAction(new ActionContinue(getGameImage(), scene, Chase(coordinate,scene,posMursAssocies.getListOfWalls()), -getGameImage().getValueMove(), valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, Chase(coordinate,scene,posMursAssocies.getListOfWalls()), getGameImage().getValueMove(), valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, Chase(coordinate,scene,posMursAssocies.getListOfWalls()), -getGameImage().getValueMove(), valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, Chase(coordinate,scene,posMursAssocies.getListOfWalls()), getGameImage().getValueMove(), valueTps, this));
     }
     public void setGoal(Coordinate coordinate){
         Random rX = new Random();
@@ -44,13 +46,47 @@ public class Fantome extends MouvingObject {
 
     }
 
-    public void  Chase(Coordinate pacManCoordinate, ArrayList<Character> listOfWalls){
-        ArrayList<Character> characters = actionPossible(listOfWalls);
+    public char  Chase(Coordinate pacManCoordinate,Scene scene, ArrayList<Character> listOfWalls){
+        ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
         if(getEuclidianDistance(pacManCoordinate)<= 80.0){
 
+            switch (bestAction(pacManCoordinate,charactersFeasable)){
+                case 'H':
+                    char temp = 'y';
+                    return temp;
+                case 'B':
+                    char temp1 = 'y';
+                    return temp1;
+                case 'D':
+                    char temp2 = 'x';
+                    return temp2;
+                case 'G':
+                    char temp3 = 'x';
+                    return temp3;
 
             }
 
+            }else {
+            switch (bestAction(getGoal(),charactersFeasable)){
+                case 'H':
+                    char temp = 'y';
+                    return temp;
+                case 'B':
+                    char temp1 = 'y';
+                    return temp1;
+                case 'D':
+                    char temp2 = 'x';
+                    return temp2;
+                case 'G':
+                    char temp3 = 'x';
+                    return temp3;
+
+            }
+
+
+        }
+        char nulL=' ';
+          return nulL;
         }
         public ArrayList<Character> actionPossible(ArrayList<Character> list){
          ArrayList<Character> characters = new ArrayList<>();
@@ -147,9 +183,54 @@ public class Fantome extends MouvingObject {
 
         }
 
-        /*public Character bestAction(Character character){
+        public Character bestAction(Coordinate Coordinate,ArrayList<Character> character){
+                double smallerDistance = 1000000;
+                Character chaR = new Character(' ');
+                if(character.contains('H')){
+                    double newY = Coordinate.getY() +Double.valueOf(getGameImage().getValueMove()) ;
 
-        }*/
+                    Coordinate coordinate = new Coordinate(Coordinate.getX(),newY );
+                    if(getEuclidianDistance(coordinate) < smallerDistance){
+                        smallerDistance = getEuclidianDistance(coordinate);
+                        chaR = 'H';
+
+                    }
+
+                }
+                if(character.contains('B')){
+                    double newY = Coordinate.getY() -Double.valueOf(getGameImage().getValueMove()) ;
+
+                    Coordinate coordinate = new Coordinate(Coordinate.getX(),newY );
+                    if(getEuclidianDistance(coordinate) < smallerDistance){
+                        smallerDistance = getEuclidianDistance(coordinate);
+                        chaR = 'B';
+
+                    }
+
+                }
+                if(character.contains('D')){
+                    double newX =  Coordinate.getX() +Double.valueOf(getGameImage().getValueMove()) ;
+
+                    Coordinate coordinate = new Coordinate(newX,Coordinate.getY() );
+                    if(getEuclidianDistance(coordinate) < smallerDistance){
+                        smallerDistance = getEuclidianDistance(coordinate);
+                        chaR = 'D';
+                    }
+
+                }
+                if(character.contains('G')){
+                    double newX =  Coordinate.getX() -Double.valueOf(getGameImage().getValueMove()) ;
+
+                    Coordinate coordinate = new Coordinate(newX,Coordinate.getY() );
+                    if(getEuclidianDistance(coordinate) < smallerDistance){
+                        smallerDistance = getEuclidianDistance(coordinate);
+                        chaR = 'G';
+                    }
+
+                }
+            return chaR;
+
+        }
 
     }
 
