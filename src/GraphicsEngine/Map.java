@@ -11,16 +11,19 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Map {
-    Stage stage;
-    ReadFileMap2Pacman readFileMap2Pacman;
+    private Stage stage;
+    private ReadFileMap2Pacman readFileMap2Pacman;
+    private ArrayList<Coordinate> realCoord = new ArrayList<>();
+
     public static ArrayList<VisualObject> visualObjects = new ArrayList<>();
-    double abscMax;
-    double ordMax;
-    double carreaux = 32;
-    double epaisseurMur = 18;
-    double longueurMur = 68;
-    Pane mapPane = new Pane();
-    Scene mapScene;
+
+    private double abscMax;
+    private double ordMax;
+    private double carreaux = 32;
+    private double epaisseurMur = 18;
+    private double longueurMur = 68;
+    private Pane mapPane = new Pane();
+    private Scene mapScene;
 
     public Map(Stage stage, String filePath){
         this.stage = stage;
@@ -30,6 +33,21 @@ public class Map {
         creationDeMap();
         mapScene = new Scene(mapPane,(abscMax+1)*carreaux+(abscMax+2)*epaisseurMur,(ordMax+1)*carreaux+(ordMax+2)*epaisseurMur);
         stage.setScene(mapScene);
+
+        for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
+            double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
+            double fausseOrd = posMursAssocies.getPointCoordinate().getY();
+            Coordinate nouv = new Coordinate(fausseAbsc*(longueurMur-2*epaisseurMur)+(1+fausseAbsc)*epaisseurMur,fausseOrd*(longueurMur-2*epaisseurMur)+(1+fausseOrd)*epaisseurMur);
+            posMursAssocies.getPointCoordinate().affichageCoord();
+            /*System.out.print(" donne : ");
+            nouv.affichageCoord();
+            System.out.println();*/
+            realCoord.add(nouv);
+        }
+
+        /*for(Coordinate coordinate : realCoord){
+            coordinate.affichageCoord();
+        }*/
 
         PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/pacmanDroite1.png", new Coordinate(18*5+4*32, 8*18+7*32), mapScene, mapPane);
         visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite2.png");

@@ -12,6 +12,19 @@ public class Coordinate {
         this.y = y;
     }
 
+    public void affichageCoord(){
+        System.out.print("(" + x + "," + y + ")");
+    }
+
+    public boolean compare(Coordinate coordinate){
+        if((this.x == coordinate.getX())&&(this.y == coordinate.getY())){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public void setX(double x){
         this.x = x;
     }

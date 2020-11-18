@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class ReadFileMap2Pacman {
     private ArrayList<PosMursAssocies> tabMurFctCoord = new ArrayList<>();
-    double abscMax = 0;
-    double ordMax = 0;
-    File mapFile;
+    private double abscMax = 0;
+    private double ordMax = 0;
+    private File mapFile;
 
     public ReadFileMap2Pacman(String mapFilePath){
         this.mapFile = new File(mapFilePath);
