@@ -6,9 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Map {
     Stage stage;
     ReadFileMap2Pacman readFileMap2Pacman;
+    public ArrayList<VisualObject> visualObjects = new ArrayList<>();
     double abscMax;
     double ordMax;
     double carreaux = 32;
@@ -51,6 +54,7 @@ public class Map {
     public void creationMurHaut(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*absc;
         double ordonnee = (longueurMur-epaisseurMur)*ord;
+        visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene,mapPane));
         mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
 
     }
@@ -58,6 +62,7 @@ public class Map {
     public void creationMurDroite(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*(absc+1);
         double ordonnee = (longueurMur-epaisseurMur)*ord;
+        visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),mapScene,mapPane));
         mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
 
@@ -65,6 +70,7 @@ public class Map {
         if(ord == ordMax) {
             double abscisse = (longueurMur-epaisseurMur)*absc;
             double ordonnee = (longueurMur-epaisseurMur)*(ord+1);
+            visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene,mapPane));
             mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png", new Coordinate(abscisse, ordonnee)).getImageView());
         }
 
@@ -74,10 +80,16 @@ public class Map {
         if(absc == 0) {
             double abscisse = (longueurMur-epaisseurMur)*absc;
             double ordonnee = (longueurMur-epaisseurMur)*ord;
+            visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),mapScene,mapPane));
             mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png", new Coordinate(abscisse, ordonnee)).getImageView());
         }
-
     }
 
+    public Scene getMapScene() {
+        return mapScene;
+    }
 
+    public Pane getMapPane() {
+        return mapPane;
+    }
 }

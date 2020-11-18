@@ -81,6 +81,10 @@ public class MenuChoixDifficulte {
                     root.setMinWidth(scene.getWidth());
                     root.setMaxWidth(scene.getWidth());
                     root.setPrefWidth(scene.getWidth());
+
+                    Map currentMap = new Map(stage,"./data/Map/PacmanMap.txt");
+                    currentMap.getMapPane().setStyle("-fx-background-color: black;");
+
                     PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/pacmanDroite1.png", new Coordinate(385, 20), scene, root);
                     visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite2.png");
                     visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite3.png");
@@ -113,19 +117,19 @@ public class MenuChoixDifficulte {
                     root.getChildren().add(visualObject1.getImageView());
                     stage.setMaximized(false);
 
-//                    Map currentMap = new Map(stage,"./data/Map/PacmanMap.txt");
 
-                    ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
+
+                    /*ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
                     readFileMapPacman.decrypt();
 
 
                     for(int i = 0; i < readFileMapPacman.getVisualObjects().size() ; i++){
                         root.getChildren().add(readFileMapPacman.getVisualObjects().get(i).getImageView());
-                    }
+                    }*/
 
                     root.setStyle("-fx-background-color: black;");
                     Musique.mediaPlayer.stop();
-                    stage.setScene(scene);
+//                    stage.setScene(scene);
                     stage.centerOnScreen();
                     //stage.setResizable(false);
                     stage.sizeToScene();

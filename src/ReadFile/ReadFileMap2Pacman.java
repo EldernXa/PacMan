@@ -18,9 +18,9 @@ public class ReadFileMap2Pacman {
             int i = 0;
             Scanner mapFileScanner = new Scanner(mapFile);
             while(mapFileScanner.hasNext()){
-                String curretnLine = mapFileScanner.nextLine();
-                int absc = recupererAbsc(curretnLine);
-                int ord = recupererOrd(curretnLine);
+                String currentLine = mapFileScanner.nextLine();
+                int absc = recupererAbsc(currentLine);
+                int ord = recupererOrd(currentLine);
 
                 if(abscMax < absc){
                     abscMax = absc;
@@ -29,7 +29,7 @@ public class ReadFileMap2Pacman {
                     ordMax = ord;
                 }
 
-                ArrayList<Character> listOfWalls = recupererListOfWalls(curretnLine);
+                ArrayList<Character> listOfWalls = recupererListOfWalls(currentLine);
 
 
                 /*System.out.println("Point : (" + absc + "," + ord + ")");
