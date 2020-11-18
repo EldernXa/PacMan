@@ -13,7 +13,7 @@ import javafx.util.Duration;
 public class ActionContinue extends Action{
 
     private float tps;
-    private static Timeline timeline;
+    private Timeline timeline;
     private int indTimeline;
     private final MouvingObject mouvingObject;
 
