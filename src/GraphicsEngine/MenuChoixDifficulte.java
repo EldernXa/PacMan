@@ -2,7 +2,7 @@ package GraphicsEngine;
 
 import GamePlay.Fantome;
 import GamePlay.PacMan;
-import ReadFile.ReadFileMapPacman;
+//import ReadFile.ReadFileMapPacman;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -72,49 +72,19 @@ public class MenuChoixDifficulte {
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    Pane root = new Pane();//Creation groupe
+//                    Pane root = new Pane();//Creation groupe
                     stage.setFullScreen(false);
-                    Scene scene = new Scene(root,655,365);//Creation fenetre de taille 400 sur 400 pixels
+                    /*Scene scene = new Scene(root,655,365);//Creation fenetre de taille 400 sur 400 pixels
                     root.setMinHeight(scene.getHeight());
                     root.setMaxHeight(scene.getHeight());
                     root.setPrefHeight(scene.getHeight());
                     root.setMinWidth(scene.getWidth());
                     root.setMaxWidth(scene.getWidth());
-                    root.setPrefWidth(scene.getWidth());
+                    root.setPrefWidth(scene.getWidth());*/
 
                     Map currentMap = new Map(stage,"./data/Map/PacmanMap.txt");
                     currentMap.getMapPane().setStyle("-fx-background-color: black;");
 
-                    PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/pacmanDroite1.png", new Coordinate(385, 20), scene, root);
-                    visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite2.png");
-                    visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite3.png");
-                    visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite4.png");
-                    visualObject.addSpriteDirDown("./data/SpriteMouvement/Pacman/pacmanBas1.png");
-                    visualObject.addSpriteDirDown("./data/SpriteMouvement/Pacman/pacmanBas2.png");
-                    visualObject.addSpriteDirDown("./data/SpriteMouvement/Pacman/pacmanBas3.png");
-                    visualObject.addSpriteDirDown("./data/SpriteMouvement/Pacman/pacmanBas4.png");
-                    visualObject.addSpriteDirUp("./data/SpriteMouvement/Pacman/pacmanHaut1.png");
-                    visualObject.addSpriteDirUp("./data/SpriteMouvement/Pacman/pacmanHaut2.png");
-                    visualObject.addSpriteDirUp("./data/SpriteMouvement/Pacman/pacmanHaut3.png");
-                    visualObject.addSpriteDirUp("./data/SpriteMouvement/Pacman/pacmanHaut4.png");
-                    visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche1.png");
-                    visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche2.png");
-                    visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche3.png");
-                    visualObject.addSpriteDirLeft("./data/SpriteMouvement/Pacman/pacmanGauche4.png");
-
-                    /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-                    Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/fantomeGrisDroite1.png", new Coordinate(385, 20), scene, root);
-                    visualObject1.addSpriteDirRight("./data/SpriteMouvement/Fantome/fantomeGrisDroite2.png");
-                    visualObject1.addSpriteDirDown("./data/SpriteMouvement/Fantome/fantomeGrisBas1.png");
-                    visualObject1.addSpriteDirDown("./data/SpriteMouvement/Fantome/fantomeGrisBas2.png");
-                    visualObject1.addSpriteDirUp("./data/SpriteMouvement/Fantome/fantomeGrisHaut1.png");
-                    visualObject1.addSpriteDirUp("./data/SpriteMouvement/Fantome/fantomeGrisHaut2.png");
-                    visualObject1.addSpriteDirLeft("./data/SpriteMouvement/Fantome/fantomeGrisGauche1.png");
-                    visualObject1.addSpriteDirLeft("./data/SpriteMouvement/Fantome/fantomeGrisGauche2.png");
-
-
-                    root.getChildren().add(visualObject.getImageView());
-                    root.getChildren().add(visualObject1.getImageView());
                     stage.setMaximized(false);
 
 
@@ -127,7 +97,7 @@ public class MenuChoixDifficulte {
                         root.getChildren().add(readFileMapPacman.getVisualObjects().get(i).getImageView());
                     }*/
 
-                    root.setStyle("-fx-background-color: black;");
+//                    root.setStyle("-fx-background-color: black;");
                     Musique.mediaPlayer.stop();
 //                    stage.setScene(scene);
                     stage.centerOnScreen();

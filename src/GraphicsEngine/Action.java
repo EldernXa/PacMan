@@ -1,6 +1,6 @@
 package GraphicsEngine;
 
-import ReadFile.ReadFileMapPacman;
+//import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -73,7 +73,7 @@ public class Action {
         if (gameImage.getCoordinate().getY() - gameImage.getValueMove() >= 0) {
             gameImage.monter();
             mouvingObject.nextImgDirUp();
-            if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+            if (collision(gameImage.getImgView(), Map.visualObjects)) {
                 gameImage.descendre();
                 mouvingObject.previousImgDirUp();
             }
@@ -91,7 +91,7 @@ public class Action {
         }
         else
             doWhenBlock();
-        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+        if (collision(gameImage.getImgView(), Map.visualObjects)) {
             gameImage.monter();
             mouvingObject.previousImgDirDown();
         }
@@ -104,7 +104,7 @@ public class Action {
         }
         else
             doWhenBlock();
-        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+        if (collision(gameImage.getImgView(), Map.visualObjects)) {
             gameImage.droite();
             mouvingObject.previousImgDirLeft();
         }
@@ -117,7 +117,7 @@ public class Action {
         }
         else
             doWhenBlock();
-        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+        if (collision(gameImage.getImgView(), Map.visualObjects)) {
             gameImage.gauche();
             mouvingObject.previousImgDirRight();
         }

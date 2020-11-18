@@ -1,6 +1,6 @@
 package GraphicsEngine;
 
-import ReadFile.ReadFileMapPacman;
+//import ReadFile.ReadFileMapPacman;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,7 +31,7 @@ public class ActionContinue extends Action{
             imgV.setX(imgV.getX()+valueMove);
         else if(dir=='y')
             imgV.setY(imgV.getY()+valueMove);
-        return(collision(imgV, ReadFileMapPacman.visualObjects));
+        return(collision(imgV, Map.visualObjects));
     }
 
     @Override

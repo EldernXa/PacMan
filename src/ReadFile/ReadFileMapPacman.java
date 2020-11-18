@@ -1,3 +1,4 @@
+/*
 package ReadFile;
 
 import GraphicsEngine.Coordinate;
@@ -103,3 +104,4 @@ public class ReadFileMapPacman {
         return height;
     }
 }
+*/
