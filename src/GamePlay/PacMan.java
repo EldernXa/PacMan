@@ -15,16 +15,16 @@ public class PacMan extends MouvingObject {
     boolean canEatGhost = false;
     private float valueTps = (float)100;
 
-    public PacMan(String path, Coordinate coordinate, Scene scene, Pane pane){
-        super(path, coordinate, scene, pane);
-        addAction(new ActionContinue(getGameImage(), scene, "z", 'y', -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "s", 'y', getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "q", 'x', -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "d", 'x', getGameImage().getValueMove(), valueTps, this));
+    public PacMan(String path, Coordinate coordinate, Scene scene){
+        super(path, coordinate, scene);
+        addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "s", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "q", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "d", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));
     }
 
-    public PacMan(String path, Coordinate coordinate, Scene scene, Pane pane, int nbViesMax, int nbVies) {
-        super(path, coordinate, scene, pane);
+    public PacMan(String path, Coordinate coordinate, Scene scene, int nbViesMax, int nbVies) {
+        super(path, coordinate, scene);
     }
 
 

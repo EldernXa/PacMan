@@ -17,26 +17,24 @@ public class ActionContinue extends Action{
     private int indTimeline;
     private final MouvingObject mouvingObject;
 
-    public ActionContinue(GameImage image, Scene scene, String carac, char dir, int valueMove, float tps, MouvingObject mouvingObject){
-        super(image, scene, carac, dir, valueMove, mouvingObject);
+    public ActionContinue(GameImage image, Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject){
+        super(image, scene, carac, x, y, dir, nameAction, mouvingObject);
         this.mouvingObject = mouvingObject;
         this.tps = tps;
     }
 
-    private boolean collisionImgView(int valueMove, char dir){
+    private boolean collisionImgView(double x, double y){
         ImageView imgV = new ImageView(new Image(super.getGameImage().getImgView().getImage().getUrl()));
         imgV.setX(super.getGameImage().getImgView().getX());
         imgV.setY(super.getGameImage().getImgView().getY());
-        if(dir=='x')
-            imgV.setX(imgV.getX()+valueMove);
-        else if(dir=='y')
-            imgV.setY(imgV.getY()+valueMove);
+        imgV.setX(x);
+        imgV.setY(y);
         return(collision(imgV, Map.visualObjects));
     }
 
     @Override
-    public void doWhenEventOccur(int valueMove, char dir){
-        if(!collisionImgView(valueMove, dir)) {
+    public void doWhenEventOccur(int dir){
+        if(!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -44,7 +42,7 @@ public class ActionContinue extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        super.doWhenEventOccur(valueMove, dir);
+                        super.doWhenEventOccur(dir);
                     }
             ));
             indTimeline = VisualObject.addTimeline(timeline, mouvingObject);

@@ -9,12 +9,12 @@ import javafx.scene.layout.Pane;
 public class Fantome extends MouvingObject {
     private float valueTps = (float)100;
 
-    public Fantome(String path, Coordinate coordinate, Scene scene, Pane pane){
-        super(path, coordinate, scene, pane);
-        addAction(new ActionContinue(getGameImage(), scene, "o", 'y', -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "l", 'y', getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "k", 'x', -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "m", 'x', getGameImage().getValueMove(), valueTps, this));
+    public Fantome(String path, Coordinate coordinate, Scene scene){
+        super(path, coordinate, scene);
+        addAction(new ActionContinue(getGameImage(), scene, "o", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "l", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "k", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "m", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));
     }
 
 }

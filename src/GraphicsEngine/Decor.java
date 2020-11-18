@@ -7,8 +7,8 @@ public class Decor extends UnmouvingObj{
 
     private final boolean isCrossable = false;
 
-    public Decor(String path, Coordinate coordinate, Scene scene, Pane root){
-        super(path, coordinate, scene, root);
+    public Decor(String path, Coordinate coordinate, Scene scene){
+        super(path, coordinate, scene);
     }
 
 

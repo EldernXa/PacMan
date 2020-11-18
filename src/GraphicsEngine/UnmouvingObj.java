@@ -5,8 +5,8 @@ import javafx.scene.layout.Pane;
 
 public class UnmouvingObj extends VisualObject{
 
-    public UnmouvingObj(String path, Coordinate coordinate, Scene scene, Pane root){
-        super(path, coordinate, scene, root);
+    public UnmouvingObj(String path, Coordinate coordinate, Scene scene){
+        super(path, coordinate, scene);
     }
 
 }
