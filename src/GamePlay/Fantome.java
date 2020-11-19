@@ -7,7 +7,7 @@ import GraphicsEngine.MouvingObject;
 
 import ReadFile.PosMursAssocies;
 import javafx.scene.Scene;
-
+import GraphicsEngine.Map;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,7 +16,7 @@ public class Fantome extends MouvingObject {
     private float valueTps = (float) 10;
     private Coordinate goal;
 
-    public Fantome(String path, Coordinate coordinate, Scene scene) {
+    public Fantome(String path, Coordinate coordinate, Scene scene,Map map) {
         super(path, coordinate, scene);
 
 

@@ -28,6 +28,8 @@ public class Map {
     private Pane mapPane = new Pane();
     private Scene mapScene;
 
+
+
     public Map(Stage stage, String filePath){
         this.stage = stage;
         readFileMap2Pacman = new ReadFileMap2Pacman(filePath);
@@ -52,14 +54,14 @@ public class Map {
             coordinate.affichageCoord();
         }*/
 
-        PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), mapScene);
+        //PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), mapScene);
 
 
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-        Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(18*5+4*32, 3*32+4*18), mapScene);
+        Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(18*5+4*32, 3*32+4*18), mapScene, this);
 
 
-        mapPane.getChildren().addAll(visualObject.getGameImage().getImgView(),visualObject1.getGameImage().getImgView());
+        mapPane.getChildren().addAll(visualObject1.getGameImage().getImgView());
     }
 
     public void creationDeMap(){
@@ -122,5 +124,8 @@ public class Map {
 
     public Pane getMapPane() {
         return mapPane;
+    }
+    public ArrayList<Coordinate> getRealCoord() {
+        return realCoord;
     }
 }

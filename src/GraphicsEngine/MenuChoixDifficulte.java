@@ -82,23 +82,17 @@ public class MenuChoixDifficulte {
                     root.setMaxWidth(scene.getWidth());
 
                     root.setPrefWidth(scene.getWidth());
-                    PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), scene);
 
 
-                    /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-                   /* Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/fantomeGrisDroite1.png", new Coordinate(385, 20), scene, root);*/
-
-
-
-                    root.getChildren().add(visualObject.getImageView());
-                    //root.getChildren().add(visualObject1.getImageView());
 
                     root.setPrefWidth(scene.getWidth());
 
                     Map currentMap = new Map(stage,"./data/Map/PacmanMap.txt");
                     currentMap.getMapPane().setStyle("-fx-background-color: black;");
-
-
+                    Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/fantomeGrisDroite1.png", new Coordinate(385, 20), scene,currentMap );
+                    root.getChildren().add(visualObject1.getImageView());
+                    PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), scene);
+                    root.getChildren().add(visualObject.getImageView());
                     stage.setMaximized(false);
 
 
@@ -112,6 +106,7 @@ public class MenuChoixDifficulte {
                     }*/
 
 //                   root.setStyle("-fx-background-color: black;");
+
                     Musique.mediaPlayer.stop();
                     stage.setScene(currentMap.getMapScene());
                     stage.centerOnScreen();

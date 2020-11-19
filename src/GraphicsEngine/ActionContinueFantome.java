@@ -15,14 +15,14 @@ public class ActionContinueFantome extends Action{
     private Timeline timeline;
     private int indTimeline;
     private final MouvingObject mouvingObject;
-    private final PosMursAssocies posMursAssocies;
+    private final Map map;
 
 
-    public ActionContinueFantome(GameImage image, Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject,PosMursAssocies posMursAssocies){
+    public ActionContinueFantome(GameImage image, Scene scene, String carac, double x, double y, int dir, String nameAction, float tps,MouvingObject mouvingObject, Map map){
         super(image, scene, carac, x, y, dir, nameAction, mouvingObject);
         this.mouvingObject = mouvingObject;
         this.tps = tps;
-        this.posMursAssocies = new PosMursAssocies(posMursAssocies.getPointCoordinate(),posMursAssocies.getListOfWalls());
+        this.map = map;
 
     }
 
@@ -36,9 +36,7 @@ public class ActionContinueFantome extends Action{
         return(collision(imgV));
     }
 
-    public PosMursAssocies getPosMursAssocies() {
-        return posMursAssocies;
-    }
+
 
     @Override
     public void doWhenEventOccur(int dir){
@@ -50,9 +48,9 @@ public class ActionContinueFantome extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        int temp = ((Fantome) mouvingObject).Chase(getGameImage().getCoordinate(),getScene(),getPosMursAssocies().getListOfWalls());
-                        super.doWhenEventOccur(temp);
-
+                        //int temp = ((Fantome) mouvingObject).Chase(getGameImage().getCoordinate(),getScene(),map.getRealCoord().);
+                        //super.doWhenEventOccur(temp);
+                        super.doWhenEventOccur(2);
                     }
             ));
             indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
