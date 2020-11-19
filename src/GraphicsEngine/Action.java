@@ -94,19 +94,19 @@ public class Action {
         }
 
         public boolean intersect(ImageView imgViewA, ImageView imgViewB){
-            if(imgViewA.getX()>=imgViewB.getX() && imgViewA.getX()<=(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
-                    imgViewA.getY()>=imgViewB.getY() && imgViewA.getY()<=(imgViewB.getY()+imgViewB.getImage().getHeight())) {
+            if(imgViewA.getX()>imgViewB.getX() && imgViewA.getX()<(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
+                    imgViewA.getY()>imgViewB.getY() && imgViewA.getY()<(imgViewB.getY()+imgViewB.getImage().getHeight())) {
                 return true;
             }
-            else if((imgViewA.getX()+imgViewA.getImage().getWidth())>=imgViewB.getX() && (imgViewA.getX()+imgViewA.getImage().getWidth())<=(imgViewB.getX()
-                    +imgViewB.getImage().getWidth()) && (imgViewA.getY()+imgViewA.getImage().getHeight())>=imgViewB.getY()&&(imgViewA.getY()+imgViewA.getImage().getHeight())<=(imgViewB.getY()
+            else if((imgViewA.getX()+imgViewA.getImage().getWidth())>imgViewB.getX() && (imgViewA.getX()+imgViewA.getImage().getWidth())<(imgViewB.getX()
+                    +imgViewB.getImage().getWidth()) && (imgViewA.getY()+imgViewA.getImage().getHeight())>imgViewB.getY()&&(imgViewA.getY()+imgViewA.getImage().getHeight())<(imgViewB.getY()
                     +imgViewB.getImage().getHeight())) {
                 return true;
-            }else if(imgViewA.getX()>=imgViewB.getX() && imgViewA.getX()<=(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
-                    (imgViewA.getY()+imgViewA.getImage().getHeight())>=imgViewB.getY() && (imgViewA.getY()+imgViewA.getImage().getHeight())<=(imgViewB.getY()+imgViewB.getImage().getHeight())){
+            }else if(imgViewA.getX()>imgViewB.getX() && imgViewA.getX()<(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
+                    (imgViewA.getY()+imgViewA.getImage().getHeight())>imgViewB.getY() && (imgViewA.getY()+imgViewA.getImage().getHeight())<(imgViewB.getY()+imgViewB.getImage().getHeight())){
                 return true;
-            }else if((imgViewA.getX()+imgViewA.getImage().getHeight())>=imgViewB.getX() && (imgViewA.getX()+imgViewA.getImage().getHeight())<=(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
-                    imgViewA.getY()>=imgViewB.getY() && imgViewA.getY()<=(imgViewB.getY()+imgViewB.getImage().getHeight())) {
+            }else if((imgViewA.getX()+imgViewA.getImage().getHeight())>imgViewB.getX() && (imgViewA.getX()+imgViewA.getImage().getHeight())<(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
+                    imgViewA.getY()>imgViewB.getY() && imgViewA.getY()<(imgViewB.getY()+imgViewB.getImage().getHeight())) {
                 return true;
             }
 

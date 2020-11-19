@@ -5,9 +5,12 @@ import GamePlay.PacMan;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap2Pacman;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Map {
@@ -39,9 +42,9 @@ public class Map {
             double fausseOrd = posMursAssocies.getPointCoordinate().getY();
             Coordinate nouv = new Coordinate(fausseAbsc*(longueurMur-2*epaisseurMur)+(1+fausseAbsc)*epaisseurMur,fausseOrd*(longueurMur-2*epaisseurMur)+(1+fausseOrd)*epaisseurMur);
             posMursAssocies.getPointCoordinate().affichageCoord();
-            /*System.out.print(" donne : ");
+            System.out.print(" donne : ");
             nouv.affichageCoord();
-            System.out.println();*/
+            System.out.println();
             realCoord.add(nouv);
         }
 
@@ -83,8 +86,8 @@ public class Map {
     public void creationMurHaut(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*absc;
         double ordonnee = (longueurMur-epaisseurMur)*ord;
-        visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene));
-        mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
+        //visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene));
+        //mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
 
     public void creationMurDroite(double absc, double ord){

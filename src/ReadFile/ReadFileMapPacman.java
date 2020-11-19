@@ -58,9 +58,9 @@ public class ReadFileMapPacman {
                 if (line.length != 0) {
                     if (line[0].compareTo("") != 0 && line[0].charAt(0) != '/') {
                         Class aClass = Class.forName("GraphicsEngine." + line[0]);
-                        Class[] parameters = new Class[]{String.class, Coordinate.class, Scene.class, Pane.class};
+                        Class[] parameters = new Class[]{String.class, Coordinate.class, Scene.class};
                         Constructor constructor = aClass.getConstructor(parameters);
-                        Object o = constructor.newInstance(line[3], new Coordinate(Integer.parseInt(line[1]), Integer.parseInt(line[2])), scene, pane);
+                        Object o = constructor.newInstance(line[3], new Coordinate(Integer.parseInt(line[1]), Integer.parseInt(line[2])), scene);
 
                         visualObjects.add((Decor) o);
                     }

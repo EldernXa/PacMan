@@ -110,7 +110,7 @@ public class MenuChoixDifficulte {
                     visualObject1.addSpriteDirLeft("./data/SpriteMouvement/Fantome/fantomeGrisGauche2.png");*/
 
 
-                    root.getChildren().add(visualObject.getImageView());
+                    /*root.getChildren().add(visualObject.getImageView());
                     //root.getChildren().add(visualObject1.getImageView());
 
                     root.setPrefWidth(scene.getWidth());*/
