@@ -89,10 +89,11 @@ public class MenuChoixDifficulte {
 
                     Map currentMap = new Map(stage,"./data/Map/PacmanMap.txt");
                     currentMap.getMapPane().setStyle("-fx-background-color: black;");
-                    Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/fantomeGrisDroite1.png", new Coordinate(385, 20), scene,currentMap );
-                    root.getChildren().add(visualObject1.getImageView());
+                    /*Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(385, 20), scene,currentMap );
                     PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), scene);
-                    root.getChildren().add(visualObject.getImageView());
+                    root.getChildren().add(visualObject1.getImageView());
+
+                    root.getChildren().add(visualObject.getImageView());*/
                     stage.setMaximized(false);
 
 

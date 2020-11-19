@@ -30,16 +30,15 @@ public class Action {
             this.gameImage = gameImage;
             runEvent(scene, carac, dir);
         }
-    public Action(GameImage gameImage, Scene scene, double x, double y, int dir, String
-            nameAction, MouvingObject mouvingObject){
-        this.nameAction = nameAction;
-        this.x = x;
-        this.y = y;
-        this.dir = dir;
+    public Action(GameImage gameImage, Scene scene, MouvingObject mouvingObject){
+        this.nameAction = "Action_IA";
+        this.x = -1;
+        this.y = -1;
+        this.dir = -1;
         this.scene = scene;
         this.mouvingObject = mouvingObject;
         this.gameImage = gameImage;
-        doWhenEventOccur(dir);
+
     }
 
     public Scene getScene() {

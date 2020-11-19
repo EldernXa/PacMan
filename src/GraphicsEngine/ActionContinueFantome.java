@@ -18,11 +18,14 @@ public class ActionContinueFantome extends Action{
     private final Map map;
 
 
-    public ActionContinueFantome(GameImage image, Scene scene, String carac, double x, double y, int dir, String nameAction, float tps,MouvingObject mouvingObject, Map map){
-        super(image, scene, carac, x, y, dir, nameAction, mouvingObject);
+    public ActionContinueFantome(GameImage image, Scene scene, float tps,MouvingObject mouvingObject, Map map){
+        super(image, scene, mouvingObject);
         this.mouvingObject = mouvingObject;
         this.tps = tps;
         this.map = map;
+        //int temp = ((Fantome) mouvingObject).Chase(getGameImage().getCoordinate(),getScene(),map.getRealCoord().);
+
+        doWhenEventOccur(2);
 
     }
 
@@ -48,9 +51,8 @@ public class ActionContinueFantome extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        //int temp = ((Fantome) mouvingObject).Chase(getGameImage().getCoordinate(),getScene(),map.getRealCoord().);
-                        //super.doWhenEventOccur(temp);
-                        super.doWhenEventOccur(2);
+
+                        super.doWhenEventOccur(dir);
                     }
             ));
             indTimeline = VisualObject.addTimeline(timeline, mouvingObject);

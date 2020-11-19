@@ -16,8 +16,10 @@ public class Fantome extends MouvingObject {
     private float valueTps = (float) 10;
     private Coordinate goal;
 
-    public Fantome(String path, Coordinate coordinate, Scene scene,Map map) {
+    public Fantome(String path, Coordinate coordinate, Scene scene,Map map,Coordinate pacmanCoordinate) {
         super(path, coordinate, scene);
+        setGoal(pacmanCoordinate);
+        addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map));
 
 
     }
@@ -27,7 +29,7 @@ public class Fantome extends MouvingObject {
         double randomValueX = 30 + (250 - 30) * rX.nextDouble();
         Random rY = new Random();
         double randomValueY = 30 + (250 - 30) * rY.nextDouble();
-        setGoal(new Coordinate(coordinate.getX() + randomValueX, coordinate.getY() + randomValueY));
+        this.goal = new Coordinate(coordinate.getX() + randomValueX, coordinate.getY() + randomValueY);
     }
 
 
