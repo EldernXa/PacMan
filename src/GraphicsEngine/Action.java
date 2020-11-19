@@ -15,10 +15,7 @@ public class Action {
     private final String nameAction;
     private final GameImage gameImage;
     private final MouvingObject mouvingObject;
-
-
-
-
+    private int dir;
 
 
     public Action(GameImage gameImage, Scene scene, String carac, double x, double y, int dir, String
@@ -26,6 +23,7 @@ public class Action {
             this.nameAction = nameAction;
             this.x = x;
             this.y = y;
+            this.dir = dir;
 
             this.mouvingObject = mouvingObject;
             this.gameImage = gameImage;
@@ -38,6 +36,9 @@ public class Action {
             runEventWithoutKey(valueMove, dir);
         }*/
 
+        public int getDir(){
+            return dir;
+        }
         private void runEvent (Scene scene, String carac,int dir){
             scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
                 if (keyEvent.getCode().getChar().toLowerCase().compareTo(
@@ -46,14 +47,6 @@ public class Action {
                 }
             });
         }
-       /* private void runEventWithoutKey ( int valueMove, char dir){
-            scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
-
-                doWhenEventOccur(valueMove, dir);
-
-            });
-
-        }*/
 
         public void doWhenEventOccur ( int dir){
             move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
@@ -68,37 +61,6 @@ public class Action {
         }
 
 
-    /*public void doInverseWhenEventOccur(int valueMove, char dir){
-        choiceInverseMove(valueMove, dir);
-    }*/
-
-/*    public void choiceMove(int valueMove, char carac){
-        if(carac=='x'){
-            if(valueMove<0)
-                gauche();
-            else
-                droite();
-        }
-        else if(carac=='y')
-            if(valueMove<0)
-                monter();
-            else
-                descendre();
-    }*/
-/*
-    public void choiceInverseMove(int valueMove, char carac){
-        if(carac=='x'){
-            if(valueMove<0)
-                droite();
-            else
-                gauche();
-        }else if(carac=='y'){
-            if(valueMove<0)
-                descendre();
-            else
-                monter();
-        }
-    }*/
 
         void doWhenBlock () {
 
@@ -115,60 +77,6 @@ public class Action {
             }*/
             }
         }
-
-    /*private void monter() {
-        if (gameImage.getCoordinate().getY() - gameImage.getValueMove() >= 0) {
-            gameImage.monter();
-            mouvingObject.nextImgDirUp();
-            if (collision(gameImage.getImgView(), Map.visualObjects)) {
-                gameImage.descendre();
-                mouvingObject.previousImgDirUp();
-            }
-
-        }else{
-            doWhenBlock();
-        }
-
-    }
-
-    private void descendre() {
-        if (gameImage.getCoordinate().getY() + gameImage.getValueMove() <= (scene.getHeight()-gameImage.getImgView().getImage().getHeight())) {
-            gameImage.descendre();
-            mouvingObject.nextImgDirDown();
-        }
-        else
-            doWhenBlock();
-        if (collision(gameImage.getImgView(), Map.visualObjects)) {
-            gameImage.monter();
-            mouvingObject.previousImgDirDown();
-        }
-    }
-
-    private void gauche() {
-        if (gameImage.getCoordinate().getX() - gameImage.getValueMove() >= 0) {
-            gameImage.gauche();
-            mouvingObject.nextImgDirLeft();
-        }
-        else
-            doWhenBlock();
-        if (collision(gameImage.getImgView(), Map.visualObjects)) {
-            gameImage.droite();
-            mouvingObject.previousImgDirLeft();
-        }
-    }
-
-    private void droite() {
-        if (gameImage.getCoordinate().getX() + gameImage.getValueMove() <= (scene.getWidth()-gameImage.getImgView().getImage().getWidth())) {
-            gameImage.droite();
-            mouvingObject.nextImgDirRight();
-        }
-        else
-            doWhenBlock();
-        if (collision(gameImage.getImgView(), Map.visualObjects)) {
-            gameImage.gauche();
-            mouvingObject.previousImgDirRight();
-        }
-    }*/
 
         public GameImage getGameImage () {
             return gameImage;
