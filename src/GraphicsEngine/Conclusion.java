@@ -1,6 +1,7 @@
 package GraphicsEngine;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -10,11 +11,11 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Conclusion {
-    private StackPane pane;
-    private Scene scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/2,Screen.getPrimary().getVisualBounds().getHeight()/2);;;
-    private Button rejouer =  new Button("REJOUER");
-    private Button retourDiff = new Button("RETOURNER AU CHOIX DE DIFFICULTES");
-    private Button retourMenu = new Button("RETOURNER AU MENU DU CHOIX DU JEU");
+    private StackPane pane = new StackPane();
+    private final Scene scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/2,Screen.getPrimary().getVisualBounds().getHeight()/2);;;
+    private final Button rejouer =  new Button("REJOUER");
+    private final Button retourDiff = new Button("RETOURNER AU CHOIX DE DIFFICULTES");
+    private final Button retourMenu = new Button("RETOURNER AU MENU DU CHOIX DU JEU");
     HBox hbox = new HBox(10);
 
 
@@ -23,6 +24,7 @@ public class Conclusion {
         clickRetourDiff(stage,game,menuChoixDuJeu);
         clickRejouer(stage,sceneBack);
         clickRetourMenu(stage,menuChoixDuJeu);
+        setHbox();
 
 
     }
@@ -54,5 +56,12 @@ public class Conclusion {
             }
         });
     }
+    public void setHbox(){
+        hbox.getChildren().addAll(rejouer,retourDiff,retourMenu);
+        hbox.setAlignment(Pos.CENTER);
+    }
 
+    public Scene getScene() {
+        return scene;
+    }
 }
