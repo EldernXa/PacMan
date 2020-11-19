@@ -34,7 +34,7 @@ public class ActionContinue extends Action{
         imgV.setY(super.getGameImage().getImgView().getY());
         imgV.setX(x);
         imgV.setY(y);
-        return(collision(imgV, Map.visualObjects));
+        return(collision(imgV));
     }
 
     @Override
@@ -48,6 +48,7 @@ public class ActionContinue extends Action{
                     Duration.millis(tps),
                     temps -> {
                         super.doWhenEventOccur(dir);
+
                     }
             ));
             indTimeline = VisualObject.addTimeline(timeline, mouvingObject);

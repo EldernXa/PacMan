@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Fantome extends MouvingObject {
-    private float valueTps = (float) 100;
+    private float valueTps = (float) 10;
     private Coordinate goal;
 
    /* public Fantome(String path, Coordinate coordinate, Scene scene, Pane pane, PosMursAssocies posMursAssocies) {

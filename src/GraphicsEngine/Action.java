@@ -71,10 +71,10 @@ public class Action {
             if (x >= 0 && y >= 0) {
                 gameImage.move(x, y);
                 mouvingObject.nextImage(dir);
-            /*if(collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)){
+            if(collision(gameImage.getImgView())){
                 gameImage.move(c.getX(), c.getY());
                 mouvingObject.previousImage(dir);
-            }*/
+            }
             }
         }
 
@@ -83,16 +83,33 @@ public class Action {
         }
 
 
-        public boolean collision (ImageView a, ArrayList < VisualObject > b){
-            for (int i = 0; i < b.size(); i++) {
-                if (b.get(i).getClass() == Decor.class) {
-                    if (a.getBoundsInParent().intersects(b.get(i).getImageView().getBoundsInParent())) {
+        public boolean collision (ImageView a){
+            for(VisualObject v : Map.visualObjects){
+                    if(intersect(a, v.getImageView())) {
                         return true;
                     }
 
-                }
-
             }
+            return false;
+        }
+
+        public boolean intersect(ImageView imgViewA, ImageView imgViewB){
+            if(imgViewA.getX()>=imgViewB.getX() && imgViewA.getX()<=(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
+                    imgViewA.getY()>=imgViewB.getY() && imgViewA.getY()<=(imgViewB.getY()+imgViewB.getImage().getHeight())) {
+                return true;
+            }
+            else if((imgViewA.getX()+imgViewA.getImage().getWidth())>=imgViewB.getX() && (imgViewA.getX()+imgViewA.getImage().getWidth())<=(imgViewB.getX()
+                    +imgViewB.getImage().getWidth()) && (imgViewA.getY()+imgViewA.getImage().getHeight())>=imgViewB.getY()&&(imgViewA.getY()+imgViewA.getImage().getHeight())<=(imgViewB.getY()
+                    +imgViewB.getImage().getHeight())) {
+                return true;
+            }else if(imgViewA.getX()>=imgViewB.getX() && imgViewA.getX()<=(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
+                    (imgViewA.getY()+imgViewA.getImage().getHeight())>=imgViewB.getY() && (imgViewA.getY()+imgViewA.getImage().getHeight())<=(imgViewB.getY()+imgViewB.getImage().getHeight())){
+                return true;
+            }else if((imgViewA.getX()+imgViewA.getImage().getHeight())>=imgViewB.getX() && (imgViewA.getX()+imgViewA.getImage().getHeight())<=(imgViewB.getX()+imgViewB.getImage().getWidth()) &&
+                    imgViewA.getY()>=imgViewB.getY() && imgViewA.getY()<=(imgViewB.getY()+imgViewB.getImage().getHeight())) {
+                return true;
+            }
+
             return false;
         }
 

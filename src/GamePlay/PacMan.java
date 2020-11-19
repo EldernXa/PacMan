@@ -12,7 +12,7 @@ public class PacMan extends MouvingObject {
     private final int nbVies = 3;
     private int nbVies_restantes = nbVies;
     private int nbPoints = 0;
-    private float valueTps = (float)100;
+    private float valueTps = (float)10;
 
     public PacMan(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);

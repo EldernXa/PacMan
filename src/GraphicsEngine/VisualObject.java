@@ -3,11 +3,8 @@ package GraphicsEngine;
 import javafx.animation.Animation;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -21,7 +18,7 @@ public class VisualObject {
     private final GameImage gameImage;
 
     public VisualObject(String path, Coordinate coordinate, Scene scene){
-        gameImage = new GameImage(path, coordinate, 10);
+        gameImage = new GameImage(path, coordinate, 1);
     }
 
     public static int addTimeline(Timeline timeline, VisualObject visualObject){
