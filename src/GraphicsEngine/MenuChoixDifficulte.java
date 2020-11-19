@@ -2,7 +2,7 @@ package GraphicsEngine;
 
 import GamePlay.Fantome;
 import GamePlay.PacMan;
-import ReadFile.ReadFileMapPacman;
+//import ReadFile.ReadFileMapPacman;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -72,14 +72,15 @@ public class MenuChoixDifficulte {
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    Pane root = new Pane();//Creation groupe
+//                    Pane root = new Pane();//Creation groupe
                     stage.setFullScreen(false);
-                    Scene scene = new Scene(root,655,365);//Creation fenetre de taille 400 sur 400 pixels
+                    /*Scene scene = new Scene(root,655,365);//Creation fenetre de taille 400 sur 400 pixels
                     root.setMinHeight(scene.getHeight());
                     root.setMaxHeight(scene.getHeight());
                     root.setPrefHeight(scene.getHeight());
                     root.setMinWidth(scene.getWidth());
                     root.setMaxWidth(scene.getWidth());
+
                     root.setPrefWidth(scene.getWidth());
                     PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/pacmanDroite1.png", new Coordinate(385, 20), scene, root);
                     visualObject.addSpriteDirRight("./data/SpriteMouvement/Pacman/pacmanDroite2.png");
@@ -111,17 +112,28 @@ public class MenuChoixDifficulte {
 
                     root.getChildren().add(visualObject.getImageView());
                     //root.getChildren().add(visualObject1.getImageView());
+
+                    root.setPrefWidth(scene.getWidth());*/
+
+                    Map currentMap = new Map(stage,"./data/Map/PacmanMap.txt");
+                    currentMap.getMapPane().setStyle("-fx-background-color: black;");
+
+
                     stage.setMaximized(false);
-                    ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
+
+
+
+                    /*ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
                     readFileMapPacman.decrypt();
+
 
                     for(int i = 0; i < readFileMapPacman.getVisualObjects().size() ; i++){
                         root.getChildren().add(readFileMapPacman.getVisualObjects().get(i).getImageView());
-                    }
+                    }*/
 
-                    root.setStyle("-fx-background-color: black;");
+//                    root.setStyle("-fx-background-color: black;");
                     Musique.mediaPlayer.stop();
-                    stage.setScene(scene);
+//                    stage.setScene(scene);
                     stage.centerOnScreen();
                     //stage.setResizable(false);
                     stage.sizeToScene();

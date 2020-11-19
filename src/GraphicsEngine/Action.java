@@ -1,6 +1,6 @@
 package GraphicsEngine;
 
-import ReadFile.ReadFileMapPacman;
+//import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -10,15 +10,24 @@ import java.util.ArrayList;
 public class Action {
 
     private final GameImage gameImage;
-    private final Scene scene;
     private final MouvingObject mouvingObject;
 
 
+
     public Action(GameImage gameImage, Scene scene, String carac, char dir, int valueMove, MouvingObject mouvingObject){
+
+    private final double x;
+    private final double y;
+    private final String nameAction;
+
+    public Action(GameImage gameImage, Scene scene, String carac, double x, double y, int dir, String nameAction, MouvingObject mouvingObject){
+        this.nameAction = nameAction;
+        this.x = x;
+        this.y = y;
+
         this.mouvingObject = mouvingObject;
-        this.scene = scene;
         this.gameImage = gameImage;
-        runEvent(scene, carac, valueMove, dir);
+        runEvent(scene, carac, dir);
     }
     public Action(GameImage gameImage,Scene scene, char dir, int valueMove, MouvingObject mouvingObject){
         this.mouvingObject = mouvingObject;
@@ -27,11 +36,11 @@ public class Action {
         runEventWithoutKey( valueMove, dir);
     }
 
-    private void runEvent(Scene scene, String carac, int valueMove, char dir){
+    private void runEvent(Scene scene, String carac, int dir){
         scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
             if(keyEvent.getCode().getChar().toLowerCase().compareTo(
                     carac.toLowerCase())==0){
-                doWhenEventOccur(valueMove, dir);
+                doWhenEventOccur(dir);
             }
         });
     }
@@ -44,15 +53,23 @@ public class Action {
 
     }
 
-    public void doWhenEventOccur(int valueMove, char dir){
-        choiceMove(valueMove, dir);
+   public void doWhenEventOccur(int dir){
+        move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
     }
 
-    public void doInverseWhenEventOccur(int valueMove, char dir){
+    public double getX(){
+        return x;
+    }
+
+    public double getY(){
+        return y;
+    }
+
+    /*public void doInverseWhenEventOccur(int valueMove, char dir){
         choiceInverseMove(valueMove, dir);
-    }
+    }*/
 
-    public void choiceMove(int valueMove, char carac){
+/*    public void choiceMove(int valueMove, char carac){
         if(carac=='x'){
             if(valueMove<0)
                 gauche();
@@ -64,8 +81,8 @@ public class Action {
                 monter();
             else
                 descendre();
-    }
-
+    }*/
+/*
     public void choiceInverseMove(int valueMove, char carac){
         if(carac=='x'){
             if(valueMove<0)
@@ -78,17 +95,29 @@ public class Action {
             else
                 monter();
         }
-    }
+    }*/
 
     void doWhenBlock(){
 
     }
 
-    private void monter() {
+    private void move(double x, double y, int dir){
+        Coordinate c = new Coordinate(gameImage.getCoordinate().getX(), gameImage.getCoordinate().getY());
+        if(x>=0 && y>=0){
+            gameImage.move(x, y);
+            mouvingObject.nextImage(dir);
+            /*if(collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)){
+                gameImage.move(c.getX(), c.getY());
+                mouvingObject.previousImage(dir);
+            }*/
+        }
+    }
+
+    /*private void monter() {
         if (gameImage.getCoordinate().getY() - gameImage.getValueMove() >= 0) {
             gameImage.monter();
             mouvingObject.nextImgDirUp();
-            if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+            if (collision(gameImage.getImgView(), Map.visualObjects)) {
                 gameImage.descendre();
                 mouvingObject.previousImgDirUp();
             }
@@ -106,7 +135,7 @@ public class Action {
         }
         else
             doWhenBlock();
-        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+        if (collision(gameImage.getImgView(), Map.visualObjects)) {
             gameImage.monter();
             mouvingObject.previousImgDirDown();
         }
@@ -119,7 +148,7 @@ public class Action {
         }
         else
             doWhenBlock();
-        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+        if (collision(gameImage.getImgView(), Map.visualObjects)) {
             gameImage.droite();
             mouvingObject.previousImgDirLeft();
         }
@@ -132,11 +161,11 @@ public class Action {
         }
         else
             doWhenBlock();
-        if (collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)) {
+        if (collision(gameImage.getImgView(), Map.visualObjects)) {
             gameImage.gauche();
             mouvingObject.previousImgDirRight();
         }
-    }
+    }*/
 
     public GameImage getGameImage(){
         return gameImage;
@@ -147,7 +176,6 @@ public class Action {
         for (int i = 0; i < b.size(); i++) {
            if(b.get(i).getClass() == Decor.class){
                if (a.getBoundsInParent().intersects(b.get(i).getImageView().getBoundsInParent())) {
-
                    return true;
                }
 

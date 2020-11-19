@@ -16,6 +16,7 @@ public class Fantome extends MouvingObject {
 
     public Fantome(String path, Coordinate coordinate, Scene scene, Pane pane, PosMursAssocies posMursAssocies){
 
+
         super(path, coordinate, scene, pane);
         setGoal(coordinate);
 
@@ -31,6 +32,14 @@ public class Fantome extends MouvingObject {
         double randomValueY = 30 + (250 - 30) * rY.nextDouble();
         setGoal(new Coordinate(coordinate.getX()+randomValueX,coordinate.getY()+randomValueY));
 
+
+
+    public Fantome(String path, Coordinate coordinate, Scene scene){
+        super(path, coordinate, scene);
+        addAction(new ActionContinue(getGameImage(), scene, "o", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "l", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "k", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "m", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));
 
     }
 

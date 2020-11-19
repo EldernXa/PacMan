@@ -13,6 +13,13 @@ public class ImageViewSizePos {
     public ImageViewSizePos(){
     }
 
+    public ImageViewSizePos(String pathImage, Coordinate coordinate){
+        this.pathImage = pathImage;
+        this.coordinate = coordinate;
+        imageView.setImage(new Image(new File(pathImage).toURI().toString()));
+        setCoordinate(coordinate);
+    }
+
     public ImageViewSizePos(String pathImage, double width, double height, Coordinate coordinate){
         this.pathImage = pathImage;
         this.coordinate = coordinate;

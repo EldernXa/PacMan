@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class MouvingObject extends VisualObject{
     private final ArrayList<Action> listAction;
     private final Animation animation;
-    public MouvingObject(String path, Coordinate coordinate, Scene scene, Pane pane){
-        super(path, coordinate, scene, pane);
-        animation = new Animation(path);
-        super.getGameImage().setImage(animation.getInitRight());
+    public MouvingObject(String path, Coordinate coordinate, Scene scene){
+        super(path, coordinate, scene);
+        animation = new Animation(path, 4);
+        super.getGameImage().setImage(animation.getInitImage());
         listAction = new ArrayList<>();
     }
 
-    public void addSpriteDirRight(String strImg){
+    /*public void addSpriteDirRight(String strImg){
         animation.addImgDirRight(strImg);
     }
 
@@ -30,9 +30,17 @@ public class MouvingObject extends VisualObject{
 
     public void addSpriteDirDown(String strImg){
         animation.addImgDirDown(strImg);
+    }*/
+
+    public void nextImage(int dir){
+        super.getGameImage().setImage(animation.nextImage(dir));
     }
 
-    public void nextImgDirRight(){
+    public void previousImage(int dir){
+        super.getGameImage().setImage(animation.previousImage(dir));
+    }
+
+    /*public void nextImgDirRight(){
         super.getGameImage().setImage(animation.nextImageRight());
     }
 
@@ -62,7 +70,7 @@ public class MouvingObject extends VisualObject{
 
     public void previousImgDirDown(){
         super.getGameImage().setImage(animation.previousImageDown());
-    }
+    }*/
 
     public void addAction(Action action){
         this.listAction.add(action);

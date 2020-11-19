@@ -20,7 +20,7 @@ public class VisualObject {
     private final static ArrayList<VisualObject> listVisualObjectTimeline = new ArrayList<>();
     private final GameImage gameImage;
 
-    public VisualObject(String path, Coordinate coordinate, Scene scene, Pane root){
+    public VisualObject(String path, Coordinate coordinate, Scene scene){
         gameImage = new GameImage(path, coordinate, 10);
     }
 

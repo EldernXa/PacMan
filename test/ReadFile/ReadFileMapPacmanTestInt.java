@@ -1,3 +1,4 @@
+/*
 package ReadFile;
 
 import GraphicsEngine.MenuChoixDifficulte;
@@ -73,4 +74,4 @@ class ReadFileMapPacmanTestInt {
             readFile.getHeight();
         });
     }
-}
+}*/

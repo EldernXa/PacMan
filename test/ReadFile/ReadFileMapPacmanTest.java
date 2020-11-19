@@ -1,3 +1,4 @@
+/*
 package ReadFile;
 
 import javafx.scene.Scene;
@@ -65,4 +66,4 @@ class ReadFileMapPacmanTest {
             readFile.getHeight();
         });
     }
-}
+}*/
