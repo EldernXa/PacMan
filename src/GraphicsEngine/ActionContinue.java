@@ -22,6 +22,11 @@ public class ActionContinue extends Action{
         this.mouvingObject = mouvingObject;
         this.tps = tps;
     }
+    public ActionContinue(GameImage image, Scene scene, char dir, int valueMove, float tps, MouvingObject mouvingObject){
+        super(image, scene, dir, valueMove, mouvingObject);
+        this.mouvingObject = mouvingObject;
+        this.tps = tps;
+    }
 
     private boolean collisionImgView(double x, double y){
         ImageView imgV = new ImageView(new Image(super.getGameImage().getImgView().getImage().getUrl()));
