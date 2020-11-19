@@ -53,10 +53,10 @@ public class Map {
 
 
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-        Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(18*5+4*32, 3*32+4*18), mapScene);
+        //Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(18*5+4*32, 3*32+4*18), mapScene);
 
 
-        mapPane.getChildren().addAll(visualObject.getGameImage().getImgView(),visualObject1.getGameImage().getImgView());
+        mapPane.getChildren().addAll(visualObject.getGameImage().getImgView(),visualObject.getGameImage().getImgView());
     }
 
     public void creationDeMap(){

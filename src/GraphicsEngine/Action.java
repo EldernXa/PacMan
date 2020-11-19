@@ -65,6 +65,7 @@ public class Action {
         return y;
     }
 
+
     /*public void doInverseWhenEventOccur(int valueMove, char dir){
         choiceInverseMove(valueMove, dir);
     }*/
