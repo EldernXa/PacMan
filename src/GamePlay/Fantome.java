@@ -1,11 +1,11 @@
 package GamePlay;
 import GraphicsEngine.ActionContinue;
-import GraphicsEngine.Action;
+
 import GraphicsEngine.Coordinate;
 import GraphicsEngine.MouvingObject;
-import ReadFile.PosMursAssocies;
+
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+
 
 import java.util.ArrayList;
 import java.util.Random;

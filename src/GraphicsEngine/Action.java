@@ -9,61 +9,63 @@ import java.util.ArrayList;
 
 public class Action {
 
+
+    private final double x;
+    private final double y;
+    private final String nameAction;
     private final GameImage gameImage;
     private final MouvingObject mouvingObject;
 
 
 
-    public Action(GameImage gameImage, Scene scene, String carac, char dir, int valueMove, MouvingObject mouvingObject){
 
-    private final double x;
-    private final double y;
-    private final String nameAction;
 
-    public Action(GameImage gameImage, Scene scene, String carac, double x, double y, int dir, String nameAction, MouvingObject mouvingObject){
-        this.nameAction = nameAction;
-        this.x = x;
-        this.y = y;
 
-        this.mouvingObject = mouvingObject;
-        this.gameImage = gameImage;
-        runEvent(scene, carac, dir);
-    }
-    public Action(GameImage gameImage,Scene scene, char dir, int valueMove, MouvingObject mouvingObject){
-        this.mouvingObject = mouvingObject;
-        this.gameImage = gameImage;
-        this.scene = scene;
-        runEventWithoutKey( valueMove, dir);
-    }
+    public Action(GameImage gameImage, Scene scene, String carac, double x, double y, int dir, String
+        nameAction, MouvingObject mouvingObject){
+            this.nameAction = nameAction;
+            this.x = x;
+            this.y = y;
 
-    private void runEvent(Scene scene, String carac, int dir){
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
-            if(keyEvent.getCode().getChar().toLowerCase().compareTo(
-                    carac.toLowerCase())==0){
-                doWhenEventOccur(dir);
-            }
-        });
-    }
-    private void runEventWithoutKey( int valueMove, char dir){
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent->{
+            this.mouvingObject = mouvingObject;
+            this.gameImage = gameImage;
+            runEvent(scene, carac, dir);
+        }
+    /*public Action(GameImage gameImage, Scene scene, char dir, int valueMove, MouvingObject mouvingObject){
+            this.mouvingObject = mouvingObject;
+            this.gameImage = gameImage;
+            this.scene = scene;
+            runEventWithoutKey(valueMove, dir);
+        }*/
+
+        private void runEvent (Scene scene, String carac,int dir){
+            scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
+                if (keyEvent.getCode().getChar().toLowerCase().compareTo(
+                        carac.toLowerCase()) == 0) {
+                    doWhenEventOccur(dir);
+                }
+            });
+        }
+       /* private void runEventWithoutKey ( int valueMove, char dir){
+            scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
 
                 doWhenEventOccur(valueMove, dir);
 
-        });
+            });
 
-    }
+        }*/
 
-   public void doWhenEventOccur(int dir){
-        move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
-    }
+        public void doWhenEventOccur ( int dir){
+            move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
+        }
 
-    public double getX(){
-        return x;
-    }
+        public double getX () {
+            return x;
+        }
 
-    public double getY(){
-        return y;
-    }
+        public double getY () {
+            return y;
+        }
 
 
     /*public void doInverseWhenEventOccur(int valueMove, char dir){
@@ -98,21 +100,21 @@ public class Action {
         }
     }*/
 
-    void doWhenBlock(){
+        void doWhenBlock () {
 
-    }
+        }
 
-    private void move(double x, double y, int dir){
-        Coordinate c = new Coordinate(gameImage.getCoordinate().getX(), gameImage.getCoordinate().getY());
-        if(x>=0 && y>=0){
-            gameImage.move(x, y);
-            mouvingObject.nextImage(dir);
+        private void move ( double x, double y, int dir){
+            Coordinate c = new Coordinate(gameImage.getCoordinate().getX(), gameImage.getCoordinate().getY());
+            if (x >= 0 && y >= 0) {
+                gameImage.move(x, y);
+                mouvingObject.nextImage(dir);
             /*if(collision(gameImage.getImgView(), ReadFileMapPacman.visualObjects)){
                 gameImage.move(c.getX(), c.getY());
                 mouvingObject.previousImage(dir);
             }*/
+            }
         }
-    }
 
     /*private void monter() {
         if (gameImage.getCoordinate().getY() - gameImage.getValueMove() >= 0) {
@@ -168,23 +170,24 @@ public class Action {
         }
     }*/
 
-    public GameImage getGameImage(){
-        return gameImage;
-    }
-
-
-    public boolean collision(ImageView a, ArrayList<VisualObject> b) {
-        for (int i = 0; i < b.size(); i++) {
-           if(b.get(i).getClass() == Decor.class){
-               if (a.getBoundsInParent().intersects(b.get(i).getImageView().getBoundsInParent())) {
-                   return true;
-               }
-
-           }
-
+        public GameImage getGameImage () {
+            return gameImage;
         }
-        return false;
+
+
+        public boolean collision (ImageView a, ArrayList < VisualObject > b){
+            for (int i = 0; i < b.size(); i++) {
+                if (b.get(i).getClass() == Decor.class) {
+                    if (a.getBoundsInParent().intersects(b.get(i).getImageView().getBoundsInParent())) {
+                        return true;
+                    }
+
+                }
+
+            }
+            return false;
+        }
+
+
     }
 
-
-}
