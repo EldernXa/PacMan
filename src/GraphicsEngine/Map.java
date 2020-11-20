@@ -7,7 +7,6 @@ import ReadFile.ReadFileMap2Pacman;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 public class Map {
@@ -185,6 +184,15 @@ public class Map {
             mapPane.getChildren().add(point.getImageView());
             visualObjects.add(point);
         }
+    }
+
+    public PosMursAssocies getWrongCoorFromReal(Coordinate coord){
+        for(int i = 0; i < realCoord.size(); i++){
+            if(coord.compare(realCoord.get(i))){
+                return readFileMap2Pacman.getTabMurFctCoord().get(i);
+            }
+        }
+        return null;
     }
 
     public Scene getMapScene() {
