@@ -15,6 +15,7 @@ public class Map {
     private ReadFileMap2Pacman readFileMap2Pacman;
     private ArrayList<Point> pointArrayList = new ArrayList<>();
     private ArrayList<Coordinate> realCoord = new ArrayList<>();
+    private ArrayList<Coordinate> pointsCoord = new ArrayList<>();
 
     public static ArrayList<VisualObject> visualObjects = new ArrayList<>();
 
@@ -43,6 +44,7 @@ public class Map {
 
         this.pacmanInitCoord = imgPacman.getCoordinate();
 
+        fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();
         //System.out.println("Taille de la lsite de poin doit être egale a 71 : " + pointArrayList.size());
@@ -134,6 +136,17 @@ public class Map {
         }
     }
 
+    public void fillListPointsCoord(){
+        for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
+            double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
+            double fausseOrd = posMursAssocies.getPointCoordinate().getY();
+            Coordinate nouv = new Coordinate(epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseAbsc*(longueurMur-epaisseurMur),epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseOrd*(longueurMur-epaisseurMur));
+            pointsCoord.add(nouv);
+        }
+    }
+
+
+
     /**
      * Remplit une liste avec les vrai coordonnées calculées
      */
@@ -150,13 +163,13 @@ public class Map {
      * Methode qui met des point sur toutes lecases de la map sauf sur celle ou le Pacman se trouve au début
      */
     public void initPoints(){
-        for(Coordinate cood : realCoord){
+        for(Coordinate cood : pointsCoord){
             /*System.out.print("Coord Pacman");
             pacmanInitCoord.affichageCoord();
             System.out.print(", Coord point : ");
             cood.affichageCoord();
             System.out.println(", same coord ? : " + cood.compare(pacmanInitCoord));*/
-            if (!cood.compare(pacmanInitCoord)) {
+            if (!cood.compare(new Coordinate(231.5,381.5))) {//revoir
                 pointArrayList.add(new Point(cood, mapScene));
             }
         }
