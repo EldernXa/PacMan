@@ -1,11 +1,10 @@
 package GamePlay;
 
-import GraphicsEngine.ActionContinue;
-import GraphicsEngine.Conclusion;
-import GraphicsEngine.Coordinate;
-import GraphicsEngine.MouvingObject;
+import GraphicsEngine.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
 
 public class PacMan extends MouvingObject {
 
@@ -23,6 +22,8 @@ public class PacMan extends MouvingObject {
         addAction(new ActionContinue(getGameImage(), scene, "d", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));
         this.coordinate = coordinate;
     }
+
+
 
     public PacMan(String path, Coordinate coordinate, Scene scene, int nbViesMax, int nbVies) {
         super(path, coordinate, scene);
@@ -43,5 +44,10 @@ public class PacMan extends MouvingObject {
 
     public int getNbPoints() {
         return nbPoints;
+    }
+
+    @Override
+    public boolean effectCollision(ArrayList<VisualObject> visualObjects) {
+        return false;
     }
 }

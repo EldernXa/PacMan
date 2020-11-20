@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
-public class MouvingObject extends VisualObject{
+public abstract class MouvingObject extends VisualObject{
     private final ArrayList<Action> listAction;
     private Action  actionNext = null;
     private final Animation animation;
@@ -17,6 +17,8 @@ public class MouvingObject extends VisualObject{
         super.getGameImage().setImage(animation.getInitImage());
         listAction = new ArrayList<>();
     }
+
+
 
     public void setActionNext(Action action){
         actionNext = action;
