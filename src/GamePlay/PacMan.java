@@ -8,14 +8,16 @@ import java.util.ArrayList;
 
 public class PacMan extends MouvingObject {
 
-    private final int nbVies = 3;
-    private int nbVies_restantes = nbVies;
-    private int nbPoints = 0;
+    private final int nbViesMax = 3;
+    private int nbVies_restantes;
+    private int nbPoints;
     private float valueTps = (float)10;
     private Coordinate coordinate;
 
     public PacMan(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);
+        nbPoints = 0;
+        nbVies_restantes = nbViesMax;
         addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "s", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "q", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
@@ -34,7 +36,7 @@ public class PacMan extends MouvingObject {
     }
 
     public int getNbVies() {
-        return nbVies;
+        return nbViesMax;
     }
 
     public int getNbVies_restantes() {
@@ -47,9 +49,13 @@ public class PacMan extends MouvingObject {
     }
 
     @Override
-    public boolean effectCollision(ArrayList<VisualObject> visualObjects) {
+    public boolean effectCollision(VisualObject visualObjects) {
         return false;
     }
+    public void ajoutPoint(){
+        nbPoints++;
+    }
+
 
     public void setNbVies_restantes(int nbVies_restantes) {
         this.nbVies_restantes = nbVies_restantes;

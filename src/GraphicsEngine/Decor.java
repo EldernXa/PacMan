@@ -16,7 +16,7 @@ public class Decor extends UnmouvingObj{
     }
 
     @Override
-    public boolean effectCollision(ArrayList<VisualObject> visualObjects) {
+    public boolean effectCollision(VisualObject visualObjects) {
 
         return true;
     }
