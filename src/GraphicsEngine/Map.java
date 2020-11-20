@@ -60,7 +60,7 @@ public class Map {
         Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(18*5+4*32, 3*32+4*18), mapScene, this,visualObject.getCoordinate());
 
 
-        mapPane.getChildren().addAll(visualObject1.getGameImage().getImgView());
+        mapPane.getChildren().addAll(visualObject1.getGameImage().getImgView(),visualObject.getImageView());
     }
 
     public void creationDeMap(){
