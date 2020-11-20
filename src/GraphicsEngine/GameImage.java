@@ -52,36 +52,4 @@ public class GameImage {
         imgView.setX(coordinate.getX());
         imgView.setY(coordinate.getY());
     }
-
-   /* *//**
-     * Decrease y coordinate for the image and display it
-     *//*
-    public void monter(){
-        coordinate.setY(imgView.getY()-valueMove);
-        imgView.setY(coordinate.getY());
-    }
-
-    *//**
-     * Increase y coordinate for the image and display it.
-     *//*
-    public void descendre(){
-        coordinate.setY(imgView.getY()+valueMove);
-        imgView.setY(coordinate.getY());
-    }
-
-    *//**
-     * Decrease x coordinate for the image and display it.
-     *//*
-    public void gauche(){
-        coordinate.setX(imgView.getX()-valueMove);
-        imgView.setX(coordinate.getX());
-    }
-
-    *//**
-     * Increase x coordinate for the image and display it.
-     *//*
-    public void droite(){
-        coordinate.setX(imgView.getX()+valueMove);
-        imgView.setX(coordinate.getX());
-    }*/
 }

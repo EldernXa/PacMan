@@ -54,8 +54,8 @@ public class Map {
             coordinate.affichageCoord();
         }*/
 
-        PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), mapScene);
-
+        PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate((18*5+4*32)+2, 8*18+7*32), mapScene);
+        System.out.println(visualObject.getImageView().getImage().getHeight());
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(18*5+4*32, 3*32+4*18), mapScene, this,visualObject.getCoordinate());
 

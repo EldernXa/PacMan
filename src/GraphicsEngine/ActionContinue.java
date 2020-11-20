@@ -30,7 +30,7 @@ public class ActionContinue extends Action{
         imgV.setY(super.getGameImage().getImgView().getY());
         imgV.setX(x);
         imgV.setY(y);
-        return(collision(imgV, super.getX(), super.getY()));
+        return(collision(imgV));
     }
 
     @Override
