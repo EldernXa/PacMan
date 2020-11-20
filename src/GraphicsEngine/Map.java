@@ -43,7 +43,8 @@ public class Map {
         Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
 
         this.pacmanInitCoord = imgPacman.getCoordinate();
-
+        visualObjects.add(imgPacman);
+        visualObjects.add(imgFantome);
         fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();

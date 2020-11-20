@@ -14,7 +14,7 @@ public class GameImage {
     private final ImageView imgView;
     private final int valueMove;
     private final String path;
-
+    private final Coordinate coordInit;
     /**
      *
      * @param path image String
@@ -22,12 +22,17 @@ public class GameImage {
      * @param valueMove the value of move (speed or other thing)
      */
     public GameImage(String path, Coordinate coordinate, int valueMove){
+        coordInit = new Coordinate(coordinate.getX(),coordinate.getY());
         this.path = path;
         this.valueMove = valueMove;
         imgView = new ImageView();
         this.coordinate = coordinate;
         imgView.setX(coordinate.getX());
         imgView.setY(coordinate.getY());
+    }
+
+    public Coordinate getCoordInit() {
+        return coordInit;
     }
 
     public void setImage(Image image){
