@@ -118,7 +118,6 @@ public class Map {
             visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene));
             mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png", new Coordinate(abscisse, ordonnee)).getImageView());
         }
-
     }
 
     /**
@@ -135,6 +134,9 @@ public class Map {
         }
     }
 
+    /**
+     * Remplit une liste avec des points calculés en fct des positions possible pour le pacman
+     */
     public void fillListPointsCoord(){
         for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
             double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
@@ -143,8 +145,6 @@ public class Map {
             pointsCoord.add(nouv);
         }
     }
-
-
 
     /**
      * Remplit une liste avec les vrai coordonnées calculées
@@ -168,10 +168,24 @@ public class Map {
             System.out.print(", Coord point : ");
             cood.affichageCoord();
             System.out.println(", same coord ? : " + cood.compare(pacmanInitCoord));*/
-            if (!cood.compare(new Coordinate(231.5,381.5))) {//revoir
+            if (!cood.compare(coordPointUnderPacman())) {
                 pointArrayList.add(new Point(cood, mapScene));
             }
         }
+    }
+
+    /**
+     * Permet de récuperer les coordonnées du point qui se trouverai en dessous de pacman au lancement du jeu et de
+     * se servir de cela pour ne pas le creer
+     * @return
+     */
+    public Coordinate coordPointUnderPacman(){
+        for(Coordinate coord : pointsCoord){
+            if(((coord.getX() >= pacmanInitCoord.getX())&&(coord.getX() <= pacmanInitCoord.getX()+30))&&(coord.getY() >= pacmanInitCoord.getY())&&(coord.getY() <= pacmanInitCoord.getY()+30)){
+                return coord;
+            }
+        }
+        return null;
     }
 
     /**
