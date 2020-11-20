@@ -12,6 +12,10 @@ public class Coordinate {
         this.y = y;
     }
 
+    public Coordinate(Coordinate coordinate){
+        x = coordinate.getX();
+        y = coordinate.getY();
+    }
     public void affichageCoord(){
         System.out.print("(" + x + "," + y + ")");
     }
