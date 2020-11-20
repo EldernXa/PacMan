@@ -64,6 +64,6 @@ public abstract class VisualObject {
         return gameImage;
     }
 
-    public abstract boolean effectCollision(ArrayList<VisualObject> visualObjects );
+    public abstract boolean effectCollision(VisualObject visualObjects);
 
 }

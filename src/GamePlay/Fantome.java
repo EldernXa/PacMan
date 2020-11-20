@@ -233,7 +233,7 @@ public class Fantome extends MouvingObject {
         }
 
     @Override
-    public boolean effectCollision(ArrayList<VisualObject> visualObjects) {
+    public boolean effectCollision(VisualObject visualObjects) {
         return false;
     }
 }

@@ -31,6 +31,7 @@ public class Action {
             this.gameImage = gameImage;
             runEvent(scene, carac, dir);
         }
+
     public Action(GameImage gameImage, Scene scene, MouvingObject mouvingObject){
         this.nameAction = "Action_IA";
         this.x = -1;
@@ -48,6 +49,7 @@ public class Action {
         imgV.setY(y);
         return(collision(imgV));
     }
+
 
     public Scene getScene() {
         return scene;
@@ -88,7 +90,7 @@ public class Action {
             if (x >= 0 && y >= 0) {
                 gameImage.move(x, y);
                 mouvingObject.nextImage(dir);
-            if(collision(gameImage.getImgView())){
+            if(collision(mouvingObject)){
                 gameImage.move(c.getX(), c.getY());
                 mouvingObject.previousImage(dir);
             }
@@ -100,7 +102,7 @@ public class Action {
         }
 
 
-        public boolean collision (ImageView a){
+        public boolean collision (VisualObject a){
             for(VisualObject v : Map.visualObjects){
                     if(intersect(a, v)) {
                         return true;
@@ -109,9 +111,27 @@ public class Action {
             }
             return false;
         }
+        public boolean collision(ImageView a){
+            for(VisualObject v : Map.visualObjects){
+                if(intersect(a, v)) {
+                    return true;
+                }
 
+            }
+            return false;
+        }
+
+    public boolean intersect(VisualObject a, VisualObject b) {
+        if (a.getImageView().getBoundsInParent().intersects(b.getImageView().getBoundsInParent())) {
+
+
+            return b.effectCollision(a);
+        }
+        return false;
+    }
     public boolean intersect(ImageView a, VisualObject b) {
         if (a.getBoundsInParent().intersects(b.getImageView().getBoundsInParent())) {
+
             return b.effectCollision(null);
         }
         return false;
