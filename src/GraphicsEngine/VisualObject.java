@@ -40,10 +40,11 @@ public abstract class VisualObject {
     }
 
     public static void removeTimeline(int ind){
+        stopTimelineParallel();
         parallelTransition.getChildren().remove(ind);
         listVisualObjectTimeline.remove(ind);
-        if(parallelTransition.getChildren().size()<=0)
-            parallelTransition.stop();
+        if(parallelTransition.getChildren().size()>0)
+            startTimelineParallel();
     }
 
     public static void stopTimelineParallel(){

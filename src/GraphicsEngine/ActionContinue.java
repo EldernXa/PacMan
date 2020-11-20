@@ -23,7 +23,9 @@ public class ActionContinue extends Action{
         this.tps = tps;
     }
 
-
+    public int getIndTimeline(){
+        return indTimeline;
+    }
     @Override
     public void doWhenEventOccur(int dir){
         if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
@@ -34,11 +36,16 @@ public class ActionContinue extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        if(!mouvingObject.verifActionNext()){
+                        if(mouvingObject.getActionNext()!=null &&mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(), getGameImage().getCoordinate().getY() + mouvingObject.getActionNext().getY())){
+                            if(((ActionContinue)mouvingObject.getActualAction())!=null) {
+                                VisualObject.removeTimeline(((ActionContinue) mouvingObject.getActualAction()).getIndTimeline());
+                                mouvingObject.setActualAction(null);
+                            }
                             Action newAction = mouvingObject.getActionNext();
                             mouvingObject.setActionNext(null);
                             newAction.doWhenEventOccur(newAction.getDir());
                         }else {
+                            mouvingObject.setActualAction(this);
                             super.doWhenEventOccur(dir);
                         }
                     }
@@ -46,8 +53,12 @@ public class ActionContinue extends Action{
             indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
             VisualObject.startTimelineParallel();
         }else{
-            System.out.println("ttesst");
-            mouvingObject.setActionNext(this);
+            if(mouvingObject.getActualAction()!=this && mouvingObject.getActualAction()!=null)
+                mouvingObject.setActionNext(this);
+            else if(mouvingObject.getActualAction()!=null){
+                doWhenBlock();
+                mouvingObject.setActualAction(null);
+            }
         }
     }
 

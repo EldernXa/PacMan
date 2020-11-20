@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public abstract class MouvingObject extends VisualObject{
     private final ArrayList<Action> listAction;
     private Action  actionNext = null;
+    private Action actualAction = null;
     private final Animation animation;
 
     public MouvingObject(String path, Coordinate coordinate, Scene scene){
@@ -24,10 +25,20 @@ public abstract class MouvingObject extends VisualObject{
         actionNext = action;
     }
 
-    public boolean verifActionNext(){
+    public void setActualAction(Action action){
+        actualAction = action;
+    }
+
+    public Action getActualAction(){
+        return actualAction;
+    }
+
+    public boolean verifActionNext(double x, double y){
         if(actionNext!=null){
-            //System.out.println(actionNext.collisionImgView(getGameImage().getCoordinate().getX() + actionNext.getX(), getGameImage().getCoordinate().getY() + actionNext.getY()));
-            return actionNext.collisionImgView(getGameImage().getCoordinate().getX() + actionNext.getX(), getGameImage().getCoordinate().getY() + actionNext.getY());
+            if(!actionNext.collisionImgView(x, y))
+                System.out.println(x + " - " + y + " ");
+            System.out.println(actionNext.collisionImgView(x, y));
+            return !actionNext.collisionImgView(x, y);
         }
         return true;
     }

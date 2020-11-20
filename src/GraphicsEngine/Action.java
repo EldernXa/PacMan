@@ -43,9 +43,7 @@ public class Action {
     }
 
     public boolean collisionImgView(double x, double y){
-        ImageView imgV = new ImageView();
-        imgV.setX(getGameImage().getImgView().getX());
-        imgV.setY(getGameImage().getImgView().getY());
+        ImageView imgV = new ImageView(gameImage.getImgView().getImage());
         imgV.setX(x);
         imgV.setY(y);
         return(collision(imgV));
