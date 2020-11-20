@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -16,19 +17,33 @@ public class Conclusion {
     private final Button rejouer =  new Button("REJOUER");
     private final Button retourDiff = new Button("RETOURNER AU CHOIX DE DIFFICULTES");
     private final Button retourMenu = new Button("RETOURNER AU MENU DU CHOIX DU JEU");
-    HBox hbox = new HBox(10);
+    private final HBox hbox = new HBox(10);
+    private Label titre = new Label();
 
 
-    public Conclusion(Stage stage, Scene sceneBack, Game game){
+    public Conclusion(Stage stage, Scene sceneBack, Game game,boolean bool){
         MenuChoixDuJeu menuChoixDuJeu= new MenuChoixDuJeu(stage);
         clickRetourDiff(stage,game,menuChoixDuJeu);
         clickRejouer(stage,sceneBack);
         clickRetourMenu(stage,menuChoixDuJeu);
         setHbox();
+        labelForGame(bool);
+        setPane();
 
 
     }
-
+    public void setPane(){
+        pane.setStyle("-fx-background-color: black");
+        pane.getChildren().addAll(hbox,titre);
+    }
+    public void labelForGame(boolean bool){
+        if(bool){
+            titre.setText("Vous avez gagné");
+        }else{
+            titre.setText("Vous avez perdu");
+        }
+        titre.setAlignment(Pos.TOP_CENTER);
+    }
     public void clickRejouer(Stage stage, Scene sceneBack){
         rejouer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
