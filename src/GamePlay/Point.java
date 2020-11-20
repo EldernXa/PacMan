@@ -1,10 +1,13 @@
-package GraphicsEngine;
+package GamePlay;
 
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.UnmouvingObj;
+import GraphicsEngine.VisualObject;
 import javafx.scene.Scene;
 
 import java.util.ArrayList;
 
-public class Point extends UnmouvingObj{
+public class Point extends UnmouvingObj {
 
     public Point(Coordinate coordinate, Scene scene) {
         super("./data/Point&Fruit/point.png", coordinate, scene);

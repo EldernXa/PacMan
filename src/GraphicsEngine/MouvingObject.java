@@ -35,9 +35,6 @@ public abstract class MouvingObject extends VisualObject{
 
     public boolean verifActionNext(double x, double y){
         if(actionNext!=null){
-            if(!actionNext.collisionImgView(x, y))
-                System.out.println(x + " - " + y + " ");
-            System.out.println(actionNext.collisionImgView(x, y));
             return !actionNext.collisionImgView(x, y);
         }
         return true;

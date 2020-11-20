@@ -45,8 +45,15 @@ public class ActionContinue extends Action{
                             mouvingObject.setActionNext(null);
                             newAction.doWhenEventOccur(newAction.getDir());
                         }else {
-                            mouvingObject.setActualAction(this);
-                            super.doWhenEventOccur(dir);
+                            if(!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
+                                mouvingObject.setActualAction(this);
+                                super.doWhenEventOccur(dir);
+                            }else{
+                                VisualObject.stopTimelineParallel();
+                                VisualObject.removeTimeline(getIndTimeline());
+                                mouvingObject.setActualAction(null);
+                                mouvingObject.setActionNext(null);
+                            }
                         }
                     }
             ));
@@ -55,10 +62,6 @@ public class ActionContinue extends Action{
         }else{
             if(mouvingObject.getActualAction()!=this && mouvingObject.getActualAction()!=null)
                 mouvingObject.setActionNext(this);
-            else if(mouvingObject.getActualAction()!=null){
-                doWhenBlock();
-                mouvingObject.setActualAction(null);
-            }
         }
     }
 
