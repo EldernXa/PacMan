@@ -19,7 +19,9 @@ public abstract class MouvingObject extends VisualObject{
         listAction = new ArrayList<>();
     }
 
-
+    public void initAnimation(){
+        super.getGameImage().setImage(animation.getInitImage());
+    }
 
     public void setActionNext(Action action){
         actionNext = action;

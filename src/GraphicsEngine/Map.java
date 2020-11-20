@@ -43,7 +43,8 @@ public class Map {
 
 
         this.pacmanInitCoord = imgPacman.getCoordinate();
-
+        visualObjects.add(imgPacman);
+        visualObjects.add(imgFantome);
         fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();

@@ -26,6 +26,18 @@ public class PacMan extends MouvingObject {
     }
 
 
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = new Coordinate(coordinate.getX(),coordinate.getY());
+        super.getImageView().setX(coordinate.getX());
+        super.getImageView().setY(coordinate.getY());
+        super.getGameImage().move(coordinate.getX(),coordinate.getY());
+    }
+    public void death(){
+        setCoordinate(super.getGameImage().getCoordInit());
+        diminueVies();
+        super.initAnimation();
+
+    }
 
     public PacMan(String path, Coordinate coordinate, Scene scene, int nbViesMax, int nbVies) {
         super(path, coordinate, scene);
@@ -53,11 +65,16 @@ public class PacMan extends MouvingObject {
         return false;
     }
     public void ajoutPoint(){
+
         nbPoints++;
+        System.out.println(nbPoints);
     }
 
 
-    public void setNbVies_restantes(int nbVies_restantes) {
-        this.nbVies_restantes = nbVies_restantes;
+    public void diminueVies() {
+
+        nbVies_restantes--;
+        System.out.println(nbVies_restantes);
+
     }
 }

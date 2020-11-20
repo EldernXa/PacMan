@@ -208,8 +208,8 @@ public class Fantome extends MouvingObject {
                     chaR = 'B';
 
                 }
-
             }
+
             if (character.contains('D')) {
                 double newX = coordinate.getX() + Double.valueOf(getGameImage().getValueMove());
 
@@ -236,6 +236,10 @@ public class Fantome extends MouvingObject {
 
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
+        if(visualObjects != null){
+            ((PacMan)visualObjects).death();
+        }
+
         return false;
     }
 }
