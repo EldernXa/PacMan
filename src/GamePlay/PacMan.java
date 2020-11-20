@@ -13,6 +13,7 @@ public class PacMan extends MouvingObject {
     private int nbVies_restantes = nbVies;
     private int nbPoints = 0;
     private float valueTps = (float)10;
+    private Coordinate coordinate;
 
     public PacMan(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);
@@ -20,12 +21,16 @@ public class PacMan extends MouvingObject {
         addAction(new ActionContinue(getGameImage(), scene, "s", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "q", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "d", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));
+        this.coordinate = coordinate;
     }
 
     public PacMan(String path, Coordinate coordinate, Scene scene, int nbViesMax, int nbVies) {
         super(path, coordinate, scene);
     }
 
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
 
     public int getNbVies() {
         return nbVies;

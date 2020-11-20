@@ -16,6 +16,7 @@ public class Action {
     private final GameImage gameImage;
     private final MouvingObject mouvingObject;
     private int dir;
+    private Scene scene;
 
 
     public Action(GameImage gameImage, Scene scene, String carac, double x, double y, int dir, String
@@ -24,19 +25,27 @@ public class Action {
             this.x = x;
             this.y = y;
             this.dir = dir;
-
+            this.scene = scene;
             this.mouvingObject = mouvingObject;
             this.gameImage = gameImage;
             runEvent(scene, carac, dir);
         }
-    /*public Action(GameImage gameImage, Scene scene, char dir, int valueMove, MouvingObject mouvingObject){
-            this.mouvingObject = mouvingObject;
-            this.gameImage = gameImage;
-            this.scene = scene;
-            runEventWithoutKey(valueMove, dir);
-        }*/
+    public Action(GameImage gameImage, Scene scene, MouvingObject mouvingObject){
+        this.nameAction = "Action_IA";
+        this.x = -1;
+        this.y = -1;
+        this.dir = -1;
+        this.scene = scene;
+        this.mouvingObject = mouvingObject;
+        this.gameImage = gameImage;
 
-        public int getDir(){
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public int getDir(){
             return dir;
         }
         private void runEvent (Scene scene, String carac,int dir){

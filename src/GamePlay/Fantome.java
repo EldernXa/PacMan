@@ -1,11 +1,13 @@
 package GamePlay;
 import GraphicsEngine.ActionContinue;
 
+import GraphicsEngine.ActionContinueFantome;
 import GraphicsEngine.Coordinate;
 import GraphicsEngine.MouvingObject;
 
+import ReadFile.PosMursAssocies;
 import javafx.scene.Scene;
-
+import GraphicsEngine.Map;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,36 +16,25 @@ public class Fantome extends MouvingObject {
     private float valueTps = (float) 10;
     private Coordinate goal;
 
-   /* public Fantome(String path, Coordinate coordinate, Scene scene, Pane pane, PosMursAssocies posMursAssocies) {
+    public Fantome(String path, Coordinate coordinate, Scene scene,Map map,Coordinate pacmanCoordinate) {
+        super(path, coordinate, scene);
+        setGoal(pacmanCoordinate);
+        addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map));
 
 
-        super(path, coordinate, scene, pane);
-        setGoal(coordinate);
-
-        addAction(new ActionContinue(getGameImage(), scene, Chase(coordinate, scene, posMursAssocies.getListOfWalls()), -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, Chase(coordinate, scene, posMursAssocies.getListOfWalls()), getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, Chase(coordinate, scene, posMursAssocies.getListOfWalls()), -getGameImage().getValueMove(), valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, Chase(coordinate, scene, posMursAssocies.getListOfWalls()), getGameImage().getValueMove(), valueTps, this));
-    }*/
+    }
 
     public void setGoal(Coordinate coordinate) {
         Random rX = new Random();
         double randomValueX = 30 + (250 - 30) * rX.nextDouble();
         Random rY = new Random();
         double randomValueY = 30 + (250 - 30) * rY.nextDouble();
-        setGoal(new Coordinate(coordinate.getX() + randomValueX, coordinate.getY() + randomValueY));
+        this.goal = new Coordinate(coordinate.getX() + randomValueX, coordinate.getY() + randomValueY);
     }
 
 
 
-    public Fantome(String path, Coordinate coordinate, Scene scene) {
-            super(path, coordinate, scene);
-            addAction(new ActionContinue(getGameImage(), scene, "o", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
-            addAction(new ActionContinue(getGameImage(), scene, "l", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
-            addAction(new ActionContinue(getGameImage(), scene, "k", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
-            addAction(new ActionContinue(getGameImage(), scene, "m", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));
 
-        }
 
         public Coordinate getGoal () {
             return goal;
@@ -57,46 +48,47 @@ public class Fantome extends MouvingObject {
 
         }
 
-        public char Chase (Coordinate pacManCoordinate, Scene scene, ArrayList < Character > listOfWalls){
+        public int Chase (Coordinate pacManCoordinate, Scene scene, ArrayList < Character > listOfWalls){
+
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
             if (getEuclidianDistance(pacManCoordinate) <= 80.0) {
 
                 switch (bestAction(pacManCoordinate, charactersFeasable)) {
                     case 'H':
-                        char temp = 'y';
+                        int temp = 3;
                         return temp;
                     case 'B':
-                        char temp1 = 'y';
+                        int temp1 = 1;
                         return temp1;
                     case 'D':
-                        char temp2 = 'x';
+                        int temp2 = 0;
                         return temp2;
                     case 'G':
-                        char temp3 = 'x';
+                        int temp3 = 2;
                         return temp3;
 
                 }
 
             } else {
-                switch (bestAction(getGoal(), charactersFeasable)) {
+                switch (bestAction(getGoal(), charactersFeasable)){
                     case 'H':
-                        char temp = 'y';
+                        int temp = 3;
                         return temp;
                     case 'B':
-                        char temp1 = 'y';
+                        int temp1 = 1;
                         return temp1;
                     case 'D':
-                        char temp2 = 'x';
+                        int temp2 = 0;
                         return temp2;
                     case 'G':
-                        char temp3 = 'x';
+                        int temp3 = 2;
                         return temp3;
 
                 }
 
 
             }
-            char nulL = ' ';
+            int nulL = -1;
             return nulL;
         }
         public ArrayList<Character> actionPossible (ArrayList < Character > list) {

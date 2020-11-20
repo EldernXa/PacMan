@@ -1,7 +1,7 @@
 package GraphicsEngine;
 
-//import ReadFile.ReadFileMapPacman;
-import javafx.animation.Animation;
+import GamePlay.Fantome;
+import ReadFile.PosMursAssocies;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -9,18 +9,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-
-public class ActionContinue extends Action{
+public class ActionContinueFantome extends Action{
 
     private float tps;
     private Timeline timeline;
     private int indTimeline;
     private final MouvingObject mouvingObject;
+    private final Map map;
 
-    public ActionContinue(GameImage image, Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject){
-        super(image, scene, carac, x, y, dir, nameAction, mouvingObject);
+
+    public ActionContinueFantome(GameImage image, Scene scene, float tps,MouvingObject mouvingObject, Map map){
+        super(image, scene, mouvingObject);
         this.mouvingObject = mouvingObject;
         this.tps = tps;
+        this.map = map;
+        //int temp = ((Fantome) mouvingObject).Chase(getGameImage().getCoordinate(),getScene(),map.getRealCoord().);
+
+        doWhenEventOccur(2);
+
     }
 
 
@@ -30,8 +36,10 @@ public class ActionContinue extends Action{
         imgV.setY(super.getGameImage().getImgView().getY());
         imgV.setX(x);
         imgV.setY(y);
-        return(collision(imgV, super.getX(), super.getY()));
+        return(collision(imgV));
     }
+
+
 
     @Override
     public void doWhenEventOccur(int dir){
@@ -43,8 +51,8 @@ public class ActionContinue extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        super.doWhenEventOccur(dir);
 
+                        super.doWhenEventOccur(dir);
                     }
             ));
             indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
