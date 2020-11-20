@@ -44,7 +44,6 @@ public class Map {
 
         this.pacmanInitCoord = imgPacman.getCoordinate();
         visualObjects.add(imgPacman);
-        visualObjects.add(imgFantome);
         fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();
@@ -58,6 +57,7 @@ public class Map {
             System.out.println();
         }*/
         Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
+        visualObjects.add(imgFantome);
         mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
     }
 
