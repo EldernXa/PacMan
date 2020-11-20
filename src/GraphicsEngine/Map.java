@@ -54,7 +54,6 @@ public class Map {
 
         PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), mapScene);
 
-
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(18*5+4*32, 3*32+4*18), mapScene);
 
@@ -86,8 +85,8 @@ public class Map {
     public void creationMurHaut(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*absc;
         double ordonnee = (longueurMur-epaisseurMur)*ord;
-        //visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene));
-        //mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
+        visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene));
+        mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
 
     public void creationMurDroite(double absc, double ord){
