@@ -114,7 +114,7 @@ public class Action {
 
     public boolean intersect(ImageView a, VisualObject b) {
         if (a.getBoundsInParent().intersects(b.getImageView().getBoundsInParent())) {
-            return true;
+            return b.effectCollision(null);
         }
         return false;
     }

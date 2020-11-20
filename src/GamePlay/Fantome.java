@@ -1,13 +1,8 @@
 package GamePlay;
-import GraphicsEngine.ActionContinue;
-
-import GraphicsEngine.ActionContinueFantome;
-import GraphicsEngine.Coordinate;
-import GraphicsEngine.MouvingObject;
+import GraphicsEngine.*;
 
 import ReadFile.PosMursAssocies;
 import javafx.scene.Scene;
-import GraphicsEngine.Map;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -237,7 +232,11 @@ public class Fantome extends MouvingObject {
 
         }
 
+    @Override
+    public boolean effectCollision(ArrayList<VisualObject> visualObjects) {
+        return false;
     }
+}
 
 
 

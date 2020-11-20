@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Decor extends UnmouvingObj{
 
@@ -14,7 +15,11 @@ public class Decor extends UnmouvingObj{
         super(path, coordinate, scene);
     }
 
+    @Override
+    public boolean effectCollision(ArrayList<VisualObject> visualObjects) {
 
+        return true;
+    }
 
 
 }

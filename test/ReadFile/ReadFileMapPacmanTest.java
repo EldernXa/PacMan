@@ -3,13 +3,12 @@ package ReadFile;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReadFileMapPacmanTest {
-
+/*
     Pane root = new Pane();
     Scene scene = new Scene(root,655,365);
     private ReadFileMapPacman readFile  = new ReadFileMapPacman(scene, root, "./data/Map/PacmanMap1");

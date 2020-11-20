@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReadFileMapPacmanTestInt {
-
+/*
     Pane root = new Pane();
     Scene scene = new Scene(root,655,365);
     private ReadFileMapPacman readFile  = new ReadFileMapPacman(scene, root, "./data/Map/PacmanMap1");

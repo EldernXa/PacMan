@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Class for all object who are displayed. There are a GameImage (for display the image) and
  * a Action (for all the action he can do).
  */
-public class VisualObject {
+public abstract class VisualObject {
     private final static ParallelTransition parallelTransition = new ParallelTransition();
     private final static ArrayList<VisualObject> listVisualObjectTimeline = new ArrayList<>();
     private final GameImage gameImage;
@@ -62,4 +62,7 @@ public class VisualObject {
     public GameImage getGameImage(){
         return gameImage;
     }
+
+    public abstract boolean effectCollision(ArrayList<VisualObject> visualObjects );
+
 }
