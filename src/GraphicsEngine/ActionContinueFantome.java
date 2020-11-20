@@ -36,7 +36,7 @@ public class ActionContinueFantome extends Action{
         imgV.setY(super.getGameImage().getImgView().getY());
         imgV.setX(x);
         imgV.setY(y);
-        return(collision(imgV,super.getX(),super.getY()));
+        return(collision(imgV));
     }
 
 
@@ -51,6 +51,7 @@ public class ActionContinueFantome extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
+
 
                         super.doWhenEventOccur(dir);
                     }

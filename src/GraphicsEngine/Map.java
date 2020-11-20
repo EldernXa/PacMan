@@ -5,17 +5,15 @@ import GamePlay.PacMan;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap2Pacman;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class Map {
     private Stage stage;
     private ReadFileMap2Pacman readFileMap2Pacman;
+    private ArrayList<Point> pointArrayList = new ArrayList<>();
     private ArrayList<Coordinate> realCoord = new ArrayList<>();
 
     public static ArrayList<VisualObject> visualObjects = new ArrayList<>();
@@ -27,7 +25,7 @@ public class Map {
     private double longueurMur = 68;
     private Pane mapPane = new Pane();
     private Scene mapScene;
-
+    private Coordinate pacmanInitCoord;
 
 
     public Map(Stage stage, String filePath){
@@ -39,30 +37,29 @@ public class Map {
         mapScene = new Scene(mapPane,(abscMax+1)*carreaux+(abscMax+2)*epaisseurMur,(ordMax+1)*carreaux+(ordMax+2)*epaisseurMur);
         stage.setScene(mapScene);
 
-        for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
-            double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
-            double fausseOrd = posMursAssocies.getPointCoordinate().getY();
-            Coordinate nouv = new Coordinate(fausseAbsc*(longueurMur-2*epaisseurMur)+(1+fausseAbsc)*epaisseurMur,fausseOrd*(longueurMur-2*epaisseurMur)+(1+fausseOrd)*epaisseurMur);
-            posMursAssocies.getPointCoordinate().affichageCoord();
-            System.out.print(" donne : ");
-            nouv.affichageCoord();
-            System.out.println();
-            realCoord.add(nouv);
-        }
+        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur)), mapScene);
+        /*** Test pour ajouté un fantome (ici un autre pac-man)***/
+        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur), 3*(longueurMur-2*epaisseurMur)+4*18), mapScene, this,imgPacman.getCoordinate());
+
+        this.pacmanInitCoord = imgPacman.getCoordinate();
+
+        fillListWithRealCoord();
+        initPoints();
+        //System.out.println("Taille de la lsite de poin doit être egale a 71 : " + pointArrayList.size());
+        afficherPoints();
 
         /*for(Coordinate coordinate : realCoord){
             coordinate.affichageCoord();
         }*/
 
-        PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, (8*18+7*32)+1), mapScene);
-        System.out.println(visualObject.getImageView().getImage().getHeight());
-        /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-        Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(18*5+4*32, 3*32+4*18), mapScene, this,visualObject.getCoordinate());
 
 
-        mapPane.getChildren().addAll(visualObject1.getGameImage().getImgView(),visualObject.getImageView());
+        mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
     }
 
+    /**
+     * Crée tout les murs de la map en lisant une liste extraite d'un fichier texte
+     */
     public void creationDeMap(){
         for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
             for(Character chara : posMursAssocies.getListOfWalls()){
@@ -84,6 +81,11 @@ public class Map {
         }
     }
 
+    /**
+     * Crée le mur qui se trouve en haut de la case concernée indentifiée por les cord en attribut
+     * @param absc
+     * @param ord
+     */
     public void creationMurHaut(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*absc;
         double ordonnee = (longueurMur-epaisseurMur)*ord;
@@ -91,6 +93,11 @@ public class Map {
         mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
 
+    /**
+     * Crée le mur qui se trouve à droite de la case concernée indentifiée por les cord en attribut
+     * @param absc
+     * @param ord
+     */
     public void creationMurDroite(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*(absc+1);
         double ordonnee = (longueurMur-epaisseurMur)*ord;
@@ -98,6 +105,11 @@ public class Map {
         mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
 
+    /**
+     * Crée le mur qui se trouve à en bas de la case concernée indentifiée por les cord en attribut
+     * @param absc
+     * @param ord
+     */
     public void creationMurBas(double absc, double ord){
         if(ord == ordMax) {
             double abscisse = (longueurMur-epaisseurMur)*absc;
@@ -108,12 +120,55 @@ public class Map {
 
     }
 
+    /**
+     * Crée le mur qui se trouve à gauche de la case concernée indentifiée por les cord en attribut
+     * @param absc
+     * @param ord
+     */
     public void creationMurGauche(double absc, double ord){
         if(absc == 0) {
             double abscisse = (longueurMur-epaisseurMur)*absc;
             double ordonnee = (longueurMur-epaisseurMur)*ord;
             visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),mapScene));
             mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png", new Coordinate(abscisse, ordonnee)).getImageView());
+        }
+    }
+
+    /**
+     * Remplit une liste avec les vrai coordonnées calculées
+     */
+    public void fillListWithRealCoord(){
+        for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
+            double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
+            double fausseOrd = posMursAssocies.getPointCoordinate().getY();
+            Coordinate nouv = new Coordinate(fausseAbsc*(longueurMur-2*epaisseurMur)+(1+fausseAbsc)*epaisseurMur+1,fausseOrd*(longueurMur-2*epaisseurMur)+(1+fausseOrd)*epaisseurMur);
+            realCoord.add(nouv);
+        }
+    }
+
+    /**
+     * Methode qui met des point sur toutes lecases de la map sauf sur celle ou le Pacman se trouve au début
+     */
+    public void initPoints(){
+        for(Coordinate cood : realCoord){
+            /*System.out.print("Coord Pacman");
+            pacmanInitCoord.affichageCoord();
+            System.out.print(", Coord point : ");
+            cood.affichageCoord();
+            System.out.println(", same coord ? : " + cood.compare(pacmanInitCoord));*/
+            if (!cood.compare(pacmanInitCoord)) {
+                pointArrayList.add(new Point(cood, mapScene));
+            }
+        }
+    }
+
+    /**
+     * Ajoute la liste de points au Pane de la map
+     */
+    public void afficherPoints(){
+        for(Point point : pointArrayList){
+            mapPane.getChildren().add(point.getImageView());
+            visualObjects.add(point);
         }
     }
 
