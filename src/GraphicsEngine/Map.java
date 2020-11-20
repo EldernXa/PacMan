@@ -47,13 +47,7 @@ public class Map {
         fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();
-        //System.out.println("Taille de la lsite de poin doit être egale a 71 : " + pointArrayList.size());
         afficherPoints();
-
-        /*for(Coordinate coordinate : realCoord){
-            coordinate.affichageCoord();
-        }*/
-
 
         mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
     }
@@ -163,11 +157,6 @@ public class Map {
      */
     public void initPoints(){
         for(Coordinate cood : pointsCoord){
-            /*System.out.print("Coord Pacman");
-            pacmanInitCoord.affichageCoord();
-            System.out.print(", Coord point : ");
-            cood.affichageCoord();
-            System.out.println(", same coord ? : " + cood.compare(pacmanInitCoord));*/
             if (!cood.compare(coordPointUnderPacman())) {
                 pointArrayList.add(new Point(cood, mapScene));
             }
