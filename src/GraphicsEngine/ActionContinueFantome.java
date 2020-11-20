@@ -52,6 +52,9 @@ public class ActionContinueFantome extends Action{
                     Duration.millis(tps),
                     temps -> {
 
+
+
+
                         super.doWhenEventOccur(dir);
                     }
             ));
