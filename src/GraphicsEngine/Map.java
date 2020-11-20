@@ -57,7 +57,8 @@ public class Map {
         PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur)+1), mapScene);
         System.out.println(visualObject.getImageView().getImage().getHeight());
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-        Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur), 3*(longueurMur-2*epaisseurMur)+4*18), mapScene, this,visualObject.getCoordinate());
+        Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,visualObject.getCoordinate());
+
 
 
         mapPane.getChildren().addAll(visualObject1.getGameImage().getImgView(),visualObject.getImageView());
