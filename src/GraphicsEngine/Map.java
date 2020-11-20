@@ -2,6 +2,7 @@ package GraphicsEngine;
 
 import GamePlay.Fantome;
 import GamePlay.PacMan;
+import GamePlay.Point;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap2Pacman;
 import javafx.scene.Scene;
