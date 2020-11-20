@@ -50,6 +50,14 @@ public class Map {
         initPoints();
         afficherPoints();
 
+        for(Coordinate coordinate : realCoord){
+            System.out.print("Coordonnées de base : ");
+            coordinate.affichageCoord();
+            System.out.print("Coordonnées calculées : ");
+            getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
+            System.out.println();
+        }
+
         mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
     }
 
@@ -148,7 +156,7 @@ public class Map {
         for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
             double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
             double fausseOrd = posMursAssocies.getPointCoordinate().getY();
-            Coordinate nouv = new Coordinate(fausseAbsc*(longueurMur-2*epaisseurMur)+(1+fausseAbsc)*epaisseurMur+1,fausseOrd*(longueurMur-2*epaisseurMur)+(1+fausseOrd)*epaisseurMur);
+            Coordinate nouv = new Coordinate(fausseAbsc*(longueurMur-2*epaisseurMur)+(1+fausseAbsc)*epaisseurMur+1,fausseOrd*(longueurMur-2*epaisseurMur)+(1+fausseOrd)*epaisseurMur+1);
             realCoord.add(nouv);
         }
     }
