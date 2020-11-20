@@ -36,6 +36,8 @@ public class Fantome extends MouvingObject {
 
 
 
+
+
         public Coordinate getGoal () {
             return goal;
         }
