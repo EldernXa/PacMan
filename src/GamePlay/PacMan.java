@@ -50,4 +50,8 @@ public class PacMan extends MouvingObject {
     public boolean effectCollision(ArrayList<VisualObject> visualObjects) {
         return false;
     }
+
+    public void setNbVies_restantes(int nbVies_restantes) {
+        this.nbVies_restantes = nbVies_restantes;
+    }
 }
