@@ -24,18 +24,9 @@ public class ActionContinue extends Action{
     }
 
 
-    private boolean collisionImgView(double x, double y){
-        ImageView imgV = new ImageView(new Image(super.getGameImage().getImgView().getImage().getUrl()));
-        imgV.setX(super.getGameImage().getImgView().getX());
-        imgV.setY(super.getGameImage().getImgView().getY());
-        imgV.setX(x);
-        imgV.setY(y);
-        return(collision(imgV));
-    }
-
     @Override
     public void doWhenEventOccur(int dir){
-        if(!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
+        if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -43,12 +34,20 @@ public class ActionContinue extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        super.doWhenEventOccur(dir);
-
+                        if(!mouvingObject.verifActionNext()){
+                            Action newAction = mouvingObject.getActionNext();
+                            mouvingObject.setActionNext(null);
+                            newAction.doWhenEventOccur(newAction.getDir());
+                        }else {
+                            super.doWhenEventOccur(dir);
+                        }
                     }
             ));
             indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
             VisualObject.startTimelineParallel();
+        }else{
+            System.out.println("ttesst");
+            mouvingObject.setActionNext(this);
         }
     }
 

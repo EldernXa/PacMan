@@ -2,6 +2,7 @@ package GraphicsEngine;
 
 //import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
@@ -39,6 +40,15 @@ public class Action {
         this.mouvingObject = mouvingObject;
         this.gameImage = gameImage;
 
+    }
+
+    public boolean collisionImgView(double x, double y){
+        ImageView imgV = new ImageView();
+        imgV.setX(getGameImage().getImgView().getX());
+        imgV.setY(getGameImage().getImgView().getY());
+        imgV.setX(x);
+        imgV.setY(y);
+        return(collision(imgV));
     }
 
     public Scene getScene() {
@@ -108,26 +118,6 @@ public class Action {
         }
         return false;
     }
-
-        public boolean intersect(ImageView imgViewA, ImageView imgViewB, double x, double y){
-
-                /*if (imgViewA.getX() >= imgViewB.getX() && imgViewA.getX() <= (imgViewB.getX() + imgViewB.getImage().getWidth()) &&
-                        imgViewA.getY() >= imgViewB.getY() && imgViewA.getY() <= (imgViewB.getY() + imgViewB.getImage().getHeight())) {
-                    return true;
-                } else if (imgViewA.getX() >= imgViewB.getX() && imgViewA.getX() <= (imgViewB.getX() + imgViewB.getImage().getWidth()) &&
-                        (imgViewA.getY() + imgViewA.getImage().getHeight()) >= imgViewB.getY() && (imgViewA.getY() + imgViewA.getImage().getHeight()) <= (imgViewB.getY() + imgViewB.getImage().getHeight())) {
-                    return true;
-                } else if ((imgViewA.getX() + imgViewA.getImage().getHeight()) >= imgViewB.getX() && (imgViewA.getX() + imgViewA.getImage().getHeight()) <= (imgViewB.getX() + imgViewB.getImage().getWidth()) &&
-                        imgViewA.getY() >= imgViewB.getY() && imgViewA.getY() <= (imgViewB.getY() + imgViewB.getImage().getHeight())) {
-                    return true;
-                } else if ((imgViewA.getX() + imgViewA.getImage().getWidth()) >= imgViewB.getX() && (imgViewA.getX() + imgViewA.getImage().getWidth()) <= (imgViewB.getX()
-                        + imgViewB.getImage().getWidth()) && (imgViewA.getY() + imgViewA.getImage().getHeight()) >= imgViewB.getY() && (imgViewA.getY() + imgViewA.getImage().getHeight()) <= (imgViewB.getY()
-                        + imgViewB.getImage().getHeight())) {
-                    return true;
-                }*/
-
-            return false;
-        }
 
 
     }
