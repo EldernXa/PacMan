@@ -53,8 +53,6 @@ public class ActionContinueFantome extends Action{
                     temps -> {
 
 
-
-
                         super.doWhenEventOccur(dir);
                     }
             ));

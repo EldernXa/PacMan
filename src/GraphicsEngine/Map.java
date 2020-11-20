@@ -84,6 +84,8 @@ public class Map {
         }
     }
 
+
+
     public void creationMurHaut(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*absc;
         double ordonnee = (longueurMur-epaisseurMur)*ord;
