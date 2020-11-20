@@ -30,14 +30,6 @@ public class ActionContinueFantome extends Action{
     }
 
 
-    private boolean collisionImgView(double x, double y){
-        ImageView imgV = new ImageView(new Image(super.getGameImage().getImgView().getImage().getUrl()));
-        imgV.setX(super.getGameImage().getImgView().getX());
-        imgV.setY(super.getGameImage().getImgView().getY());
-        imgV.setX(x);
-        imgV.setY(y);
-        return(collision(imgV));
-    }
 
 
 
