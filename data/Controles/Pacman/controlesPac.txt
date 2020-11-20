@@ -1,0 +1,4 @@
+mondrer z 5 40
+descendre q 5 40
+gauche s 5 40
+droite d 5 40
