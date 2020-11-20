@@ -67,6 +67,7 @@ public class ActionContinue extends Action{
         VisualObject.stopTimelineParallel();
         VisualObject.removeTimeline(indTimeline);
         VisualObject.startTimelineParallel();
+        mouvingObject.setActionNext(null);
     }
 
 }
