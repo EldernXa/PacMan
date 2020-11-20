@@ -2,6 +2,7 @@ package GamePlay;
 import GraphicsEngine.*;
 
 import ReadFile.PosMursAssocies;
+import ReadFile.ReadFileMap2Pacman;
 import javafx.scene.Scene;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Fantome extends MouvingObject {
         super(path, coordinate, scene);
         setGoal(pacmanCoordinate);
         addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map));
+
 
 
     }
@@ -45,7 +47,7 @@ public class Fantome extends MouvingObject {
 
         }
 
-        public int Chase (Coordinate pacManCoordinate, Scene scene, ArrayList < Character > listOfWalls){
+        public int Chase (Coordinate pacManCoordinate, ArrayList<Character> listOfWalls){
 
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
             if (getEuclidianDistance(pacManCoordinate) <= 80.0) {

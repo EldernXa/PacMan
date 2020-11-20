@@ -40,7 +40,7 @@ public class Map {
 
         PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1), mapScene);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
+
 
         this.pacmanInitCoord = imgPacman.getCoordinate();
 
@@ -49,14 +49,14 @@ public class Map {
         initPoints();
         afficherPoints();
 
-        for(Coordinate coordinate : realCoord){
+        /*for(Coordinate coordinate : realCoord){
             System.out.print("Coordonnées de base : ");
             coordinate.affichageCoord();
             System.out.print("Coordonnées calculées : ");
             getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
             System.out.println();
-        }
-
+        }*/
+        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
         mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
     }
 
@@ -183,6 +183,10 @@ public class Map {
             }
         }
         return null;
+    }
+
+    public ReadFileMap2Pacman getReadFileMap2Pacman() {
+        return readFileMap2Pacman;
     }
 
     /**

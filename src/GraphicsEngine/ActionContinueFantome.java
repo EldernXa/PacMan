@@ -23,7 +23,7 @@ public class ActionContinueFantome extends Action{
         this.mouvingObject = mouvingObject;
         this.tps = tps;
         this.map = map;
-        //int temp = ((Fantome) mouvingObject).Chase(getGameImage().getCoordinate(),getScene(),map.getRealCoord().);
+
 
         doWhenEventOccur(2);
 
@@ -43,8 +43,6 @@ public class ActionContinueFantome extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-
-
                         super.doWhenEventOccur(dir);
                     }
             ));
