@@ -23,11 +23,6 @@ public class ReadFileMap2Pacman {
         initTabMurFctCoord();
         initTabNoPointNFruit();
 
-        for(Coordinate coordinate : tabCoordNoPoint){
-            coordinate.affichageCoord();
-            System.out.println();
-        }
-
     }
 
     public void initTabNoPointNFruit(){
