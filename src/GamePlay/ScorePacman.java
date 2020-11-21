@@ -52,7 +52,7 @@ public class ScorePacman implements Score {
             if(!t1.equals(number)){
                 nbVies.setText(String.valueOf(pacMan.getNbVies_restantes()));
                 if(pacMan.getNbVies_restantes() == 0){
-                    ConclusionPacman conclusion = new ConclusionPacman(stage,false);
+                    ConclusionPacman conclusion = new ConclusionPacman(stage,false,pacMan.getNbPoints());
                 }
 
             }
