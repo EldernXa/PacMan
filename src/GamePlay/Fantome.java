@@ -3,7 +3,10 @@ import GraphicsEngine.*;
 
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap2Pacman;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,6 +14,9 @@ import java.util.Random;
 public class Fantome extends MouvingObject {
     private float valueTps = (float) 10;
     private Coordinate goal;
+    private Coordinate fantome;
+    private Timeline timeline;
+    private int indTimeline;
 
     public Fantome(String path, Coordinate coordinate, Scene scene,Map map,Coordinate pacmanCoordinate) {
         super(path, coordinate, scene);
@@ -19,6 +25,44 @@ public class Fantome extends MouvingObject {
 
 
 
+    }
+    public void Test(Coordinate pacman,Map map,Scene scene){
+        if (timeline == null)
+            timeline = new Timeline();
+        VisualObject.stopTimelineParallel();
+        timeline.getKeyFrames().clear();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.millis(valueTps),
+                temps -> {
+
+                 int temp = Chase(pacman,map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+                    //System.out.println(temp);
+                  switch (temp){
+                      case 0:
+                          new ActionContinueFantome(getGameImage(), scene, valueTps,this,map, getGameImage().getValueMove(),0,0,"Droite");
+                          break;
+                      case 1:
+                          new ActionContinueFantome(getGameImage(), scene, valueTps,this,map, 0,-getGameImage().getValueMove(),1,"Bas");
+                          break;
+                      case 2:
+                          new ActionContinueFantome(getGameImage(), scene, valueTps,this,map, -getGameImage().getValueMove(),0,2,"Gauche");
+                          break;
+                      case 3:
+                          new ActionContinueFantome(getGameImage(), scene, valueTps,this,map, 0,getGameImage().getValueMove(),3,"Haut");
+                          break;
+                  }
+
+
+                }
+        ));
+        indTimeline = VisualObject.addTimeline(timeline, this);
+        System.out.println(indTimeline);
+        VisualObject.startTimelineParallel();
+    }
+
+
+    public Coordinate getFantome() {
+        return fantome;
     }
 
     public void setGoal(Coordinate coordinate) {
@@ -40,8 +84,8 @@ public class Fantome extends MouvingObject {
         }
 
         public double getEuclidianDistance (Coordinate coordinate){
-            double xGF = Math.pow(this.goal.getX() - coordinate.getX(), 2);
-            double yGF = Math.pow(this.goal.getY() - coordinate.getY(), 2);
+            double xGF = Math.pow(this.fantome.getX() - coordinate.getX(), 2);
+            double yGF = Math.pow(this.fantome.getY() - coordinate.getY(), 2);
             return Math.sqrt(xGF + yGF);
 
 
@@ -50,7 +94,9 @@ public class Fantome extends MouvingObject {
         public int Chase (Coordinate pacManCoordinate, ArrayList<Character> listOfWalls){
 
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
-            if (getEuclidianDistance(pacManCoordinate) <= 80.0) {
+            if(getEuclidianDistance(getGoal()) <= 5.0){
+                setGoal(getFantome());
+            }else if (getEuclidianDistance(pacManCoordinate) <= 80.0) {
 
                 switch (bestAction(pacManCoordinate, charactersFeasable)) {
                     case 'H':

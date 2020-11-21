@@ -1,6 +1,7 @@
 package GraphicsEngine;
 
 //import ReadFile.ReadFileMapPacman;
+import GamePlay.Fantome;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,6 +41,7 @@ public class Action {
         this.scene = scene;
         this.mouvingObject = mouvingObject;
         this.gameImage = gameImage;
+
 
     }
 

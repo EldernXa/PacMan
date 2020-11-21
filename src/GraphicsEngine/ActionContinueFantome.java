@@ -24,8 +24,9 @@ public class ActionContinueFantome extends Action{
         this.tps = tps;
         this.map = map;
 
+        doWhenEventOccur(dir);
 
-        doWhenEventOccur(2);
+
 
     }
 
@@ -36,6 +37,7 @@ public class ActionContinueFantome extends Action{
     @Override
     public void doWhenEventOccur(int dir){
         if(!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
+
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -43,7 +45,9 @@ public class ActionContinueFantome extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
+
                         super.doWhenEventOccur(dir);
+
                     }
             ));
             indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
@@ -57,5 +61,28 @@ public class ActionContinueFantome extends Action{
         VisualObject.removeTimeline(indTimeline);
         VisualObject.startTimelineParallel();
     }
+
+    /*public int returnDir(int dir) {
+
+
+        try {
+            int temp = ((Fantome) mouvingObject).Chase(mouvingObject.getGameImage().getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+            return temp;
+        } catch (Exception e) {
+            System.out.println("Dommage");
+        }
+
+                        /*for (Action action: mouvingObject.getListAction()
+                        ) {
+                            if(dir != temp){
+
+                                super.doWhenEventOccur(temp);
+                            }else{
+                                super.doWhenEventOccur(dir);
+                            }
+
+                        }
+        return -1;
+    }*/
 
 }

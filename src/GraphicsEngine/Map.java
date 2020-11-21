@@ -40,14 +40,20 @@ public class Map {
         mapScene = new Scene(mapPane,(abscMax+1)*carreaux+(abscMax+2)*epaisseurMur,(ordMax+1)*carreaux+(ordMax+2)*epaisseurMur);
         stage.setScene(mapScene);
 
-        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1), mapScene);
+
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
 
+        //new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1) Pac-man
+        //new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1) Fantome
 
-        this.pacmanInitCoord = imgPacman.getCoordinate();
-        visualObjects.add(imgPacman);
+
         fillListPointsCoord();
         fillListWithRealCoord();
+        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene);
+        this.pacmanInitCoord = imgPacman.getCoordinate();
+        visualObjects.add(imgPacman);
+        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1), mapScene, this,imgPacman.getCoordinate());
+
         initPoints();
         afficherPoints();
 
@@ -59,7 +65,7 @@ public class Map {
             getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
             System.out.println();
         }*/
-        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
+
         visualObjects.add(imgFantome);
         mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
         score(imgPacman);
