@@ -87,7 +87,7 @@ public class MenuChoixDifficulte {
 
                     root.setPrefWidth(scene.getWidth());
 
-                    Map currentMap = new Map(stage,"./data/Map/PacmanMap.txt");
+                    Map currentMap = new Map(stage,"./data/Map/");
                     currentMap.getMapPane().setStyle("-fx-background-color: black;");
                     /*Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(385, 20), scene,currentMap );
                     PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), scene);

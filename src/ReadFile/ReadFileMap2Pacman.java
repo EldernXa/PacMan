@@ -1,6 +1,7 @@
 package ReadFile;
 
 import GraphicsEngine.Coordinate;
+import GraphicsEngine.Fruit;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,16 +9,59 @@ import java.util.Scanner;
 
 public class ReadFileMap2Pacman {
     private ArrayList<PosMursAssocies> tabMurFctCoord = new ArrayList<>();
+    private ArrayList<Coordinate> tabCoordNoPoint = new ArrayList<>();
+    private ArrayList<Fruit> tabFruit = new ArrayList<>();
     private double abscMax = 0;
     private double ordMax = 0;
     private File mapFile;
+    private File pointsNFruit;
 
-    public ReadFileMap2Pacman(String mapFilePath){
-        this.mapFile = new File(mapFilePath);
+    public ReadFileMap2Pacman(String mapFolderPath){
+        this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
+        this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
+
+        initTabMurFctCoord();
+        initTabNoPointNFruit();
+
+        for(Coordinate coordinate : tabCoordNoPoint){
+            coordinate.affichageCoord();
+            System.out.println();
+        }
+
+    }
+
+    public void initTabNoPointNFruit(){
+        initTabCoordNoPoint();
+        initTabFruit();
+    }
+
+    public void initTabCoordNoPoint(){
+        try{
+            Scanner pointNFruitScanner = new Scanner(pointsNFruit);
+            String currentLine = pointNFruitScanner.nextLine();
+            while(!currentLine.equals("")){
+                if(currentLine.equals("zone interdites :")){
+                    currentLine = pointNFruitScanner.nextLine();
+                }
+                int absc = recupererAbsc(currentLine);
+                int ord = recupererOrd(currentLine);
+                tabCoordNoPoint.add(new Coordinate(absc,ord));
+                currentLine = pointNFruitScanner.nextLine();
+                }
+            pointNFruitScanner.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void initTabFruit(){
+
+    }
+
+    public void initTabMurFctCoord(){
         try {
-            int i = 0;
             Scanner mapFileScanner = new Scanner(mapFile);
-            while(mapFileScanner.hasNext()){
+            while(mapFileScanner.hasNextLine()){
                 String currentLine = mapFileScanner.nextLine();
                 int absc = recupererAbsc(currentLine);
                 int ord = recupererOrd(currentLine);
@@ -47,6 +91,7 @@ public class ReadFileMap2Pacman {
                 tabMurFctCoord.add(new PosMursAssocies(new Coordinate(absc,ord),listOfWalls));
 
             }
+            mapFileScanner.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -56,6 +101,7 @@ public class ReadFileMap2Pacman {
         int i = 0;
         int absc;
         String tampon = "";
+
         while(currentLine.charAt(i) != ','){
             if(currentLine.charAt(i) == '('){
                 i++;
@@ -65,9 +111,7 @@ public class ReadFileMap2Pacman {
                 i++;
             }
         }
-
         absc = Integer.parseInt(tampon);
-
         return absc;
     }
 
@@ -113,6 +157,10 @@ public class ReadFileMap2Pacman {
         }
 
         return tamponList;
+    }
+
+    public ArrayList<Coordinate> getTabCoordNoPoint() {
+        return tabCoordNoPoint;
     }
 
     public double getAbscMax() {
