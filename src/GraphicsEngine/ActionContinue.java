@@ -39,6 +39,7 @@ public class ActionContinue extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
+                        mouvingObject.incrementTpsAnimate((mouvingObject.getTpsAnimate()+1)%(int)tps);
                         if(mouvingObject.getActionNext()!=null &&mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(), getGameImage().getCoordinate().getY() + mouvingObject.getActionNext().getY())){
                             if(((ActionContinue)mouvingObject.getActualAction())!=null) {
                                 VisualObject.removeTimeline(((ActionContinue) mouvingObject.getActualAction()).getIndTimeline());
@@ -65,6 +66,20 @@ public class ActionContinue extends Action{
         }else{
             if(mouvingObject.getActualAction()!=this && mouvingObject.getActualAction()!=null)
                 mouvingObject.setActionNext(this);
+        }
+    }
+
+    @Override
+    public void nextImage(int dir){
+        if(mouvingObject.getTpsAnimate()%10==0){
+            super.nextImage(dir);
+        }
+    }
+
+    @Override
+    public void previousImage(int dir){
+        if(mouvingObject.getTpsAnimate()%10==0){
+            super.previousImage(dir);
         }
     }
 

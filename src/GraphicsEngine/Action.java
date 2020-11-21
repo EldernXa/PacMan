@@ -94,12 +94,20 @@ public class Action {
         Coordinate c = new Coordinate(gameImage.getCoordinate().getX(), gameImage.getCoordinate().getY());
         if (x >= 0 && y >= 0) {
             gameImage.move(x, y);
-            mouvingObject.nextImage(dir);
+            nextImage(dir);
         if(collision(mouvingObject)){
             gameImage.move(c.getX(), c.getY());
-            mouvingObject.previousImage(dir);
+            previousImage(dir);
         }
         }
+    }
+
+    public void nextImage(int dir){
+        mouvingObject.nextImage(dir);
+    }
+
+    public void previousImage(int dir){
+        mouvingObject.previousImage(dir);
     }
 
     public GameImage getGameImage () {
