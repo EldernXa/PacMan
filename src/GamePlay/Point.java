@@ -1,13 +1,9 @@
 package GamePlay;
 
 import GraphicsEngine.Coordinate;
-import GraphicsEngine.Score;
 import GraphicsEngine.UnmouvingObj;
 import GraphicsEngine.VisualObject;
-import com.sun.javafx.runtime.VersionInfo;
 import javafx.scene.Scene;
-
-import java.util.ArrayList;
 
 public class Point extends UnmouvingObj {
     private boolean passe = false;
@@ -17,16 +13,15 @@ public class Point extends UnmouvingObj {
 
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
-        PacMan pacman = ((PacMan)visualObjects);
-        if(visualObjects != null){
+        if(visualObjects!=null && visualObjects.getClass() == PacMan.class){
+            PacMan pacMan = ((PacMan)visualObjects);
             if(!passe){
-                pacman.ajoutPoint();
+                pacMan.ajoutPoint();
+                pacMan.incrementPoints();
             }
             passe = true;
             super.getImageView().setVisible(false);
-
         }
-
         return false;
     }
 }
