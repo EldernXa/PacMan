@@ -1,6 +1,10 @@
 package GamePlay;
 
 import GraphicsEngine.*;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
@@ -9,15 +13,17 @@ import java.util.ArrayList;
 public class PacMan extends MouvingObject {
 
     private final int nbViesMax = 3;
-    private int nbVies_restantes;
-    private int nbPoints;
+    private SimpleIntegerProperty nbVies_restantes;
+    private SimpleIntegerProperty nbPoints;
     private float valueTps = (float)10;
     private Coordinate coordinate;
+    private ChangeListener<Number> changeListenerVies;
+    private ChangeListener<Number> changeListenerPoint;
 
     public PacMan(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);
-        nbPoints = 0;
-        nbVies_restantes = nbViesMax;
+        nbPoints = new SimpleIntegerProperty(0);
+        nbVies_restantes = new SimpleIntegerProperty(nbViesMax);
         addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "s", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "q", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
@@ -52,12 +58,12 @@ public class PacMan extends MouvingObject {
     }
 
     public int getNbVies_restantes() {
-        return nbVies_restantes;
+        return nbVies_restantes.get();
     }
 
 
     public int getNbPoints() {
-        return nbPoints;
+        return nbPoints.get();
     }
 
     @Override
@@ -66,15 +72,35 @@ public class PacMan extends MouvingObject {
     }
     public void ajoutPoint(){
 
-        nbPoints++;
+        nbPoints.set(nbPoints.get()+1);
         System.out.println(nbPoints);
     }
 
 
     public void diminueVies() {
 
-        nbVies_restantes--;
+         nbVies_restantes.set(nbVies_restantes.get()-1);
+
         System.out.println(nbVies_restantes);
 
+    }
+
+    public void setListenerPoint(ChangeListener<Number> changeListener){
+        changeListenerPoint = changeListener;
+        nbPoints.addListener(changeListenerPoint);
+    }
+    public void setListenerNbVies(ChangeListener<Number> changeListener){
+        changeListenerVies=changeListener;
+        nbVies_restantes.addListener(changeListenerVies);
+    }
+    public void removeListenerPoint(){
+        if(changeListenerPoint != null)
+            nbPoints.removeListener(changeListenerPoint);
+        changeListenerPoint = null;
+    }
+    public void removeListenerVies(){
+        if(changeListenerVies != null)
+            nbVies_restantes.removeListener(changeListenerVies);
+        changeListenerVies = null;
     }
 }
