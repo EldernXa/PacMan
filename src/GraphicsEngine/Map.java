@@ -3,12 +3,11 @@ package GraphicsEngine;
 import GamePlay.Fantome;
 import GamePlay.PacMan;
 import GamePlay.Point;
+import GamePlay.ScorePacman;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap2Pacman;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
@@ -59,6 +58,7 @@ public class Map {
             getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
             System.out.println();
         }*/
+        mapPane.setStyle("-fx-background-color: black");
         Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
         visualObjects.add(imgFantome);
         mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
@@ -214,7 +214,7 @@ public class Map {
     }
 
     public void score(VisualObject visualObject){
-        Score score = new Score(visualObject);
+        ScorePacman score = new ScorePacman(stage,visualObject);
         mapPane.getChildren().add(score.getScore());
 
 

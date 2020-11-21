@@ -73,15 +73,12 @@ public class PacMan extends MouvingObject {
     public void ajoutPoint(){
 
         nbPoints.set(nbPoints.get()+1);
-        System.out.println(nbPoints);
     }
 
 
     public void diminueVies() {
 
          nbVies_restantes.set(nbVies_restantes.get()-1);
-
-        System.out.println(nbVies_restantes);
 
     }
 
