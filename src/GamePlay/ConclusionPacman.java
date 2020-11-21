@@ -1,6 +1,7 @@
 package GamePlay;
 
 import GraphicsEngine.*;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -23,36 +25,38 @@ public class ConclusionPacman implements Conclusion {
     private final HBox hbox = new HBox(10);
     private final HBox hboxLabel = new HBox();
     private Label titre = new Label();
-    Stage stage= new Stage();
+    private Stage stage= new Stage();
+    private Button exit = new Button("Quitter");
 
 
-    public ConclusionPacman(Stage stageJeu, boolean bool){
+    public ConclusionPacman(Stage stageJeu, boolean bool,int nbPoints){
         MenuChoixDuJeu menuChoixDuJeu= new MenuChoixDuJeu(stage);
         VisualObject.stopTimelineParallel();
         VisualObject.clearTimelineParallel();
-        //clickRetourDiff(stageJeu,game,menuChoixDuJeu);
         clickRejouer(stageJeu);
         clickRetourMenu(stageJeu,menuChoixDuJeu);
         setHbox();
-        labelForGame(bool);
+        labelForGame(bool,nbPoints);
         setPane();
+        clickExit();
         stage.setScene(scene);
         stage.show();
 
-
     }
+
     public void setPane(){
         pane.setStyle("-fx-background-color: black");
         pane.getChildren().addAll(hbox,titre);
     }
-    public void labelForGame(boolean bool){
+    public void labelForGame(boolean bool, int nbPoints){
         if(bool){
-            titre.setText("Vous avez gagné");
+            titre.setText("Vous avez gagné ! \nVous avez obtenu : "  +nbPoints +" Points.");
             titre.setTextFill(Color.GREEN);
         }else{
-            titre.setText("Vous avez perdu");
+            titre.setText("Vous avez perdu! \nVous avez obtenu : "  +nbPoints +" Points.");
             titre.setTextFill(Color.RED);
         }
+        titre.setFont(Font.font("Arial",20));
         hboxLabel.getChildren().add(titre);
         hboxLabel.setAlignment(Pos.TOP_CENTER);
 
@@ -90,8 +94,17 @@ public class ConclusionPacman implements Conclusion {
             }
         });
     }
+    public void clickExit(){
+        exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+    }
     public void setHbox(){
-        hbox.getChildren().addAll(rejouer,retourMenu);
+        hbox.getChildren().addAll(rejouer,retourMenu,exit);
         hbox.setAlignment(Pos.TOP_CENTER);
     }
 

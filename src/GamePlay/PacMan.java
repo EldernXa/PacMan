@@ -41,7 +41,7 @@ public class PacMan extends MouvingObject {
     public void incrementPoints(){
         nbPointsMap++;
         if(getNbPointsMap()==getNbPointsMapMax()){
-            ConclusionPacman conclusion = new ConclusionPacman(stage,true);
+            ConclusionPacman conclusion = new ConclusionPacman(stage,true,nbPoints.get());
         }
     }
 
