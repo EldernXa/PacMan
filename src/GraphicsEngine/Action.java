@@ -57,69 +57,74 @@ public class Action {
 
     public int getDir(){
             return dir;
+    }
+
+    public void runEvent (Scene scene, String carac,int dir){
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
+            eventAppear(keyEvent, carac);
+        });
+    }
+
+    public void eventAppear(KeyEvent keyEvent, String carac){
+        if (keyEvent.getCode().getChar().toLowerCase().compareTo(
+                carac.toLowerCase()) == 0) {
+            doWhenEventOccur(dir);
         }
-        private void runEvent (Scene scene, String carac,int dir){
-            scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
-                if (keyEvent.getCode().getChar().toLowerCase().compareTo(
-                        carac.toLowerCase()) == 0) {
-                    doWhenEventOccur(dir);
-                }
-            });
+    }
+
+    public void doWhenEventOccur ( int dir){
+        move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
+    }
+
+    public double getX () {
+        return x;
+    }
+
+    public double getY () {
+        return y;
+    }
+
+
+
+    void doWhenBlock () {
+
+    }
+
+    private void move ( double x, double y, int dir){
+        Coordinate c = new Coordinate(gameImage.getCoordinate().getX(), gameImage.getCoordinate().getY());
+        if (x >= 0 && y >= 0) {
+            gameImage.move(x, y);
+            mouvingObject.nextImage(dir);
+        if(collision(mouvingObject)){
+            gameImage.move(c.getX(), c.getY());
+            mouvingObject.previousImage(dir);
         }
-
-        public void doWhenEventOccur ( int dir){
-            move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
         }
+    }
 
-        public double getX () {
-            return x;
-        }
-
-        public double getY () {
-            return y;
-        }
+    public GameImage getGameImage () {
+        return gameImage;
+    }
 
 
-
-        void doWhenBlock () {
-
-        }
-
-        private void move ( double x, double y, int dir){
-            Coordinate c = new Coordinate(gameImage.getCoordinate().getX(), gameImage.getCoordinate().getY());
-            if (x >= 0 && y >= 0) {
-                gameImage.move(x, y);
-                mouvingObject.nextImage(dir);
-            if(collision(mouvingObject)){
-                gameImage.move(c.getX(), c.getY());
-                mouvingObject.previousImage(dir);
-            }
-            }
-        }
-
-        public GameImage getGameImage () {
-            return gameImage;
-        }
-
-
-        public boolean collision (VisualObject a){
-            for(VisualObject v : Map.visualObjects){
-                    if(intersect(a, v)) {
-                        return true;
-                    }
-
-            }
-            return false;
-        }
-        public boolean collision(ImageView a){
-            for(VisualObject v : Map.visualObjects){
+    public boolean collision (VisualObject a){
+        for(VisualObject v : Map.visualObjects){
                 if(intersect(a, v)) {
                     return true;
                 }
 
-            }
-            return false;
         }
+        return false;
+    }
+    public boolean collision(ImageView a){
+        for(VisualObject v : Map.visualObjects){
+            if(intersect(a, v)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
 
     public boolean intersect(VisualObject a, VisualObject b) {
         if (a.getImageView().getBoundsInParent().intersects(b.getImageView().getBoundsInParent())) {
