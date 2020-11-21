@@ -3,12 +3,11 @@ package GraphicsEngine;
 import GamePlay.Fantome;
 import GamePlay.PacMan;
 import GamePlay.Point;
+import GamePlay.ScorePacman;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap2Pacman;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
@@ -40,17 +39,18 @@ public class Map {
         mapScene = new Scene(mapPane,(abscMax+1)*carreaux+(abscMax+2)*epaisseurMur,(ordMax+1)*carreaux+(ordMax+2)*epaisseurMur);
         stage.setScene(mapScene);
 
-        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1), mapScene);
-        /*** Test pour ajouté un fantome (ici un autre pac-man)***/
 
 
-        this.pacmanInitCoord = imgPacman.getCoordinate();
-        visualObjects.add(imgPacman);
+
+        this.pacmanInitCoord = new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1);
+
         fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();
         afficherPoints();
-
+        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), mapScene, pointArrayList.size()-1, stage);
+        /*** Test pour ajouté un fantome (ici un autre pac-man)***/
+        visualObjects.add(imgPacman);
 
         /*for(Coordinate coordinate : realCoord){
             System.out.print("Coordonnées de base : ");
@@ -59,9 +59,10 @@ public class Map {
             getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
             System.out.println();
         }*/
+        mapPane.setStyle("-fx-background-color: black");
         Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
         visualObjects.add(imgFantome);
-        mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
+        mapPane.getChildren().addAll(imgFantome.getImageView(), imgPacman.getImageView());
         score(imgPacman);
     }
 
@@ -226,7 +227,7 @@ public class Map {
     }
 
     public void score(VisualObject visualObject){
-        Score score = new Score(visualObject);
+        ScorePacman score = new ScorePacman(stage,visualObject);
         mapPane.getChildren().add(score.getScore());
 
 

@@ -11,9 +11,11 @@ public abstract class MouvingObject extends VisualObject{
     private Action  actionNext = null;
     private Action actualAction = null;
     private final Animation animation;
+    private int valueAnimate;
 
     public MouvingObject(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);
+        int valueAnimate = 0;
         animation = new Animation(path, 4);
         super.getGameImage().setImage(animation.getInitImage());
         listAction = new ArrayList<>();
@@ -58,6 +60,13 @@ public abstract class MouvingObject extends VisualObject{
         this.listAction.add(action);
     }
 
+    public void incrementTpsAnimate(int value){
+        valueAnimate = value;
+    }
+
+    public int getTpsAnimate(){
+        return valueAnimate;
+    }
 
 
 

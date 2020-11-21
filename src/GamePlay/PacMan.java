@@ -1,23 +1,36 @@
 package GamePlay;
 
 import GraphicsEngine.*;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class PacMan extends MouvingObject {
 
     private final int nbViesMax = 3;
-    private int nbVies_restantes;
-    private int nbPoints;
+    private SimpleIntegerProperty nbVies_restantes;
+    private SimpleIntegerProperty nbPoints;
+    private final int nbPointsMapMax;
+    private int nbPointsMap;
     private float valueTps = (float)10;
     private Coordinate coordinate;
+    private ChangeListener<Number> changeListenerVies;
+    private ChangeListener<Number> changeListenerPoint;
+    private final Stage stage;
 
-    public PacMan(String path, Coordinate coordinate, Scene scene){
+    public PacMan(String path, Coordinate coordinate, Scene scene, int nbPointsMapMax, Stage stage){
         super(path, coordinate, scene);
-        nbPoints = 0;
-        nbVies_restantes = nbViesMax;
+        this.stage = stage;
+        nbPoints = new SimpleIntegerProperty(0);
+        this.nbPointsMapMax = nbPointsMapMax;
+        this.nbPointsMap = 0;
+        nbVies_restantes = new SimpleIntegerProperty(nbViesMax);
         addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "s", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "q", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
@@ -25,6 +38,20 @@ public class PacMan extends MouvingObject {
         this.coordinate = coordinate;
     }
 
+    public void incrementPoints(){
+        nbPointsMap++;
+        if(getNbPointsMap()==getNbPointsMapMax()){
+            ConclusionPacman conclusion = new ConclusionPacman(stage,true,nbPoints.get());
+        }
+    }
+
+    public int getNbPointsMapMax(){
+        return nbPointsMapMax;
+    }
+
+    public int getNbPointsMap(){
+        return nbPointsMap;
+    }
 
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = new Coordinate(coordinate.getX(),coordinate.getY());
@@ -39,10 +66,6 @@ public class PacMan extends MouvingObject {
 
     }
 
-    public PacMan(String path, Coordinate coordinate, Scene scene, int nbViesMax, int nbVies) {
-        super(path, coordinate, scene);
-    }
-
     public Coordinate getCoordinate() {
         return coordinate;
     }
@@ -52,12 +75,12 @@ public class PacMan extends MouvingObject {
     }
 
     public int getNbVies_restantes() {
-        return nbVies_restantes;
+        return nbVies_restantes.get();
     }
 
 
     public int getNbPoints() {
-        return nbPoints;
+        return nbPoints.get();
     }
 
     @Override
@@ -66,15 +89,32 @@ public class PacMan extends MouvingObject {
     }
     public void ajoutPoint(){
 
-        nbPoints++;
-        System.out.println(nbPoints);
+        nbPoints.set(nbPoints.get()+1);
     }
 
 
     public void diminueVies() {
 
-        nbVies_restantes--;
-        System.out.println(nbVies_restantes);
+         nbVies_restantes.set(nbVies_restantes.get()-1);
 
+    }
+
+    public void setListenerPoint(ChangeListener<Number> changeListener){
+        changeListenerPoint = changeListener;
+        nbPoints.addListener(changeListenerPoint);
+    }
+    public void setListenerNbVies(ChangeListener<Number> changeListener){
+        changeListenerVies=changeListener;
+        nbVies_restantes.addListener(changeListenerVies);
+    }
+    public void removeListenerPoint(){
+        if(changeListenerPoint != null)
+            nbPoints.removeListener(changeListenerPoint);
+        changeListenerPoint = null;
+    }
+    public void removeListenerVies(){
+        if(changeListenerVies != null)
+            nbVies_restantes.removeListener(changeListenerVies);
+        changeListenerVies = null;
     }
 }

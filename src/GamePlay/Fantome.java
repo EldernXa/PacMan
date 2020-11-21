@@ -239,9 +239,6 @@ public class Fantome extends MouvingObject {
         PacMan pacman = ((PacMan)visualObjects);
         if(visualObjects != null){
             pacman.death();
-            if(pacman.getNbVies() <= 0){
-                //mettre la scene de fin avec la defaite
-            }
         }
 
         return false;
