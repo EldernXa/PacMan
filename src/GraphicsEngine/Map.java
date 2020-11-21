@@ -5,8 +5,10 @@ import GamePlay.PacMan;
 import GamePlay.Point;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap2Pacman;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
@@ -49,6 +51,7 @@ public class Map {
         initPoints();
         afficherPoints();
 
+
         /*for(Coordinate coordinate : realCoord){
             System.out.print("Coordonnées de base : ");
             coordinate.affichageCoord();
@@ -59,6 +62,7 @@ public class Map {
         Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
         visualObjects.add(imgFantome);
         mapPane.getChildren().addAll(imgFantome.getGameImage().getImgView(),imgPacman.getImageView());
+        score(imgPacman);
     }
 
     /**
@@ -207,6 +211,13 @@ public class Map {
             }
         }
         return null;
+    }
+
+    public void score(VisualObject visualObject){
+        Score score = new Score(visualObject);
+        mapPane.getChildren().add(score.getScore());
+
+
     }
 
     public Scene getMapScene() {

@@ -1,6 +1,7 @@
 package GamePlay;
 
 import GraphicsEngine.Coordinate;
+import GraphicsEngine.Score;
 import GraphicsEngine.UnmouvingObj;
 import GraphicsEngine.VisualObject;
 import com.sun.javafx.runtime.VersionInfo;
@@ -23,6 +24,7 @@ public class Point extends UnmouvingObj {
             }
             passe = true;
             super.getImageView().setVisible(false);
+
         }
 
         return false;
