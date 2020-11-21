@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -15,14 +16,20 @@ public class PacMan extends MouvingObject {
     private final int nbViesMax = 3;
     private SimpleIntegerProperty nbVies_restantes;
     private SimpleIntegerProperty nbPoints;
+    private final int nbPointsMapMax;
+    private int nbPointsMap;
     private float valueTps = (float)10;
     private Coordinate coordinate;
     private ChangeListener<Number> changeListenerVies;
     private ChangeListener<Number> changeListenerPoint;
+    private final Stage stage;
 
-    public PacMan(String path, Coordinate coordinate, Scene scene){
+    public PacMan(String path, Coordinate coordinate, Scene scene, int nbPointsMapMax, Stage stage){
         super(path, coordinate, scene);
+        this.stage = stage;
         nbPoints = new SimpleIntegerProperty(0);
+        this.nbPointsMapMax = nbPointsMapMax;
+        this.nbPointsMap = 0;
         nbVies_restantes = new SimpleIntegerProperty(nbViesMax);
         addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "s", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
@@ -31,6 +38,20 @@ public class PacMan extends MouvingObject {
         this.coordinate = coordinate;
     }
 
+    public void incrementPoints(){
+        nbPointsMap++;
+        if(getNbPointsMap()==getNbPointsMapMax()){
+            ConclusionPacman conclusion = new ConclusionPacman(stage,true);
+        }
+    }
+
+    public int getNbPointsMapMax(){
+        return nbPointsMapMax;
+    }
+
+    public int getNbPointsMap(){
+        return nbPointsMap;
+    }
 
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = new Coordinate(coordinate.getX(),coordinate.getY());
@@ -43,10 +64,6 @@ public class PacMan extends MouvingObject {
         diminueVies();
         super.initAnimation();
 
-    }
-
-    public PacMan(String path, Coordinate coordinate, Scene scene, int nbViesMax, int nbVies) {
-        super(path, coordinate, scene);
     }
 
     public Coordinate getCoordinate() {

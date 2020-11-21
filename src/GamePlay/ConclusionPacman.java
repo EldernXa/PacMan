@@ -28,6 +28,8 @@ public class ConclusionPacman implements Conclusion {
 
     public ConclusionPacman(Stage stageJeu, boolean bool){
         MenuChoixDuJeu menuChoixDuJeu= new MenuChoixDuJeu(stage);
+        VisualObject.stopTimelineParallel();
+        VisualObject.clearTimelineParallel();
         //clickRetourDiff(stageJeu,game,menuChoixDuJeu);
         clickRejouer(stageJeu);
         clickRetourMenu(stageJeu,menuChoixDuJeu);
@@ -60,9 +62,10 @@ public class ConclusionPacman implements Conclusion {
         rejouer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                stageJeu.close();
-                Map map = new Map(stage,"./data/Map/PacmanMap.txt");
-                stage.setScene(map.getMapScene());
+                stage.close();
+                Map.visualObjects.clear();
+                Map map = new Map(stageJeu,"./data/Map/PacmanMap.txt");
+                stageJeu.setScene(map.getMapScene());
             }
         });
     }/*public void clickRetourDiff(Stage stageJeu,Game game,MenuChoixDuJeu menuChoixDuJeu){
@@ -81,6 +84,7 @@ public class ConclusionPacman implements Conclusion {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 stageJeu.close();
+                Map.visualObjects.clear();
                 stage.setScene(menuChoixDuJeu.getMenuScene());
                 stage.setMaximized(true);
             }

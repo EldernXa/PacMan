@@ -56,6 +56,11 @@ public abstract class VisualObject {
         parallelTransition.play();
     }
 
+    public static void clearTimelineParallel(){
+        parallelTransition.getChildren().clear();
+        listVisualObjectTimeline.clear();
+    }
+
     public ImageView getImageView(){
         return gameImage.getImgView();
     }
