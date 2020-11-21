@@ -68,7 +68,7 @@ public class ConclusionPacman implements Conclusion {
             public void handle(MouseEvent mouseEvent) {
                 stage.close();
                 Map.visualObjects.clear();
-                Map map = new Map(stageJeu,"./data/Map/PacmanMap.txt");
+                Map map = new Map(stageJeu,"./data/Map/");
                 stageJeu.setScene(map.getMapScene());
             }
         });

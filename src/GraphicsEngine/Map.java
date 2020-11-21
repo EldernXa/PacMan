@@ -48,7 +48,7 @@ public class Map {
         fillListWithRealCoord();
         initPoints();
         afficherPoints();
-        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), mapScene, pointArrayList.size()-1, stage);
+        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), mapScene, pointArrayList.size(), stage);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         visualObjects.add(imgPacman);
 
