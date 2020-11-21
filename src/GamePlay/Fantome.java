@@ -27,6 +27,7 @@ public class Fantome extends MouvingObject {
 
     }
     public void Test(Coordinate pacman,Map map,Scene scene){
+
         if (timeline == null)
             timeline = new Timeline();
         VisualObject.stopTimelineParallel();
@@ -34,9 +35,14 @@ public class Fantome extends MouvingObject {
         timeline.getKeyFrames().add(new KeyFrame(
                 Duration.millis(valueTps),
                 temps -> {
+                    //System.out.println(bestAction(getGoal(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
 
-                 int temp = Chase(pacman,map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
-                    //System.out.println(temp);
+                 int temp = Chase(getGoal(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+
+                    getGoal().affichageCoord();
+                    getFantome().affichageCoord();
+
+
                   switch (temp){
                       case 0:
                           new ActionContinueFantome(getGameImage(), scene, valueTps,this,map, getGameImage().getValueMove(),0,0,"Droite");
@@ -56,8 +62,9 @@ public class Fantome extends MouvingObject {
                 }
         ));
         indTimeline = VisualObject.addTimeline(timeline, this);
-        System.out.println(indTimeline);
+        //System.out.println(indTimeline);
         VisualObject.startTimelineParallel();
+
     }
 
 
@@ -67,20 +74,35 @@ public class Fantome extends MouvingObject {
 
     public void setGoal(Coordinate coordinate) {
         Random rX = new Random();
-        double randomValueX = 30 + (250 - 30) * rX.nextDouble();
+        double randomValueX = 18 + (382 - 18) * rX.nextDouble();
         Random rY = new Random();
-        double randomValueY = 30 + (250 - 30) * rY.nextDouble();
-        this.goal = new Coordinate(coordinate.getX() + randomValueX, coordinate.getY() + randomValueY);
+        double randomValueY = 18 + (382 - 18) * rY.nextDouble();
+        Coordinate temp =new Coordinate( randomValueX,  randomValueY);
+
+        if(validCoordinate(temp)) {
+            this.goal = new Coordinate( randomValueX,  randomValueY);
+        }else{
+            setGoal(coordinate);
+        }
     }
-
-
-
-
-
 
 
         public Coordinate getGoal () {
             return goal;
+        }
+
+        public boolean validCoordinate(Coordinate coordinate){
+        Double maxXY = 400.0;
+        Double minXY = 0.0;
+        if(coordinate.getX() > maxXY || coordinate.getX()< minXY || coordinate.getY() > maxXY || coordinate.getY() < minXY) {
+
+            return false;
+
+        } else {
+
+            return true;
+        }
+
         }
 
         public double getEuclidianDistance (Coordinate coordinate){
@@ -90,16 +112,24 @@ public class Fantome extends MouvingObject {
 
 
         }
+        public boolean objectifReach(Coordinate coordinate){
+            if(getEuclidianDistance(coordinate) <= 5.0){
+                return true;
+            }else{
+                return false;
+                }
+        }
 
         public int Chase (Coordinate pacManCoordinate, ArrayList<Character> listOfWalls){
 
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
-            if(getEuclidianDistance(getGoal()) <= 5.0){
+            if(objectifReach(getGoal())){
                 setGoal(getFantome());
-            }else if (getEuclidianDistance(pacManCoordinate) <= 80.0) {
+            }else if (getEuclidianDistance(pacManCoordinate) <= 30.0) {
 
                 switch (bestAction(pacManCoordinate, charactersFeasable)) {
                     case 'H':
+                        System.out.println("yo");
                         int temp = 3;
                         return temp;
                     case 'B':
@@ -117,6 +147,7 @@ public class Fantome extends MouvingObject {
             } else {
                 switch (bestAction(getGoal(), charactersFeasable)){
                     case 'H':
+                        System.out.println("y0 2");
                         int temp = 3;
                         return temp;
                     case 'B':
@@ -136,7 +167,7 @@ public class Fantome extends MouvingObject {
             int nulL = -1;
             return nulL;
         }
-        public ArrayList<Character> actionPossible (ArrayList < Character > list) {
+        public ArrayList<Character> actionPossible (ArrayList <Character> list) {
             ArrayList<Character> characters = new ArrayList<>();
             if (list.contains('H')) {
                 characters.add('B');
@@ -235,10 +266,12 @@ public class Fantome extends MouvingObject {
             double smallerDistance = 1000000;
             Character chaR = new Character(' ');
             if (character.contains('H')) {
-                double newY = coordinate.getY() + Double.valueOf(getGameImage().getValueMove());
-
+                double newY = coordinate.getY() - getGameImage().getValueMove();
                 Coordinate Newcoordinate = new Coordinate(coordinate.getX(), newY);
+
+                //System.out.println(smallerDistance);
                 if (getEuclidianDistance(Newcoordinate) < smallerDistance) {
+
                     smallerDistance = getEuclidianDistance(Newcoordinate);
                     chaR = 'H';
 
@@ -246,10 +279,12 @@ public class Fantome extends MouvingObject {
 
             }
             if (character.contains('B')) {
-                double newY = coordinate.getY() - Double.valueOf(getGameImage().getValueMove());
 
+                double newY = coordinate.getY() + Double.valueOf(getGameImage().getValueMove());
                 Coordinate Newcoordinate = new Coordinate(coordinate.getX(), newY);
+
                 if (getEuclidianDistance(Newcoordinate) < smallerDistance) {
+
                     smallerDistance = getEuclidianDistance(Newcoordinate);
                     chaR = 'B';
 
@@ -257,25 +292,31 @@ public class Fantome extends MouvingObject {
             }
 
             if (character.contains('D')) {
-                double newX = coordinate.getX() + Double.valueOf(getGameImage().getValueMove());
+
+                double newX = coordinate.getX() - Double.valueOf(getGameImage().getValueMove());
 
                 Coordinate Newcoordinate = new Coordinate(newX, coordinate.getY());
+
                 if (getEuclidianDistance(Newcoordinate) < smallerDistance) {
+
                     smallerDistance = getEuclidianDistance(Newcoordinate);
                     chaR = 'D';
                 }
 
             }
             if (character.contains('G')) {
-                double newX = coordinate.getX() - Double.valueOf(getGameImage().getValueMove());
+
+                double newX = coordinate.getX() + Double.valueOf(getGameImage().getValueMove());
 
                 Coordinate Newcoordinate = new Coordinate(newX, coordinate.getY());
+
                 if (getEuclidianDistance(Newcoordinate) < smallerDistance) {
-                    //smallerDistance = getEuclidianDistance(Newcoordinate);
+
                     chaR = 'G';
                 }
 
             }
+
             return chaR;
 
         }
