@@ -48,7 +48,7 @@ public class Map {
         fillListWithRealCoord();
         initPoints();
         afficherPoints();
-        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), mapScene, pointArrayList.size()-1, stage);
+        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), mapScene, pointArrayList.size(), stage);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         visualObjects.add(imgPacman);
 
@@ -166,12 +166,24 @@ public class Map {
         }
     }
 
+    public boolean belongToZoneInterdite(Coordinate coordinate){
+        for(Coordinate coord : readFileMap2Pacman.getTabCoordNoPoint()){
+            double fausseAbsc = coord.getX();
+            double fausseOrd = coord.getY();
+            Coordinate nouv = new Coordinate(epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseAbsc*(longueurMur-epaisseurMur),epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseOrd*(longueurMur-epaisseurMur));
+            if (coordinate.compare(nouv)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Methode qui met des point sur toutes lecases de la map sauf sur celle ou le Pacman se trouve au début
      */
     public void initPoints(){
         for(Coordinate cood : pointsCoord){
-            if (!cood.compare(coordPointUnderPacman())) {
+            if ((!cood.compare(coordPointUnderPacman()))&&(!belongToZoneInterdite(cood))) {
                 pointArrayList.add(new Point(cood, mapScene));
             }
         }
