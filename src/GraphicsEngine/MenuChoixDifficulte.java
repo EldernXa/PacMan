@@ -69,6 +69,7 @@ public class MenuChoixDifficulte {
             button.setPrefHeight(hbox.getPrefHeight());
             button.getStyleClass().add("diff");
             hbox.getChildren().add(button);
+            stage.setMaximized(false);
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
