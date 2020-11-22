@@ -24,7 +24,7 @@ public class ActionContinueFantome extends Action{
         this.tps = tps;
         this.map = map;
 
-        doWhenEventOccur(dir);
+        doWhenEventOccur(super.getDir());
 
 
 

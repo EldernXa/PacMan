@@ -1,4 +1,4 @@
 droite d 1 0
-descendre d 10 1
+descendre s 0 1
 gauche q -1 0
-monter a 1 1
+monter z 0 -1
