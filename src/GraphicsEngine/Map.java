@@ -5,7 +5,7 @@ import GamePlay.PacMan;
 import GamePlay.Point;
 import GamePlay.ScorePacman;
 import ReadFile.PosMursAssocies;
-import ReadFile.ReadFileMap2Pacman;
+import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Map {
     private Stage stage;
-    private ReadFileMap2Pacman readFileMap2Pacman;
+    private ReadFileMapPacman readFileMapPacman;
     private ArrayList<Point> pointArrayList = new ArrayList<>();
     private ArrayList<Coordinate> realCoord = new ArrayList<>();
     private ArrayList<Coordinate> pointsCoord = new ArrayList<>();
@@ -32,15 +32,14 @@ public class Map {
 
     public Map(Stage stage, String filePath){
         this.stage = stage;
-        readFileMap2Pacman = new ReadFileMap2Pacman(filePath);
-        abscMax = readFileMap2Pacman.getAbscMax();
-        ordMax = readFileMap2Pacman.getOrdMax();
+        readFileMapPacman = new ReadFileMapPacman(filePath);
+        abscMax = readFileMapPacman.getAbscMax();
+        ordMax = readFileMapPacman.getOrdMax();
         creationDeMap();
         mapScene = new Scene(mapPane,(abscMax+1)*carreaux+(abscMax+2)*epaisseurMur,(ordMax+1)*carreaux+(ordMax+2)*epaisseurMur);
         stage.setScene(mapScene);
-
-
-
+        stage.centerOnScreen();
+        stage.sizeToScene();
 
         this.pacmanInitCoord = new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1);
 
@@ -48,7 +47,7 @@ public class Map {
         fillListWithRealCoord();
         initPoints();
         afficherPoints();
-        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), mapScene, pointArrayList.size()-1, stage);
+        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), mapScene, pointArrayList.size(), stage);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         visualObjects.add(imgPacman);
 
@@ -70,7 +69,7 @@ public class Map {
      * Crée tout les murs de la map en lisant une liste extraite d'un fichier texte
      */
     public void creationDeMap(){
-        for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
+        for(PosMursAssocies posMursAssocies : readFileMapPacman.getTabMurFctCoord()){
             for(Character chara : posMursAssocies.getListOfWalls()){
                 switch (chara){
                     case 'H':
@@ -146,7 +145,7 @@ public class Map {
      * Remplit une liste avec des points calculés en fct des positions possible pour le pacman
      */
     public void fillListPointsCoord(){
-        for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
+        for(PosMursAssocies posMursAssocies : readFileMapPacman.getTabMurFctCoord()){
             double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
             double fausseOrd = posMursAssocies.getPointCoordinate().getY();
             Coordinate nouv = new Coordinate(epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseAbsc*(longueurMur-epaisseurMur),epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseOrd*(longueurMur-epaisseurMur));
@@ -158,7 +157,7 @@ public class Map {
      * Remplit une liste avec les vrai coordonnées calculées
      */
     public void fillListWithRealCoord(){
-        for(PosMursAssocies posMursAssocies : readFileMap2Pacman.getTabMurFctCoord()){
+        for(PosMursAssocies posMursAssocies : readFileMapPacman.getTabMurFctCoord()){
             double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
             double fausseOrd = posMursAssocies.getPointCoordinate().getY();
             Coordinate nouv = new Coordinate(fausseAbsc*(longueurMur-2*epaisseurMur)+(1+fausseAbsc)*epaisseurMur+1,fausseOrd*(longueurMur-2*epaisseurMur)+(1+fausseOrd)*epaisseurMur+1);
@@ -166,12 +165,24 @@ public class Map {
         }
     }
 
+    public boolean belongToZoneInterdite(Coordinate coordinate){
+        for(Coordinate coord : readFileMapPacman.getTabCoordNoPoint()){
+            double fausseAbsc = coord.getX();
+            double fausseOrd = coord.getY();
+            Coordinate nouv = new Coordinate(epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseAbsc*(longueurMur-epaisseurMur),epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseOrd*(longueurMur-epaisseurMur));
+            if (coordinate.compare(nouv)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Methode qui met des point sur toutes lecases de la map sauf sur celle ou le Pacman se trouve au début
      */
     public void initPoints(){
         for(Coordinate cood : pointsCoord){
-            if (!cood.compare(coordPointUnderPacman())) {
+            if ((!cood.compare(coordPointUnderPacman()))&&(!belongToZoneInterdite(cood))) {
                 pointArrayList.add(new Point(cood, mapScene));
             }
         }
@@ -191,8 +202,8 @@ public class Map {
         return null;
     }
 
-    public ReadFileMap2Pacman getReadFileMap2Pacman() {
-        return readFileMap2Pacman;
+    public ReadFileMapPacman getReadFileMap2Pacman() {
+        return readFileMapPacman;
     }
 
     /**
@@ -208,7 +219,7 @@ public class Map {
     public PosMursAssocies getWrongCoorFromReal(Coordinate coord){
         for(int i = 0; i < realCoord.size(); i++){
             if(coord.compare(realCoord.get(i))){
-                return readFileMap2Pacman.getTabMurFctCoord().get(i);
+                return readFileMapPacman.getTabMurFctCoord().get(i);
             }
         }
         return null;

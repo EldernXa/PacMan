@@ -1,107 +1,176 @@
-/*
 package ReadFile;
 
 import GraphicsEngine.Coordinate;
-import GraphicsEngine.Decor;
-import GraphicsEngine.VisualObject;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import GraphicsEngine.Fruit;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class ReadFileMapPacman {
+    private ArrayList<PosMursAssocies> tabMurFctCoord = new ArrayList<>();
+    private ArrayList<Coordinate> tabCoordNoPoint = new ArrayList<>();
+    private ArrayList<Fruit> tabFruit = new ArrayList<>();
+    private double abscMax = 0;
+    private double ordMax = 0;
+    private File mapFile;
+    private File pointsNFruit;
 
+    public ReadFileMapPacman(String mapFolderPath){
+        this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
+        this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
 
-    private String file[];
-    private ArrayList<String> line;
-    private int width;
-    private int height;
-    public static ArrayList<VisualObject> visualObjects = new ArrayList<>();
-    private Scene scene;
-    private Pane pane;
+        initTabMurFctCoord();
+        initTabNoPointNFruit();
 
-    public ReadFileMapPacman(Scene scene, Pane pane, String str) {
-        this.scene = scene;
-        this.pane = pane;
-        line = new ArrayList<>();
-        Path path = Paths.get(str);
-        try {
-            this.file = Files.readString(path).split("\n");
-            String mapSize[] = file[0].split("\\s+");
+    }
 
-            width = Integer.parseInt(mapSize[0]);
-            height = Integer.parseInt(mapSize[1]);
+    public void initTabNoPointNFruit(){
+        initTabCoordNoPoint();
+        initTabFruit();
+    }
 
-
-        } catch (IOException e) {
+    public void initTabCoordNoPoint(){
+        try{
+            Scanner pointNFruitScanner = new Scanner(pointsNFruit);
+            String currentLine = pointNFruitScanner.nextLine();
+            while(!currentLine.equals("")){
+                if(currentLine.equals("zone interdites :")){
+                    currentLine = pointNFruitScanner.nextLine();
+                }
+                int absc = recupererAbsc(currentLine);
+                int ord = recupererOrd(currentLine);
+                tabCoordNoPoint.add(new Coordinate(absc,ord));
+                currentLine = pointNFruitScanner.nextLine();
+                }
+            pointNFruitScanner.close();
+        }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void initTabFruit(){
 
     }
 
+    public void initTabMurFctCoord(){
+        try {
+            Scanner mapFileScanner = new Scanner(mapFile);
+            while(mapFileScanner.hasNextLine()){
+                String currentLine = mapFileScanner.nextLine();
+                int absc = recupererAbsc(currentLine);
+                int ord = recupererOrd(currentLine);
 
-    public void decrypt() {
-
-        for (int i = 1; i < file.length; i++) {
-
-            try {
-                String line[] = file[i].split("\\s+");
-                if (line.length != 0) {
-                    if (line[0].compareTo("") != 0 && line[0].charAt(0) != '/') {
-                        Class aClass = Class.forName("GraphicsEngine." + line[0]);
-                        Class[] parameters = new Class[]{String.class, Coordinate.class, Scene.class};
-                        Constructor constructor = aClass.getConstructor(parameters);
-                        Object o = constructor.newInstance(line[3], new Coordinate(Integer.parseInt(line[1]), Integer.parseInt(line[2])), scene);
-
-                        visualObjects.add((Decor) o);
-                    }
+                if(abscMax < absc){
+                    abscMax = absc;
+                }
+                if(ordMax < ord){
+                    ordMax = ord;
                 }
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                ArrayList<Character> listOfWalls = recupererListOfWalls(currentLine);
 
+
+                /*System.out.println("Point : (" + absc + "," + ord + ")");
+                System.out.println("List des murs pour les coordonnées : (" + absc + "," + ord + ") :");
+                System.out.print("[");
+
+                for(int j = 0; j < listOfWalls.size(); j++){
+                    System.out.print(listOfWalls.get(j));
+                    if(j != listOfWalls.size()-1){
+                        System.out.print(",");
+                    }
+                }
+                System.out.println("]\n");*/
+
+                tabMurFctCoord.add(new PosMursAssocies(new Coordinate(absc,ord),listOfWalls));
+
+            }
+            mapFileScanner.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public int recupererAbsc(String currentLine){
+        int i = 0;
+        int absc;
+        String tampon = "";
+
+        while(currentLine.charAt(i) != ','){
+            if(currentLine.charAt(i) == '('){
+                i++;
+            }
+            else{
+                tampon += currentLine.charAt(i);
+                i++;
+            }
+        }
+        absc = Integer.parseInt(tampon);
+        return absc;
+    }
+
+    public int recupererOrd(String currentline){
+        int i = 0 ;
+        int ord;
+        String tampon = "";
+
+        while (currentline.charAt(i) != ',') {
+            i++;
         }
 
+        i++;
 
+        while(currentline.charAt(i) != ')'){
+            tampon += currentline.charAt(i);
+            i++;
+        }
+
+        ord = Integer.parseInt(tampon);
+
+        return ord;
     }
 
+    public ArrayList<Character> recupererListOfWalls(String currentLine){
+        ArrayList<Character> tamponList = new ArrayList<>();
+        int i = 0;
 
-    public String[] getFile() {
-        return file;
+        while (currentLine.charAt(i) != ':'){
+            i++;
+        }
+
+        i++;
+
+        while(i < currentLine.length()){
+            if(currentLine.charAt(i) == ','){
+                i++;
+            }
+            else{
+                tamponList.add(currentLine.charAt(i));
+                i++;
+            }
+        }
+
+        return tamponList;
     }
 
-    public ArrayList<String> getLine() {
-        return line;
+    public ArrayList<Coordinate> getTabCoordNoPoint() {
+        return tabCoordNoPoint;
     }
 
-    public ArrayList<VisualObject> getVisualObjects() {
-        return visualObjects;
+    public double getAbscMax() {
+        return abscMax;
     }
 
-    public Scene getScene() {
-        return scene;
+    public double getOrdMax() {
+        return ordMax;
     }
 
-    public Pane getPane() {
-        return pane;
+    public ArrayList<PosMursAssocies> getTabMurFctCoord() {
+        return tabMurFctCoord;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    public File getMapFile() {
+        return mapFile;
     }
 }
-*/
