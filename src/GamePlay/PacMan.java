@@ -1,6 +1,7 @@
 package GamePlay;
 
 import GraphicsEngine.*;
+import ReadFile.ReadFileCommandes;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -23,6 +24,7 @@ public class PacMan extends MouvingObject {
     private ChangeListener<Number> changeListenerVies;
     private ChangeListener<Number> changeListenerPoint;
     private final Stage stage;
+    private final ReadFileCommandes pacmanControle;
 
     public PacMan(String path, Coordinate coordinate, Scene scene, int nbPointsMapMax, Stage stage){
         super(path, coordinate, scene);
@@ -31,10 +33,17 @@ public class PacMan extends MouvingObject {
         this.nbPointsMapMax = nbPointsMapMax;
         this.nbPointsMap = 0;
         nbVies_restantes = new SimpleIntegerProperty(nbViesMax);
-        addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
+        pacmanControle = new ReadFileCommandes("./data/Controles/Pacman/controlesPac.txt");
+        for(int i = 0; i<pacmanControle.getDirection().size(); i++){
+            addAction(new ActionContinue(getGameImage(), scene,
+                    pacmanControle.getTouche().get(i), pacmanControle.getxCoord().get(i),
+                    pacmanControle.getyCoord().get(i), i, pacmanControle.getDirection().get(i),
+                    valueTps, this));
+        }
+        /*addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "s", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
         addAction(new ActionContinue(getGameImage(), scene, "q", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "d", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));
+        addAction(new ActionContinue(getGameImage(), scene, "d", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));*/
         this.coordinate = coordinate;
     }
 
