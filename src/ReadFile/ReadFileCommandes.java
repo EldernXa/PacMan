@@ -57,7 +57,7 @@ public class ReadFileCommandes {
     }
 
 
-    public void write(String direction, char touche, int x, int y) {
+    public void write(String direction, char touche) {
         try {
             List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(pathName), StandardCharsets.UTF_8));
             System.out.println(this.direction.contains(direction));
@@ -65,7 +65,7 @@ public class ReadFileCommandes {
                 for (int i = 0; i < file.length; i++) {
                     String line[] = file[i].split("\\s+");
                     if(line[0].equals(direction)){
-                        fileContent.set(i, direction +" " + touche+" " + x+" " +y);
+                        fileContent.set(i, direction +" " + touche+" " + xCoord.get(i)+" " +yCoord.get(i));
                         Files.write(Paths.get(pathName), fileContent, StandardCharsets.UTF_8);
                         return;
 
@@ -73,13 +73,6 @@ public class ReadFileCommandes {
                 }
             }
 
-            File file = new File(pathName);
-
-            FileWriter fileWriter = new FileWriter(file, true);
-
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(direction +" "+touche+" "+x+" "+y+"\n");
-            bufferedWriter.close();
 
 
 
