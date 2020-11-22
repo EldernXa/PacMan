@@ -72,47 +72,11 @@ public class MenuChoixDifficulte {
             button.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                     Pane root = new Pane();//Creation groupe
                     stage.setFullScreen(false);
-                    Scene scene = new Scene(root,655,365);//Creation fenetre de taille 400 sur 400 pixels
-                    root.setMinHeight(scene.getHeight());
-                    root.setMaxHeight(scene.getHeight());
-                    root.setPrefHeight(scene.getHeight());
-                    root.setMinWidth(scene.getWidth());
-                    root.setMaxWidth(scene.getWidth());
-
-                    root.setPrefWidth(scene.getWidth());
-
-
-
-                    root.setPrefWidth(scene.getWidth());
-
                     Map currentMap = new Map(stage,"./data/Map/");
-                    currentMap.getMapPane().setStyle("-fx-background-color: black;");
-                    /*Fantome visualObject1 = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(385, 20), scene,currentMap );
-                    PacMan visualObject = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(18*5+4*32, 8*18+7*32), scene);
-                    root.getChildren().add(visualObject1.getImageView());
-
-                    root.getChildren().add(visualObject.getImageView());*/
-                    stage.setMaximized(false);
-
-
-
-                    /*ReadFileMapPacman readFileMapPacman = new ReadFileMapPacman(scene,root, "./data/Map/PacmanMap1");
-                    readFileMapPacman.decrypt();
-
-
-                    for(int i = 0; i < readFileMapPacman.getVisualObjects().size() ; i++){
-                        root.getChildren().add(readFileMapPacman.getVisualObjects().get(i).getImageView());
-                    }*/
-
-//                   root.setStyle("-fx-background-color: black;");
-
                     Musique.mediaPlayer.stop();
                     stage.setScene(currentMap.getMapScene());
-                    stage.centerOnScreen();
-                    //stage.setResizable(false);
-                    stage.sizeToScene();
+
                 }
             });
 
