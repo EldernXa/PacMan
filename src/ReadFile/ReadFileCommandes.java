@@ -1,10 +1,12 @@
 package ReadFile;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReadFileCommandes {
     private String file[];
@@ -57,7 +59,19 @@ public class ReadFileCommandes {
 
     public void write(String direction, char touche, int x, int y) {
         try {
+            List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(pathName), StandardCharsets.UTF_8));
+            System.out.println(this.direction.contains(direction));
+            if(this.direction.contains(direction) ){
+                for (int i = 0; i < file.length; i++) {
+                    String line[] = file[i].split("\\s+");
+                    if(line[0].equals(direction)){
+                        fileContent.set(i, direction +" " + touche+" " + x+" " +y);
+                        Files.write(Paths.get(pathName), fileContent, StandardCharsets.UTF_8);
+                        return;
 
+                    }
+                }
+            }
 
             File file = new File(pathName);
 
@@ -66,6 +80,8 @@ public class ReadFileCommandes {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(direction +" "+touche+" "+x+" "+y+"\n");
             bufferedWriter.close();
+
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
