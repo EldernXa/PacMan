@@ -40,6 +40,7 @@ public class MenuChoixDifficulte {
         setChoixDiff();
         setToolTip();
 
+        stage.setMaximized(true);
 
         pane.getChildren().addAll(fond.getImageView(),hbox, revenir.getImageView());
         pane.setStyle("-fx-background-color: black");
@@ -101,7 +102,6 @@ public class MenuChoixDifficulte {
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                //a revoir lier avec le menu du choix du jeu
 
                 stage.setScene(sceneBack);
             }
