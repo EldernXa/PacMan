@@ -1,6 +1,4 @@
 import GraphicsEngine.*;
-import ReadFile.ReadFileCommandes;
-import ReadFile.ReadFileMap2Pacman;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

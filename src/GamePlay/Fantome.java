@@ -1,8 +1,6 @@
 package GamePlay;
 import GraphicsEngine.*;
 
-import ReadFile.PosMursAssocies;
-import ReadFile.ReadFileMap2Pacman;
 import javafx.scene.Scene;
 
 import java.util.ArrayList;
