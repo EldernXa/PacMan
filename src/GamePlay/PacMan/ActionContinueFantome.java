@@ -1,15 +1,12 @@
-package GraphicsEngine;
+package GamePlay.PacMan;
 
-import GamePlay.Fantome;
-import ReadFile.PosMursAssocies;
+import GraphicsEngine.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class ActionContinueFantome extends Action{
+public class ActionContinueFantome extends Action {
 
     private float tps;
     private Timeline timeline;
@@ -18,7 +15,7 @@ public class ActionContinueFantome extends Action{
     private final Map map;
 
 
-    public ActionContinueFantome(GameImage image, Scene scene, float tps,MouvingObject mouvingObject, Map map){
+    public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, Map map){
         super(image, scene, mouvingObject);
         this.mouvingObject = mouvingObject;
         this.tps = tps;
@@ -56,7 +53,7 @@ public class ActionContinueFantome extends Action{
     }
 
     @Override
-    void doWhenBlock(){
+    public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
         VisualObject.removeTimeline(indTimeline);
         VisualObject.startTimelineParallel();

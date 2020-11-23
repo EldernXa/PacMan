@@ -1,9 +1,9 @@
 package GraphicsEngine;
 
-import GamePlay.Fantome;
-import GamePlay.PacMan;
-import GamePlay.Point;
-import GamePlay.ScorePacman;
+import GamePlay.PacMan.Fantome;
+import GamePlay.PacMan.PacMan;
+import GamePlay.PacMan.Point;
+import GamePlay.PacMan.ScorePacman;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;

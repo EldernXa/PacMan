@@ -84,7 +84,7 @@ public class ActionContinue extends Action{
     }
 
     @Override
-    void doWhenBlock(){
+    public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
         VisualObject.removeTimeline(indTimeline);
         VisualObject.startTimelineParallel();

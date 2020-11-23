@@ -1,16 +1,11 @@
-package GamePlay;
+package GamePlay.PacMan;
 
 import GraphicsEngine.*;
 import ReadFile.ReadFileCommandes;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class PacMan extends MouvingObject {
 

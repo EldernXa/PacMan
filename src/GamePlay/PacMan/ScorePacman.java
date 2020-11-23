@@ -1,12 +1,9 @@
-package GamePlay;
+package GamePlay.PacMan;
 
-import GamePlay.PacMan;
-import GraphicsEngine.Conclusion;
 import GraphicsEngine.ImageViewSizePos;
 import GraphicsEngine.Score;
 import GraphicsEngine.VisualObject;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;

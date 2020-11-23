@@ -1,4 +1,4 @@
-package GamePlay;
+package GamePlay.PacMan;
 
 import GraphicsEngine.Coordinate;
 import GraphicsEngine.UnmouvingObj;

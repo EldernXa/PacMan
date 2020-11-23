@@ -1,13 +1,9 @@
 package GraphicsEngine;
 
 //import ReadFile.ReadFileMapPacman;
-import GamePlay.Fantome;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-
-import java.util.ArrayList;
 
 public class Action {
 
@@ -88,7 +84,7 @@ public class Action {
 
 
 
-    void doWhenBlock () {
+    public void doWhenBlock () {
 
     }
 

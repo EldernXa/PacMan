@@ -1,11 +1,9 @@
-package GamePlay;
+package GamePlay.PacMan;
 import GraphicsEngine.*;
 
 
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
