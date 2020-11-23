@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ReadFileMapPacman {
+public class ReadFileMapPacman extends ReadFileMap{
     private ArrayList<PosMursAssocies> tabMurFctCoord = new ArrayList<>();
     private ArrayList<Coordinate> tabCoordNoPoint = new ArrayList<>();
     private ArrayList<Fruit> tabFruit = new ArrayList<>();
@@ -17,7 +17,8 @@ public class ReadFileMapPacman {
     private File pointsNFruit;
 
     public ReadFileMapPacman(String mapFolderPath){
-        this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
+        this.mapFile = new File
+                (mapFolderPath + "PacmanMap.txt");
         this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
 
         initTabMurFctCoord();
