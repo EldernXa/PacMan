@@ -1,8 +1,7 @@
 package GraphicsEngine;
 
-import GamePlay.Fantome;
-import GamePlay.PacMan;
 //import ReadFile.ReadFileMapPacman;
+import GraphicsEngine.Maps.Map;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,8 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+        import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;

@@ -1,12 +1,9 @@
 package GraphicsEngine;
 
-import GamePlay.Fantome;
-import ReadFile.PosMursAssocies;
+import GraphicsEngine.Maps.Map;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class ActionContinueFantome extends Action{

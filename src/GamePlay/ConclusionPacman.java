@@ -1,6 +1,7 @@
 package GamePlay;
 
 import GraphicsEngine.*;
+import GraphicsEngine.Maps.Map;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -10,13 +11,13 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class ConclusionPacman implements Conclusion {
+public class
+ConclusionPacman implements Conclusion {
     private StackPane pane = new StackPane();
     private final Scene scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/4,Screen.getPrimary().getVisualBounds().getHeight()/4);;;
     private final Button rejouer =  new Button("REJOUER");

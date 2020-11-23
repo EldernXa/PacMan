@@ -2,10 +2,9 @@ package GamePlay;
 import GraphicsEngine.*;
 
 
-import javafx.animation.KeyFrame;
+import GraphicsEngine.Maps.Map;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,7 +17,7 @@ public class Fantome extends MouvingObject {
     private int indTimeline;
     private char lastCharacter;
 
-    public Fantome(String path, Coordinate coordinate, Scene scene,Map map,Coordinate pacmanCoordinate) {
+    public Fantome(String path, Coordinate coordinate, Scene scene, Map map, Coordinate pacmanCoordinate) {
         super(path, coordinate, scene);
         setGoal(pacmanCoordinate);
         addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map));
@@ -128,6 +127,7 @@ public class Fantome extends MouvingObject {
             int nulL = -1;
             return nulL;
         }
+
         public ArrayList<Character> actionPossible (ArrayList <Character> list) {
             ArrayList<Character> characters = new ArrayList<>();
             if (list.contains('H')) {
