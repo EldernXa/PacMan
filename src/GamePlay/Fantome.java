@@ -312,6 +312,14 @@ public class Fantome extends MouvingObject {
         characters.remove(character);
         return characters;
     }
+
+    public Coordinate getFantome() {
+        return fantome;
+    }
+
+    public void setLastCharacter(char lastCharacter) {
+        this.lastCharacter = lastCharacter;
+    }
 }
 
 
