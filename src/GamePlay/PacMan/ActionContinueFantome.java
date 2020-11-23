@@ -1,12 +1,16 @@
-package GraphicsEngine;
+package GamePlay.PacMan;
 
+import GraphicsEngine.Action;
+import GraphicsEngine.GameImage;
 import GraphicsEngine.Maps.Map;
+import GraphicsEngine.MouvingObject;
+import GraphicsEngine.VisualObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.util.Duration;
 
-public class ActionContinueFantome extends Action{
+public class ActionContinueFantome extends Action {
 
     private float tps;
     private Timeline timeline;
@@ -15,24 +19,21 @@ public class ActionContinueFantome extends Action{
     private final Map map;
 
 
-    public ActionContinueFantome(GameImage image, Scene scene, float tps,MouvingObject mouvingObject, Map map){
-        super(image, scene, mouvingObject);
+    public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, Map map, int dir, double x, double y){
+        super(image, scene, mouvingObject,x,y,dir);
         this.mouvingObject = mouvingObject;
         this.tps = tps;
         this.map = map;
 
-        doWhenEventOccur(super.getDir());
+        doWhenEventOccur(dir);
 
 
 
     }
 
-
-
-
-
     @Override
     public void doWhenEventOccur(int dir){
+        System.out.println(dir);
         if(!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
 
             if (timeline == null)
@@ -42,7 +43,7 @@ public class ActionContinueFantome extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-
+                        //System.out.println(dir);
                         super.doWhenEventOccur(dir);
 
                     }
@@ -53,7 +54,7 @@ public class ActionContinueFantome extends Action{
     }
 
     @Override
-    void doWhenBlock(){
+   public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
         VisualObject.removeTimeline(indTimeline);
         VisualObject.startTimelineParallel();

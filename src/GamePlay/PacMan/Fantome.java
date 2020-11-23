@@ -2,7 +2,7 @@ package GamePlay.PacMan;
     import GraphicsEngine.*;
 
 
-import GraphicsEngine.ActionContinueFantome;
+
 import GraphicsEngine.Maps.Map;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -21,9 +21,8 @@ public class Fantome extends MouvingObject {
     public Fantome(String path, Coordinate coordinate, Scene scene, Map map, Coordinate pacmanCoordinate) {
         super(path, coordinate, scene);
         setGoal(pacmanCoordinate);
-        addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map));
-
-
+        this.fantome = coordinate;
+        new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()),0,getGameImage().getValueMove());
 
     }
 

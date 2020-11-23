@@ -38,6 +38,7 @@ public class Action {
         this.scene = scene;
         this.mouvingObject = mouvingObject;
         this.gameImage = gameImage;
+        doWhenEventOccur(dir);
 
 
     }
@@ -72,6 +73,7 @@ public class Action {
     }
 
     public void doWhenEventOccur ( int dir){
+
         move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
     }
 
@@ -85,7 +87,7 @@ public class Action {
 
 
 
-    void doWhenBlock () {
+    public void doWhenBlock () {
 
     }
 
@@ -148,6 +150,8 @@ public class Action {
         }
         return false;
     }
+
+
 
 
     }
