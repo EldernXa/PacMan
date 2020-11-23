@@ -1,7 +1,7 @@
 package ReadFile;
 
+import GamePlay.PacMan.Fruit;
 import GraphicsEngine.Coordinate;
-import GraphicsEngine.Fruit;
 
 import java.io.File;
 import java.util.ArrayList;

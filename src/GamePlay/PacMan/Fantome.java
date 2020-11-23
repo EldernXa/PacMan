@@ -1,7 +1,8 @@
-package GamePlay;
-import GraphicsEngine.*;
+package GamePlay.PacMan;
+    import GraphicsEngine.*;
 
 
+import GraphicsEngine.ActionContinueFantome;
 import GraphicsEngine.Maps.Map;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
