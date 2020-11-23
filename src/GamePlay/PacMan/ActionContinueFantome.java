@@ -15,13 +15,11 @@ public class ActionContinueFantome extends Action {
     private float tps;
     private Timeline timeline;
     private int indTimeline;
-    private final MouvingObject mouvingObject;
     private final Map map;
 
 
     public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, Map map, int dir, double x, double y){
         super(image, scene, mouvingObject,x,y,dir);
-        this.mouvingObject = mouvingObject;
         this.tps = tps;
         this.map = map;
 
@@ -34,8 +32,6 @@ public class ActionContinueFantome extends Action {
     @Override
     public void doWhenEventOccur(int dir){
         System.out.println(dir);
-        if(!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
-
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -48,9 +44,8 @@ public class ActionContinueFantome extends Action {
 
                     }
             ));
-            indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
+            indTimeline = VisualObject.addTimeline(timeline, super.getMouvingObject());
             VisualObject.startTimelineParallel();
-        }
     }
 
     @Override

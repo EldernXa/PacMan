@@ -30,17 +30,21 @@ public class Action {
             runEvent(scene, carac, dir);
         }
 
-    public Action(GameImage gameImage, Scene scene, MouvingObject mouvingObject){
+    public Action(GameImage gameImage, Scene scene, MouvingObject mouvingObject, double x, double y, int dir){
         this.nameAction = "Action_IA";
-        this.x = -1;
-        this.y = -1;
-        this.dir = -1;
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
         this.scene = scene;
         this.mouvingObject = mouvingObject;
         this.gameImage = gameImage;
         doWhenEventOccur(dir);
 
 
+    }
+
+    public MouvingObject getMouvingObject(){
+        return mouvingObject;
     }
 
     public boolean collisionImgView(double x, double y){
