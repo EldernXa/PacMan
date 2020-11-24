@@ -63,7 +63,7 @@ public class Action {
                 break;
         }
 
-        doWhenEventOccur(dir);
+       runEvent(scene,dir);
 
 
     }
@@ -93,12 +93,22 @@ public class Action {
             eventAppear(keyEvent, carac);
         });
     }
+    public void runEvent (Scene scene,int dir){
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
+            eventAppear(keyEvent);
+        });
+    }
 
     public void eventAppear(KeyEvent keyEvent, String carac){
         if (keyEvent.getCode().getChar().toLowerCase().compareTo(
                 carac.toLowerCase()) == 0) {
             doWhenEventOccur(dir);
         }
+    }
+    public void eventAppear(KeyEvent keyEvent){
+
+            doWhenEventOccur(dir);
+
     }
 
     public void doWhenEventOccur ( int dir){

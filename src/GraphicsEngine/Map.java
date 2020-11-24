@@ -67,7 +67,7 @@ public class Map {
             System.out.println();imgFantome.getImageView(),
         }*/
         mapPane.setStyle("-fx-background-color: black");
-        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
+        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman);
         visualObjects.add(imgFantome);
         mapPane.getChildren().addAll(imgFantome.getImageView(), imgPacman.getImageView());
         score(imgPacman);
