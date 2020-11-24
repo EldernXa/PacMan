@@ -16,13 +16,12 @@ public class Action {
     private final double x;
     private final double y;
     private final String nameAction;
-    private final GameImage gameImage;
     private final MouvingObject mouvingObject;
-    private int dir;
-    private Scene scene;
+    private final int dir;
+    private final Scene scene;
 
 
-    public Action(GameImage gameImage, Scene scene, String carac, double x, double y, int dir, String
+    public Action(Scene scene, String carac, double x, double y, int dir, String
         nameAction, MouvingObject mouvingObject){
             this.nameAction = nameAction;
             this.x = x;
@@ -30,16 +29,14 @@ public class Action {
             this.dir = dir;
             this.scene = scene;
             this.mouvingObject = mouvingObject;
-            this.gameImage = gameImage;
             runEvent(scene, carac, dir);
         }
 
-    public Action(GameImage gameImage, Scene scene, MouvingObject mouvingObject, int dir){
+    public Action(Scene scene, MouvingObject mouvingObject, int dir){
         this.nameAction = "Action_IA";
         this.dir = dir;
         this.scene = scene;
         this.mouvingObject = mouvingObject;
-        this.gameImage = gameImage;
         switch (dir){
             case 0:
                 this.x = getGameImage().getValueMove();
@@ -73,7 +70,7 @@ public class Action {
     }
 
     public boolean collisionImgView(double x, double y){
-        ImageView imgV = new ImageView(gameImage.getImgView().getImage());
+        ImageView imgV = new ImageView(mouvingObject.getGameImage().getImgView().getImage());
         imgV.setX(x);
         imgV.setY(y);
         return(collision(imgV));
@@ -112,7 +109,7 @@ public class Action {
     }
 
     public void doWhenEventOccur ( int dir){
-        move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
+        move(mouvingObject.getGameImage().getCoordinate().getX() + x, mouvingObject.getGameImage().getCoordinate().getY() + y, dir);
     }
 
     public double getX () {
@@ -130,7 +127,7 @@ public class Action {
     }
 
     private void move ( double x, double y, int dir){
-        Coordinate c = new Coordinate(gameImage.getCoordinate().getX(), gameImage.getCoordinate().getY());
+        Coordinate c = new Coordinate(mouvingObject.getGameImage().getCoordinate().getX(), mouvingObject.getGameImage().getCoordinate().getY());
         if (x >= 0 && y >= 0) {
             mouvingObject.move(x, y);
             nextImage(dir);
@@ -150,7 +147,7 @@ public class Action {
     }
 
     public GameImage getGameImage () {
-        return gameImage;
+        return mouvingObject.getGameImage();
     }
 
 
