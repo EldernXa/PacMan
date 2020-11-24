@@ -22,8 +22,8 @@ public class ActionContinueFantome extends Action {
 
 
 
-    public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, int dir,Map map){
-        super(image, scene, mouvingObject,dir);
+    public ActionContinueFantome(Scene scene, float tps, MouvingObject mouvingObject, int dir,Map map){
+        super(scene, mouvingObject,dir);
         this.tps = tps;
         this.mouvingObject = mouvingObject;
         this.map = map;

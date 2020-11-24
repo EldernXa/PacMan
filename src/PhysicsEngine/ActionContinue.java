@@ -20,8 +20,8 @@ public class ActionContinue extends Action{
     private final MouvingObject mouvingObject;
     private final LinkedList<KeyCode> listKeyEvent;
 
-    public ActionContinue(GameImage image, Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject){
-        super(image, scene, carac, x, y, dir, nameAction, mouvingObject);
+    public ActionContinue(Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject){
+        super(scene, carac, x, y, dir, nameAction, mouvingObject);
         listKeyEvent = new LinkedList<>();
         this.mouvingObject = mouvingObject;
         this.tps = tps;

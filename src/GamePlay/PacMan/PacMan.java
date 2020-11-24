@@ -32,7 +32,7 @@ public class PacMan extends MouvingObject {
         nbVies_restantes = new SimpleIntegerProperty(nbViesMax);
         pacmanControle = new ReadFileCommandes("./data/Controles/Pacman/controlesPac.txt");
         for(int i = 0; i<pacmanControle.getDirection().size(); i++){
-            addAction(new ActionContinue(getGameImage(), scene,
+            addAction(new ActionContinue(scene,
                     pacmanControle.getTouche().get(i), pacmanControle.getxCoord().get(i),
                     pacmanControle.getyCoord().get(i), i, pacmanControle.getDirection().get(i),
                     valueTps, this));
