@@ -1,9 +1,9 @@
 package GamePlay.PacMan;
 
-import GraphicsEngine.Action;
+import PhysicsEngine.Action;
 import GraphicsEngine.GameImage;
-import GraphicsEngine.Maps.Map;
-import GraphicsEngine.MouvingObject;
+import GraphicsEngine.Map;
+import PhysicsEngine.MouvingObject;
 import GraphicsEngine.VisualObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

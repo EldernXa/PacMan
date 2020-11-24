@@ -3,8 +3,9 @@ package GamePlay.PacMan;
 
 
 
-import GraphicsEngine.Maps.Map;
-import javafx.animation.Timeline;
+import GraphicsEngine.Map;
+    import PhysicsEngine.MouvingObject;
+    import javafx.animation.Timeline;
 import javafx.scene.Scene;
 
 import java.util.ArrayList;

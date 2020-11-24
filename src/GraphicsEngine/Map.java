@@ -1,4 +1,4 @@
-package GraphicsEngine.Maps;
+package GraphicsEngine;
 
 import GamePlay.PacMan.Fantome;
 import GamePlay.PacMan.PacMan;
@@ -13,10 +13,9 @@ import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
-public class MapPacman extends Map{
+public class Map {
     private Stage stage;
     private ReadFileMapPacman readFileMapPacman;
     private ArrayList<Point> pointArrayList = new ArrayList<>();
@@ -34,11 +33,12 @@ public class MapPacman extends Map{
     private Scene mapScene;
     private Coordinate pacmanInitCoord;
 
-    public MapPacman(){
+    public Map(){
 
     }
 
-    public MapPacman(Stage stage, String filePath){
+
+    public Map(Stage stage, String filePath){
         this.stage = stage;
         readFileMapPacman = new ReadFileMapPacman(filePath);
         abscMax = readFileMapPacman.getAbscMax();
@@ -64,7 +64,7 @@ public class MapPacman extends Map{
             coordinate.affichageCoord();
             System.out.print("Coordonnées calculées : ");
             getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
-            System.out.println();
+            System.out.println();imgFantome.getImageView(),
         }*/
         mapPane.setStyle("-fx-background-color: black");
         Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());

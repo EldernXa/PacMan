@@ -1,7 +1,11 @@
-package GraphicsEngine;
+package PhysicsEngine;
 
 //import ReadFile.ReadFileMapPacman;
-import GraphicsEngine.Maps.Map;
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.GameImage;
+import GraphicsEngine.Map;
+import GraphicsEngine.VisualObject;
+import PhysicsEngine.MouvingObject;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -98,10 +102,10 @@ public class Action {
     private void move ( double x, double y, int dir){
         Coordinate c = new Coordinate(gameImage.getCoordinate().getX(), gameImage.getCoordinate().getY());
         if (x >= 0 && y >= 0) {
-            gameImage.move(x, y);
+            mouvingObject.move(x, y);
             nextImage(dir);
         if(collision(mouvingObject)){
-            gameImage.move(c.getX(), c.getY());
+            mouvingObject.move(c.getX(), c.getY());
             previousImage(dir);
         }
         }

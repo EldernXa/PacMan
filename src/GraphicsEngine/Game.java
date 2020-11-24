@@ -1,7 +1,6 @@
 package GraphicsEngine;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import MusicEngine.Musique;
 
 import java.io.File;
 import java.io.FileNotFoundException;

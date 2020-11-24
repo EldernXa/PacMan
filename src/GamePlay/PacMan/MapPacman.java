@@ -1,21 +1,19 @@
-package GraphicsEngine.Maps;
+package GamePlay.PacMan;
 
-import GamePlay.PacMan.Fantome;
-import GamePlay.PacMan.PacMan;
-import GamePlay.PacMan.Point;
-import GamePlay.PacMan.ScorePacman;
 import GraphicsEngine.Coordinate;
 import GraphicsEngine.Decor;
 import GraphicsEngine.ImageViewSizePos;
+import GraphicsEngine.Map;
 import GraphicsEngine.VisualObject;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
-public class Map {
+public class MapPacman extends Map {
     private Stage stage;
     private ReadFileMapPacman readFileMapPacman;
     private ArrayList<Point> pointArrayList = new ArrayList<>();
@@ -33,12 +31,11 @@ public class Map {
     private Scene mapScene;
     private Coordinate pacmanInitCoord;
 
-    public Map(){
+    public MapPacman(){
 
     }
 
-
-    public Map(Stage stage, String filePath){
+    public MapPacman(Stage stage, String filePath){
         this.stage = stage;
         readFileMapPacman = new ReadFileMapPacman(filePath);
         abscMax = readFileMapPacman.getAbscMax();
@@ -64,7 +61,7 @@ public class Map {
             coordinate.affichageCoord();
             System.out.print("Coordonnées calculées : ");
             getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
-            System.out.println();imgFantome.getImageView(),
+            System.out.println();
         }*/
         mapPane.setStyle("-fx-background-color: black");
         Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
