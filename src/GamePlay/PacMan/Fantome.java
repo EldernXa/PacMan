@@ -26,9 +26,11 @@ public class Fantome extends MouvingObject {
         setGoal(pacmanCoordinate);
         this.fantome = getGameImage().getCoordinate();
         //new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
-        Test(scene, map);
+        //Test(scene, map);
+        new ActionContinueFantome(getGameImage(),scene,valueTps,this,Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()),map);
     }
-    public void Test(Scene scene,Map map){
+   /* public void Test(Scene scene,Map map){
+
         if (timeline == null)
             timeline = new Timeline();
         VisualObject.stopTimelineParallel();
@@ -37,14 +39,14 @@ public class Fantome extends MouvingObject {
                 Duration.millis(valueTps),
                 temps -> {
 
-                    new ActionContinueFantome(getGameImage(),scene,valueTps,this,Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
-                    getFantome().affichageCoord();
-                    System.out.println(Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
+                    new ActionContinueFantome(getGameImage(),scene,valueTps,this,Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()),map);
+                    //getFantome().affichageCoord();
+                    //System.out.println(Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
                 }
         ));
         indTimeline = VisualObject.addTimeline(timeline, this);
         VisualObject.startTimelineParallel();
-    }
+    }*/
 
 
     public void setGoal(Coordinate coordinate) {
