@@ -1,6 +1,8 @@
-package GraphicsEngine;
+package GamePlay.PacMan;
 
-import GamePlay.PacMan;
+import GraphicsEngine.Coordinate;
+import PhysicsEngine.UnmouvingObj;
+import GraphicsEngine.VisualObject;
 import javafx.scene.Scene;
 
 public class Fruit extends UnmouvingObj {

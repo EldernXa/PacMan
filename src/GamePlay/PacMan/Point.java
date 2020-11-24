@@ -1,7 +1,7 @@
-package GamePlay;
+package GamePlay.PacMan;
 
 import GraphicsEngine.Coordinate;
-import GraphicsEngine.UnmouvingObj;
+import PhysicsEngine.UnmouvingObj;
 import GraphicsEngine.VisualObject;
 import javafx.scene.Scene;
 

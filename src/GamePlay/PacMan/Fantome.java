@@ -1,12 +1,16 @@
-package GamePlay;
-import GraphicsEngine.*;
+package GamePlay.PacMan;
+    import GraphicsEngine.*;
 
 
-import GraphicsEngine.Maps.Map;
-import javafx.animation.Timeline;
+
+import GraphicsEngine.Map;
+    import PhysicsEngine.MouvingObject;
+    import javafx.animation.KeyFrame;
+    import javafx.animation.Timeline;
 import javafx.scene.Scene;
+    import javafx.util.Duration;
 
-import java.util.ArrayList;
+    import java.util.ArrayList;
 import java.util.Random;
 
 public class Fantome extends MouvingObject {
@@ -16,15 +20,40 @@ public class Fantome extends MouvingObject {
     private Timeline timeline;
     private int indTimeline;
     private char lastCharacter;
+    private PacMan pacMan;
 
-    public Fantome(String path, Coordinate coordinate, Scene scene, Map map, Coordinate pacmanCoordinate) {
+    public Fantome(String path, Coordinate coordinate, Scene scene, Map map, PacMan pacMan) {
         super(path, coordinate, scene);
-        setGoal(pacmanCoordinate);
-        addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map));
-
-
+        setGoal(pacMan.getCoordinate());
+        this.pacMan = pacMan;
+        this.fantome = getGameImage().getCoordinate();
+        //new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
+        //Test(scene, map);
+       addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,0,map,pacMan));
+        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,1,map,pacMan));
+        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,2,map,pacMan));
+        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,3,map,pacMan));
 
     }
+   /* public void Test(Scene scene,Map map){
+
+        if (timeline == null)
+            timeline = new Timeline();
+        VisualObject.stopTimelineParallel();
+        timeline.getKeyFrames().clear();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.millis(valueTps),
+                temps -> {
+
+                    new ActionContinueFantome(getGameImage(),scene,valueTps,this,Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()),map);
+                    //getFantome().affichageCoord();
+                    //System.out.println(Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
+                }
+        ));
+        indTimeline = VisualObject.addTimeline(timeline, this);
+        VisualObject.startTimelineParallel();
+    }*/
+
 
     public void setGoal(Coordinate coordinate) {
         Random rX = new Random();
@@ -130,11 +159,28 @@ public class Fantome extends MouvingObject {
 
         public ArrayList<Character> actionPossible (ArrayList <Character> list) {
             ArrayList<Character> characters = new ArrayList<>();
-            if (list.contains('H')) {
-                characters.add('B');
+
+            if (list.contains('H') && list.contains('G') && list.contains('B')) {
+
                 characters.add('D');
+                return characters;
+
+
+            }
+            if (list.contains('H') && list.contains('D') && list.contains('B')) {
                 characters.add('G');
                 return characters;
+
+            }
+            if (list.contains('H') && list.contains('D') && list.contains('G')) {
+                characters.add('B');
+                return characters;
+
+            }
+            if (list.contains('B') && list.contains('D') && list.contains('G')) {
+                characters.add('H');
+                return characters;
+
             }
             if (list.contains('H') && list.contains('G')) {
                 characters.add('B');
@@ -155,30 +201,6 @@ public class Fantome extends MouvingObject {
 
 
             }
-            if (list.contains('H') && list.contains('G') && list.contains('B')) {
-
-                characters.add('D');
-                return characters;
-
-
-            }
-            if (list.contains('H') && list.contains('D') && list.contains('B')) {
-                characters.add('G');
-                return characters;
-
-            }
-            if (list.contains('H') && list.contains('D') && list.contains('G')) {
-                characters.add('B');
-                return characters;
-
-            }
-            if (list.contains('B')) {
-                characters.add('H');
-                characters.add('D');
-                characters.add('G');
-                return characters;
-
-            }
             if (list.contains('B') && list.contains('G')) {
                 characters.add('H');
                 characters.add('D');
@@ -191,9 +213,22 @@ public class Fantome extends MouvingObject {
                 return characters;
 
             }
-
-            if (list.contains('B') && list.contains('D') && list.contains('G')) {
+            if (list.contains('G') && list.contains('D')) {
                 characters.add('H');
+                characters.add('B');
+                return characters;
+
+            }
+            if (list.contains('H')) {
+                characters.add('B');
+                characters.add('D');
+                characters.add('G');
+                return characters;
+            }
+            if (list.contains('B')) {
+                characters.add('H');
+                characters.add('D');
+                characters.add('G');
                 return characters;
 
             }
@@ -205,12 +240,7 @@ public class Fantome extends MouvingObject {
                 return characters;
 
             }
-            if (list.contains('G') && list.contains('D')) {
-                characters.add('H');
-                characters.add('B');
-                return characters;
 
-            }
             if (list.contains('D')) {
                 characters.add('H');
                 characters.add('G');
@@ -289,8 +319,8 @@ public class Fantome extends MouvingObject {
 
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
-        PacMan pacman = ((PacMan)visualObjects);
-        if(visualObjects != null){
+        if(visualObjects!=null && visualObjects.getClass()==PacMan.class){
+            PacMan pacman = ((PacMan) visualObjects);
             pacman.death();
         }
 
@@ -304,7 +334,7 @@ public class Fantome extends MouvingObject {
         if(character == 'B')newChar = 'H';
         if(character == 'D')newChar = 'G';
         if(character == 'G')newChar = 'D';
-        System.out.println(newChar);
+        //System.out.println(newChar);
         return newChar;
     }
 

@@ -1,4 +1,4 @@
-package GraphicsEngine;
+package MusicEngine;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -7,7 +7,7 @@ import java.io.File;
 
 public class Musique {
     String path;
-    static MediaPlayer mediaPlayer;
+    public static MediaPlayer mediaPlayer;
     boolean playing = false;
 
 
@@ -21,7 +21,7 @@ public class Musique {
         return path;
     }
 
-    void lancerMusique()
+    public void lancerMusique()
     {
         if(!playing) {
             mediaPlayer.play();
@@ -32,16 +32,16 @@ public class Musique {
             });
         }
     }
-    void modifMusique(Media nomMedia){
+    public void modifMusique(Media nomMedia){
         mediaPlayer.stop();
         mediaPlayer = new MediaPlayer(nomMedia);
     }
-    void stopMusique(){
+    public void stopMusique(){
         mediaPlayer.stop();
         playing=false;
         mediaPlayer.setMute(false);
     }
-    void mute(boolean mute){
+    public void mute(boolean mute){
         mediaPlayer.setMute(mute);
     }
 

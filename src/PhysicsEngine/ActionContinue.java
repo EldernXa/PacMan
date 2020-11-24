@@ -1,5 +1,7 @@
-package GraphicsEngine;
+package PhysicsEngine;
 
+import GraphicsEngine.GameImage;
+import GraphicsEngine.VisualObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -7,7 +9,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -19,8 +20,8 @@ public class ActionContinue extends Action{
     private final MouvingObject mouvingObject;
     private final LinkedList<KeyCode> listKeyEvent;
 
-    public ActionContinue(GameImage image, Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject){
-        super(image, scene, carac, x, y, dir, nameAction, mouvingObject);
+    public ActionContinue(Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject){
+        super(scene, carac, x, y, dir, nameAction, mouvingObject);
         listKeyEvent = new LinkedList<>();
         this.mouvingObject = mouvingObject;
         this.tps = tps;
@@ -84,7 +85,7 @@ public class ActionContinue extends Action{
     }
 
     @Override
-    void doWhenBlock(){
+    public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
         VisualObject.removeTimeline(indTimeline);
         VisualObject.startTimelineParallel();

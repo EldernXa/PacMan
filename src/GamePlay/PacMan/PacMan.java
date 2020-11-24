@@ -1,16 +1,13 @@
-package GamePlay;
+package GamePlay.PacMan;
 
 import GraphicsEngine.*;
+import PhysicsEngine.ActionContinue;
+import PhysicsEngine.MouvingObject;
 import ReadFile.ReadFileCommandes;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class PacMan extends MouvingObject {
 
@@ -35,7 +32,7 @@ public class PacMan extends MouvingObject {
         nbVies_restantes = new SimpleIntegerProperty(nbViesMax);
         pacmanControle = new ReadFileCommandes("./data/Controles/Pacman/controlesPac.txt");
         for(int i = 0; i<pacmanControle.getDirection().size(); i++){
-            addAction(new ActionContinue(getGameImage(), scene,
+            addAction(new ActionContinue(scene,
                     pacmanControle.getTouche().get(i), pacmanControle.getxCoord().get(i),
                     pacmanControle.getyCoord().get(i), i, pacmanControle.getDirection().get(i),
                     valueTps, this));
@@ -66,7 +63,7 @@ public class PacMan extends MouvingObject {
         this.coordinate = new Coordinate(coordinate.getX(),coordinate.getY());
         super.getImageView().setX(coordinate.getX());
         super.getImageView().setY(coordinate.getY());
-        super.getGameImage().move(coordinate.getX(),coordinate.getY());
+        super.move(coordinate.getX(),coordinate.getY());
     }
     public void death(){
         setCoordinate(super.getGameImage().getCoordInit());

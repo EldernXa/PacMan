@@ -1,20 +1,23 @@
-package GraphicsEngine;
+package PhysicsEngine;
 
 import AnimationEngine.Animation;
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.VisualObject;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 
-public abstract class MouvingObject extends VisualObject{
+public abstract class MouvingObject extends VisualObject {
     private final ArrayList<Action> listAction;
-    private Action  actionNext = null;
-    private Action actualAction = null;
+    private Action actionNext;
+    private Action actualAction;
     private final Animation animation;
     private int valueAnimate;
 
     public MouvingObject(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);
+        actionNext = null;
+        actualAction = null;
         int valueAnimate = 0;
         animation = new Animation(path, 4);
         super.getGameImage().setImage(animation.getInitImage());
@@ -72,6 +75,12 @@ public abstract class MouvingObject extends VisualObject{
         return valueAnimate;
     }
 
+    public void move(double x, double y){
+        super.getGameImage().getCoordinate().setX(x);
+        super.getGameImage().getCoordinate().setY(y);
+        super.getImageView().setX(super.getGameImage().getCoordinate().getX());
+        super.getImageView().setY(super.getGameImage().getCoordinate().getY());
+    }
 
 
 }
