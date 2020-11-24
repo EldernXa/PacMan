@@ -30,14 +30,35 @@ public class Action {
             runEvent(scene, carac, dir);
         }
 
-    public Action(GameImage gameImage, Scene scene, MouvingObject mouvingObject, double x, double y, int dir){
+    public Action(GameImage gameImage, Scene scene, MouvingObject mouvingObject, int dir){
         this.nameAction = "Action_IA";
-        this.x = x;
-        this.y = y;
         this.dir = dir;
         this.scene = scene;
         this.mouvingObject = mouvingObject;
         this.gameImage = gameImage;
+        switch (dir){
+            case 0:
+                this.x = getGameImage().getValueMove();
+                this.y = 0;
+                break;
+            case 1:
+                this.x = 0;
+                this.y = -getGameImage().getValueMove();
+                break;
+            case 2:
+                this.x = -getGameImage().getValueMove();
+                this.y = 0;
+                break;
+            case 3:
+                this.x = 0;
+                this.y = getGameImage().getValueMove();
+                break;
+            default:
+                this.x = 0;
+                this.y = 0;
+                break;
+        }
+
         doWhenEventOccur(dir);
 
 
