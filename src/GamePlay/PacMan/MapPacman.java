@@ -1,40 +1,24 @@
-package GraphicsEngine.Maps;
+package GamePlay.PacMan;
 
-import GamePlay.Fantome;
-import GamePlay.PacMan;
-import GamePlay.Point;
-import GamePlay.ScorePacman;
-import GraphicsEngine.Coordinate;
-import GraphicsEngine.Decor;
-import GraphicsEngine.ImageViewSizePos;
-import GraphicsEngine.VisualObject;
+import GraphicsEngine.*;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap;
 import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
-public class MapPacman extends Map{
+public class MapPacman extends Map {
     private ReadFileMapPacman readFileMapPacman;
     private ArrayList<Point> pointArrayList = new ArrayList<>();
     private ArrayList<Coordinate> realCoord = new ArrayList<>();
     private ArrayList<Coordinate> pointsCoord = new ArrayList<>();
-
-    private double abscMax;
-    private double ordMax;
-    private double carreaux = 32;
-    private double epaisseurMur = 18;
-    private double longueurMur = 68;
     private Coordinate pacmanInitCoord;
 
     public MapPacman(Stage stage, String mapFolderPath){
         super(stage, mapFolderPath);
-        abscMax = readFileMapPacman.getAbscMax();
-        ordMax = readFileMapPacman.getOrdMax();
-        this.pacmanInitCoord = new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1);
+        this.pacmanInitCoord = new Coordinate((getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur()))+1, 8*getEpaisseurMur()+7*(getLongueurMur()-2*getEpaisseurMur()) +1);
         fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();
@@ -51,16 +35,17 @@ public class MapPacman extends Map{
             System.out.println();
         }*/
         getMapPane().setStyle("-fx-background-color: black");
-        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), getMapScene(), this,imgPacman.getCoordinate());
+        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1), getMapScene(), this,imgPacman);
+        getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome.getImageView());
         visualObjects.add(imgFantome);
-        getMapPane().getChildren().addAll(imgFantome.getImageView(), imgPacman.getImageView());
         score(imgPacman);
     }
 
     /**
      * Crée tout les murs de la map en lisant une liste extraite d'un fichier texte
      */
-    public void creationDeMap(){
+    @Override
+    public void creationDeMap() {
         for(PosMursAssocies posMursAssocies : readFileMapPacman.getTabMurFctCoord()){
             for(Character chara : posMursAssocies.getListOfWalls()){
                 switch (chara){
@@ -81,14 +66,15 @@ public class MapPacman extends Map{
         }
     }
 
+
     /**
      * Crée le mur qui se trouve en haut de la case concernée indentifiée por les cord en attribut
      * @param absc
      * @param ord
      */
     public void creationMurHaut(double absc, double ord){
-        double abscisse = (longueurMur-epaisseurMur)*absc;
-        double ordonnee = (longueurMur-epaisseurMur)*ord;
+        double abscisse = (getLongueurMur()-getEpaisseurMur())*absc;
+        double ordonnee = (getLongueurMur()-getEpaisseurMur())*ord;
         visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),getMapScene()));
         getMapPane().getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
@@ -99,8 +85,8 @@ public class MapPacman extends Map{
      * @param ord
      */
     public void creationMurDroite(double absc, double ord){
-        double abscisse = (longueurMur-epaisseurMur)*(absc+1);
-        double ordonnee = (longueurMur-epaisseurMur)*ord;
+        double abscisse = (getLongueurMur()-getEpaisseurMur())*(absc+1);
+        double ordonnee = (getLongueurMur()-getEpaisseurMur())*ord;
         visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),getMapScene()));
         getMapPane().getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
@@ -111,9 +97,9 @@ public class MapPacman extends Map{
      * @param ord
      */
     public void creationMurBas(double absc, double ord){
-        if(ord == ordMax) {
-            double abscisse = (longueurMur-epaisseurMur)*absc;
-            double ordonnee = (longueurMur-epaisseurMur)*(ord+1);
+        if(ord == getOrdMax()) {
+            double abscisse = (getLongueurMur()-getEpaisseurMur())*absc;
+            double ordonnee = (getLongueurMur()-getEpaisseurMur())*(ord+1);
             visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),getMapScene()));
             getMapPane().getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png", new Coordinate(abscisse, ordonnee)).getImageView());
         }
@@ -126,8 +112,8 @@ public class MapPacman extends Map{
      */
     public void creationMurGauche(double absc, double ord){
         if(absc == 0) {
-            double abscisse = (longueurMur-epaisseurMur)*absc;
-            double ordonnee = (longueurMur-epaisseurMur)*ord;
+            double abscisse = (getLongueurMur()-getEpaisseurMur())*absc;
+            double ordonnee = (getLongueurMur()-getEpaisseurMur())*ord;
             visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),getMapScene()));
             getMapPane().getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png", new Coordinate(abscisse, ordonnee)).getImageView());
         }
@@ -140,7 +126,7 @@ public class MapPacman extends Map{
         for(PosMursAssocies posMursAssocies : readFileMapPacman.getTabMurFctCoord()){
             double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
             double fausseOrd = posMursAssocies.getPointCoordinate().getY();
-            Coordinate nouv = new Coordinate(epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseAbsc*(longueurMur-epaisseurMur),epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseOrd*(longueurMur-epaisseurMur));
+            Coordinate nouv = new Coordinate(getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseAbsc*(getLongueurMur()-getEpaisseurMur()),getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseOrd*(getLongueurMur()-getEpaisseurMur()));
             pointsCoord.add(nouv);
         }
     }
@@ -152,7 +138,7 @@ public class MapPacman extends Map{
         for(PosMursAssocies posMursAssocies : readFileMapPacman.getTabMurFctCoord()){
             double fausseAbsc = posMursAssocies.getPointCoordinate().getX();
             double fausseOrd = posMursAssocies.getPointCoordinate().getY();
-            Coordinate nouv = new Coordinate(fausseAbsc*(longueurMur-2*epaisseurMur)+(1+fausseAbsc)*epaisseurMur+1,fausseOrd*(longueurMur-2*epaisseurMur)+(1+fausseOrd)*epaisseurMur+1);
+            Coordinate nouv = new Coordinate(fausseAbsc*(getLongueurMur()-2*getEpaisseurMur())+(1+fausseAbsc)*getEpaisseurMur()+1,fausseOrd*(getLongueurMur()-2*getEpaisseurMur())+(1+fausseOrd)*getEpaisseurMur()+1);
             realCoord.add(nouv);
         }
     }
@@ -161,7 +147,7 @@ public class MapPacman extends Map{
         for(Coordinate coord : readFileMapPacman.getTabCoordNoPoint()){
             double fausseAbsc = coord.getX();
             double fausseOrd = coord.getY();
-            Coordinate nouv = new Coordinate(epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseAbsc*(longueurMur-epaisseurMur),epaisseurMur+(longueurMur-2*epaisseurMur)/2-2.5+fausseOrd*(longueurMur-epaisseurMur));
+            Coordinate nouv = new Coordinate(getOrdMax()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseAbsc*(getLongueurMur()-getEpaisseurMur()),getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseOrd*(getLongueurMur()-getEpaisseurMur()));
             if (coordinate.compare(nouv)){
                 return true;
             }
@@ -181,7 +167,11 @@ public class MapPacman extends Map{
 
     @Override
     public Scene initMapScene() {
-        return new Scene(getMapPane(),(abscMax+1)*carreaux+(abscMax+2)*epaisseurMur,(ordMax+1)*carreaux+(ordMax+2)*epaisseurMur);
+        System.out.println("AbscMax : " + getAbscMax());
+        System.out.println("OrdMax : " + getOrdMax());
+        System.out.println("Carreaux : " + getCarreaux());
+        System.out.println("Epaisseur des murs : " + getEpaisseurMur());
+        return new Scene(getMapPane(),(getAbscMax()+1)*getCarreaux()+(getAbscMax()+2)*getEpaisseurMur(),(getOrdMax()+1)*getCarreaux()+(getOrdMax()+2)*getEpaisseurMur());
     }
 
     /**
@@ -209,7 +199,8 @@ public class MapPacman extends Map{
         return null;
     }
 
-    public ReadFileMapPacman getReadFileMapPacman() {
+    @Override
+    public ReadFileMap getReadFileMap() {
         return readFileMapPacman;
     }
 
@@ -242,11 +233,25 @@ public class MapPacman extends Map{
     public Scene getMapScene() {
         return super.getMapScene();
     }
-
     public Pane getMapPane() {
         return super.getMapPane();
     }
     public ArrayList<Coordinate> getRealCoord() {
         return realCoord;
+    }
+
+    @Override
+    public double getCarreaux() {
+        return 32;
+    }
+
+    @Override
+    public double getEpaisseurMur() {
+        return 18;
+    }
+
+    @Override
+    public double getLongueurMur() {
+        return 68;
     }
 }

@@ -1,19 +1,11 @@
-package GraphicsEngine.Maps;
+package GraphicsEngine;
 
-import GamePlay.Fantome;
-import GamePlay.PacMan;
-import GamePlay.Point;
-import GamePlay.ScorePacman;
-import GraphicsEngine.Coordinate;
-import GraphicsEngine.Decor;
-import GraphicsEngine.ImageViewSizePos;
-import GraphicsEngine.VisualObject;
-import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap;
-import ReadFile.ReadFileMapPacman;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 public abstract class Map {
@@ -21,6 +13,11 @@ public abstract class Map {
     public static ArrayList<VisualObject> visualObjects = new ArrayList<>();
     private Scene mapScene;
     private Pane mapPane;
+    private double abscMax;
+    private double ordMax;
+    private double carreaux = 32;
+    private double epaisseurMur = 18;
+    private double longueurMur = 68;
 
     public Map(){
     }
@@ -32,6 +29,9 @@ public abstract class Map {
         this.mapPane = initMapPane();
         creationDeMap();
         mapScene = initMapScene();
+        /*Pane pane = new Pane();
+        Scene scene = new Scene(pane,500,500);
+        stage.setScene(scene);*/
         stage.setScene(mapScene);
         stage.centerOnScreen();
         stage.sizeToScene();
@@ -41,6 +41,26 @@ public abstract class Map {
     public abstract Scene initMapScene();
     public abstract void initReadFile(String mapFolderPath);
     public abstract Pane initMapPane();
+    public abstract ReadFileMap getReadFileMap();
+
+
+    public double getCarreaux(){
+        return this.longueurMur;
+    }
+    public double getEpaisseurMur(){
+        return this.getEpaisseurMur();
+    }
+    public double getLongueurMur() {
+        return this.getLongueurMur();
+    }
+
+    public double getAbscMax() {
+        return getReadFileMap().getAbscMax();
+    }
+
+    public double getOrdMax() {
+        return getReadFileMap().getOrdMax();
+    }
 
     public Pane getMapPane() {
         return mapPane;

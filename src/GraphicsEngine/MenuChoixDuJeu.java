@@ -170,7 +170,7 @@ public class MenuChoixDuJeu {
         return nextGame;
     }
 
-    public static void game1GetGam1Attributs(Game game1, Game game2){
+    public static void game1SetGame2Attributs(Game game1, Game game2){
         game1.setName(game2.getName());
         game1.setListDifficultesFromString(game2.getName());
         game1.setListMusiques(game2.getListMusiques());
@@ -181,42 +181,42 @@ public class MenuChoixDuJeu {
     }
 
     public void setCurrentGame(int index) {
-        game1GetGam1Attributs(currentGame,gameList.get(index));
+        game1SetGame2Attributs(currentGame,gameList.get(index));
         if(gameList.size() < 3){
             if(index == 0){
                 this.previousGame = null;
                 //mettre une image noire pour previous
             }
             else{
-                game1GetGam1Attributs(previousGame,gameList.get(calculFollowingCurrentIndex(-1,index)));
+                game1SetGame2Attributs(previousGame,gameList.get(calculFollowingCurrentIndex(-1,index)));
             }
             if(index == gameList.size()-1){
                 this.nextGame = null;
                 //mettre une image noir pour next
             }
             else{
-                game1GetGam1Attributs(nextGame,gameList.get(calculFollowingCurrentIndex(1,index)));
+                game1SetGame2Attributs(nextGame,gameList.get(calculFollowingCurrentIndex(1,index)));
 
             }
         }
         else {
             if (index == 0) {
                 if ((!gameList.get(gameList.size()-1).getName().equals(this.nextGame.getName())) && (!gameList.get(gameList.size()-1).getName().equals(this.currentGame.getName()))) {
-                    game1GetGam1Attributs(previousGame,gameList.get(calculFollowingCurrentIndex(-1,index)));
-                    game1GetGam1Attributs(nextGame,gameList.get(calculFollowingCurrentIndex(1,index)));
+                    game1SetGame2Attributs(previousGame,gameList.get(calculFollowingCurrentIndex(-1,index)));
+                    game1SetGame2Attributs(nextGame,gameList.get(calculFollowingCurrentIndex(1,index)));
                 } else {
                     //mettre une image noire
                 }
             } else if (index == gameList.size() - 1) {
                 if ((!gameList.get(0).getName().equals(this.previousGame.getName())) && (!gameList.get(0).getName().equals(this.currentGame.getName()))) {
-                    game1GetGam1Attributs(nextGame,gameList.get(calculFollowingCurrentIndex(1,index)));
-                    game1GetGam1Attributs(previousGame,gameList.get(calculFollowingCurrentIndex(-1,index)));
+                    game1SetGame2Attributs(nextGame,gameList.get(calculFollowingCurrentIndex(1,index)));
+                    game1SetGame2Attributs(previousGame,gameList.get(calculFollowingCurrentIndex(-1,index)));
                 } else {
                     //mettre une image noire
                 }
             } else {
-                game1GetGam1Attributs(previousGame,gameList.get(calculFollowingCurrentIndex(-1,index)));
-                game1GetGam1Attributs(nextGame,gameList.get(calculFollowingCurrentIndex(1,index)));
+                game1SetGame2Attributs(previousGame,gameList.get(calculFollowingCurrentIndex(-1,index)));
+                game1SetGame2Attributs(nextGame,gameList.get(calculFollowingCurrentIndex(1,index)));
             }
         }
     }

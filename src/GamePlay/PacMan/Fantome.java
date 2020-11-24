@@ -22,7 +22,7 @@ public class Fantome extends MouvingObject {
     private char lastCharacter;
     private PacMan pacMan;
 
-    public Fantome(String path, Coordinate coordinate, Scene scene, Map map, PacMan pacMan) {
+    public Fantome(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene);
         setGoal(pacMan.getCoordinate());
         this.pacMan = pacMan;

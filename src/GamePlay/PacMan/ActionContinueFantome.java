@@ -1,6 +1,5 @@
 package GamePlay.PacMan;
 
-import GraphicsEngine.Coordinate;
 import PhysicsEngine.Action;
 import GraphicsEngine.GameImage;
 import GraphicsEngine.Map;
@@ -18,14 +17,14 @@ public class ActionContinueFantome extends Action {
     private Timeline timeline;
     private int indTimeline;
     private MouvingObject mouvingObject;
-    private final Map map;
+    private final MapPacman map;
     private PacMan pacMan;
     private int dir;
 
 
 
-    public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, int dir,Map map,PacMan pacMan){
-        super(image, scene, mouvingObject,dir);
+    public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, int dir,MapPacman map,PacMan pacMan){
+        super(scene, mouvingObject,dir);
         this.tps = tps;
         this.mouvingObject = mouvingObject;
         this.map = map;

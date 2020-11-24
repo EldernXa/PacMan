@@ -21,8 +21,7 @@ public class Action {
     private final Scene scene;
 
 
-    public Action(Scene scene, String carac, double x, double y, int dir, String
-        nameAction, MouvingObject mouvingObject){
+    public Action(Scene scene, String carac, double x, double y, int dir, String nameAction, MouvingObject mouvingObject){
             this.nameAction = nameAction;
             this.x = x;
             this.y = y;
