@@ -102,7 +102,6 @@ public class Action {
     }
 
     public void doWhenEventOccur ( int dir){
-
         move(gameImage.getCoordinate().getX() + x, gameImage.getCoordinate().getY() + y, dir);
     }
 

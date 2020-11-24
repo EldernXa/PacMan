@@ -53,6 +53,9 @@ public class ActionContinueFantome extends Action {
 
 
                         super.doWhenEventOccur(dir);
+                        if(collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())){
+                            doWhenBlock(); // A modifier
+                        }
 
                     }
             ));
