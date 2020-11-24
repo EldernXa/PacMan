@@ -5,10 +5,12 @@ package GamePlay.PacMan;
 
 import GraphicsEngine.Map;
     import PhysicsEngine.MouvingObject;
+    import javafx.animation.KeyFrame;
     import javafx.animation.Timeline;
 import javafx.scene.Scene;
+    import javafx.util.Duration;
 
-import java.util.ArrayList;
+    import java.util.ArrayList;
 import java.util.Random;
 
 public class Fantome extends MouvingObject {
@@ -22,10 +24,28 @@ public class Fantome extends MouvingObject {
     public Fantome(String path, Coordinate coordinate, Scene scene, Map map, Coordinate pacmanCoordinate) {
         super(path, coordinate, scene);
         setGoal(pacmanCoordinate);
-        this.fantome = coordinate;
-        new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()),0,getGameImage().getValueMove());
-
+        this.fantome = getGameImage().getCoordinate();
+        //new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
+        Test(scene, map);
     }
+    public void Test(Scene scene,Map map){
+        if (timeline == null)
+            timeline = new Timeline();
+        VisualObject.stopTimelineParallel();
+        timeline.getKeyFrames().clear();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.millis(valueTps),
+                temps -> {
+
+                    new ActionContinueFantome(getGameImage(),scene,valueTps,this,Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
+                    getFantome().affichageCoord();
+                    System.out.println(Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
+                }
+        ));
+        indTimeline = VisualObject.addTimeline(timeline, this);
+        VisualObject.startTimelineParallel();
+    }
+
 
     public void setGoal(Coordinate coordinate) {
         Random rX = new Random();
@@ -305,7 +325,7 @@ public class Fantome extends MouvingObject {
         if(character == 'B')newChar = 'H';
         if(character == 'D')newChar = 'G';
         if(character == 'G')newChar = 'D';
-        System.out.println(newChar);
+        //System.out.println(newChar);
         return newChar;
     }
 

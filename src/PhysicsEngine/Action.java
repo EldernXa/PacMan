@@ -47,7 +47,7 @@ public class Action {
                 break;
             case 1:
                 this.x = 0;
-                this.y = -getGameImage().getValueMove();
+                this.y = getGameImage().getValueMove();
                 break;
             case 2:
                 this.x = -getGameImage().getValueMove();
@@ -55,7 +55,7 @@ public class Action {
                 break;
             case 3:
                 this.x = 0;
-                this.y = getGameImage().getValueMove();
+                this.y = -getGameImage().getValueMove();
                 break;
             default:
                 this.x = 0;

@@ -15,13 +15,13 @@ public class ActionContinueFantome extends Action {
     private float tps;
     private Timeline timeline;
     private int indTimeline;
-    private final Map map;
+    //private final Map map;
 
 
-    public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, Map map, int dir, double x, double y){
-        super(image, scene, mouvingObject,x,y,dir);
+    public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, int dir){
+        super(image, scene, mouvingObject,dir);
         this.tps = tps;
-        this.map = map;
+        //this.map = map;
 
         doWhenEventOccur(dir);
 
@@ -30,8 +30,10 @@ public class ActionContinueFantome extends Action {
     }
 
     @Override
-    public void doWhenEventOccur(int dir){
-        System.out.println(dir);
+    public void doWhenEventOccur(int dir) {
+        //System.out.println("Ici");
+        //getGameImage().getCoordinate().affichageCoord();
+        if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -39,13 +41,20 @@ public class ActionContinueFantome extends Action {
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        //System.out.println(dir);
+                        //System.out.println(getX());
+                        //System.out.println(getY());
+                        //System.out.println(map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls().get(0));
+                        //System.out.println(map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+                        getGameImage().getCoordinate().affichageCoord();
+                        System.out.println(dir);
+
                         super.doWhenEventOccur(dir);
 
                     }
             ));
             indTimeline = VisualObject.addTimeline(timeline, super.getMouvingObject());
             VisualObject.startTimelineParallel();
+        }
     }
 
     @Override
