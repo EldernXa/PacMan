@@ -2,28 +2,22 @@ package ReadFile;
 
 import GraphicsEngine.Coordinate;
 import GraphicsEngine.Fruit;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReadFileMapPacman extends ReadFileMap{
-    private ArrayList<PosMursAssocies> tabMurFctCoord = new ArrayList<>();
     private ArrayList<Coordinate> tabCoordNoPoint = new ArrayList<>();
     private ArrayList<Fruit> tabFruit = new ArrayList<>();
-    private double abscMax = 0;
-    private double ordMax = 0;
     private File mapFile;
     private File pointsNFruit;
 
     public ReadFileMapPacman(String mapFolderPath){
-        this.mapFile = new File
-                (mapFolderPath + "PacmanMap.txt");
+        this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
         this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
 
         initTabMurFctCoord();
         initTabNoPointNFruit();
-
     }
 
     public void initTabNoPointNFruit(){
@@ -62,11 +56,11 @@ public class ReadFileMapPacman extends ReadFileMap{
                 int absc = recupererAbsc(currentLine);
                 int ord = recupererOrd(currentLine);
 
-                if(abscMax < absc){
-                    abscMax = absc;
+                if(getAbscMax() < absc){
+                    setAbscMax(absc);
                 }
-                if(ordMax < ord){
-                    ordMax = ord;
+                if(getOrdMax() < ord){
+                    setOrdMax(ord);
                 }
 
                 ArrayList<Character> listOfWalls = recupererListOfWalls(currentLine);
@@ -84,7 +78,7 @@ public class ReadFileMapPacman extends ReadFileMap{
                 }
                 System.out.println("]\n");*/
 
-                tabMurFctCoord.add(new PosMursAssocies(new Coordinate(absc,ord),listOfWalls));
+                getTabMurFctCoord().add(new PosMursAssocies(new Coordinate(absc,ord),listOfWalls));
 
             }
             mapFileScanner.close();
@@ -160,15 +154,15 @@ public class ReadFileMapPacman extends ReadFileMap{
     }
 
     public double getAbscMax() {
-        return abscMax;
+        return super.getAbscMax();
     }
 
     public double getOrdMax() {
-        return ordMax;
+        return super.getOrdMax();
     }
 
     public ArrayList<PosMursAssocies> getTabMurFctCoord() {
-        return tabMurFctCoord;
+        return super.getTabMurFctCoord();
     }
 
     public File getMapFile() {

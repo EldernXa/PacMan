@@ -9,6 +9,7 @@ import GraphicsEngine.Decor;
 import GraphicsEngine.ImageViewSizePos;
 import GraphicsEngine.VisualObject;
 import ReadFile.PosMursAssocies;
+import ReadFile.ReadFileMap;
 import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -17,45 +18,28 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class MapPacman extends Map{
-    private Stage stage;
     private ReadFileMapPacman readFileMapPacman;
     private ArrayList<Point> pointArrayList = new ArrayList<>();
     private ArrayList<Coordinate> realCoord = new ArrayList<>();
     private ArrayList<Coordinate> pointsCoord = new ArrayList<>();
-
-    public static ArrayList<VisualObject> visualObjects = new ArrayList<>();
 
     private double abscMax;
     private double ordMax;
     private double carreaux = 32;
     private double epaisseurMur = 18;
     private double longueurMur = 68;
-    private Pane mapPane = new Pane();
-    private Scene mapScene;
     private Coordinate pacmanInitCoord;
 
-    public MapPacman(){
-
-    }
-
-    public MapPacman(Stage stage, String filePath){
-        this.stage = stage;
-        readFileMapPacman = new ReadFileMapPacman(filePath);
+    public MapPacman(Stage stage, String mapFolderPath){
+        super(stage, mapFolderPath);
         abscMax = readFileMapPacman.getAbscMax();
         ordMax = readFileMapPacman.getOrdMax();
-        creationDeMap();
-        mapScene = new Scene(mapPane,(abscMax+1)*carreaux+(abscMax+2)*epaisseurMur,(ordMax+1)*carreaux+(ordMax+2)*epaisseurMur);
-        stage.setScene(mapScene);
-        stage.centerOnScreen();
-        stage.sizeToScene();
-
         this.pacmanInitCoord = new Coordinate((epaisseurMur*5+4*(longueurMur-2*epaisseurMur))+1, 8*epaisseurMur+7*(longueurMur-2*epaisseurMur) +1);
-
         fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();
         afficherPoints();
-        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), mapScene, pointArrayList.size(), stage);
+        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), getMapScene(), pointArrayList.size(), stage);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         visualObjects.add(imgPacman);
 
@@ -66,10 +50,10 @@ public class MapPacman extends Map{
             getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
             System.out.println();
         }*/
-        mapPane.setStyle("-fx-background-color: black");
-        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), mapScene, this,imgPacman.getCoordinate());
+        getMapPane().setStyle("-fx-background-color: black");
+        Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(epaisseurMur*5+4*(longueurMur-2*epaisseurMur)+1, 3*(longueurMur-2*epaisseurMur)+4*18+1), getMapScene(), this,imgPacman.getCoordinate());
         visualObjects.add(imgFantome);
-        mapPane.getChildren().addAll(imgFantome.getImageView(), imgPacman.getImageView());
+        getMapPane().getChildren().addAll(imgFantome.getImageView(), imgPacman.getImageView());
         score(imgPacman);
     }
 
@@ -105,8 +89,8 @@ public class MapPacman extends Map{
     public void creationMurHaut(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*absc;
         double ordonnee = (longueurMur-epaisseurMur)*ord;
-        visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene));
-        mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
+        visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),getMapScene()));
+        getMapPane().getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
 
     /**
@@ -117,8 +101,8 @@ public class MapPacman extends Map{
     public void creationMurDroite(double absc, double ord){
         double abscisse = (longueurMur-epaisseurMur)*(absc+1);
         double ordonnee = (longueurMur-epaisseurMur)*ord;
-        visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),mapScene));
-        mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee)).getImageView());
+        visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),getMapScene()));
+        getMapPane().getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee)).getImageView());
     }
 
     /**
@@ -130,8 +114,8 @@ public class MapPacman extends Map{
         if(ord == ordMax) {
             double abscisse = (longueurMur-epaisseurMur)*absc;
             double ordonnee = (longueurMur-epaisseurMur)*(ord+1);
-            visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),mapScene));
-            mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png", new Coordinate(abscisse, ordonnee)).getImageView());
+            visualObjects.add(new Decor("./data/Murs/murH18_32_18X18.png",new Coordinate(abscisse,ordonnee),getMapScene()));
+            getMapPane().getChildren().add(new ImageViewSizePos("./data/Murs/murH18_32_18X18.png", new Coordinate(abscisse, ordonnee)).getImageView());
         }
     }
 
@@ -144,8 +128,8 @@ public class MapPacman extends Map{
         if(absc == 0) {
             double abscisse = (longueurMur-epaisseurMur)*absc;
             double ordonnee = (longueurMur-epaisseurMur)*ord;
-            visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),mapScene));
-            mapPane.getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png", new Coordinate(abscisse, ordonnee)).getImageView());
+            visualObjects.add(new Decor("./data/Murs/murV18X18_32_18.png",new Coordinate(abscisse,ordonnee),getMapScene()));
+            getMapPane().getChildren().add(new ImageViewSizePos("./data/Murs/murV18X18_32_18.png", new Coordinate(abscisse, ordonnee)).getImageView());
         }
     }
 
@@ -185,13 +169,28 @@ public class MapPacman extends Map{
         return false;
     }
 
+    @Override
+    public Pane initMapPane() {
+        return new Pane();
+    }
+
+    @Override
+    public void initReadFile(String mapFolderPath) {
+        this.readFileMapPacman = new ReadFileMapPacman(mapFolderPath);
+    }
+
+    @Override
+    public Scene initMapScene() {
+        return new Scene(getMapPane(),(abscMax+1)*carreaux+(abscMax+2)*epaisseurMur,(ordMax+1)*carreaux+(ordMax+2)*epaisseurMur);
+    }
+
     /**
      * Methode qui met des point sur toutes lecases de la map sauf sur celle ou le Pacman se trouve au début
      */
     public void initPoints(){
         for(Coordinate cood : pointsCoord){
             if ((!cood.compare(coordPointUnderPacman()))&&(!belongToZoneInterdite(cood))) {
-                pointArrayList.add(new Point(cood, mapScene));
+                pointArrayList.add(new Point(cood, getMapScene()));
             }
         }
     }
@@ -210,7 +209,7 @@ public class MapPacman extends Map{
         return null;
     }
 
-    public ReadFileMapPacman getReadFileMap2Pacman() {
+    public ReadFileMapPacman getReadFileMapPacman() {
         return readFileMapPacman;
     }
 
@@ -219,7 +218,7 @@ public class MapPacman extends Map{
      */
     public void afficherPoints(){
         for(Point point : pointArrayList){
-            mapPane.getChildren().add(point.getImageView());
+            getMapPane().getChildren().add(point.getImageView());
             visualObjects.add(point);
         }
     }
@@ -234,18 +233,18 @@ public class MapPacman extends Map{
     }
 
     public void score(VisualObject visualObject){
-        ScorePacman score = new ScorePacman(stage,visualObject);
-        mapPane.getChildren().add(score.getScore());
+        ScorePacman score = new ScorePacman(getStage(),visualObject);
+        getMapPane().getChildren().add(score.getScore());
 
 
     }
 
     public Scene getMapScene() {
-        return mapScene;
+        return super.getMapScene();
     }
 
     public Pane getMapPane() {
-        return mapPane;
+        return super.getMapPane();
     }
     public ArrayList<Coordinate> getRealCoord() {
         return realCoord;

@@ -2,6 +2,7 @@ package GamePlay;
 
 import GraphicsEngine.*;
 import GraphicsEngine.Maps.Map;
+import GraphicsEngine.Maps.MapPacman;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -69,7 +70,7 @@ ConclusionPacman implements Conclusion {
             public void handle(MouseEvent mouseEvent) {
                 stage.close();
                 Map.visualObjects.clear();
-                Map map = new Map(stageJeu,"./data/Map/");
+                Map map = new MapPacman(stageJeu,"./data/Map/");
                 stageJeu.setScene(map.getMapScene());
             }
         });

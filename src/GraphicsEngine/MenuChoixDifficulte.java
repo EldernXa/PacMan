@@ -2,6 +2,7 @@ package GraphicsEngine;
 
 //import ReadFile.ReadFileMapPacman;
 import GraphicsEngine.Maps.Map;
+import GraphicsEngine.Maps.MapPacman;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -73,7 +74,7 @@ public class MenuChoixDifficulte {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     stage.setFullScreen(false);
-                    Map currentMap = new Map(stage,"./data/Map/");
+                    Map currentMap = new MapPacman(stage,"./data/Map/");
                     Musique.mediaPlayer.stop();
                     stage.setScene(currentMap.getMapScene());
 
