@@ -16,8 +16,9 @@ public class MapPacman extends Map {
     private ArrayList<Coordinate> pointsCoord = new ArrayList<>();
     private Coordinate pacmanInitCoord;
 
+
     public MapPacman(Stage stage, String mapFolderPath){
-        super(stage, mapFolderPath);
+        super(stage, mapFolderPath,32,18,68);
         this.pacmanInitCoord = new Coordinate((getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur()))+1, 8*getEpaisseurMur()+7*(getLongueurMur()-2*getEpaisseurMur()) +1);
         fillListPointsCoord();
         fillListWithRealCoord();
@@ -242,16 +243,16 @@ public class MapPacman extends Map {
 
     @Override
     public double getCarreaux() {
-        return 32;
+        return super.getCarreaux();
     }
 
     @Override
     public double getEpaisseurMur() {
-        return 18;
+        return super.getEpaisseurMur();
     }
 
     @Override
     public double getLongueurMur() {
-        return 68;
+        return super.getLongueurMur();
     }
 }

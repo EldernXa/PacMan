@@ -15,15 +15,18 @@ public abstract class Map {
     private Pane mapPane;
     private double abscMax;
     private double ordMax;
-    private double carreaux = 32;
-    private double epaisseurMur = 18;
-    private double longueurMur = 68;
+    private double carreaux;
+    private double epaisseurMur;
+    private double longueurMur;
 
     public Map(){
     }
 
 
-    public Map(Stage stage, String mapFolderPath){
+    public Map(Stage stage, String mapFolderPath,double carreaux, double epaisseurMur, double longueurMur){
+        this.carreaux = carreaux;
+        this.epaisseurMur = epaisseurMur;
+        this.longueurMur = longueurMur;
         this.stage = stage;
         initReadFile(mapFolderPath);
         this.mapPane = initMapPane();
@@ -45,13 +48,13 @@ public abstract class Map {
 
 
     public double getCarreaux(){
-        return this.longueurMur;
+        return this.carreaux;
     }
     public double getEpaisseurMur(){
-        return this.getEpaisseurMur();
+        return this.epaisseurMur;
     }
     public double getLongueurMur() {
-        return this.getLongueurMur();
+        return this.longueurMur;
     }
 
     public double getAbscMax() {
