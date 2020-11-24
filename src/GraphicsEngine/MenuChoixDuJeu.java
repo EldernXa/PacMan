@@ -1,5 +1,6 @@
 package GraphicsEngine;
 
+import MusicEngine.Musique;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

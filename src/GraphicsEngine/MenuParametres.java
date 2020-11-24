@@ -1,5 +1,6 @@
 package GraphicsEngine;
 
+import MusicEngine.Musique;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.EventHandler;

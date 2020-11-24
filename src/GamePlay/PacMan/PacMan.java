@@ -1,6 +1,8 @@
 package GamePlay.PacMan;
 
 import GraphicsEngine.*;
+import PhysicsEngine.ActionContinue;
+import PhysicsEngine.MouvingObject;
 import ReadFile.ReadFileCommandes;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -61,7 +63,7 @@ public class PacMan extends MouvingObject {
         this.coordinate = new Coordinate(coordinate.getX(),coordinate.getY());
         super.getImageView().setX(coordinate.getX());
         super.getImageView().setY(coordinate.getY());
-        super.getGameImage().move(coordinate.getX(),coordinate.getY());
+        super.move(coordinate.getX(),coordinate.getY());
     }
     public void death(){
         setCoordinate(super.getGameImage().getCoordInit());

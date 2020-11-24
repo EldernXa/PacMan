@@ -1,7 +1,7 @@
 package GraphicsEngine;
 
 //import ReadFile.ReadFileMapPacman;
-import GraphicsEngine.Maps.Map;
+import MusicEngine.Musique;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

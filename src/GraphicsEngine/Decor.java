@@ -1,9 +1,10 @@
 package GraphicsEngine;
 
+import PhysicsEngine.UnmouvingObj;
 import javafx.scene.Scene;
 
 
-public class Decor extends UnmouvingObj{
+public class Decor extends UnmouvingObj {
 
 
     public Decor(String path, Coordinate coordinate, Scene scene){

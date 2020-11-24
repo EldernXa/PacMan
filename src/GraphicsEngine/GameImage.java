@@ -50,11 +50,4 @@ public class GameImage {
     public Coordinate getCoordinate(){
         return coordinate;
     }
-
-    public void move(double x, double y){
-        coordinate.setX(x);
-        coordinate.setY(y);
-        imgView.setX(coordinate.getX());
-        imgView.setY(coordinate.getY());
-    }
 }

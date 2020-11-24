@@ -1,7 +1,7 @@
 package GamePlay.PacMan;
 
 import GraphicsEngine.*;
-import GraphicsEngine.Maps.Map;
+import GraphicsEngine.Map;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

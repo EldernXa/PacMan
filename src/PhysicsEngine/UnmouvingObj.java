@@ -1,12 +1,14 @@
-package GraphicsEngine;
+package PhysicsEngine;
 
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.VisualObject;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 import java.io.File;
 
-public abstract class UnmouvingObj extends VisualObject{
+public abstract class UnmouvingObj extends VisualObject {
 
     public UnmouvingObj(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);

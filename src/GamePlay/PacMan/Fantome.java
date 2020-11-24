@@ -3,13 +3,12 @@ package GamePlay.PacMan;
 
 
 
-import GraphicsEngine.Maps.Map;
-    import javafx.animation.KeyFrame;
+import GraphicsEngine.Map;
+    import PhysicsEngine.MouvingObject;
     import javafx.animation.Timeline;
 import javafx.scene.Scene;
-    import javafx.util.Duration;
 
-    import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Fantome extends MouvingObject {
@@ -23,31 +22,9 @@ public class Fantome extends MouvingObject {
     public Fantome(String path, Coordinate coordinate, Scene scene, Map map, Coordinate pacmanCoordinate) {
         super(path, coordinate, scene);
         setGoal(pacmanCoordinate);
-        this.fantome = getGameImage().getCoordinate();
+        this.fantome = coordinate;
+        new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()),0,getGameImage().getValueMove());
 
-        //addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,0));
-        //addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,1));
-        //addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,2));
-        //addAction(new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,3));
-
-        Test(map, scene);
-    }
-
-    public void Test(Map map,Scene scene){
-        if (timeline == null)
-            timeline = new Timeline();
-        VisualObject.stopTimelineParallel();
-        timeline.getKeyFrames().clear();
-        timeline.getKeyFrames().add(new KeyFrame(
-                Duration.millis(valueTps),
-                temps -> {
-                    //fantome.affichageCoord();
-                    int temp = Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls());
-                    new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,temp);
-                }
-        ));
-        indTimeline = VisualObject.addTimeline(timeline, this);
-        VisualObject.startTimelineParallel();
     }
 
     public void setGoal(Coordinate coordinate) {
@@ -328,7 +305,7 @@ public class Fantome extends MouvingObject {
         if(character == 'B')newChar = 'H';
         if(character == 'D')newChar = 'G';
         if(character == 'G')newChar = 'D';
-        //System.out.println(newChar);
+        System.out.println(newChar);
         return newChar;
     }
 
