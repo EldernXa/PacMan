@@ -1,35 +1,39 @@
 package GamePlay.PacMan;
 
 import GraphicsEngine.Coordinate;
-import PhysicsEngine.UnmouvingObj;
 import GraphicsEngine.VisualObject;
 import javafx.scene.Scene;
 
-public class Fruit extends UnmouvingObj {
-    private boolean passe = false;
-    public Fruit(String path, Coordinate coordinate, Scene scene) {
+public class Cerise extends Fruit {
+
+
+
+    public Cerise(String path, Coordinate coordinate, Scene scene) {
         super(path, coordinate, scene);
     }
 
+
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
-        /*PacMan pacman = ((PacMan)visualObjects);
+
+         PacMan pacman = ((PacMan)visualObjects);
         if(visualObjects != null){
-            if(!passe){
-                pacman.ajoutPoint();
+            if(!isPasse()){
+                pacman.ajoutPoint(25);
             }
-            passe = true;
+            setPasse(true);
             super.getImageView().setVisible(false);
         }
-        return false;*/
         return false;
     }
 
+    @Override
     public boolean isPasse() {
-        return passe;
+        return super.isPasse();
     }
 
+    @Override
     public void setPasse(boolean passe) {
-        this.passe = passe;
+        super.setPasse(passe);
     }
 }

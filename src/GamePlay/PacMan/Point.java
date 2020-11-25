@@ -13,15 +13,25 @@ public class Point extends UnmouvingObj {
 
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
+
         if(visualObjects!=null && visualObjects.getClass() == PacMan.class){
             PacMan pacMan = ((PacMan)visualObjects);
+
             if(!passe){
-                pacMan.ajoutPoint();
+                pacMan.ajoutPoint(1);
                 pacMan.incrementPoints();
             }
             passe = true;
             super.getImageView().setVisible(false);
         }
         return false;
+    }
+
+    public boolean isPasse() {
+        return passe;
+    }
+
+    public void setPasse(boolean passe) {
+        this.passe = passe;
     }
 }

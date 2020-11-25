@@ -26,7 +26,6 @@ public class ReadFileCommandes {
         Path path = Paths.get(str);
         try {
             this.file = Files.readString(path).split("\n");
-            String mapSize[] = file[0].split("\\s+");
             read();
 
         } catch (IOException e) {
@@ -76,10 +75,6 @@ public class ReadFileCommandes {
 
 
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -148,8 +148,15 @@ public class MapPacman extends Map {
         for(Coordinate coord : readFileMapPacman.getTabCoordNoPoint()){
             double fausseAbsc = coord.getX();
             double fausseOrd = coord.getY();
-            Coordinate nouv = new Coordinate(getOrdMax()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseAbsc*(getLongueurMur()-getEpaisseurMur()),getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseOrd*(getLongueurMur()-getEpaisseurMur()));
+            Coordinate nouv = new Coordinate(getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseAbsc*(getLongueurMur()-getEpaisseurMur()),getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseOrd*(getLongueurMur()-getEpaisseurMur()));
+            System.out.print("Coord No Point Pas calculé");
+            coord.affichageCoord();
+            System.out.println();
+            System.out.print("Coord No Point");
+            nouv.affichageCoord();
+            System.out.println();
             if (coordinate.compare(nouv)){
+                coord.affichageCoord();
                 return true;
             }
         }
@@ -180,6 +187,9 @@ public class MapPacman extends Map {
      */
     public void initPoints(){
         for(Coordinate cood : pointsCoord){
+            System.out.print("Point Coord : ");
+            cood.affichageCoord();
+            System.out.println();
             if ((!cood.compare(coordPointUnderPacman()))&&(!belongToZoneInterdite(cood))) {
                 pointArrayList.add(new Point(cood, getMapScene()));
             }
