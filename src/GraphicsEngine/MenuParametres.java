@@ -16,7 +16,7 @@ import java.io.File;
 
 public class MenuParametres {
     private final StackPane pane = new StackPane();
-    private final Scene scene;
+    private final Scene scene=  new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/2,Screen.getPrimary().getVisualBounds().getHeight()/2);;
     private final ImageViewSizePos revenir = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));;
     private static final Stage stage = new Stage();
 
@@ -29,33 +29,32 @@ public class MenuParametres {
 
 
     public MenuParametres(Game game) {
-        scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/2,Screen.getPrimary().getVisualBounds().getHeight()/2);;
-
-
-        scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
-        titre.setStyle("-fx-font-size: 30px");
-
-        /*ToggleGroup group = new ToggleGroup();
-        RadioButton button1 = new RadioButton("Male");
-        button1.setToggleGroup(group);
-        button1.setSelected(true);
-
-        // Radio 3: Female.
-        RadioButton button2 = new RadioButton("Female");
-        button2.setToggleGroup(group); */
-
-
-
-        setButton(game);
-        pane.setStyle("-fx-background-color: lightgray");
-        pane.getChildren().addAll(titre,revenir.getImageView());
-        setRevenir();
-
-        StackPane.setAlignment(revenir.getImageView(),Pos.TOP_LEFT);
-        StackPane.setAlignment(titre,Pos.TOP_CENTER);
         if(!stage.isShowing()) {
-            stage.setScene(scene);
-            stage.show();
+            
+            scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
+            titre.setStyle("-fx-font-size: 30px");
+
+            /*ToggleGroup group = new ToggleGroup();
+            RadioButton button1 = new RadioButton("Male");
+            button1.setToggleGroup(group);
+            button1.setSelected(true);
+
+            // Radio 3: Female.
+            RadioButton button2 = new RadioButton("Female");
+            button2.setToggleGroup(group); */
+
+
+
+            setButton(game);
+            pane.setStyle("-fx-background-color: lightgray");
+            pane.getChildren().addAll(titre,revenir.getImageView());
+            setRevenir();
+
+            StackPane.setAlignment(revenir.getImageView(),Pos.TOP_LEFT);
+            StackPane.setAlignment(titre,Pos.TOP_CENTER);
+
+                stage.setScene(scene);
+                stage.show();
         }
     }
 
