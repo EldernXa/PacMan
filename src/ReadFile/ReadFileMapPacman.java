@@ -1,42 +1,45 @@
 package ReadFile;
 
+import GamePlay.PacMan.Cerise;
+import GamePlay.PacMan.SuperPoint;
 import GraphicsEngine.Coordinate;
 import GamePlay.PacMan.Fruit;
+import PhysicsEngine.UnmouvingObj;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReadFileMapPacman extends ReadFileMap{
     private ArrayList<Coordinate> tabCoordNoPoint = new ArrayList<>();
-    private ArrayList<Fruit> tabFruit = new ArrayList<>();
+    private ArrayList<PosFruitNSuperPoint> tabFruitNSupPoint = new ArrayList<>();
     private File mapFile;
     private File pointsNFruit;
 
     public ReadFileMapPacman(String mapFolderPath){
         this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
         this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
-
         initTabMurFctCoord();
-        initTabNoPointNFruit();
+        initTabNoPointFruitNSupPoint();
     }
 
-    public void initTabNoPointNFruit(){
+    public void initTabNoPointFruitNSupPoint(){
         initTabCoordNoPoint();
-        initTabFruit();
+        initTabFruitNSupPoint();
     }
 
     public void initTabCoordNoPoint(){
         try{
             Scanner pointNFruitScanner = new Scanner(pointsNFruit);
-            String currentLine = pointNFruitScanner.nextLine();
-            while(!currentLine.equals("")){
-                if(currentLine.equals("zone interdites :")){
+            String currentLine;
+            while(pointNFruitScanner.hasNextLine()){
+                currentLine = pointNFruitScanner.nextLine();
+                while((currentLine.equals("zone interdites :")||(currentLine.equals("")||(currentLine.equals("fruits et super points :"))))){
                     currentLine = pointNFruitScanner.nextLine();
                 }
-                int absc = recupererAbsc(currentLine);
-                int ord = recupererOrd(currentLine);
-                tabCoordNoPoint.add(new Coordinate(absc,ord));
-                currentLine = pointNFruitScanner.nextLine();
+                double absc = recupererAbsc(currentLine);
+                double ord = recupererOrd(currentLine);
+                ajouterATabCoordNoPoint(new Coordinate(absc,ord));
                 }
             pointNFruitScanner.close();
         }catch(Exception e){
@@ -44,8 +47,47 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
     }
 
-    public void initTabFruit(){
+    public void ajouterATabCoordNoPoint(Coordinate coordinate){
+        boolean add = true;
+        for(Coordinate cood : tabCoordNoPoint){
+            if(cood.compare(coordinate)){
+                add = false;
+            }
+        }
+        if(add){
+            tabCoordNoPoint.add(coordinate);
+        }
+    }
 
+    public void initTabFruitNSupPoint(){
+        try {
+            Scanner pointNFruitScanner = new Scanner(pointsNFruit);
+            String currentLine = pointNFruitScanner.nextLine();
+            while(!currentLine.equals("fruits et super points :")){
+                currentLine = pointNFruitScanner.nextLine();
+            }
+            while(pointNFruitScanner.hasNextLine()){
+                currentLine = pointNFruitScanner.nextLine();
+                double abs = recupererAbsc(currentLine);
+                double ord = recupererOrd(currentLine);
+                char character = recupererCharacter(currentLine);
+                tabFruitNSupPoint.add(new PosFruitNSuperPoint(new Coordinate(abs,ord),character));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public char recupererCharacter(String currentLine){
+        int i = 0;
+            while(currentLine.charAt(i) != ':'){
+                System.out.println("Character courant : " + currentLine.charAt(i));
+                i++;
+            }
+            System.out.println("Character courant : " + currentLine.charAt(i));
+            i++;
+            System.out.println("Character courant : " + currentLine.charAt(i));
+            return currentLine.charAt(i);
     }
 
     public void initTabMurFctCoord(){
@@ -53,8 +95,8 @@ public class ReadFileMapPacman extends ReadFileMap{
             Scanner mapFileScanner = new Scanner(mapFile);
             while(mapFileScanner.hasNextLine()){
                 String currentLine = mapFileScanner.nextLine();
-                int absc = recupererAbsc(currentLine);
-                int ord = recupererOrd(currentLine);
+                double absc = recupererAbsc(currentLine);
+                double ord = recupererOrd(currentLine);
 
                 if(getAbscMax() < absc){
                     setAbscMax(absc);
@@ -87,11 +129,10 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
     }
 
-    public int recupererAbsc(String currentLine){
+    public double recupererAbsc(String currentLine){
         int i = 0;
         int absc;
         String tampon = "";
-
         while(currentLine.charAt(i) != ','){
             if(currentLine.charAt(i) == '('){
                 i++;
@@ -105,37 +146,29 @@ public class ReadFileMapPacman extends ReadFileMap{
         return absc;
     }
 
-    public int recupererOrd(String currentline){
+    public double recupererOrd(String currentline){
         int i = 0 ;
         int ord;
         String tampon = "";
-
         while (currentline.charAt(i) != ',') {
             i++;
         }
-
         i++;
-
         while(currentline.charAt(i) != ')'){
             tampon += currentline.charAt(i);
             i++;
         }
-
         ord = Integer.parseInt(tampon);
-
         return ord;
     }
 
     public ArrayList<Character> recupererListOfWalls(String currentLine){
         ArrayList<Character> tamponList = new ArrayList<>();
         int i = 0;
-
         while (currentLine.charAt(i) != ':'){
             i++;
         }
-
         i++;
-
         while(i < currentLine.length()){
             if(currentLine.charAt(i) == ','){
                 i++;
@@ -147,6 +180,10 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
 
         return tamponList;
+    }
+
+    public ArrayList<PosFruitNSuperPoint> getTabFruitNSupPoint() {
+        return tabFruitNSupPoint;
     }
 
     public ArrayList<Coordinate> getTabCoordNoPoint() {

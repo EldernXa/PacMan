@@ -6,9 +6,9 @@ zone interdites :
 (4,3)
 (5,3)
 
-Fruits :
-(5,2):C
+fruits et super points :
+(4,1):C
 (2,5):P
-(7,5):P
+(6,5):P
 (1,3):P
 (7,3):P
