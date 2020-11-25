@@ -22,9 +22,11 @@ public class PacMan extends MouvingObject {
     private ChangeListener<Number> changeListenerPoint;
     private final Stage stage;
     private final ReadFileCommandes pacmanControle;
+    private boolean superPacman;
 
     public PacMan(String path, Coordinate coordinate, Scene scene, int nbPointsMapMax, Stage stage){
         super(path, coordinate, scene);
+        superPacman = false;
         this.stage = stage;
         nbPoints = new SimpleIntegerProperty(0);
         this.nbPointsMapMax = nbPointsMapMax;
@@ -93,10 +95,11 @@ public class PacMan extends MouvingObject {
     public boolean effectCollision(VisualObject visualObjects) {
         return false;
     }
-    public void ajoutPoint(){
+    public void ajoutPoint(int nb){
 
-        nbPoints.set(nbPoints.get()+1);
+        nbPoints.set(nbPoints.get()+nb);
     }
+
 
 
     public void diminueVies() {
@@ -122,5 +125,13 @@ public class PacMan extends MouvingObject {
         if(changeListenerVies != null)
             nbVies_restantes.removeListener(changeListenerVies);
         changeListenerVies = null;
+    }
+
+    public boolean isSuperPacman() {
+        return superPacman;
+    }
+
+    public void setSuperPacman(boolean superPacman) {
+        this.superPacman = superPacman;
     }
 }

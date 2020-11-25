@@ -319,12 +319,31 @@ public class Fantome extends MouvingObject {
 
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
+
         if(visualObjects!=null && visualObjects.getClass()==PacMan.class){
             PacMan pacman = ((PacMan) visualObjects);
-            pacman.death();
+            if(pacman.isSuperPacman()){
+                death();
+            }
+            else {
+                pacman.death();
+            }
+
         }
 
         return false;
+    }
+    public void death(){
+        setCoordinate(super.getGameImage().getCoordInit());
+        super.initAnimation();
+
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.fantome = new Coordinate(coordinate.getX(),coordinate.getY());
+        super.getImageView().setX(coordinate.getX());
+        super.getImageView().setY(coordinate.getY());
+        super.move(coordinate.getX(),coordinate.getY());
     }
 
     public Character oppositeDirection(char character){
