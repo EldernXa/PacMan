@@ -1,6 +1,5 @@
 package GraphicsEngine;
 
-import ReadFile.ReadFileCommandes;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,7 +18,7 @@ public class MenuParametres {
     private final StackPane pane = new StackPane();
     private final Scene scene;
     private final ImageViewSizePos revenir = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));;
-    private final Stage stage = new Stage();
+    private static final Stage stage = new Stage();
 
     private Button boutonSon= new Button("Réglage son");
     private Button boutonCommande = new Button("Réglage commandes");
@@ -54,8 +53,10 @@ public class MenuParametres {
 
         StackPane.setAlignment(revenir.getImageView(),Pos.TOP_LEFT);
         StackPane.setAlignment(titre,Pos.TOP_CENTER);
-        stage.setScene(scene);
-        stage.show();
+        if(!stage.isShowing()) {
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
 
