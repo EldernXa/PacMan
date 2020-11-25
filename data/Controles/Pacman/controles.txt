@@ -1,0 +1,4 @@
+droite ' 1 0
+descendre ( 0 1
+gauche % -1 0
+monter & 0 -1

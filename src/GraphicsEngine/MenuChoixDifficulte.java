@@ -74,8 +74,9 @@ public class MenuChoixDifficulte {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     stage.setFullScreen(false);
-                    MapPacman currentMap = new MapPacman(stage,"./data/Map/");
                     Musique.mediaPlayer.stop();
+                    MapPacman currentMap = new MapPacman(stage,"./data/Map/");
+
                 }
             });
 

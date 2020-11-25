@@ -53,7 +53,7 @@ public class MenuDuJeu {
         exitSound();
         enterParam();
         exitParam();
-        clickParam();
+        clickParam(game);
         setmusic(game);
         setTooltip();
         enterRevenir();
@@ -138,15 +138,12 @@ public class MenuDuJeu {
             }
         });
     }
-    public void clickParam(){
+    public void clickParam(Game game){
         param.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuParametres parametres = new MenuParametres();
-                if(jeu.getListMusiques().isEmpty()){
-                    parametres.getVolumeSlider().setValue(0);
-                    parametres.getVolumeSlider().setDisable(true);
-                }
+                MenuParametres parametres = new MenuParametres(game);
+
 
             }
         });
