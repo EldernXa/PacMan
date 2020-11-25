@@ -9,11 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.util.concurrent.TimeUnit;
 
 public class MenuParametresCommandes {
     private final StackPane pane = new StackPane();
@@ -21,6 +23,8 @@ public class MenuParametresCommandes {
     VBox vbox = new VBox(10);
     private final ImageViewSizePos revenir = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
     ReadFileCommandes readFileCommandes;
+    Label label1 = new Label("Cliquez sur un bouton et appuyez sur une touche.");
+
 
     public MenuParametresCommandes(Stage stage,Scene sceneBack, Game game) {
 
@@ -28,13 +32,17 @@ public class MenuParametresCommandes {
         setCommandes();
         setRevenir(stage,sceneBack);
         pane.getChildren().add(revenir.getImageView());
+        pane.getChildren().add(label1);
         StackPane.setAlignment(revenir.getImageView(),Pos.TOP_LEFT);
+        label1.setAlignment(Pos.CENTER);
+        StackPane.setAlignment(label1,Pos.CENTER);
     }
 
 
     public Scene getScene() {
         return scene;
     }
+
     public void setCommandes(){
         for(int i = readFileCommandes.getDirection().size()-1;i>=0;i--){
             HBox hbox = new HBox(10);
@@ -63,16 +71,19 @@ public class MenuParametresCommandes {
         }
         vbox.setAlignment(Pos.CENTER_LEFT);
         pane.getChildren().add(vbox);
+
     }
 
-    public void setChangeCommande(Label label,Button button){
+    synchronized public void setChangeCommande(Label label,Button button){
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                label1.setText("Cliquez sur un bouton et appuyez sur une touche.");
                 button.setOnKeyPressed(new EventHandler<KeyEvent>() {
                     @Override
                     public void handle(KeyEvent keyEvent) {
-                        System.out.println(keyEvent.getCode().getChar());
+                        System.out.println(keyEvent.getCode().getCode());
+                        int code = keyEvent.getCode().getCode();
                         switch (keyEvent.getCode().getChar()){
                             case "&" :
                                 button.setText("↑");
@@ -87,10 +98,25 @@ public class MenuParametresCommandes {
                                 button.setText("→");
                                 break;
                             default:
-                                button.setText(keyEvent.getCode().getChar().toLowerCase());
+                                if((code <=110 && code >=97) || code ==10 || code == 20 || code == 9 || code ==0){
+
+                                }else{
+                                    button.setText(keyEvent.getCode().getChar().toLowerCase());
+                                }
+
                                 break;
                         }
-                        readFileCommandes.write(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
+
+                        if((code <=110 && code >=97) || code ==10 || code == 20 || code == 9 || code ==0){
+
+
+                            label1.setText("Caractère non correct");
+
+
+                        }else{
+                            readFileCommandes.write(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
+                        }
+
                         button.setOnKeyPressed(null);
 
 
