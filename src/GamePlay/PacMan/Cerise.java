@@ -8,8 +8,8 @@ public class Cerise extends Fruit {
 
 
 
-    public Cerise(String path, Coordinate coordinate, Scene scene) {
-        super(path, coordinate, scene);
+    public Cerise(Coordinate coordinate, Scene scene) {
+        super("./data/Point&Fruit/cerisee.png", coordinate, scene);
     }
 
 

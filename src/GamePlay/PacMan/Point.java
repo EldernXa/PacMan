@@ -7,8 +7,13 @@ import javafx.scene.Scene;
 
 public class Point extends UnmouvingObj {
     private boolean passe = false;
+
     public Point(Coordinate coordinate, Scene scene) {
         super("./data/Point&Fruit/point.png", coordinate, scene);
+    }
+
+    public Point(String path, Coordinate coordinate, Scene scene) {
+        super(path, coordinate, scene);
     }
 
     @Override

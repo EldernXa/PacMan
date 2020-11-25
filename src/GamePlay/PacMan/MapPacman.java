@@ -1,17 +1,23 @@
 package GamePlay.PacMan;
 
 import GraphicsEngine.*;
+import PhysicsEngine.UnmouvingObj;
+import ReadFile.PosFruitNSuperPoint;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap;
 import ReadFile.ReadFileMapPacman;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.nio.charset.CoderResult;
 import java.util.ArrayList;
 
 public class MapPacman extends Map {
     private ReadFileMapPacman readFileMapPacman;
     private ArrayList<Point> pointArrayList = new ArrayList<>();
+    private ArrayList<PosFruitNSuperPoint> posFruitNSuperPointArrayList = new ArrayList<>();
+    private ArrayList<UnmouvingObj> FruitNSuperPointArrayList = new ArrayList<>();
     private ArrayList<Coordinate> realCoord = new ArrayList<>();
     private ArrayList<Coordinate> pointsCoord = new ArrayList<>();
     private Coordinate pacmanInitCoord;
@@ -24,17 +30,16 @@ public class MapPacman extends Map {
         fillListWithRealCoord();
         initPoints();
         afficherPoints();
+        fillListPosFruitSuperPoint();
+        initFruitNSuperPoint();
+        afficherFruitNSuperPoint();
+        for(Coordinate coor : readFileMapPacman.getTabCoordNoPoint()){
+            coor.affichageCoord();
+            System.out.println();
+        }
         PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), getMapScene(), pointArrayList.size(), stage);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         visualObjects.add(imgPacman);
-
-        /*for(Coordinate coordinate : realCoord){
-            System.out.print("Coordonnées de base : ");
-            coordinate.affichageCoord();
-            System.out.print("Coordonnées calculées : ");
-            getWrongCoorFromReal(coordinate).getPointCoordinate().affichageCoord();
-            System.out.println();
-        }*/
         getMapPane().setStyle("-fx-background-color: black");
         Fantome imgFantome = new Fantome("./data/SpriteMouvement/Fantome/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1), getMapScene(), this,imgPacman);
         getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome.getImageView());
@@ -120,6 +125,15 @@ public class MapPacman extends Map {
         }
     }
 
+    public void fillListPosFruitSuperPoint(){
+        for(PosFruitNSuperPoint posFruitNSuperPoint : readFileMapPacman.getTabFruitNSupPoint()){
+            double fausseAbsc = posFruitNSuperPoint.getCoordinate().getX();
+            double fausseOrd = posFruitNSuperPoint.getCoordinate().getY();
+            Coordinate nouv = new Coordinate(getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-7.5+fausseAbsc*(getLongueurMur()-getEpaisseurMur()),getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-7.5+fausseOrd*(getLongueurMur()-getEpaisseurMur()));
+            this.posFruitNSuperPointArrayList.add(new PosFruitNSuperPoint(nouv,posFruitNSuperPoint.getCharacter()));
+        }
+    }
+
     /**
      * Remplit une liste avec des points calculés en fct des positions possible pour le pacman
      */
@@ -149,14 +163,7 @@ public class MapPacman extends Map {
             double fausseAbsc = coord.getX();
             double fausseOrd = coord.getY();
             Coordinate nouv = new Coordinate(getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseAbsc*(getLongueurMur()-getEpaisseurMur()),getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-2.5+fausseOrd*(getLongueurMur()-getEpaisseurMur()));
-            System.out.print("Coord No Point Pas calculé");
-            coord.affichageCoord();
-            System.out.println();
-            System.out.print("Coord No Point");
-            nouv.affichageCoord();
-            System.out.println();
             if (coordinate.compare(nouv)){
-                coord.affichageCoord();
                 return true;
             }
         }
@@ -187,9 +194,6 @@ public class MapPacman extends Map {
      */
     public void initPoints(){
         for(Coordinate cood : pointsCoord){
-            System.out.print("Point Coord : ");
-            cood.affichageCoord();
-            System.out.println();
             if ((!cood.compare(coordPointUnderPacman()))&&(!belongToZoneInterdite(cood))) {
                 pointArrayList.add(new Point(cood, getMapScene()));
             }
@@ -213,6 +217,27 @@ public class MapPacman extends Map {
     @Override
     public ReadFileMap getReadFileMap() {
         return readFileMapPacman;
+    }
+
+    public void initFruitNSuperPoint(){
+        for(PosFruitNSuperPoint posFruitNSuperPoint : this.posFruitNSuperPointArrayList){
+            switch (posFruitNSuperPoint.getCharacter()){
+                case 'C':
+                    System.out.println("Creation cerise");
+                    FruitNSuperPointArrayList.add(new Cerise(posFruitNSuperPoint.getCoordinate(),getMapScene()));
+                    break;
+                case 'P':
+                    FruitNSuperPointArrayList.add(new SuperPoint(posFruitNSuperPoint.getCoordinate(),getMapScene()));
+                    break;
+            }
+        }
+    }
+
+    public void afficherFruitNSuperPoint(){
+        for(UnmouvingObj fruitNSuperPoint : FruitNSuperPointArrayList){
+            getMapPane().getChildren().add(fruitNSuperPoint.getImageView());
+            visualObjects.add(fruitNSuperPoint);
+        }
     }
 
     /**

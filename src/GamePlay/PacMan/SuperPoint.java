@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 
 public class SuperPoint extends Point {
     public SuperPoint(Coordinate coordinate, Scene scene) {
-        super(coordinate, scene);
+        super("./data/Point&Fruit/gros_point.png", coordinate, scene);
     }
 
     @Override
