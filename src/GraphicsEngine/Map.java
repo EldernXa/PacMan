@@ -54,7 +54,8 @@ public abstract class Map {
         return this.epaisseurMur;
     }
     public double getLongueurMur() {
-        return this.longueurMur;
+        return this.longueurMur
+                ;
     }
 
     public double getAbscMax() {
