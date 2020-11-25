@@ -14,7 +14,7 @@ import java.util.LinkedList;
 
 public class ActionContinue extends Action{
 
-    private float tps;
+    private final float tps;
     private Timeline timeline;
     private int indTimeline;
     private final MouvingObject mouvingObject;
