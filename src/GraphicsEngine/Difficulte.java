@@ -6,6 +6,7 @@ public class Difficulte {
     String name;
     Scene scene;
 
+
     public Difficulte(String name) {
         this.name = name;
     }
