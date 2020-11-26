@@ -56,6 +56,7 @@ public class ActionContinueFantome extends Action {
 
 
         if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
+            Timeline timeline2 = timeline;
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -89,29 +90,31 @@ public class ActionContinueFantome extends Action {
     @Override
    public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
-        VisualObject.removeTimeline(indTimeline);
+        VisualObject.removeTimeline(timeline);
         VisualObject.startTimelineParallel();
 
         //System.out.println(((Fantome)mouvingObject).bestAction(getGameImage().getCoordinate(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
         int temp = ((Fantome)mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
         Fantome.setDirection(temp);
-        asMove();
+        //asMove();
         //System.out.println(temp);
         //System.out.println(getX()+" "+getY());
+        for(Action a : mouvingObject.getListAction()){
+            if(a.getDir()==temp){
+                a.doWhenEventOccur(temp);
+            }
+        }
         //doWhenEventOccur(temp);
     }
     public void newMove(){
-            VisualObject.stopTimelineParallel();
-            VisualObject.removeTimeline(indTimeline);
-            VisualObject.startTimelineParallel();
-
+            VisualObject.removeTimeline(timeline);
             //System.out.println(((Fantome)mouvingObject).bestAction(getGameImage().getCoordinate(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
             int temp = ((Fantome)mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
             Fantome.setDirection(temp);
             asMove();
             //System.out.println(temp);
             //System.out.println(getX()+" "+getY());
-            //doWhenEventOccur(temp);
+            doWhenEventOccur(temp);
         }
 
 

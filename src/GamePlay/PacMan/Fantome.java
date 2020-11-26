@@ -4,6 +4,7 @@ package GamePlay.PacMan;
 
 
 import GraphicsEngine.Map;
+    import PhysicsEngine.Action;
     import PhysicsEngine.MouvingObject;
     import javafx.animation.KeyFrame;
     import javafx.animation.Timeline;

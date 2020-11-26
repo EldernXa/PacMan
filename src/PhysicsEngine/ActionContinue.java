@@ -27,12 +27,16 @@ public class ActionContinue extends Action{
         this.tps = tps;
     }
 
+    public Timeline getTimeline(){
+        return timeline;
+    }
     public int getIndTimeline(){
         return indTimeline;
     }
     @Override
     public void doWhenEventOccur(int dir){
         if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
+            Timeline timeline2 = timeline;
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -43,7 +47,7 @@ public class ActionContinue extends Action{
                         mouvingObject.incrementTpsAnimate((mouvingObject.getTpsAnimate()+1)%(int)tps);
                         if(mouvingObject.getActionNext()!=null &&mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(), getGameImage().getCoordinate().getY() + mouvingObject.getActionNext().getY())){
                             if(((ActionContinue)mouvingObject.getActualAction())!=null) {
-                                VisualObject.removeTimeline(((ActionContinue) mouvingObject.getActualAction()).getIndTimeline());
+                                VisualObject.removeTimeline(((ActionContinue) mouvingObject.getActualAction()).getTimeline());
                                 mouvingObject.setActualAction(null);
                             }
                             Action newAction = mouvingObject.getActionNext();
@@ -54,8 +58,7 @@ public class ActionContinue extends Action{
                                 mouvingObject.setActualAction(this);
                                 super.doWhenEventOccur(dir);
                             }else{
-                                VisualObject.stopTimelineParallel();
-                                VisualObject.removeTimeline(getIndTimeline());
+                                VisualObject.removeTimeline(timeline);
                                 mouvingObject.setActualAction(null);
                                 mouvingObject.setActionNext(null);
                             }
@@ -87,8 +90,8 @@ public class ActionContinue extends Action{
     @Override
     public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
-        VisualObject.removeTimeline(indTimeline);
-        VisualObject.startTimelineParallel();
+        VisualObject.removeTimeline(timeline);
+        //VisualObject.startTimelineParallel();
         mouvingObject.setActionNext(null);
     }
 
