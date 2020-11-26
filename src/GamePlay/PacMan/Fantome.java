@@ -69,21 +69,17 @@ public class Fantome extends MouvingObject {
 
 
     public void setRandomGoal() {
-        /*Random rX = new Random();
-        double randomValueX = 18 + (382 - 18) * rX.nextDouble();
-        Random rY = new Random();
-        double randomValueY = 18 + (382 - 18) * rY.nextDouble();
-        Coordinate temp =new Coordinate( randomValueX,  randomValueY);
 
-        if(validCoordinate(temp)) {
-            this.goal = new Coordinate( randomValueX,  randomValueY);
-        }else{
-            setGoal(coordinate);
-        }*/
         Random random = new Random();
-        int randomValue = random.nextInt(mapPacman.getRealCoord().size());
+        int randomValueX = random.nextInt(8);
+        int randomValueY = random.nextInt(9);
+        double valueX = randomValueX + 0.0;
+        double valueY = randomValueY + 0.0;
+        //int randomValue = random.nextInt(mapPacman.getRealCoord().size());
 
-        this.goal = mapPacman.getRealCoord().get(randomValue);
+   // mapPacman.getRealCoord().get(randomValue).affichageCoord();
+
+        this.goal = new Coordinate(valueX,valueY);
     }
 
 
@@ -125,8 +121,9 @@ public class Fantome extends MouvingObject {
 
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
             if(objectifReach(getGoal())){
+                System.out.println("Objectif atteint");
                 setRandomGoal();
-            }else if (getEuclidianDistance(pacManCoordinate) <= 30.0) {
+            }else if (getEuclidianDistance(mapPacman.getWrongCoorFromReal(pacManCoordinate).getPointCoordinate()) <= 4.0) {
 
                 switch (bestAction(pacManCoordinate, charactersFeasable)) {
                     case 'H':
@@ -281,7 +278,7 @@ public class Fantome extends MouvingObject {
             Character chaR = new Character(' ');
             if (character.contains('H')) {
 
-                double realNewY = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY() - 50.0;
+                double realNewY = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY()  - getGameImage().getValueMove();
                 double  newY = Math.abs(realNewY);
                 //double newY = coordinate.getY() - getGameImage().getValueMove();
                 Coordinate Newcoordinate = new Coordinate(mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX(), newY);
@@ -297,7 +294,7 @@ public class Fantome extends MouvingObject {
             }
             if (character.contains('B')) {
 
-                double realNewY = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY() + 50.0;
+                double realNewY = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY() + getGameImage().getValueMove();
                 double  newY = Math.abs(realNewY);
                 //double newY = coordinate.getY() + Double.valueOf(getGameImage().getValueMove());
                 Coordinate Newcoordinate = new Coordinate(mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX(), newY);
@@ -312,7 +309,7 @@ public class Fantome extends MouvingObject {
 
             if (character.contains('D')) {
 
-                double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() - 50.0;
+                double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() - getGameImage().getValueMove();
                 double  newX = Math.abs(realNewX);
                 //double newX = coordinate.getX() - Double.valueOf(getGameImage().getValueMove());
                 Coordinate Newcoordinate = new Coordinate(newX, mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY());
@@ -326,7 +323,7 @@ public class Fantome extends MouvingObject {
             }
             if (character.contains('G')) {
 
-                double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() + 50.0;
+                double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() + getGameImage().getValueMove();
                 double  newX = Math.abs(realNewX);
                 //double newX = coordinate.getX() + Double.valueOf(getGameImage().getValueMove());
                 Coordinate Newcoordinate = new Coordinate(newX, mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY());
