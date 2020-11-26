@@ -123,11 +123,17 @@ public class ActionContinueFantome extends Action {
     }
 
     public boolean asMove(){
-        if(!map.getWrongCoorFromReal(getGameImage().getCoordinate()).getPointCoordinate().compare(previous)){
-            return true;
-        }else {
-            return  false;
+        try{
+            if(!map.getWrongCoorFromReal(getGameImage().getCoordinate()).getPointCoordinate().compare(previous)){
+                return true;
+            }
+
+        }catch (Exception e){
+
+
         }
+        return false;
+
 
     }
 }
