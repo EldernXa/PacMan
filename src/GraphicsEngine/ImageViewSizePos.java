@@ -29,6 +29,7 @@ public class ImageViewSizePos {
         setCoordinate(coordinate);
     }
 
+
     public String getPathImage() {
         return pathImage;
     }
@@ -43,6 +44,7 @@ public class ImageViewSizePos {
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
     }
+
 
     public Coordinate getCoordinate() {
         return coordinate;
@@ -61,5 +63,9 @@ public class ImageViewSizePos {
     public void setImageView(String pathImage) {
         this.pathImage = pathImage;
         this.imageView.setImage(new Image(new File(pathImage).toURI().toString()));
+    }
+    public void setSize(double width, double height) {
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
     }
 }

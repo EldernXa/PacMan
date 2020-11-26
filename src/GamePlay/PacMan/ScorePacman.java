@@ -7,12 +7,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class ScorePacman implements Score {
     Label nbVies = new Label();
     Label nbPoints = new Label();
-    HBox score = new HBox(400);
+    HBox score = new HBox(390);
     HBox vies = new HBox(5);
     ImageViewSizePos logoCoeur = new ImageViewSizePos();
 
@@ -34,7 +35,10 @@ public class ScorePacman implements Score {
         nbPoints.setMinWidth(20);
         vies.getChildren().addAll(logoCoeur.getImageView(),nbVies);
         score.getChildren().addAll(nbPoints,vies);
-        score.setPrefSize(20,20);
+        score.setPrefSize(40,40);
+        logoCoeur.setSize(20,20);
+        nbPoints.setFont(Font.font("Arial",20));
+        nbVies.setFont(Font.font("Arial",20));
         score.setTranslateX(14);
         score.setTranslateY(5);
     }
