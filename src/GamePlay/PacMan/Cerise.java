@@ -16,8 +16,9 @@ public class Cerise extends Fruit {
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
 
-         PacMan pacman = ((PacMan)visualObjects);
-        if(visualObjects != null){
+
+        if(visualObjects!=null && visualObjects.getClass() == PacMan.class){
+            PacMan pacman = ((PacMan)visualObjects);
             if(!isPasse()){
                 pacman.ajoutPoint(25);
             }

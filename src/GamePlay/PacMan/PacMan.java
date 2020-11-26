@@ -9,6 +9,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.concurrent.TimeUnit;
+
 public class PacMan extends MouvingObject {
 
     private final int nbViesMax = 3;
@@ -129,6 +131,22 @@ public class PacMan extends MouvingObject {
 
     public boolean isSuperPacman() {
         return superPacman;
+    }
+    public void superPacman(){
+        setSuperPacman(true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                setSuperPacman(false);
+            }
+        }).start();
+
     }
 
     public void setSuperPacman(boolean superPacman) {

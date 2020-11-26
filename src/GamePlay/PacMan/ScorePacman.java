@@ -32,7 +32,7 @@ public class ScorePacman implements Score {
     public void setHbox(){
         nbVies.setTextFill(Color.WHITE);
         nbPoints.setTextFill(Color.WHITE);
-        nbPoints.setMinWidth(20);
+        nbPoints.setMinWidth(40);
         vies.getChildren().addAll(logoCoeur.getImageView(),nbVies);
         score.getChildren().addAll(nbPoints,vies);
         score.setPrefSize(40,40);

@@ -14,7 +14,7 @@ public class SuperPoint extends Point {
 
         if(visualObjects!=null && visualObjects.getClass() == PacMan.class){
             PacMan pacMan = ((PacMan)visualObjects);
-            pacMan.setSuperPacman(true);
+            pacMan.superPacman();
             if(!isPasse()){
                 pacMan.ajoutPoint(50);
             }
