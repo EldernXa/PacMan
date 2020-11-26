@@ -137,7 +137,7 @@ public class PacMan extends MouvingObject {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
+                //mettre la nouvelle image du superpacman
                 try {
                     TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {

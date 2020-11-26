@@ -20,7 +20,7 @@ public class Cerise extends Fruit {
         if(visualObjects!=null && visualObjects.getClass() == PacMan.class){
             PacMan pacman = ((PacMan)visualObjects);
             if(!isPasse()){
-                pacman.ajoutPoint(25);
+                pacman.ajoutPoint(100);
             }
             setPasse(true);
             super.getImageView().setVisible(false);
