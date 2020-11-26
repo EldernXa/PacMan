@@ -21,10 +21,12 @@ public class Fantome extends MouvingObject {
     private int indTimeline;
     private char lastCharacter;
     private PacMan pacMan;
+    private static int direction;
 
     public Fantome(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene);
-        setGoal(pacMan.getCoordinate());
+        //setGoal(pacMan.getCoordinate());
+        setGoal(new Coordinate(0,0));
         this.pacMan = pacMan;
         this.fantome = getGameImage().getCoordinate();
         //new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
@@ -35,7 +37,15 @@ public class Fantome extends MouvingObject {
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,3,map,pacMan));
 
     }
-   /* public void Test(Scene scene,Map map){
+
+    public static void setDirection(int direction) {
+        Fantome.direction = direction;
+    }
+
+    public static int getDirection() {
+        return direction;
+    }
+/* public void Test(Scene scene,Map map){
 
         if (timeline == null)
             timeline = new Timeline();
@@ -56,7 +66,7 @@ public class Fantome extends MouvingObject {
 
 
     public void setGoal(Coordinate coordinate) {
-        Random rX = new Random();
+        /*Random rX = new Random();
         double randomValueX = 18 + (382 - 18) * rX.nextDouble();
         Random rY = new Random();
         double randomValueY = 18 + (382 - 18) * rY.nextDouble();
@@ -66,7 +76,8 @@ public class Fantome extends MouvingObject {
             this.goal = new Coordinate( randomValueX,  randomValueY);
         }else{
             setGoal(coordinate);
-        }
+        }*/
+        this.goal = coordinate;
     }
 
 

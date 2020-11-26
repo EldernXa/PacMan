@@ -60,7 +60,7 @@ public class Action {
         }
 
        runEvent(scene,dir);
-
+        //doWhenEventOccur(dir);
 
     }
 
@@ -91,7 +91,7 @@ public class Action {
     }
     public void runEvent (Scene scene,int dir){
         scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
-            eventAppear(keyEvent);
+            eventAppear(keyEvent,"");
         });
     }
 
@@ -101,11 +101,7 @@ public class Action {
             doWhenEventOccur(dir);
         }
     }
-    public void eventAppear(KeyEvent keyEvent){
 
-            doWhenEventOccur(dir);
-
-    }
 
     public void doWhenEventOccur ( int dir){
         move(mouvingObject.getGameImage().getCoordinate().getX() + x, mouvingObject.getGameImage().getCoordinate().getY() + y, dir);

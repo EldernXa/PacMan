@@ -9,6 +9,7 @@ import GraphicsEngine.VisualObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
 public class ActionContinueFantome extends Action {
@@ -59,6 +60,7 @@ public class ActionContinueFantome extends Action {
                         //((Fantome)mouvingObject).getGoal().affichageCoord();
                         //System.out.println();
                         //setPacMan();
+
                         super.doWhenEventOccur(dir);
                         if(collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())){
                             //System.out.println("bloqué");
@@ -79,11 +81,18 @@ public class ActionContinueFantome extends Action {
         VisualObject.removeTimeline(indTimeline);
         VisualObject.startTimelineParallel();
 
+        //System.out.println(((Fantome)mouvingObject).bestAction(getGameImage().getCoordinate(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
         int temp = ((Fantome)mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+        Fantome.setDirection(temp);
         //System.out.println(temp);
-        doWhenEventOccur(temp);
+        //System.out.println(getX()+" "+getY());
+        //doWhenEventOccur(temp);
     }
 
-
-
+    @Override
+    public void eventAppear(KeyEvent keyEvent, String carac) {
+        if (getDir() == Fantome.getDirection()){
+            doWhenEventOccur(dir);
+        }
+    }
 }
