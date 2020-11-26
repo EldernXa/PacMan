@@ -1,5 +1,6 @@
 package GamePlay.PacMan;
 
+import GraphicsEngine.Coordinate;
 import PhysicsEngine.Action;
 import GraphicsEngine.GameImage;
 import GraphicsEngine.Map;
@@ -21,6 +22,7 @@ public class ActionContinueFantome extends Action {
     private final MapPacman map;
     private PacMan pacMan;
     private int dir;
+    private Coordinate previous;
 
 
 
@@ -41,6 +43,14 @@ public class ActionContinueFantome extends Action {
         this.pacMan = pacMan;
     }
 
+    public Coordinate getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Coordinate previous) {
+        this.previous = previous;
+    }
+
     @Override
     public void doWhenEventOccur(int dir) {
 
@@ -55,17 +65,18 @@ public class ActionContinueFantome extends Action {
                     temps -> {
 
 
-                        //getGameImage().getCoordinate().affichageCoord();
-                        //System.out.println();
-                        //((Fantome)mouvingObject).getGoal().affichageCoord();
-                        //System.out.println();
-                        //setPacMan();
 
+                        setPrevious(getGameImage().getCoordinate());
                         super.doWhenEventOccur(dir);
-                        if(collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())){
+
+                        if(asMove()){
+                            newMove();
+                        }
+
+                       /* if(collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())){
                             //System.out.println("bloqué");
                             doWhenBlock(); // A modifier
-                        }
+                        }*/
 
                     }
             ));
@@ -84,15 +95,39 @@ public class ActionContinueFantome extends Action {
         //System.out.println(((Fantome)mouvingObject).bestAction(getGameImage().getCoordinate(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
         int temp = ((Fantome)mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
         Fantome.setDirection(temp);
+        asMove();
         //System.out.println(temp);
         //System.out.println(getX()+" "+getY());
         //doWhenEventOccur(temp);
     }
+    public void newMove(){
+            VisualObject.stopTimelineParallel();
+            VisualObject.removeTimeline(indTimeline);
+            VisualObject.startTimelineParallel();
+
+            //System.out.println(((Fantome)mouvingObject).bestAction(getGameImage().getCoordinate(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
+            int temp = ((Fantome)mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+            Fantome.setDirection(temp);
+            asMove();
+            //System.out.println(temp);
+            //System.out.println(getX()+" "+getY());
+            //doWhenEventOccur(temp);
+        }
+
 
     @Override
     public void eventAppear(KeyEvent keyEvent, String carac) {
         if (getDir() == Fantome.getDirection()){
             doWhenEventOccur(dir);
         }
+    }
+
+    public boolean asMove(){
+        if(!map.getWrongCoorFromReal(getGameImage().getCoordinate()).getPointCoordinate().compare(previous)){
+            return true;
+        }else {
+            return  false;
+        }
+
     }
 }
