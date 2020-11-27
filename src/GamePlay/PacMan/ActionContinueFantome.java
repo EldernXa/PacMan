@@ -79,7 +79,7 @@ public class ActionContinueFantome extends Action {
                                 if(asMove()) {
                                     int temp = ((Fantome) mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
                                     Fantome.setDirection(temp);
-                                    System.out.println(temp);
+                                    VisualObject.removeTimeline(timeline);
                                     for (Action a : mouvingObject.getListAction()) {
                                         if (a.getDir() == temp) {
                                             a.doWhenEventOccur(a.getDir());
