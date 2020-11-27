@@ -36,7 +36,6 @@ public class ActionContinue extends Action{
     @Override
     public void doWhenEventOccur(int dir){
         if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
-            Timeline timeline2 = timeline;
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -46,7 +45,7 @@ public class ActionContinue extends Action{
                     temps -> {
                         mouvingObject.incrementTpsAnimate((mouvingObject.getTpsAnimate()+1)%(int)tps);
                         if(mouvingObject.getActionNext()!=null &&mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(), getGameImage().getCoordinate().getY() + mouvingObject.getActionNext().getY())){
-                            if(((ActionContinue)mouvingObject.getActualAction())!=null) {
+                            if(mouvingObject.getActualAction() !=null) {
                                 VisualObject.removeTimeline(((ActionContinue) mouvingObject.getActualAction()).getTimeline());
                                 mouvingObject.setActualAction(null);
                             }
