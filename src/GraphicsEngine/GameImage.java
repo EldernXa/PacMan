@@ -13,7 +13,7 @@ public class GameImage {
     private Coordinate coordinate;
     private final ImageView imgView;
     private final int valueMove;
-    private final String path;
+    private final String initPath;
     private final Coordinate coordInit;
     /**
      *
@@ -23,12 +23,16 @@ public class GameImage {
      */
     public GameImage(String path, Coordinate coordinate, int valueMove){
         coordInit = new Coordinate(coordinate.getX(),coordinate.getY());
-        this.path = path;
+        this.initPath = path;
         this.valueMove = valueMove;
         imgView = new ImageView();
         this.coordinate = coordinate;
         imgView.setX(coordinate.getX());
         imgView.setY(coordinate.getY());
+    }
+
+    public String getInitPath(){
+        return initPath;
     }
 
     public Coordinate getCoordInit() {

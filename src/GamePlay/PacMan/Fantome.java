@@ -7,6 +7,7 @@ import GraphicsEngine.Map;
     import PhysicsEngine.Action;
     import PhysicsEngine.ActionContinue;
     import PhysicsEngine.MouvingObject;
+    import ReadFile.ReadFileCommandes;
     import javafx.animation.KeyFrame;
     import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -42,17 +43,18 @@ public class Fantome extends MouvingObject {
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,2,map,pacMan));
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,3,map,pacMan));*/
         setJ();
-        /*addAction(new ActionContinue(scene, "o", 0, -1, 3, "monter", valueTps, this));
-        addAction(new ActionContinue(scene, "k", -1, 0, 2, "gauche", valueTps, this));
-        addAction(new ActionContinue(scene, "l", 0, 1, 1, "descendre", valueTps, this));
-        addAction(new ActionContinue(scene, "m", 1, 0, 0, "droite", valueTps, this));*/
     }
 
     public void setJ(){
-        addAction(new ActionContinue(getScene(), "o", 0, -1, 3, "monter", valueTps, this));
-        addAction(new ActionContinue(getScene(), "k", -1, 0, 2, "gauche", valueTps, this));
-        addAction(new ActionContinue(getScene(), "l", 0, 1, 1, "descendre", valueTps, this));
-        addAction(new ActionContinue(getScene(), "m", 1, 0, 0, "droite", valueTps, this));
+        clearListAction();
+        ReadFileCommandes pacmanControle = new ReadFileCommandes("./data/Controles/Pacman/controles.txt",true);
+        for(int i = 0; i<pacmanControle.getDirectionMulti().size(); i++){
+
+            addAction(new ActionContinue(getScene(),
+                    pacmanControle.getToucheMulti().get(i), pacmanControle.getxCoordSolo().get(i),
+                    pacmanControle.getyCoordMulti().get(i), i, pacmanControle.getDirectionSolo().get(i),
+                    valueTps, this));
+        }
     }
 
     public void setIA(){

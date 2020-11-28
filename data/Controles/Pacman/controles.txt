@@ -5,4 +5,4 @@ monter z 0 -1
 droite ' 1 0
 descendre ( 0 1
 gauche % -1 0
-monter p 0 -1
+monter & 0 -1
