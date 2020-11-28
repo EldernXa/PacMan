@@ -12,9 +12,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class MenuParametresCommandes {
@@ -27,8 +29,9 @@ public class MenuParametresCommandes {
 
 
     public MenuParametresCommandes(Stage stage,Scene sceneBack, Game game) {
-
+        scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         readFileCommandes = new ReadFileCommandes("./data/Controles/" +game.getName() +"/controles.txt" );
+        label1.setFont(Font.font("Arial",20));
         setCommandes();
         setRevenir(stage,sceneBack);
         pane.getChildren().add(revenir.getImageView());
@@ -48,6 +51,8 @@ public class MenuParametresCommandes {
             HBox hbox = new HBox(10);
             Label label = new Label(readFileCommandes.getDirection().get(i));
             Button button = new Button(readFileCommandes.getTouche().get(i));
+            label.setFont(Font.font("Arial",20));
+            button.getStyleClass().add("controle");
             switch (button.getText()){
                 case "&" :
                     button.setText("↑");
@@ -79,6 +84,7 @@ public class MenuParametresCommandes {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 label1.setText("Cliquez sur un bouton et appuyez sur une touche.");
+                button.setText("");
                 button.setOnKeyPressed(new EventHandler<KeyEvent>() {
                     @Override
                     public void handle(KeyEvent keyEvent) {
