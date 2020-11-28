@@ -19,6 +19,7 @@ public class Action {
     private final MouvingObject mouvingObject;
     private final int dir;
     private final Scene scene;
+    private final String carac;
 
 
     public Action(Scene scene, String carac, double x, double y, int dir, String nameAction, MouvingObject mouvingObject){
@@ -28,6 +29,7 @@ public class Action {
             this.dir = dir;
             this.scene = scene;
             this.mouvingObject = mouvingObject;
+            this.carac = carac;
             runEvent(scene, carac, dir);
         }
 
@@ -36,6 +38,7 @@ public class Action {
         this.dir = dir;
         this.scene = scene;
         this.mouvingObject = mouvingObject;
+        this.carac = null;
         switch (dir){
             case 0:
                 this.x = getGameImage().getValueMove();
@@ -62,6 +65,10 @@ public class Action {
        runEvent(scene,dir);
         //doWhenEventOccur(dir);
 
+    }
+
+    public String getCarac(){
+        return carac;
     }
 
     public MouvingObject getMouvingObject(){

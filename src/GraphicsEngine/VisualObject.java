@@ -1,10 +1,12 @@
 package GraphicsEngine;
 
 import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -41,8 +43,10 @@ public abstract class VisualObject {
 
     public static void removeTimeline(Timeline timeline){
         stopTimelineParallel();
-        listVisualObjectTimeline.remove(parallelTransition.getChildren().indexOf(timeline));
-        parallelTransition.getChildren().remove(timeline);
+        if(parallelTransition.getChildren().contains(timeline)) {
+            listVisualObjectTimeline.remove(parallelTransition.getChildren().indexOf(timeline));
+            parallelTransition.getChildren().remove(timeline);
+        }
 
         if(parallelTransition.getChildren().size()>0)
             startTimelineParallel();
@@ -52,14 +56,42 @@ public abstract class VisualObject {
         parallelTransition.stop();
     }
 
+    public static boolean containsTimeline(Timeline timeline){
+        return parallelTransition.getChildren().contains(timeline);
+    }
+
     public static void startTimelineParallel(){
-        parallelTransition.setCycleCount(Animation.INDEFINITE);
-        parallelTransition.play();
+        if(verifContainsParallel()) {
+            parallelTransition.setCycleCount(Animation.INDEFINITE);
+            parallelTransition.playFromStart();
+        }
+    }
+
+    private static boolean verifContainsParallel(){
+        for(Animation t : parallelTransition.getChildren()){
+            if(((Timeline) t).getKeyFrames().size()>0)
+                return true;
+        }
+        return false;
     }
 
     public static void clearTimelineParallel(){
         parallelTransition.getChildren().clear();
         listVisualObjectTimeline.clear();
+    }
+
+    public static boolean clearOrRemoveParallel(){
+        return parallelTransition.getChildren().size()>1;
+    }
+
+    public static void clearTimeline(Timeline timeline, float tps){
+        timeline.getKeyFrames().clear();
+        timeline.getKeyFrames().add(new KeyFrame(
+                Duration.millis(tps),
+                temps->{
+
+                }
+        ));
     }
 
     public ImageView getImageView(){

@@ -5,6 +5,7 @@ package GamePlay.PacMan;
 
 import GraphicsEngine.Map;
     import PhysicsEngine.Action;
+    import PhysicsEngine.ActionContinue;
     import PhysicsEngine.MouvingObject;
     import javafx.animation.KeyFrame;
     import javafx.animation.Timeline;
@@ -34,11 +35,14 @@ public class Fantome extends MouvingObject {
         setRandomGoal();
         //new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
         //Test(scene, map);
-       addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,0,map,pacMan));
+        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,0,map,pacMan));
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,1,map,pacMan));
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,2,map,pacMan));
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,3,map,pacMan));
-
+        /*addAction(new ActionContinue(scene, "o", 0, -1, 3, "monter", valueTps, this));
+        addAction(new ActionContinue(scene, "k", -1, 0, 2, "gauche", valueTps, this));
+        addAction(new ActionContinue(scene, "l", 0, 1, 1, "descendre", valueTps, this));
+        addAction(new ActionContinue(scene, "m", 1, 0, 0, "droite", valueTps, this));*/
     }
 
     public static void setDirection(int direction) {

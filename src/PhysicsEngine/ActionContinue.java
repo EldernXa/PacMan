@@ -43,28 +43,42 @@ public class ActionContinue extends Action{
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        mouvingObject.incrementTpsAnimate((mouvingObject.getTpsAnimate()+1)%(int)tps);
-                        if(mouvingObject.getActionNext()!=null &&mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(), getGameImage().getCoordinate().getY() + mouvingObject.getActionNext().getY())){
-                            if(mouvingObject.getActualAction() !=null) {
-                                VisualObject.removeTimeline(((ActionContinue) mouvingObject.getActualAction()).getTimeline());
+                        mouvingObject.incrementTpsAnimate((mouvingObject.getTpsAnimate() + 1) % (int) tps);
+                        if (mouvingObject.getActionNext() != null && mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(), getGameImage().getCoordinate().getY() + mouvingObject.getActionNext().getY())) {
+                            if (mouvingObject.getActualAction() != null) {
+                                VisualObject.stopTimelineParallel();
+                                if(!VisualObject.clearOrRemoveParallel())
+                                    VisualObject.removeTimeline(((ActionContinue) mouvingObject.getActualAction()).getTimeline());
+                                else{
+                                    VisualObject.clearTimeline(((ActionContinue)mouvingObject.getActualAction()).getTimeline(), tps);
+                                    VisualObject.startTimelineParallel();
+                                }
                                 mouvingObject.setActualAction(null);
                             }
                             Action newAction = mouvingObject.getActionNext();
                             mouvingObject.setActionNext(null);
                             newAction.doWhenEventOccur(newAction.getDir());
-                        }else {
-                            if(!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
+                        } else {
+                            if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
                                 mouvingObject.setActualAction(this);
                                 super.doWhenEventOccur(dir);
-                            }else{
-                                VisualObject.removeTimeline(timeline);
+                            } else {
+                                VisualObject.stopTimelineParallel();
+                                if(!VisualObject.clearOrRemoveParallel())
+                                    VisualObject.removeTimeline(timeline);
+                                else {
+                                    //timeline.getKeyFrames().clear();
+                                    VisualObject.clearTimeline(timeline, tps);
+                                    VisualObject.startTimelineParallel();
+                                }
                                 mouvingObject.setActualAction(null);
                                 mouvingObject.setActionNext(null);
                             }
                         }
                     }
             ));
-            indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
+            if(!VisualObject.containsTimeline(timeline))
+                indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
             VisualObject.startTimelineParallel();
         }else{
             if(mouvingObject.getActualAction()!=this && mouvingObject.getActualAction()!=null)
@@ -89,8 +103,10 @@ public class ActionContinue extends Action{
     @Override
     public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
-        VisualObject.removeTimeline(timeline);
-        //VisualObject.startTimelineParallel();
+        timeline.getKeyFrames().clear();
+        //VisualObject.removeTimeline(timeline);
+        VisualObject.startTimelineParallel();
+        mouvingObject.setActualAction(null);
         mouvingObject.setActionNext(null);
     }
 
