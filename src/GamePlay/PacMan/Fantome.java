@@ -20,8 +20,8 @@ public class Fantome extends MouvingObject {
     private float valueTps = (float) 10;
     private Coordinate goal;
     private Coordinate fantome;
-    private Timeline timeline;
-    private int indTimeline;
+    //private Timeline timeline;
+    //private int indTimeline;
     private char lastCharacter;
     private PacMan pacMan;
     private static int direction;
@@ -90,6 +90,10 @@ public class Fantome extends MouvingObject {
         this.goal = new Coordinate(valueX,valueY);
     }
 
+    public void setGoal(Coordinate coordinate){
+        this.goal = coordinate;
+    }
+
 
         public Coordinate getGoal () {
             return goal;
@@ -114,13 +118,13 @@ public class Fantome extends MouvingObject {
         }
 
         public int Chase ( ArrayList<Character> listOfWalls){
-            //pacMan.getCoordinate().affichageCoord();
-            mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().affichageCoord();
+
+            mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().affichageCoord();
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
             if(objectifReach(getGoal())){
                 System.out.println("Objectif atteint");
                 setRandomGoal();
-            }else if (getEuclidianDistance(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate()) <= 4.0) {
+            }else if (getEuclidianDistance(mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate()) <= 4.0) {
 
                 switch (bestAction(pacMan.getCoordinate(), charactersFeasable)) {
                     case 'H':
