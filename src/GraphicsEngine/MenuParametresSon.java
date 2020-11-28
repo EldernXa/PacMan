@@ -28,6 +28,7 @@ public class MenuParametresSon {
 
 
     public MenuParametresSon(Stage stage, Scene sceneBack, Game game) {
+        pane.setStyle("-fx-background-color: lightgray");
         setVolumeSlider();
         styleLabelSon();
         son.getChildren().addAll(labelSon,volumeSlider);
