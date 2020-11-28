@@ -28,6 +28,7 @@ public class MenuParametresCommandes {
 
     public MenuParametresCommandes(Stage stage,Scene sceneBack, Game game) {
         scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
+        pane.setStyle("-fx-background-color: lightgray");
         readFileCommandes = new ReadFileCommandes("./data/Controles/" +game.getName() +"/controles.txt" ,true);
         label1.setFont(Font.font("Arial",20));
         setCommandes();
@@ -78,18 +79,18 @@ public class MenuParametresCommandes {
     }
 
     synchronized public void setChangeCommande(Label label,Button button){
+
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                label1.setText("Cliquez sur un bouton et appuyez sur une touche.");
                 String text = button.getText();
+                label1.setText("Cliquez sur un bouton et appuyez sur une touche.");
                 button.setText("");
                 button.setOnKeyPressed(new EventHandler<KeyEvent>() {
                     @Override
                     public void handle(KeyEvent keyEvent) {
                         int code = keyEvent.getCode().getCode();
-
-                        if(readFileCommandes.getToucheSolo().contains(keyEvent.getCode().getChar().toLowerCase())){
+                        if(readFileCommandes.getToucheSolo().contains(keyEvent.getCode().getChar().toLowerCase())&& !keyEvent.getCode().getChar().toLowerCase().equals(text)){
                             label1.setText("Ce caractère est deja utilisé");
                             button.setText(text);
                         }else{
@@ -121,17 +122,31 @@ public class MenuParametresCommandes {
                                 label1.setText("Caractère non correct");
                             }else{
                                 readFileCommandes.writeSolo(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
-                                System.out.println("-----------"+readFileCommandes.getToucheSolo());
+
                             }
                         }
 
                         button.setOnKeyPressed(null);
-
+                        scene.setOnMouseClicked(null);
 
                     }
                 });
+
+                scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+
+                        System.out.println(text);
+                        button.setText(text);
+                        button.setOnKeyPressed(null);
+                        scene.setOnMouseClicked(null);
+                    }
+                });
+
             }
+
         });
+
     }
     public void setRevenir(Stage stage, Scene scene){
         revenir.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
