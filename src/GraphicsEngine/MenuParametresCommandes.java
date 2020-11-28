@@ -82,43 +82,47 @@ public class MenuParametresCommandes {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 label1.setText("Cliquez sur un bouton et appuyez sur une touche.");
+                String text = button.getText();
                 button.setText("");
                 button.setOnKeyPressed(new EventHandler<KeyEvent>() {
                     @Override
                     public void handle(KeyEvent keyEvent) {
-                        System.out.println(keyEvent.getCode().getCode());
                         int code = keyEvent.getCode().getCode();
-                        switch (keyEvent.getCode().getChar()){
-                            case "&" :
-                                button.setText("↑");
-                                break;
-                            case "%" :
-                                button.setText("←");
-                                break;
-                            case "(":
-                                button.setText("↓");
-                                break;
-                            case "'":
-                                button.setText("→");
-                                break;
-                            default:
-                                if((code <=110 && code >=97) || code ==10 || code == 20 || code == 9 || code ==0){
 
-                                }else{
-                                    button.setText(keyEvent.getCode().getChar().toLowerCase());
-                                }
-
-                                break;
-                        }
-
-                        if((code <=110 && code >=97) || code ==10 || code == 20 || code == 9 || code ==0){
-
-
-                            label1.setText("Caractère non correct");
-
-
+                        if(readFileCommandes.getToucheSolo().contains(keyEvent.getCode().getChar().toLowerCase())){
+                            label1.setText("Ce caractère est deja utilisé");
+                            button.setText(text);
                         }else{
-                            readFileCommandes.writeSolo(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
+
+                            switch (keyEvent.getCode().getChar()){
+                                case "&" :
+                                    button.setText("↑");
+                                    break;
+                                case "%" :
+                                    button.setText("←");
+                                    break;
+                                case "(":
+                                    button.setText("↓");
+                                    break;
+                                case "'":
+                                    button.setText("→");
+                                    break;
+                                default:
+                                    if((code <=110 && code >=97) || code ==10 || code == 20 || code == 9 || code ==0){
+
+                                    }else{
+                                        button.setText(keyEvent.getCode().getChar().toLowerCase());
+                                    }
+
+                                    break;
+                            }
+
+                            if((code <=110 && code >=97) || code ==10 || code == 20 || code == 9 || code ==0){
+                                label1.setText("Caractère non correct");
+                            }else{
+                                readFileCommandes.writeSolo(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
+                                System.out.println("-----------"+readFileCommandes.getToucheSolo());
+                            }
                         }
 
                         button.setOnKeyPressed(null);
