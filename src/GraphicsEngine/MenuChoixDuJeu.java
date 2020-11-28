@@ -129,8 +129,12 @@ public class MenuChoixDuJeu {
             currentGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    MenuDuJeu currentGameMenu = new MenuDuJeu(stage,currentGame,menuScene);
-                    changerScene(currentGameMenu.getMenuDuJeuScene());
+                    if(Menu.getMenuJeu()) {
+                        MenuDuJeu currentGameMenu = new MenuDuJeu(stage, currentGame, menuScene);
+                        changerScene(currentGameMenu.getMenuDuJeuScene());
+                    }else if(Menu.getMenuLevel()){
+                        MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, currentGame, menuScene);
+                    }
                 }
             });
         }
