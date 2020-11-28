@@ -118,7 +118,6 @@ public class Fantome extends MouvingObject {
         }
 
         public int Chase (Coordinate pacManCoordinate, ArrayList<Character> listOfWalls){
-
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
             if(objectifReach(getGoal())){
                 System.out.println("Objectif atteint");

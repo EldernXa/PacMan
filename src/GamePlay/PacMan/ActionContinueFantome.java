@@ -53,10 +53,7 @@ public class ActionContinueFantome extends Action {
 
     @Override
     public void doWhenEventOccur(int dir) {
-
-
         if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
-            Timeline timeline2 = timeline;
             if (timeline == null)
                 timeline = new Timeline();
             VisualObject.stopTimelineParallel();
@@ -64,15 +61,45 @@ public class ActionContinueFantome extends Action {
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
+                        mouvingObject.incrementTpsAnimate((mouvingObject.getTpsAnimate()+1)%(int)tps);
+                        if(mouvingObject.getActionNext()!=null && mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(),
+                                getGameImage().getCoordinate().getY()+mouvingObject.getActionNext().getY())){
+                            if(mouvingObject.getActualAction() !=null){
+                                VisualObject.removeTimeline(((ActionContinueFantome)mouvingObject.getActualAction()).getTimeline());
+                                mouvingObject.setActualAction(null);
+                            }
+                            Action newAction = mouvingObject.getActionNext();
+                            mouvingObject.setActionNext(null);
+                            newAction.doWhenEventOccur(newAction.getDir());
+                        }else{
+                            if(!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
+                                mouvingObject.setActualAction(this);
+                                super.doWhenEventOccur(dir);
+                                setPrevious(getGameImage().getCoordinate());
+                                if(asMove()) {
+                                    int temp = ((Fantome) mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+                                    Fantome.setDirection(temp);
+                                    VisualObject.removeTimeline(timeline);
+                                    for (Action a : mouvingObject.getListAction()) {
+                                        if (a.getDir() == temp) {
+                                            a.doWhenEventOccur(a.getDir());
+                                        }
+                                    }
+                                }
+                            }else{
+                                VisualObject.removeTimeline(timeline);
+                                mouvingObject.setActualAction(null);
+                                mouvingObject.setActionNext(null);
+                            }
+                        }
 
 
-
-                        setPrevious(getGameImage().getCoordinate());
+                        /*setPrevious(getGameImage().getCoordinate());
                         super.doWhenEventOccur(dir);
 
                         if(asMove()){
                             newMove();
-                        }
+                        }*/
 
                        /* if(collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())){
                             //System.out.println("bloqué");
@@ -83,7 +110,14 @@ public class ActionContinueFantome extends Action {
             ));
             indTimeline = VisualObject.addTimeline(timeline, super.getMouvingObject());
             VisualObject.startTimelineParallel();
+        }else{
+            if(mouvingObject.getActualAction()!=this && mouvingObject.getActualAction()!=null)
+                mouvingObject.setActionNext(this);
         }
+    }
+
+    public Timeline getTimeline(){
+        return timeline;
     }
 
 
@@ -99,9 +133,13 @@ public class ActionContinueFantome extends Action {
         //asMove();
         //System.out.println(temp);
         //System.out.println(getX()+" "+getY());
+        boolean verif = false;
         for(Action a : mouvingObject.getListAction()){
             if(a.getDir()==temp){
-                a.doWhenEventOccur(temp);
+                if(!verif) {
+                    a.doWhenEventOccur(temp);
+                    verif = true;
+                }
             }
         }
         //doWhenEventOccur(temp);
