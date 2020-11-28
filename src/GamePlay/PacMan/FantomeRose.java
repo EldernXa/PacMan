@@ -17,6 +17,7 @@ public class FantomeRose extends Fantome{
         super(path, coordinate, scene, map, pacMan);
         this.mapPacman=map;
         this.pacMan = pacMan;
+        super.setGoal(anticipation(pacMan));
     }
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
@@ -48,32 +49,31 @@ public class FantomeRose extends Fantome{
         return nulL;
     }
 
-    /*public Coordinate anticipation(PacMan pacMan){
-        switch (){
+    public Coordinate anticipation(PacMan pacMan){
+        switch (pacMan.getDir()){
             case 0:
                 double x0 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getX() ;
                 double y0 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getY() ;
                 return   new Coordinate(x0+2,y0);
-                break;
             case 1:
                 double x1 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getX() ;
                 double y1 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getY() ;
                 return  new Coordinate(x1,y1+2);
-                break;
+
 
             case 2:
                 double x2 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getX() ;
                 double y2 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getY() ;
                 return  new Coordinate(x2-2,y2);
-                break;
+
             case 3:
                 double x3 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getX() ;
                 double y3 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getY() ;
                 return  new Coordinate(x3,y3-2);
-                break;
+
 
         }
+        return new Coordinate(-1,-1);
 
-
-    }*/
+    }
 }
