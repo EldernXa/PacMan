@@ -19,22 +19,73 @@ public class FantomeBleu extends Fantome{
     private final float startTime = (float)10 ;
     private int counterPacmanPoint ;
     private Timeline timeline;
+    private MapPacman mapPacman;
+    private PacMan pacMan;
+    private FantomeRouge fantomeRouge;
 
-    public FantomeBleu(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
+    public FantomeBleu(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan, FantomeRouge fantomeRouge) {
         super(path, coordinate, scene, map, pacMan);
+        this.mapPacman= map;
+        this.pacMan = pacMan;
+        this.fantomeRouge = fantomeRouge;
 
+    }
 
+    public float getStartTime() {
+        return startTime;
+    }
+
+    public int getCounterPacmanPoint() {
+        return counterPacmanPoint;
+    }
+
+    public void setCounterPacmanPoint(int counterPacmanPoint) {
+        this.counterPacmanPoint = counterPacmanPoint;
+    }
+
+    public Timeline getTimeline() {
+        return timeline;
+    }
+
+    public void setTimeline(Timeline timeline) {
+        this.timeline = timeline;
+    }
+
+    public MapPacman getMapPacman() {
+        return mapPacman;
+    }
+
+    public void setMapPacman(MapPacman mapPacman) {
+        this.mapPacman = mapPacman;
+    }
+
+    public PacMan getPacMan() {
+        return pacMan;
+    }
+
+    public void setPacMan(PacMan pacMan) {
+        this.pacMan = pacMan;
+    }
+
+    public FantomeRouge getFantomeRouge() {
+        return fantomeRouge;
+    }
+
+    public void setFantomeRouge(FantomeRouge fantomeRouge) {
+        this.fantomeRouge = fantomeRouge;
     }
 
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
         if (timeline.getKeyFrames().get(0).getTime().equals(  startTime)){
-
+            setGoal(Transition(fantomeRouge));
+            return super.Chase(listOfWalls);
         }else {
-            int nulL = -1;
-            return nulL;
+            setRandomGoal();
+            return super.Chase(listOfWalls);
         }
-        int nulL = -1;
-        return nulL;
+
     }
+
+
 }

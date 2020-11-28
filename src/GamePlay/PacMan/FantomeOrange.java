@@ -49,61 +49,30 @@ public class FantomeOrange extends Fantome {
     public int Chase(ArrayList<Character> listOfWalls) {
         if (getCounterPoint() >= 3 * (pacMan.getNbPointsMapMax() / 4)) {
 
-            //mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().affichageCoord();
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
-            if (objectifReach(getGoal())) {
-                setRandomGoal();
-            } else if (getEuclidianDistance(mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate()) <= 4.0) {
+            if (isNear(mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate(),2)) {
 
-                switch (bestAction(pacMan.getGameImage().getCoordinate(), charactersFeasable)) {
-                    case 'H':
-                        setLastCharacter('H');
-                        int temp = 3;
-                        return temp;
-                    case 'B':
-                        setLastCharacter('B');
-                        int temp1 = 1;
-                        return temp1;
-                    case 'D':
-                        setLastCharacter('D');
-                        int temp2 = 0;
-                        return temp2;
-                    case 'G':
-                        setLastCharacter('G');
-                        int temp3 = 2;
-                        return temp3;
-
-                }
-
+                setGoal(mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate());
+                return super.Chase(listOfWalls);
             } else {
-                switch (bestAction(getGoal(), charactersFeasable)) {
-                    case 'H':
-                        setLastCharacter('H');
-                        int temp = 3;
-                        return temp;
-                    case 'B':
-                        setLastCharacter('B');
-                        int temp1 = 1;
-                        return temp1;
-                    case 'D':
-                        setLastCharacter('D');
-                        int temp2 = 0;
-                        return temp2;
-                    case 'G':
-                        setLastCharacter('G');
-                        int temp3 = 2;
-                        return temp3;
-
-                }
-
-
+                setRandomGoal();
+                return super.Chase(listOfWalls);
             }
-            int nulL = -1;
-            return nulL;
+
         }else {
             int nulL = -1;
             return nulL;
         }
+    }
+
+    public boolean isNear(Coordinate coordinate,double range){
+
+        if((Math.abs(coordinate.getX() - this.getGameImage().getCoordinate().getX()) <= range )||(Math.abs(coordinate.getY() - this.getGameImage().getCoordinate().getY()) <= range )){
+            return true;
+        }else {
+            return false;
+        }
+
     }
 }
 
