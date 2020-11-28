@@ -34,11 +34,12 @@ public class PacMan extends MouvingObject {
         this.nbPointsMapMax = nbPointsMapMax;
         this.nbPointsMap = 0;
         nbVies_restantes = new SimpleIntegerProperty(nbViesMax);
-        pacmanControle = new ReadFileCommandes("./data/Controles/Pacman/controles.txt");
-        for(int i = 0; i<pacmanControle.getDirection().size(); i++){
+        pacmanControle = new ReadFileCommandes("./data/Controles/Pacman/controles.txt",true);
+        for(int i = 0; i<pacmanControle.getDirectionSolo().size(); i++){
+
             addAction(new ActionContinue(scene,
-                    pacmanControle.getTouche().get(i), pacmanControle.getxCoord().get(i),
-                    pacmanControle.getyCoord().get(i), i, pacmanControle.getDirection().get(i),
+                    pacmanControle.getToucheSolo().get(i), pacmanControle.getxCoordSolo().get(i),
+                    pacmanControle.getyCoordSolo().get(i), i, pacmanControle.getDirectionSolo().get(i),
                     valueTps, this));
         }
         /*addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
