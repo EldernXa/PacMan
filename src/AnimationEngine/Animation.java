@@ -11,15 +11,30 @@ public class Animation {
     private final ArrayList<ArrayList<Image>> listImage;
     private int ind;
 
-    public Animation(String path, int taille) {
+    public Animation(String path) {
         ind = 0;
         listImage = new ArrayList<>();
-        for (int i = 0; i < taille; i++) {
+        /*for (int i = 0; i < taille; i++) {
             listImage.add(new ArrayList<>());
         }
         File file = new File(path);
         for (File f : Objects.requireNonNull(file.listFiles())) {
             for (File fImage : Objects.requireNonNull(f.listFiles())) {
+                listImage.get(Integer.parseInt(f.getName().split("sprite")[1])).add(new Image(fImage.toURI().toString()));
+            }
+        }*/
+        changeAnimation(path);
+    }
+
+    public void changeAnimation(String path){
+        ind = 0;
+        listImage.clear();
+        File file = new File(path);
+        for(File f:Objects.requireNonNull(file.listFiles())){
+            listImage.add(new ArrayList<>());
+        }
+        for(File f : Objects.requireNonNull(file.listFiles())){
+            for(File fImage:Objects.requireNonNull(f.listFiles())){
                 listImage.get(Integer.parseInt(f.getName().split("sprite")[1])).add(new Image(fImage.toURI().toString()));
             }
         }
