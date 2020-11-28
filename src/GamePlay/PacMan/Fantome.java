@@ -77,24 +77,7 @@ public class Fantome extends MouvingObject {
     public static int getDirection() {
         return direction;
     }
-/* public void Test(Scene scene,Map map){
 
-        if (timeline == null)
-            timeline = new Timeline();
-        VisualObject.stopTimelineParallel();
-        timeline.getKeyFrames().clear();
-        timeline.getKeyFrames().add(new KeyFrame(
-                Duration.millis(valueTps),
-                temps -> {
-
-                    new ActionContinueFantome(getGameImage(),scene,valueTps,this,Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()),map);
-                    //getFantome().affichageCoord();
-                    //System.out.println(Chase(getGoal(),map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
-                }
-        ));
-        indTimeline = VisualObject.addTimeline(timeline, this);
-        VisualObject.startTimelineParallel();
-    }*/
 
 
     public void setRandomGoal() {
@@ -104,10 +87,6 @@ public class Fantome extends MouvingObject {
         int randomValueY = random.nextInt(9);
         double valueX = randomValueX + 0.0;
         double valueY = randomValueY + 0.0;
-        //int randomValue = random.nextInt(mapPacman.getRealCoord().size());
-
-   // mapPacman.getRealCoord().get(randomValue).affichageCoord();
-
         this.goal = new Coordinate(valueX,valueY);
     }
 
@@ -116,19 +95,7 @@ public class Fantome extends MouvingObject {
             return goal;
         }
 
-        /*public boolean validCoordinate(Coordinate coordinate){
-        Double maxXY = 400.0;
-        Double minXY = 0.0;
-        if(coordinate.getX() > maxXY || coordinate.getX()< minXY || coordinate.getY() > maxXY || coordinate.getY() < minXY) {
 
-            return false;
-
-        } else {
-
-            return true;
-        }
-
-        }*/
 
         public double getEuclidianDistance (Coordinate coordinate){
 
@@ -146,15 +113,16 @@ public class Fantome extends MouvingObject {
                 }
         }
 
-        public int Chase (Coordinate pacManCoordinate, ArrayList<Character> listOfWalls){
-            mapPacman.getWrongCoorFromReal(pacManCoordinate).getPointCoordinate().affichageCoord();
+        public int Chase ( ArrayList<Character> listOfWalls){
+            //pacMan.getCoordinate().affichageCoord();
+            mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().affichageCoord();
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
             if(objectifReach(getGoal())){
                 System.out.println("Objectif atteint");
                 setRandomGoal();
-            }else if (getEuclidianDistance(mapPacman.getWrongCoorFromReal(pacManCoordinate).getPointCoordinate()) <= 4.0) {
+            }else if (getEuclidianDistance(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate()) <= 4.0) {
 
-                switch (bestAction(pacManCoordinate, charactersFeasable)) {
+                switch (bestAction(pacMan.getCoordinate(), charactersFeasable)) {
                     case 'H':
                         setLastCharacter('H');
                         int temp = 3;
@@ -403,7 +371,6 @@ public class Fantome extends MouvingObject {
         if(character == 'B')newChar = 'H';
         if(character == 'D')newChar = 'G';
         if(character == 'G')newChar = 'D';
-        //System.out.println(newChar);
         return newChar;
     }
 
