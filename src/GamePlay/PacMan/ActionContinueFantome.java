@@ -24,8 +24,6 @@ public class ActionContinueFantome extends Action {
     private int dir;
     private Coordinate previous;
 
-
-
     public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, int dir,MapPacman map,PacMan pacMan){
         super(scene, mouvingObject,dir);
         this.tps = tps;

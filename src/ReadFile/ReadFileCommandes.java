@@ -16,12 +16,17 @@ public class ReadFileCommandes {
     private ArrayList<Integer> xCoord;
     private ArrayList<Integer> yCoord;
 
-    public ReadFileCommandes(String  str) {
+    private final boolean multijoueur;
+
+    public ReadFileCommandes(String str, boolean multijoueur) {
         pathName = str;
         direction = new ArrayList<>();
         touche = new ArrayList<>();
         xCoord = new ArrayList<>();
         yCoord = new ArrayList<>();
+;
+
+        this.multijoueur = multijoueur;
 
         Path path = Paths.get(str);
         try {
@@ -49,22 +54,31 @@ public class ReadFileCommandes {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
 
     }
 
-
-    public void write(String direction, char touche) {
+    private void write(String direction, char touche, boolean multijoueur) {
         try {
+
+            int length;
+            int start;
+            if (multijoueur) {
+                start = file.length / 2;
+                length = file.length;
+            } else {
+                start = 0;
+                length = file.length / 2;
+            }
             List<String> fileContent = new ArrayList<>(Files.readAllLines(Paths.get(pathName), StandardCharsets.UTF_8));
-            System.out.println(this.direction.contains(direction));
-            if(this.direction.contains(direction) ){
-                for (int i = 0; i < file.length; i++) {
+            if (this.direction.contains(direction)) {
+                for (int i = start; i < length; i++) {
                     String line[] = file[i].split("\\s+");
-                    if(line[0].equals(direction)){
-                        fileContent.set(i, direction +" " + touche+" " + xCoord.get(i)+" " +yCoord.get(i));
+                    if (line[0].equals(direction)) {
+                        fileContent.set(i, direction + " " + touche + " " + xCoord.get(i) + " " + yCoord.get(i));
+                        this.direction.set(i,direction);
+                        this.touche.set(i,String.valueOf(touche));
                         Files.write(Paths.get(pathName), fileContent, StandardCharsets.UTF_8);
                         return;
 
@@ -72,28 +86,51 @@ public class ReadFileCommandes {
                 }
             }
 
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void writeSolo(String direction, char touche) {
+        write(direction, touche, false);
 
     }
 
-    public ArrayList<String> getDirection() {
-        return direction;
+    public void writeMulti(String direction, char touche) {
+
+        write(direction, touche, true);
+
     }
 
-    public ArrayList<String> getTouche() {
-        return touche;
+    public List<String> getDirectionSolo() {
+        return  direction.subList(0,direction.size()/2);
     }
 
-    public ArrayList<Integer> getxCoord() {
-        return xCoord;
+    public List<String> getToucheSolo() {
+        return touche.subList(0,touche.size()/2);
     }
 
-    public ArrayList<Integer> getyCoord() {
-        return yCoord;
+    public List<Integer> getxCoordSolo() {
+        return  xCoord.subList(0,xCoord.size()/2);
+    }
+
+    public List<Integer> getyCoordSolo() {
+        return  yCoord.subList(0,yCoord.size()/2);
+    }
+
+    public List<String> getDirectionMulti() {
+        return direction.subList(direction.size()/2,direction.size());
+    }
+
+    public List<String> getToucheMulti() {
+        return  touche.subList(touche.size()/2,touche.size());
+    }
+
+    public List<Integer> getxCoordMulti() {
+        return  xCoord.subList(xCoord.size()/2,xCoord.size());
+    }
+
+    public List<Integer> getyCoordMulti() {
+        return  yCoord.subList(yCoord.size()/2,yCoord.size());
     }
 }

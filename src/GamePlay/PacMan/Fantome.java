@@ -7,6 +7,7 @@ import GraphicsEngine.Map;
     import PhysicsEngine.Action;
     import PhysicsEngine.ActionContinue;
     import PhysicsEngine.MouvingObject;
+    import ReadFile.ReadFileCommandes;
     import javafx.animation.KeyFrame;
     import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -25,24 +26,48 @@ public class Fantome extends MouvingObject {
     private PacMan pacMan;
     private static int direction;
     private MapPacman mapPacman;
+    private final Scene scene;
 
     public Fantome(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene);
+        this.scene = scene;
         //setGoal(pacMan.getCoordinate());
         this.mapPacman = map;
         this.pacMan = pacMan;
         this.fantome = getGameImage().getCoordinate();
-        setRandomGoal();
         //new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
         //Test(scene, map);
+        /*setRandomGoal();
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,0,map,pacMan));
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,1,map,pacMan));
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,2,map,pacMan));
-        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,3,map,pacMan));
-        /*addAction(new ActionContinue(scene, "o", 0, -1, 3, "monter", valueTps, this));
-        addAction(new ActionContinue(scene, "k", -1, 0, 2, "gauche", valueTps, this));
-        addAction(new ActionContinue(scene, "l", 0, 1, 1, "descendre", valueTps, this));
-        addAction(new ActionContinue(scene, "m", 1, 0, 0, "droite", valueTps, this));*/
+        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,3,map,pacMan));*/
+        setJ();
+    }
+
+    public void setJ(){
+        clearListAction();
+        ReadFileCommandes pacmanControle = new ReadFileCommandes("./data/Controles/Pacman/controles.txt",true);
+        for(int i = 0; i<pacmanControle.getDirectionMulti().size(); i++){
+
+            addAction(new ActionContinue(getScene(),
+                    pacmanControle.getToucheMulti().get(i), pacmanControle.getxCoordSolo().get(i),
+                    pacmanControle.getyCoordMulti().get(i), i, pacmanControle.getDirectionSolo().get(i),
+                    valueTps, this));
+        }
+    }
+
+    public void setIA(){
+        setRandomGoal();
+        clearListAction();
+        addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 0, mapPacman, pacMan));
+        addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 1, mapPacman, pacMan));
+        addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 2, mapPacman, pacMan));
+        addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 3, mapPacman, pacMan));
+    }
+
+    public Scene getScene(){
+        return scene;
     }
 
     public static void setDirection(int direction) {
