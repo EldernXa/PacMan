@@ -83,7 +83,7 @@ public class ActionContinueFantome extends Action {
                                 super.doWhenEventOccur(dir);
                                 setPrevious(getGameImage().getCoordinate());
                                 if(asMove()) {
-                                    int temp = ((Fantome) mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+                                    int temp = ((Fantome) mouvingObject).Chase(map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
                                     Fantome.setDirection(temp);
                                     VisualObject.removeTimeline(timeline);
                                     for (Action a : mouvingObject.getListAction()) {
@@ -141,7 +141,7 @@ public class ActionContinueFantome extends Action {
         VisualObject.startTimelineParallel();
 
         //System.out.println(((Fantome)mouvingObject).bestAction(getGameImage().getCoordinate(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
-        int temp = ((Fantome)mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+        int temp = ((Fantome)mouvingObject).Chase( map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
         Fantome.setDirection(temp);
         //asMove();
         //System.out.println(temp);
@@ -160,7 +160,7 @@ public class ActionContinueFantome extends Action {
     public void newMove(){
             VisualObject.removeTimeline(timeline);
             //System.out.println(((Fantome)mouvingObject).bestAction(getGameImage().getCoordinate(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
-            int temp = ((Fantome)mouvingObject).Chase(pacMan.getCoordinate(), map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+            int temp = ((Fantome)mouvingObject).Chase( map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
             Fantome.setDirection(temp);
             asMove();
             //System.out.println(temp);
