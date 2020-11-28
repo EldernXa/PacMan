@@ -14,18 +14,23 @@ import java.util.ArrayList;
 
 
 public class FantomeBleu extends Fantome{
+    private boolean fuite;
     private final float startTime = (float)10 ;
     private int counterPacmanPoint ;
     private Timeline timeline;
     private MapPacman mapPacman;
     private PacMan pacMan;
     private FantomeRouge fantomeRouge;
+    private Coordinate coordinateScatter1 = new Coordinate(8,7);
+    private Coordinate coordinateScatter2 = new Coordinate(7,5);
+
 
     public FantomeBleu(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan, FantomeRouge fantomeRouge) {
         super(path, coordinate, scene, map, pacMan);
         this.mapPacman= map;
         this.pacMan = pacMan;
         this.fantomeRouge = fantomeRouge;
+        this.fuite = false;
 
     }
 
@@ -83,6 +88,12 @@ public class FantomeBleu extends Fantome{
             return super.Chase(listOfWalls);
         }
 
+    }
+   public void scatterMode(){
+        setGoal(this.coordinateScatter1);
+        if (objectifReach(coordinateScatter1)&&this.fuite){
+            setGoal(coordinateScatter2);
+        }
     }
 
 

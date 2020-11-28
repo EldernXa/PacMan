@@ -389,6 +389,9 @@ public class Fantome extends MouvingObject {
         double facteurY = fantomeRouge.getGameImage().getCoordinate().getY() -  anticipation(pacMan,1).getY();
         return new Coordinate(anticipation(pacMan,1).getX()+facteurX,anticipation(pacMan,1).getY()+facteurY);
     }
+
+
+
 }
 
 

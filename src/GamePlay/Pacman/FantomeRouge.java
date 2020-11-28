@@ -11,9 +11,12 @@ import java.util.ArrayList;
  * il commence hors de la base des fantômes   ***/
 
 public class FantomeRouge extends Fantome {
+    private boolean fuite;
     private Coordinate goal;
     private MapPacman mapPacman;
     private PacMan pacMan;
+    private Coordinate coordinateScatter1 = new Coordinate(8,0);
+    private Coordinate coordinateScatter2 = new Coordinate(8,4);
 
 
     public FantomeRouge(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
@@ -33,6 +36,13 @@ public class FantomeRouge extends Fantome {
     public int Chase(ArrayList<Character> listOfWalls) {
         setGoal(pacMan.getGameImage().getCoordinate());
         return super.Chase(listOfWalls);
+    }
+
+    public void scatterMode(){
+        setGoal(this.coordinateScatter1);
+        if (objectifReach(coordinateScatter1)&&this.fuite){
+            setGoal(coordinateScatter2);
+        }
     }
 }
 
