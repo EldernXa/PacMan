@@ -16,22 +16,37 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.List;
 
 public class MenuParametresCommandes {
     private final StackPane pane = new StackPane();
-    private final Scene scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/2,Screen.getPrimary().getVisualBounds().getHeight()/2);;
-    VBox vbox = new VBox(10);
+    private final Scene scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/1.5,Screen.getPrimary().getVisualBounds().getHeight()- (Screen.getPrimary().getVisualBounds().getHeight()/4));;
+    VBox vboxSolo = new VBox(10);
+    VBox vboxMulti = new VBox(10);
+    VBox vbox = new VBox(20);
     private final ImageViewSizePos revenir = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
     ReadFileCommandes readFileCommandes;
     Label label1 = new Label("Cliquez sur un bouton et appuyez sur une touche.");
+
 
 
     public MenuParametresCommandes(Stage stage,Scene sceneBack, Game game) {
         scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         pane.setStyle("-fx-background-color: lightgray");
         readFileCommandes = new ReadFileCommandes("./data/Controles/" +game.getName() +"/controles.txt" ,true);
+
         label1.setFont(Font.font("Arial",20));
-        setCommandes();
+        Label titre = new Label("Player 1");
+        titre.setFont(Font.font("Arial",30));
+        vboxSolo.getChildren().addAll(titre);
+        setCommandes(readFileCommandes.getDirectionSolo(),readFileCommandes.getToucheSolo(),true);
+        Label titre1 = new Label("Player 2");
+        titre1.setFont(Font.font("Arial",30));
+        vboxMulti.getChildren().addAll(titre1);
+
+        setCommandes(readFileCommandes.getDirectionMulti(),readFileCommandes.getToucheMulti(),false);
+        vbox.getChildren().addAll(vboxSolo,vboxMulti);
+        pane.getChildren().addAll(vbox);
         setRevenir(stage,sceneBack);
         pane.getChildren().add(revenir.getImageView());
         pane.getChildren().add(label1);
@@ -45,11 +60,11 @@ public class MenuParametresCommandes {
         return scene;
     }
 
-    public void setCommandes(){
-        for(int i = readFileCommandes.getDirectionSolo().size()-1; i>=0; i--){
+    public void setCommandes(List<String> list,List<String> listTouche,boolean bool){
+        for(int i = list.size()-1; i>=0; i--){
             HBox hbox = new HBox(10);
-            Label label = new Label(readFileCommandes.getDirectionSolo().get(i));
-            Button button = new Button(readFileCommandes.getToucheSolo().get(i));
+            Label label = new Label(list.get(i));
+            Button button = new Button(listTouche.get(i));
             label.setFont(Font.font("Arial",20));
             button.getStyleClass().add("controle");
             switch (button.getText()){
@@ -70,15 +85,22 @@ public class MenuParametresCommandes {
                     break;
             }
             hbox.getChildren().addAll(label,button);
-            vbox.getChildren().add(hbox);
-            setChangeCommande(label,button);
+            if(bool){
+
+                vboxSolo.getChildren().addAll(hbox);
+            }else{
+                vboxMulti.getChildren().addAll(hbox);
+            }
+
+            setChangeCommande(label,button,listTouche,bool);
         }
         vbox.setAlignment(Pos.CENTER_LEFT);
-        pane.getChildren().add(vbox);
+
+
 
     }
 
-    synchronized public void setChangeCommande(Label label,Button button){
+    synchronized public void setChangeCommande(Label label,Button button,List<String> list,boolean bool){
 
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -90,7 +112,7 @@ public class MenuParametresCommandes {
                     @Override
                     public void handle(KeyEvent keyEvent) {
                         int code = keyEvent.getCode().getCode();
-                        if(readFileCommandes.getToucheSolo().contains(keyEvent.getCode().getChar().toLowerCase())&& !keyEvent.getCode().getChar().toLowerCase().equals(text)){
+                        if(list.contains(keyEvent.getCode().getChar().toLowerCase())&& !keyEvent.getCode().getChar().toLowerCase().equals(text)){
                             label1.setText("Ce caractère est deja utilisé");
                             button.setText(text);
                         }else{
@@ -121,8 +143,10 @@ public class MenuParametresCommandes {
                             if((code <=110 && code >=97) || code ==10 || code == 20 || code == 9 || code ==0){
                                 label1.setText("Caractère non correct");
                             }else{
-                                readFileCommandes.writeSolo(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
-
+                                if(bool)
+                                    readFileCommandes.writeSolo(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
+                                else
+                                    readFileCommandes.writeMulti(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
                             }
                         }
 
@@ -135,16 +159,12 @@ public class MenuParametresCommandes {
                 scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-
-                        System.out.println(text);
                         button.setText(text);
                         button.setOnKeyPressed(null);
                         scene.setOnMouseClicked(null);
                     }
                 });
-
             }
-
         });
 
     }
