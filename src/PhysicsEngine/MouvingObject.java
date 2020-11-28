@@ -51,6 +51,10 @@ public abstract class MouvingObject extends VisualObject {
         return true;
     }
 
+    public void clearListAction(){
+        listAction.clear();
+    }
+
     public Action getActionNext(){
         return actionNext;
     }
