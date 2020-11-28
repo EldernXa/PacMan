@@ -1,4 +1,4 @@
-package GamePlay.PacMan;
+package GamePlay.Pacman;
 
 import GraphicsEngine.*;
 import PhysicsEngine.UnmouvingObj;
@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.nio.charset.CoderResult;
 import java.util.ArrayList;
 
 public class MapPacman extends Map {

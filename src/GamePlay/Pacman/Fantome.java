@@ -1,17 +1,11 @@
-package GamePlay.PacMan;
+package GamePlay.Pacman;
     import GraphicsEngine.*;
 
 
-
-import GraphicsEngine.Map;
-    import PhysicsEngine.Action;
     import PhysicsEngine.ActionContinue;
     import PhysicsEngine.MouvingObject;
     import ReadFile.ReadFileCommandes;
-    import javafx.animation.KeyFrame;
-    import javafx.animation.Timeline;
-import javafx.scene.Scene;
-    import javafx.util.Duration;
+    import javafx.scene.Scene;
 
     import java.util.ArrayList;
 import java.util.Random;
