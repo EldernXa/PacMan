@@ -96,6 +96,16 @@ public class PacMan extends MouvingObject {
 
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
+        if(visualObjects!=null && visualObjects.getClass()==Fantome.class){
+            Fantome fantome = ((Fantome) visualObjects);
+            if(isSuperPacman()){
+                fantome.death();
+            }
+            else {
+                death();
+            }
+
+        }
         return false;
     }
     public void ajoutPoint(int nb){
