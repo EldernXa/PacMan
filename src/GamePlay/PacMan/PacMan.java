@@ -42,10 +42,6 @@ public class PacMan extends MouvingObject {
                     pacmanControle.getyCoordSolo().get(i), i, pacmanControle.getDirectionSolo().get(i),
                     valueTps, this));
         }
-        /*addAction(new ActionContinue(getGameImage(), scene, "z", 0, -getGameImage().getValueMove(), 3, "Monter", valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "s", 0, getGameImage().getValueMove(), 1, "Descendre", valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "q", -getGameImage().getValueMove(), 0, 2, "Gauche", valueTps, this));
-        addAction(new ActionContinue(getGameImage(), scene, "d", getGameImage().getValueMove(), 0, 0, "Droite", valueTps, this));*/
         this.coordinate = coordinate;
     }
 

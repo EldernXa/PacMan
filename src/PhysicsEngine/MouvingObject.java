@@ -13,15 +13,24 @@ public abstract class MouvingObject extends VisualObject {
     private Action actualAction;
     private final Animation animation;
     private int valueAnimate;
+    private int dir;
 
     public MouvingObject(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);
+        dir = 0;
         actionNext = null;
         actualAction = null;
-        int valueAnimate = 0;
         animation = new Animation(path);
         super.getGameImage().setImage(animation.getInitImage());
         listAction = new ArrayList<>();
+    }
+
+    public void setDir(int dir){
+        this.dir = dir;
+    }
+
+    public int getDir(){
+        return dir;
     }
 
     public ArrayList<Action> getListAction() {
@@ -38,6 +47,8 @@ public abstract class MouvingObject extends VisualObject {
 
     public void setActualAction(Action action){
         actualAction = action;
+        if(actualAction!=null)
+            setDir(actualAction.getDir());
     }
 
     public Action getActualAction(){
