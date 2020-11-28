@@ -1,4 +1,4 @@
-package GamePlay.PacMan;
+package GamePlay.Pacman;
 
 import GraphicsEngine.ImageViewSizePos;
 import GraphicsEngine.Score;

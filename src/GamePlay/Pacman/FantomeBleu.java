@@ -1,10 +1,8 @@
-package GamePlay.PacMan;
+package GamePlay.Pacman;
 
 import GraphicsEngine.Coordinate;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 

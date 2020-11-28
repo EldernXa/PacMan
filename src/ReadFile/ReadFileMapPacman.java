@@ -1,10 +1,6 @@
 package ReadFile;
 
-import GamePlay.PacMan.Cerise;
-import GamePlay.PacMan.SuperPoint;
 import GraphicsEngine.Coordinate;
-import GamePlay.PacMan.Fruit;
-import PhysicsEngine.UnmouvingObj;
 
 import java.io.File;
 import java.util.ArrayList;

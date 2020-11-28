@@ -1,10 +1,8 @@
-package GamePlay.PacMan;
+package GamePlay.Pacman;
 
 import GraphicsEngine.Coordinate;
 import PhysicsEngine.Action;
 import GraphicsEngine.GameImage;
-import GraphicsEngine.Map;
-import PhysicsEngine.ActionContinue;
 import PhysicsEngine.MouvingObject;
 import GraphicsEngine.VisualObject;
 import javafx.animation.KeyFrame;

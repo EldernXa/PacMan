@@ -19,6 +19,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 
@@ -129,8 +131,25 @@ public class MenuChoixDuJeu {
             currentGame.getImageJeu().getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    MenuDuJeu currentGameMenu = new MenuDuJeu(stage,currentGame,menuScene);
-                    changerScene(currentGameMenu.getMenuDuJeuScene());
+                    if(Menu.getMenuJeu()) {
+                        MenuDuJeu currentGameMenu = new MenuDuJeu(stage, currentGame, menuScene);
+                        changerScene(currentGameMenu.getMenuDuJeuScene());
+                    }else if(Menu.getMenuLevel()){
+                        MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, currentGame, menuScene);
+                    }else{
+                        String nameFileMap = "Map" + currentGame.name;
+                        try {
+                            Musique.mediaPlayer.stop();
+                            Class<?> classMap = Class.forName("GamePlay."+currentGame.getName()+"."+nameFileMap);
+                            Class<?>[] parameters = new Class[]{Stage.class, String.class};
+                            Constructor<?> constructor = classMap.getConstructor(parameters);
+                            Object o = constructor.newInstance(stage, "./data/Map/");
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
                 }
             });
         }
