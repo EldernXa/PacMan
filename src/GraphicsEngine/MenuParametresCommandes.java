@@ -11,13 +11,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 public class MenuParametresCommandes {
     private final StackPane pane = new StackPane();
@@ -30,7 +28,7 @@ public class MenuParametresCommandes {
 
     public MenuParametresCommandes(Stage stage,Scene sceneBack, Game game) {
         scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
-        readFileCommandes = new ReadFileCommandes("./data/Controles/" +game.getName() +"/controles.txt" );
+        readFileCommandes = new ReadFileCommandes("./data/Controles/" +game.getName() +"/controles.txt" ,true);
         label1.setFont(Font.font("Arial",20));
         setCommandes();
         setRevenir(stage,sceneBack);
@@ -47,10 +45,10 @@ public class MenuParametresCommandes {
     }
 
     public void setCommandes(){
-        for(int i = readFileCommandes.getDirection().size()-1;i>=0;i--){
+        for(int i = readFileCommandes.getDirectionSolo().size()-1; i>=0; i--){
             HBox hbox = new HBox(10);
-            Label label = new Label(readFileCommandes.getDirection().get(i));
-            Button button = new Button(readFileCommandes.getTouche().get(i));
+            Label label = new Label(readFileCommandes.getDirectionSolo().get(i));
+            Button button = new Button(readFileCommandes.getToucheSolo().get(i));
             label.setFont(Font.font("Arial",20));
             button.getStyleClass().add("controle");
             switch (button.getText()){
@@ -120,7 +118,7 @@ public class MenuParametresCommandes {
 
 
                         }else{
-                            readFileCommandes.write(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
+                            readFileCommandes.writeSolo(label.getText(),keyEvent.getCode().getChar().toLowerCase().charAt(0));
                         }
 
                         button.setOnKeyPressed(null);
