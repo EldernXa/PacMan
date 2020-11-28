@@ -77,6 +77,8 @@ public class ReadFileCommandes {
                     String line[] = file[i].split("\\s+");
                     if (line[0].equals(direction)) {
                         fileContent.set(i, direction + " " + touche + " " + xCoord.get(i) + " " + yCoord.get(i));
+                        this.direction.set(i,direction);
+                        this.touche.set(i,String.valueOf(touche));
                         Files.write(Paths.get(pathName), fileContent, StandardCharsets.UTF_8);
                         return;
 
