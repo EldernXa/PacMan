@@ -65,7 +65,13 @@ public class ActionContinueFantome extends Action {
                         if(mouvingObject.getActionNext()!=null && mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(),
                                 getGameImage().getCoordinate().getY()+mouvingObject.getActionNext().getY())){
                             if(mouvingObject.getActualAction() !=null){
-                                VisualObject.removeTimeline(((ActionContinueFantome)mouvingObject.getActualAction()).getTimeline());
+                                VisualObject.stopTimelineParallel();
+                                if(!VisualObject.clearOrRemoveParallel())
+                                    VisualObject.removeTimeline(((ActionContinueFantome)mouvingObject.getActualAction()).getTimeline());
+                                else{
+                                    VisualObject.clearTimeline(((ActionContinueFantome)mouvingObject.getActualAction()).getTimeline(), tps);
+                                    VisualObject.startTimelineParallel();
+                                }
                                 mouvingObject.setActualAction(null);
                             }
                             Action newAction = mouvingObject.getActionNext();
@@ -87,7 +93,13 @@ public class ActionContinueFantome extends Action {
                                     }
                                 }
                             }else{
-                                VisualObject.removeTimeline(timeline);
+                                VisualObject.stopTimelineParallel();
+                                if(!VisualObject.clearOrRemoveParallel())
+                                    VisualObject.removeTimeline(timeline);
+                                else{
+                                    VisualObject.clearTimeline(timeline, tps);
+                                    VisualObject.startTimelineParallel();
+                                }
                                 mouvingObject.setActualAction(null);
                                 mouvingObject.setActionNext(null);
                             }
@@ -108,7 +120,8 @@ public class ActionContinueFantome extends Action {
 
                     }
             ));
-            indTimeline = VisualObject.addTimeline(timeline, super.getMouvingObject());
+            if(!VisualObject.containsTimeline(timeline))
+                indTimeline = VisualObject.addTimeline(timeline, super.getMouvingObject());
             VisualObject.startTimelineParallel();
         }else{
             if(mouvingObject.getActualAction()!=this && mouvingObject.getActualAction()!=null)
