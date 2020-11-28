@@ -370,7 +370,6 @@ public class Fantome extends MouvingObject {
 
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
-
         if(visualObjects!=null && visualObjects.getClass()==PacMan.class){
             PacMan pacman = ((PacMan) visualObjects);
             if(pacman.isSuperPacman()){
