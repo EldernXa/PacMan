@@ -68,6 +68,13 @@ public class MenuChoixDuJeu {
 
         initialisationAllGamesImages();
 
+        buttonexit();
+        pane.getChildren().addAll(currentGame.getImageJeu().getImageView(), choixDuJeuLabel,zoneDeRecherche,buttonExit);
+        stage.setScene(menuScene);
+        this.stage = stage ;
+    }
+
+    public void buttonexit(){
         buttonExit.setTranslateX(menuScene.getWidth()/2-100);
         buttonExit.setTranslateY(menuScene.getHeight()/2 + 250);
         buttonExit.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -77,9 +84,6 @@ public class MenuChoixDuJeu {
                 System.exit(0);
             }
         });
-        pane.getChildren().addAll(currentGame.getImageJeu().getImageView(), choixDuJeuLabel,zoneDeRecherche,buttonExit);
-        stage.setScene(menuScene);
-        this.stage = stage ;
     }
 
     public void creationZoneDeRecherche(){
