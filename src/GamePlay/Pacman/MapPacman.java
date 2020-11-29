@@ -32,10 +32,6 @@ public class MapPacman extends Map {
         fillListPosFruitSuperPoint();
         initFruitNSuperPoint();
         afficherFruitNSuperPoint();
-        for(Coordinate coor : readFileMapPacman.getTabCoordNoPoint()){
-            coor.affichageCoord();
-            System.out.println();
-        }
         PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), getMapScene(), pointArrayList.size(), stage);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         visualObjects.add(imgPacman);
@@ -181,10 +177,6 @@ public class MapPacman extends Map {
 
     @Override
     public Scene initMapScene() {
-        System.out.println("AbscMax : " + getAbscMax());
-        System.out.println("OrdMax : " + getOrdMax());
-        System.out.println("Carreaux : " + getCarreaux());
-        System.out.println("Epaisseur des murs : " + getEpaisseurMur());
         return new Scene(getMapPane(),(getAbscMax()+1)*getCarreaux()+(getAbscMax()+2)*getEpaisseurMur(),(getOrdMax()+1)*getCarreaux()+(getOrdMax()+2)*getEpaisseurMur());
     }
 
@@ -222,7 +214,6 @@ public class MapPacman extends Map {
         for(PosFruitNSuperPoint posFruitNSuperPoint : this.posFruitNSuperPointArrayList){
             switch (posFruitNSuperPoint.getCharacter()){
                 case 'C':
-                    System.out.println("Creation cerise");
                     FruitNSuperPointArrayList.add(new Cerise(posFruitNSuperPoint.getCoordinate(),getMapScene()));
                     break;
                 case 'P':

@@ -77,12 +77,9 @@ public class ReadFileMapPacman extends ReadFileMap{
     public char recupererCharacter(String currentLine){
         int i = 0;
             while(currentLine.charAt(i) != ':'){
-                System.out.println("Character courant : " + currentLine.charAt(i));
                 i++;
             }
-            System.out.println("Character courant : " + currentLine.charAt(i));
             i++;
-            System.out.println("Character courant : " + currentLine.charAt(i));
             return currentLine.charAt(i);
     }
 
@@ -102,19 +99,6 @@ public class ReadFileMapPacman extends ReadFileMap{
                 }
 
                 ArrayList<Character> listOfWalls = recupererListOfWalls(currentLine);
-
-
-                /*System.out.println("Point : (" + absc + "," + ord + ")");
-                System.out.println("List des murs pour les coordonnées : (" + absc + "," + ord + ") :");
-                System.out.print("[");
-
-                for(int j = 0; j < listOfWalls.size(); j++){
-                    System.out.print(listOfWalls.get(j));
-                    if(j != listOfWalls.size()-1){
-                        System.out.print(",");
-                    }
-                }
-                System.out.println("]\n");*/
 
                 getTabMurFctCoord().add(new PosMursAssocies(new Coordinate(absc,ord),listOfWalls));
 
