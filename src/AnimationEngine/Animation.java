@@ -14,15 +14,6 @@ public class Animation {
     public Animation(String path) {
         ind = 0;
         listImage = new ArrayList<>();
-        /*for (int i = 0; i < taille; i++) {
-            listImage.add(new ArrayList<>());
-        }
-        File file = new File(path);
-        for (File f : Objects.requireNonNull(file.listFiles())) {
-            for (File fImage : Objects.requireNonNull(f.listFiles())) {
-                listImage.get(Integer.parseInt(f.getName().split("sprite")[1])).add(new Image(fImage.toURI().toString()));
-            }
-        }*/
         changeAnimation(path);
     }
 

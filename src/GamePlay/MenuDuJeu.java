@@ -1,4 +1,6 @@
-package GraphicsEngine;
+package GamePlay;
+import GraphicsEngine.*;
+import MusicEngine.Musique;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,6 +18,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.util.Objects;
+
+import static GraphicsEngine.Menu.getMenuLevel;
 
 public class MenuDuJeu {
     private final StackPane pane = new StackPane();
@@ -89,8 +95,25 @@ public class MenuDuJeu {
         singlePlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, jeu,menuDuJeuScene);
-                diff(jeu,stage, menuChoixDifficulte,revenir,screenWidth,screenHeight);
+                if(Menu.getMenuLevel() || !verifGameFinish(jeu)) {
+                    MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, jeu, menuDuJeuScene);
+                    diff(jeu,stage, menuChoixDifficulte,revenir,screenWidth,screenHeight);
+                }
+                else{
+                    String nameFileMap = "Map" + jeu.getName();
+                    if(Musique.mediaPlayer!=null)
+                        Musique.mediaPlayer.stop();
+                    try {
+                        Class <?>classMap = Class.forName("GamePlay." + jeu.getName() + "." + nameFileMap);
+                        Class<?>[] parameters = new Class[]{Stage.class, String.class};
+                        Constructor<?> constructor = classMap.getConstructor(parameters);
+                        Map map = (Map)constructor.newInstance(stage, "./data/Map/");
+                        stage.setScene(map.getMapScene());
+                        System.out.println("test");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
@@ -220,7 +243,10 @@ public class MenuDuJeu {
         retouner.setPrefWidth(buttonContainers.getPrefWidth());
         hbox.setPrefWidth(buttonContainers.getPrefWidth());
         hbox.setAlignment(Pos.CENTER);
-        buttonContainers.getChildren().addAll(singlePlayer,multiPlayer,retouner, hbox);
+        buttonContainers.getChildren().addAll(singlePlayer,multiPlayer);
+        if(Menu.getMenuChoiceGame())
+            buttonContainers.getChildren().add(retouner);
+        buttonContainers.getChildren().add(hbox);
 
         buttonContainers.setAlignment(Pos.CENTER);
     }
@@ -272,6 +298,16 @@ public class MenuDuJeu {
                 stage.setScene(menuChoixDifficulte.getScene());
 
         }
+
+    public boolean verifGameFinish(Game game){
+        File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
+        boolean bool = false;
+        for(String content : Objects.requireNonNull(directoryPath.list())){
+            if(content.equals("notyet.txt"))
+                bool = true;
+        }
+        return !bool;
+    }
 
 
     public Game getJeu() {

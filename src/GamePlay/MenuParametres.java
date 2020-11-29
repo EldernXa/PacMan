@@ -1,5 +1,6 @@
-package GraphicsEngine;
+package GamePlay;
 
+import GraphicsEngine.*;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

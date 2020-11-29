@@ -1,5 +1,9 @@
-package GraphicsEngine;
+package GamePlay;
 
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.Game;
+import GraphicsEngine.ImageViewSizePos;
+import GraphicsEngine.Menu;
 import MusicEngine.Musique;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -137,13 +141,13 @@ public class MenuChoixDuJeu {
                     }else if(Menu.getMenuLevel()){
                         MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, currentGame, menuScene);
                     }else{
-                        String nameFileMap = "Map" + currentGame.name;
+                        String nameFileMap = "Map" + currentGame.getName();
                         try {
                             Musique.mediaPlayer.stop();
                             Class<?> classMap = Class.forName("GamePlay."+currentGame.getName()+"."+nameFileMap);
                             Class<?>[] parameters = new Class[]{Stage.class, String.class};
                             Constructor<?> constructor = classMap.getConstructor(parameters);
-                            Object o = constructor.newInstance(stage, "./data/Map/");
+                            constructor.newInstance(stage, "./data/Map/");
 
                         } catch (Exception e) {
                             e.printStackTrace();

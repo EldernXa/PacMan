@@ -1,7 +1,11 @@
-package GraphicsEngine;
+package GamePlay;
 
 //import ReadFile.ReadFileMapPacman;
 import GamePlay.Pacman.MapPacman;
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.Difficulte;
+import GraphicsEngine.Game;
+import GraphicsEngine.ImageViewSizePos;
 import MusicEngine.Musique;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -74,7 +78,8 @@ public class MenuChoixDifficulte {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
                     stage.setFullScreen(false);
-                    Musique.mediaPlayer.stop();
+                    if(Musique.mediaPlayer!=null)
+                        Musique.mediaPlayer.stop();
                     MapPacman currentMap = new MapPacman(stage,"./data/Map/");
 
                 }

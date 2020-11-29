@@ -1,5 +1,6 @@
 package GamePlay.Pacman;
 
+import GamePlay.MenuChoixDuJeu;
 import GraphicsEngine.*;
 import GraphicsEngine.Map;
 import javafx.application.Platform;
@@ -84,7 +85,7 @@ ConclusionPacman implements Conclusion {
             }
         });
     } */
-    public void clickRetourMenu(Stage stageJeu,MenuChoixDuJeu menuChoixDuJeu){
+    public void clickRetourMenu(Stage stageJeu, MenuChoixDuJeu menuChoixDuJeu){
         retourMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -105,7 +106,10 @@ ConclusionPacman implements Conclusion {
         });
     }
     public void setHbox(){
-        hbox.getChildren().addAll(rejouer,retourMenu,exit);
+        hbox.getChildren().addAll(rejouer);
+        if(Menu.getMenuChoiceGame())
+            hbox.getChildren().add(retourMenu);
+        hbox.getChildren().add(exit);
         hbox.setAlignment(Pos.TOP_CENTER);
     }
 

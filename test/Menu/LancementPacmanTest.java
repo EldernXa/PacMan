@@ -1,9 +1,8 @@
 package Menu;
 
-import GraphicsEngine.MenuChoixDuJeu;
+import GamePlay.MenuChoixDuJeu;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Test;
 
 public class LancementPacmanTest extends Application {
 

@@ -1,5 +1,8 @@
-package GraphicsEngine;
+package GamePlay;
 
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.Game;
+import GraphicsEngine.ImageViewSizePos;
 import ReadFile.ReadFileCommandes;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

@@ -1,5 +1,8 @@
-package GraphicsEngine;
+package GamePlay;
 
+import GraphicsEngine.Coordinate;
+import GraphicsEngine.Game;
+import GraphicsEngine.ImageViewSizePos;
 import MusicEngine.Musique;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
