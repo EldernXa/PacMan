@@ -1,6 +1,7 @@
 package GamePlay.Pacman;
 
 import GamePlay.MenuChoixDuJeu;
+import GamePlay.MenuDuJeu;
 import GraphicsEngine.*;
 import GraphicsEngine.Map;
 import javafx.application.Platform;
@@ -23,20 +24,23 @@ ConclusionPacman implements Conclusion {
     private final Scene scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/4,Screen.getPrimary().getVisualBounds().getHeight()/4);;;
     private final Button rejouer =  new Button("REJOUER");
     //private final Button retourDiff = new Button("RETOURNER AU CHOIX DE DIFFICULTES");
-    private final Button retourMenu = new Button("CHOIX DU JEU");
+    private final Button retourMenuChoix = new Button("CHOIX DU JEU");
+    private final Button retourMenu = new Button("MENU DU JEU");
     private final HBox hbox = new HBox(10);
     private final HBox hboxLabel = new HBox();
     private Label titre = new Label();
     private Stage stage= new Stage();
-    private Button exit = new Button("Quitter");
+    private Button exit = new Button("QUITTER");
 
 
     public ConclusionPacman(Stage stageJeu, boolean bool,int nbPoints){
         MenuChoixDuJeu menuChoixDuJeu= new MenuChoixDuJeu(stage);
+        MenuDuJeu menuDuJeu = new MenuDuJeu(stage,new Game("Pacman"),null);
         VisualObject.stopTimelineParallel();
         VisualObject.clearTimelineParallel();
         clickRejouer(stageJeu);
-        clickRetourMenu(stageJeu,menuChoixDuJeu);
+        clickRetourMenuChoix(stageJeu,menuChoixDuJeu);
+        clickRetourMenu(stageJeu,menuDuJeu);
         setHbox();
         labelForGame(bool,nbPoints);
         setPane();
@@ -74,7 +78,8 @@ ConclusionPacman implements Conclusion {
                 stageJeu.setScene(map.getMapScene());
             }
         });
-    }/*public void clickRetourDiff(Stage stageJeu,Game game,MenuChoixDuJeu menuChoixDuJeu){
+    }
+    /*public void clickRetourDiff(Stage stageJeu,Game game,MenuChoixDuJeu menuChoixDuJeu){
         retourDiff.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -85,8 +90,8 @@ ConclusionPacman implements Conclusion {
             }
         });
     } */
-    public void clickRetourMenu(Stage stageJeu, MenuChoixDuJeu menuChoixDuJeu){
-        retourMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    public void clickRetourMenuChoix(Stage stageJeu, MenuChoixDuJeu menuChoixDuJeu){
+        retourMenuChoix.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 stageJeu.close();
@@ -96,6 +101,19 @@ ConclusionPacman implements Conclusion {
             }
         });
     }
+
+    public void clickRetourMenu(Stage stageJeu, MenuDuJeu menuDuJeu){
+        retourMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                stageJeu.close();
+                Map.visualObjects.clear();
+                stage.setScene(menuDuJeu.getMenuDuJeuScene());
+                stage.setMaximized(true);
+            }
+        });
+    }
+
     public void clickExit(){
         exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -107,8 +125,11 @@ ConclusionPacman implements Conclusion {
     }
     public void setHbox(){
         hbox.getChildren().addAll(rejouer);
-        if(Menu.getMenuChoiceGame())
+        if(Menu.getMenuJeu())
             hbox.getChildren().add(retourMenu);
+        if(Menu.getMenuChoiceGame())
+            hbox.getChildren().add(retourMenuChoix);
+
         hbox.getChildren().add(exit);
         hbox.setAlignment(Pos.TOP_CENTER);
     }
