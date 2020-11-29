@@ -15,6 +15,7 @@ public class ReadFileMapPacman extends ReadFileMap{
     public ReadFileMapPacman(String mapFolderPath){
         this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
         this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
+        System.out.println(pointsNFruit.getPath());
         initTabMurFctCoord();
         initTabNoPointFruitNSupPoint();
     }

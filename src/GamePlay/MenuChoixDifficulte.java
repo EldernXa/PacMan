@@ -80,7 +80,7 @@ public class MenuChoixDifficulte {
                     stage.setFullScreen(false);
                     if(Musique.mediaPlayer!=null)
                         Musique.mediaPlayer.stop();
-                    MapPacman currentMap = new MapPacman(stage,"./data/Map/");
+                    MapPacman currentMap = new MapPacman(stage,"./data/Map/" + difficulte.getName() + "_");
 
                 }
             });
