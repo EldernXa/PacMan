@@ -14,7 +14,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-//        ReadFileMap2Pacman readFileMap2Pacman = new ReadFileMap2Pacman("./data/Map/PacmanMap.txt");
+//        ReadFileMap2Pacman readFileMap2Pacman = new ReadFileMap2Pacman("./data/Map/FACILE_PacmanMap.txt");
        /* ReadFileCommandes test = new ReadFileCommandes("./data/Controles/Pacman/controlesPac.txt");
         test.write("a",'a',1,1); */
         launch(args);
