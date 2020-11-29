@@ -42,9 +42,7 @@ public class Menu {
                 Class <?>classMap = Class.forName("GamePlay." + game.getName() + "." + nameFileMap);
                 Class<?>[] parameters = new Class[]{Stage.class, String.class};
                 Constructor<?> constructor = classMap.getConstructor(parameters);
-                Map map = (Map)constructor.newInstance(stage, "./data/Map/");
-                stage.setScene(map.getMapScene());
-                System.out.println("test");
+                constructor.newInstance(stage, "./data/Map/");
             } catch (Exception e) {
                 e.printStackTrace();
             }
