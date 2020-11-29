@@ -34,7 +34,10 @@ public class ReadFileCommandes {
             read();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            direction = null;
+            touche = null;
+            xCoord = null;
+            yCoord = null;
         }
     }
 
@@ -52,7 +55,6 @@ public class ReadFileCommandes {
 
 
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
 
@@ -87,7 +89,6 @@ public class ReadFileCommandes {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
