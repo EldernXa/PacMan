@@ -8,6 +8,7 @@ import MusicEngine.Musique;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
@@ -26,6 +28,7 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class MenuChoixDuJeu {
@@ -141,16 +144,20 @@ public class MenuChoixDuJeu {
                     }else if(Menu.getMenuLevel()){
                         MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, currentGame, menuScene);
                     }else{
-                        String nameFileMap = "Map" + currentGame.getName();
-                        try {
-                            Musique.mediaPlayer.stop();
-                            Class<?> classMap = Class.forName("GamePlay."+currentGame.getName()+"."+nameFileMap);
-                            Class<?>[] parameters = new Class[]{Stage.class, String.class};
-                            Constructor<?> constructor = classMap.getConstructor(parameters);
-                            constructor.newInstance(stage, "./data/Map/");
+                        if(!verifGameFinish(currentGame)){
+                            notYet(currentGame, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
+                        }else {
+                            String nameFileMap = "Map" + currentGame.getName();
+                            try {
+                                Musique.mediaPlayer.stop();
+                                Class<?> classMap = Class.forName("GamePlay." + currentGame.getName() + "." + nameFileMap);
+                                Class<?>[] parameters = new Class[]{Stage.class, String.class};
+                                Constructor<?> constructor = classMap.getConstructor(parameters);
+                                constructor.newInstance(stage, "./data/Map/");
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
 
                     }
@@ -183,6 +190,33 @@ public class MenuChoixDuJeu {
             });
             pane.getChildren().add(nextGame.getImageJeu().getImageView());
         }
+    }
+
+    public void notYet(Game game, double screenWidth, double screenHeight){
+        File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
+        String contents[] = directoryPath.list();
+        boolean bool = false;
+        for(String content :contents){
+            if(content.equals("notyet.txt")){
+                StackPane newPane = new StackPane();
+                Scene scenetemp = new Scene(newPane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
+                ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",screenWidth,screenHeight);
+                newPane.getChildren().addAll(imageViewSizePos.getImageView());
+                newPane.setAlignment(Pos.TOP_LEFT);
+                stage.setScene(scenetemp);
+            }
+
+        }
+    }
+
+    public boolean verifGameFinish(Game game){
+        File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
+        boolean bool = false;
+        for(String content : Objects.requireNonNull(directoryPath.list())){
+            if(content.equals("notyet.txt"))
+                bool = true;
+        }
+        return !bool;
     }
 
     public Game getCurrentGame() {
