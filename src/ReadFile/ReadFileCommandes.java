@@ -34,7 +34,10 @@ public class ReadFileCommandes {
             read();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            direction = null;
+            touche = null;
+            xCoord = null;
+            yCoord = null;
         }
     }
 
@@ -52,7 +55,6 @@ public class ReadFileCommandes {
 
 
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
 
@@ -87,7 +89,6 @@ public class ReadFileCommandes {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -119,18 +120,30 @@ public class ReadFileCommandes {
     }
 
     public List<String> getDirectionMulti() {
+        if(!multijoueur){
+            return null;
+        }
         return direction.subList(direction.size()/2,direction.size());
     }
 
     public List<String> getToucheMulti() {
+        if(!multijoueur){
+            return null;
+        }
         return  touche.subList(touche.size()/2,touche.size());
     }
 
     public List<Integer> getxCoordMulti() {
+        if(!multijoueur){
+            return null;
+        }
         return  xCoord.subList(xCoord.size()/2,xCoord.size());
     }
 
     public List<Integer> getyCoordMulti() {
+        if(!multijoueur){
+            return null;
+        }
         return  yCoord.subList(yCoord.size()/2,yCoord.size());
     }
 }
