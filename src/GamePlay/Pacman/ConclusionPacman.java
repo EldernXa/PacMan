@@ -4,6 +4,7 @@ import GamePlay.MenuChoixDuJeu;
 import GamePlay.MenuDuJeu;
 import GraphicsEngine.*;
 import GraphicsEngine.Map;
+import MusicEngine.Musique;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -17,6 +18,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.util.Objects;
 
 public class
 ConclusionPacman implements Conclusion {
@@ -34,13 +38,14 @@ ConclusionPacman implements Conclusion {
 
 
     public ConclusionPacman(Stage stageJeu, boolean bool,int nbPoints){
+
         MenuChoixDuJeu menuChoixDuJeu= new MenuChoixDuJeu(stage);
-        MenuDuJeu menuDuJeu = new MenuDuJeu(stage,new Game("Pacman"),null);
+
         VisualObject.stopTimelineParallel();
         VisualObject.clearTimelineParallel();
         clickRejouer(stageJeu);
         clickRetourMenuChoix(stageJeu,menuChoixDuJeu);
-        clickRetourMenu(stageJeu,menuDuJeu);
+        clickRetourMenu(stageJeu);
         setHbox();
         labelForGame(bool,nbPoints);
         setPane();
@@ -102,10 +107,18 @@ ConclusionPacman implements Conclusion {
         });
     }
 
-    public void clickRetourMenu(Stage stageJeu, MenuDuJeu menuDuJeu){
+    public void clickRetourMenu(Stage stageJeu){
         retourMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                Game game = new Game("Pacman");
+                game.setImageJeu(new ImageViewSizePos("./data/Jeux/"+game.getName() +"/menuchoixdujeu.jpg", 500, 250));
+                for(String string : Objects.requireNonNull(new File("./data/Jeux/" + game.getName()).list())){
+                    if(string.substring(0,7).equals("musique")){
+                        game.getListMusiques().add(new Musique("./data/Jeux/"+game.getName()+"/"+string));
+                    }
+                }
+                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,game,null);
                 stageJeu.close();
                 Map.visualObjects.clear();
                 stage.setScene(menuDuJeu.getMenuDuJeuScene());
