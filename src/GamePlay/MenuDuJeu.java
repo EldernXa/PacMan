@@ -1,6 +1,7 @@
 package GamePlay;
 import GraphicsEngine.*;
 import MusicEngine.Musique;
+import ReadFile.ReadFileOptions;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -38,12 +39,14 @@ public class MenuDuJeu {
     private final double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
     private final double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
     private final Scene menuDuJeuScene= new Scene(pane, screenWidth,screenHeight);
+    private final ReadFileOptions readFileOptions ;
 
 
     public MenuDuJeu(Stage stage,Game game,Scene sceneBack) {
         this.stage = stage;
         jeu = game;
-
+        //readFileOptions = new ReadFileOptions("./data/Jeux/" + game.getName()+ "/options.txt");
+        readFileOptions = new ReadFileOptions(game.getName());
         menuDuJeuScene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
 
         if(!game.getListMusiques().isEmpty()) {
@@ -97,7 +100,7 @@ public class MenuDuJeu {
             public void handle(MouseEvent mouseEvent) {
                 if(Menu.getMenuLevel() || !verifGameFinish(jeu)) {
                     MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, jeu, menuDuJeuScene);
-                    diff(jeu,stage, menuChoixDifficulte,revenir,screenWidth,screenHeight);
+                    diff(stage, menuChoixDifficulte,revenir,screenWidth,screenHeight);
                 }
                 else{
                     String nameFileMap = "Map" + jeu.getName();
@@ -252,14 +255,9 @@ public class MenuDuJeu {
     }
 
     public void setmusic(Game game){
-        File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
-        String contents[] = directoryPath.list();
-        boolean music = false;
-        for(String content :contents){
-            if(content.contains("musique")){
-                music = true;
-            }
-        }
+
+
+        boolean music = readFileOptions.isState("music");
         if(!music){
             soundAndNoSound.setImageView("./data/Logos/nosound.png");
             soundAndNoSound.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -278,35 +276,29 @@ public class MenuDuJeu {
         }
 
     }
-    public void diff(Game game, Stage stage, MenuChoixDifficulte menuChoixDifficulte, ImageViewSizePos revenir, double screenWidth, double screenHeight){
-            File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
-            String contents[] = directoryPath.list();
-            boolean bool = false;
-            for(String content :contents){
-                if(content.equals("notyet.txt")){
+    public void diff( Stage stage, MenuChoixDifficulte menuChoixDifficulte, ImageViewSizePos revenir, double screenWidth, double screenHeight){
+
+            boolean bool = readFileOptions.isState("single");
+            System.out.println(bool);
+            if(!bool){
                     StackPane newPane = new StackPane();
                     Scene scenetemp = new Scene(newPane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
                     ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",screenWidth,screenHeight);
                     newPane.getChildren().addAll(imageViewSizePos.getImageView(),revenir.getImageView());
                     newPane.setAlignment(Pos.TOP_LEFT);
                     stage.setScene(scenetemp);
-                    bool = true;
-                }
 
-            }
-            if(!bool)
+            }else{
                 stage.setScene(menuChoixDifficulte.getScene());
+            }
+
+
 
         }
 
     public boolean verifGameFinish(Game game){
-        File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
-        boolean bool = false;
-        for(String content : Objects.requireNonNull(directoryPath.list())){
-            if(content.equals("notyet.txt"))
-                bool = true;
-        }
-        return !bool;
+        return readFileOptions.isState("single");
+
     }
 
 

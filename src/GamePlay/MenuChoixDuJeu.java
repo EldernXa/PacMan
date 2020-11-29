@@ -5,6 +5,7 @@ import GraphicsEngine.Game;
 import GraphicsEngine.ImageViewSizePos;
 import GraphicsEngine.Menu;
 import MusicEngine.Musique;
+import ReadFile.ReadFileOptions;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -103,14 +104,14 @@ public class MenuChoixDuJeu {
         zoneDeRecherche.setMinSize(300,35);
     }
 
-    public void propositionJeu(){
+    /*public void propositionJeu(){
         zoneDeRecherche.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 
             }
         });
-    }
+    }*/
 
     public void creationDuJeuLabel(){
         choixDuJeuLabel.setFont(Font.font("Avenir Next", 45));
@@ -142,7 +143,12 @@ public class MenuChoixDuJeu {
                         MenuDuJeu currentGameMenu = new MenuDuJeu(stage, currentGame, menuScene);
                         changerScene(currentGameMenu.getMenuDuJeuScene());
                     }else if(Menu.getMenuLevel()){
-                        MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, currentGame, menuScene);
+                        if(!verifGameFinish(currentGame)){
+                            notYet(currentGame, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
+                        }else{
+
+                            MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, currentGame, menuScene);
+                        }
                     }else{
                         if(!verifGameFinish(currentGame)){
                             notYet(currentGame, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
@@ -193,30 +199,34 @@ public class MenuChoixDuJeu {
     }
 
     public void notYet(Game game, double screenWidth, double screenHeight){
-        File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
-        String contents[] = directoryPath.list();
-        boolean bool = false;
-        for(String content :contents){
-            if(content.equals("notyet.txt")){
+        ReadFileOptions readFileOptions = new ReadFileOptions(game.getName());
+        boolean bool = readFileOptions.isState("single");
+        System.out.println(bool);
+        if(!bool){
                 StackPane newPane = new StackPane();
                 Scene scenetemp = new Scene(newPane,Screen.getPrimary().getVisualBounds().getWidth(),Screen.getPrimary().getVisualBounds().getHeight());
                 ImageViewSizePos imageViewSizePos = new ImageViewSizePos("./data/DevPrivate/wip.jpg",screenWidth,screenHeight);
-                newPane.getChildren().addAll(imageViewSizePos.getImageView());
+                ImageViewSizePos retourner  = new ImageViewSizePos("./data/Logos/return.png",50,50, new Coordinate(2,2));
+                retourner.getImageView().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
+                    stage.setScene(menuScene);
+                }
+            });
+                newPane.getChildren().addAll(imageViewSizePos.getImageView(),retourner.getImageView());
                 newPane.setAlignment(Pos.TOP_LEFT);
                 stage.setScene(scenetemp);
             }
 
-        }
     }
 
     public boolean verifGameFinish(Game game){
-        File directoryPath = new File("./data/Jeux/"+ game.getName()+"/");
-        boolean bool = false;
-        for(String content : Objects.requireNonNull(directoryPath.list())){
-            if(content.equals("notyet.txt"))
-                bool = true;
-        }
-        return !bool;
+        ReadFileOptions options = new ReadFileOptions(game.getName());
+        System.out.println(options.isState("single"));
+        return options.isState("single");
+
+
     }
 
     public Game getCurrentGame() {

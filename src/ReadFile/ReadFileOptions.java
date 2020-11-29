@@ -14,12 +14,12 @@ public class ReadFileOptions {
 
 
     public ReadFileOptions(String str) {
-        pathName = str;
+
+        pathName = "./data/Jeux/" + str + "/options.txt";
         option = new ArrayList<>();
         stateOption = new ArrayList<>();
 
-
-        Path path = Paths.get(str);
+        Path path = Paths.get(pathName);
         try {
             this.file = Files.readString(path).split("\n");
             read();
