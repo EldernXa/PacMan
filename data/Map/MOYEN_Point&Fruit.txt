@@ -35,7 +35,8 @@ zone interdites :
 (11,8)
 
 fruits et super points :
-(6,3):C
+(11,6):C
+(0,6):C
 (0,1):P
 (11,1):P
 (0,10):P
