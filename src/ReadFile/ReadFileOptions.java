@@ -25,7 +25,7 @@ public class ReadFileOptions {
             read();
 
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
 
@@ -43,7 +43,7 @@ public class ReadFileOptions {
 
 
             } catch (Exception e) {
-                e.printStackTrace();
+
             }
         }
 
