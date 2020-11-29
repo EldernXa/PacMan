@@ -32,9 +32,6 @@ public abstract class Map {
         this.mapPane = initMapPane();
         creationDeMap();
         mapScene = initMapScene();
-        /*Pane pane = new Pane();
-        Scene scene = new Scene(pane,500,500);
-        stage.setScene(scene);*/
         stage.setScene(mapScene);
         stage.centerOnScreen();
         stage.sizeToScene();
