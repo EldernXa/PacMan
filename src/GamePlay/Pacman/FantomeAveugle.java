@@ -9,15 +9,15 @@ import java.util.ArrayList;
  * Le fantôme orange sort de la base lorsque Pac-man à obtenu 3 quart des points  ,
  * il poursuit Pac-man quand celui-ci est à moins de 2 blocs de lui,
  * sinon il garde sa routine ***/
-public class FantomeOrange extends Fantome {
+public class FantomeAveugle extends Fantome {
     private boolean fuite;
     private int counterPoint;
     private PacMan pacMan;
     private MapPacman mapPacman;
     private Coordinate coordinateScatter1 = new Coordinate(0,7);
-    private Coordinate coordinateScatter2 = new Coordinate(1,5);
 
-    public FantomeOrange(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
+
+    public FantomeAveugle(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene, map, pacMan);
         this.pacMan = pacMan;
         this.mapPacman = map;
@@ -81,7 +81,7 @@ public class FantomeOrange extends Fantome {
     public void scatterMode(){
         setGoal(this.coordinateScatter1);
         if (objectifReach(coordinateScatter1)&&this.fuite){
-            setGoal(coordinateScatter2);
+            setGoal(coordinateScatter1);
         }
     }
 }

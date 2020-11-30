@@ -10,13 +10,12 @@ import java.util.ArrayList;
  * il regarde la position de Pac-man ainsi que
  * sa direction et cible la position ou sera Pac-man dans 2 cases  ***/
 
-public class FantomeRose extends Fantome{
+public class FantomeStratège extends Fantome{
     private boolean fuite;
     private PacMan pacMan;
     private MapPacman mapPacman;
     private Coordinate coordinateScatter1 = new Coordinate(0,0);
-    private Coordinate coordinateScatter2 = new Coordinate(1,4);
-    public FantomeRose(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
+    public FantomeStratège(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene, map, pacMan);
         this.mapPacman=map;
         this.pacMan = pacMan;
@@ -32,7 +31,7 @@ public class FantomeRose extends Fantome{
     public void scatterMode(){
         setGoal(this.coordinateScatter1);
         if (objectifReach(coordinateScatter1)&&this.fuite){
-            setGoal(coordinateScatter2);
+            setGoal(coordinateScatter1);
         }
     }
 
