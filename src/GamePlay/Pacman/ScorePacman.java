@@ -10,6 +10,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * class for score points
+ */
+
 public class ScorePacman implements Score {
     Label nbVies = new Label();
     Label nbPoints = new Label();
@@ -30,6 +34,9 @@ public class ScorePacman implements Score {
 
     }
 
+    /**
+     * np param, it set the hbox for the display of score points
+     */
     public void setHbox(){
         nbVies.setTextFill(Color.WHITE);
         nbPoints.setTextFill(Color.WHITE);
@@ -43,6 +50,12 @@ public class ScorePacman implements Score {
         score.setTranslateX(14);
         score.setTranslateY(5);
     }
+
+    /**
+     *
+     * @param visualObject the image object
+     * @param stage stage of the window
+     */
     public void modifyRealTimeValue(VisualObject visualObject,Stage stage){
         PacMan pacMan = (PacMan)visualObject;
         ChangeListener<Number> changeListenerPoint = (((observableValue, number, t1) -> {
@@ -62,6 +75,10 @@ public class ScorePacman implements Score {
         pacMan.setListenerNbVies(changeListenerVies);
     }
 
+    /**
+     *
+     * @return the score
+     */
     public HBox getScore() {
         return score;
     }
