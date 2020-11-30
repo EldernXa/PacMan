@@ -19,6 +19,7 @@ public class FantomeAveugle extends Fantome {
 
     public FantomeAveugle(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene, map, pacMan);
+        setRandomGoal();
         this.pacMan = pacMan;
         this.mapPacman = map;
         counterPoint = 0;
@@ -50,32 +51,45 @@ public class FantomeAveugle extends Fantome {
 
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
-        if (getCounterPoint() >= 3 * (pacMan.getNbPointsMapMax() / 4)) {
+        /*if (getCounterPoint() >= 3 * (pacMan.getNbPointsMapMax() / 4)) {*/
 
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
-            if (isNear(mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate(),2)) {
+        //System.out.println(isNear(new Coordinate(0,1),new Coordinate(0,3),2));
+           // try{
+                //System.out.println(isNear(mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate(),3));
+                if (isNear(mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate(),mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate(),3)) {
+                    System.out.println("Vrai");
+                    setGoal(mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate());
+                    return super.Chase(listOfWalls);
+                }else {
+                    System.out.println("Faux1");
+                    setRandomGoal();
+                    return super.Chase(listOfWalls);
 
-                setGoal(mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate());
-                return super.Chase(listOfWalls);
-            } else {
+                }
+
+            /*}catch (Exception e){
+                System.out.println("Faux2");
                 setRandomGoal();
                 return super.Chase(listOfWalls);
-            }
+            }*/
 
-        }else {
+
+       /* }else {
             int nulL = -1;
             return nulL;
-        }
+        }*/
     }
 
-    public boolean isNear(Coordinate coordinate,double range){
+    public boolean isNear(Coordinate coordinate,Coordinate coordinate1,double range) {
 
-        if((Math.abs(coordinate.getX() - this.getGameImage().getCoordinate().getX()) <= range )||(Math.abs(coordinate.getY() - this.getGameImage().getCoordinate().getY()) <= range )){
+
+        if ((Math.abs(coordinate.getX() - coordinate1.getX()) <= range) && (Math.abs(coordinate.getY() - coordinate1.getY()) <= range)) {
             return true;
-        }else {
+        } else {
             return false;
-        }
 
+        }
     }
 
     public void scatterMode(){
