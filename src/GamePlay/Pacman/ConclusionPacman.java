@@ -1,5 +1,6 @@
 package GamePlay.Pacman;
 
+import GamePlay.MenuChoixDifficulte;
 import GamePlay.MenuChoixDuJeu;
 import GamePlay.MenuDuJeu;
 import GraphicsEngine.*;
@@ -41,6 +42,7 @@ ConclusionPacman implements Conclusion {
 
     public ConclusionPacman(Stage stageJeu, boolean bool,int nbPoints, PacMan pacMan){
         MenuChoixDuJeu menuChoixDuJeu= new MenuChoixDuJeu(stage);
+
         this.pacMan = pacMan;
         for(EventHandler<KeyEvent> eventHandler : Map.getListEventHandler()){
             stageJeu.getScene().removeEventHandler(KeyEvent.KEY_PRESSED, eventHandler);
@@ -83,7 +85,7 @@ ConclusionPacman implements Conclusion {
             public void handle(MouseEvent mouseEvent) {
                 stage.close();
                 Map.visualObjects.clear();
-                Map map = new MapPacman(stageJeu,"./data/Map/");
+                Map map = new MapPacman(stageJeu,"./data/Map/"+ Map.diff.getName()+"_");
                 stageJeu.setScene(map.getMapScene());
             }
         });
