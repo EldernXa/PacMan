@@ -17,6 +17,7 @@ public class Main extends Application {
 //        ReadFileMap2Pacman readFileMap2Pacman = new ReadFileMap2Pacman("./data/Map/FACILE_PacmanMap.txt");
        /* ReadFileCommandes test = new ReadFileCommandes("./data/Controles/Pacman/controlesPac.txt");
         test.write("a",'a',1,1); */
+
         launch(args);
     }
 }
