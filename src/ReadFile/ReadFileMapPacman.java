@@ -3,20 +3,32 @@ package ReadFile;
 import GraphicsEngine.Coordinate;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReadFileMapPacman extends ReadFileMap{
     private ArrayList<Coordinate> tabCoordNoPoint = new ArrayList<>();
-    private ArrayList<PosFruitNSuperPoint> tabFruitNSupPoint = new ArrayList<>();
+    private ArrayList<PosFruitNSuperPointNPacManNFantoms> tabFruitNSupPoint = new ArrayList<>();
+    private ArrayList<PosFruitNSuperPointNPacManNFantoms> tabPacmanNFantoms = new ArrayList<>();
     private File mapFile;
     private File pointsNFruit;
+    private File pacmanAndFantoms;
 
     public ReadFileMapPacman(String mapFolderPath){
         this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
         this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
+        this.pacmanAndFantoms = new File(mapFolderPath + "PacMan_Fantoms.txt");
         initTabMurFctCoord();
         initTabNoPointFruitNSupPoint();
+        initPosPacManNFantoms();
+        /*for(PosFruitNSuperPointNPacManNFantoms posFSPPF : tabPacmanNFantoms){
+            System.out.println();
+            System.out.print("Coord : ");
+            posFSPPF.getCoordinate().affichageCoord();
+            System.out.print(" Character : ");
+            System.out.println(posFSPPF.getCharacter());
+        }*/
     }
 
     public void initTabNoPointFruitNSupPoint(){
@@ -67,8 +79,9 @@ public class ReadFileMapPacman extends ReadFileMap{
                 double abs = recupererAbsc(currentLine);
                 double ord = recupererOrd(currentLine);
                 char character = recupererCharacter(currentLine);
-                tabFruitNSupPoint.add(new PosFruitNSuperPoint(new Coordinate(abs,ord),character));
+                tabFruitNSupPoint.add(new PosFruitNSuperPointNPacManNFantoms(new Coordinate(abs,ord),character));
             }
+            pointNFruitScanner.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -107,6 +120,38 @@ public class ReadFileMapPacman extends ReadFileMap{
         }catch(Exception e){
             System.out.println("Le fichier n'existe pas");
             System.exit(0); // quitte l'application
+        }
+    }
+
+    public void initPosPacManNFantoms(){
+        try {
+            Scanner pacManNFantomScanner = new Scanner(pacmanAndFantoms);
+            while(pacManNFantomScanner.hasNextLine()){
+                String currentLine = pacManNFantomScanner.nextLine();
+                double absc = recupererAbsc(currentLine);
+                double ord = recupererOrd(currentLine);
+                initTabPacmanNFantoms(new Coordinate(absc,ord), currentLine);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initTabPacmanNFantoms(Coordinate coordinate, String currentLine ){
+        int i = 0;
+        while(currentLine.charAt(i) != ':'){
+            i++;
+        }
+        i++;
+        while(i < currentLine.length()){
+            if(currentLine.charAt(i) == ','){
+                i++;
+            }
+            else{
+                char temporaire = currentLine.charAt(i);
+                tabPacmanNFantoms.add(new PosFruitNSuperPointNPacManNFantoms(coordinate,temporaire));
+                i++;
+            }
         }
     }
 
@@ -163,7 +208,7 @@ public class ReadFileMapPacman extends ReadFileMap{
         return tamponList;
     }
 
-    public ArrayList<PosFruitNSuperPoint> getTabFruitNSupPoint() {
+    public ArrayList<PosFruitNSuperPointNPacManNFantoms> getTabFruitNSupPoint() {
         return tabFruitNSupPoint;
     }
 
@@ -181,6 +226,10 @@ public class ReadFileMapPacman extends ReadFileMap{
 
     public ArrayList<PosMursAssocies> getTabMurFctCoord() {
         return super.getTabMurFctCoord();
+    }
+
+    public ArrayList<PosFruitNSuperPointNPacManNFantoms> getTabPacmanNFantoms() {
+        return tabPacmanNFantoms;
     }
 
     public File getMapFile() {

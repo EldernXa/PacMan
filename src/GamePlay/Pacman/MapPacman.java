@@ -1,14 +1,13 @@
 package GamePlay.Pacman;
 
 import GraphicsEngine.*;
+import PhysicsEngine.MouvingObject;
 import PhysicsEngine.UnmouvingObj;
-import ReadFile.PosFruitNSuperPoint;
+import ReadFile.PosFruitNSuperPointNPacManNFantoms;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap;
 import ReadFile.ReadFileMapPacman;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -17,11 +16,13 @@ import java.util.ArrayList;
 public class MapPacman extends Map {
     private ReadFileMapPacman readFileMapPacman;
     private ArrayList<Point> pointArrayList = new ArrayList<>();
-    private ArrayList<PosFruitNSuperPoint> posFruitNSuperPointArrayList = new ArrayList<>();
+    private ArrayList<PosFruitNSuperPointNPacManNFantoms> posFruitNSuperPointNPacManNFantomsArrayList = new ArrayList<>();
     private ArrayList<UnmouvingObj> FruitNSuperPointArrayList = new ArrayList<>();
     private ArrayList<Coordinate> realCoord = new ArrayList<>();
     private ArrayList<Coordinate> pointsCoord = new ArrayList<>();
     private Coordinate pacmanInitCoord;
+    private PacMan thePacman;
+    private ArrayList<MouvingObject> fantomsList = new ArrayList<>();
 
 
     public MapPacman(Stage stage, String mapFolderPath){
@@ -34,16 +35,15 @@ public class MapPacman extends Map {
         fillListPosFruitSuperPoint();
         initFruitNSuperPoint();
         afficherFruitNSuperPoint();
-        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), getMapScene(), pointArrayList.size(), stage);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-        visualObjects.add(imgPacman);
+        creationPacmanNFantoms();
+        visualObjects.add(thePacman);
         getMapPane().setStyle("-fx-background-color: black");
         //Fantome imgFantome = new Fantome("./data/SpriteMouvement/FantomeJoueur/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
-        FantomeChasseur imgFantome = new FantomeChasseur("./data/SpriteMouvement/FantomeRouge/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
         //FantomeRose imgFantome = new FantomeRose("./data/SpriteMouvement/FantomeRose/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
-        getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome.getImageView());
-        visualObjects.add(imgFantome);
-        score(imgPacman);
+        getMapPane().getChildren().addAll(thePacman.getImageView(), thePacman.getImageView());
+        visualObjects.add(thePacman);
+        score(thePacman);
     }
     public MapPacman(Stage stage, Difficulte difficulte){
         super(stage, difficulte,32,18,68);
@@ -54,16 +54,18 @@ public class MapPacman extends Map {
         initPoints();
         afficherPoints();
         fillListPosFruitSuperPoint();
+        creationPacmanNFantoms();
         initFruitNSuperPoint();
         afficherFruitNSuperPoint();
-        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), getMapScene(), pointArrayList.size(), stage);
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
-        visualObjects.add(imgPacman);
+        visualObjects.add(thePacman);
         getMapPane().setStyle("-fx-background-color: black");
-        Fantome imgFantome = new Fantome("./data/SpriteMouvement/FantomeJoueur/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
-        getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome.getImageView());
-        visualObjects.add(imgFantome);
-        score(imgPacman);
+        getMapPane().getChildren().add(thePacman.getImageView());
+        for(MouvingObject mouvingObject : fantomsList){
+            getMapPane().getChildren().addAll(mouvingObject.getImageView());
+        }
+        visualObjects.add(thePacman);
+        score(thePacman);
     }
 
     /**
@@ -91,6 +93,28 @@ public class MapPacman extends Map {
         }
     }
 
+    public void creationPacmanNFantoms(){
+        for(PosFruitNSuperPointNPacManNFantoms posFSPPF : readFileMapPacman.getTabPacmanNFantoms()){
+            switch (posFSPPF.getCharacter()){
+                case 'P':
+                    thePacman = new PacMan("./data/SpriteMouvement/Pacman/", calcExactCoord(posFSPPF.getCoordinate()),getMapScene(),pointArrayList.size(),getStage());
+                    break;
+                case 'F':
+                    fantomsList.add(new Fantome("./data/SpriteMouvement/FantomeJoueur/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman));
+                    break;
+            }
+        }
+    }
+
+    public Coordinate calcExactCoord(Coordinate coordinate) {
+        System.out.print("Coordonnées 1 : ");
+        coordinate.affichageCoord();
+        System.out.println();
+        double absc = getEpaisseurMur() + coordinate.getX()*(getLongueurMur()-getEpaisseurMur())+1;
+        double ord = getEpaisseurMur() + coordinate.getY()*(getLongueurMur()-getEpaisseurMur())+1;
+        System.out.println("Coordonnées : " + "(" + absc + "," + ord + ")");
+        return new Coordinate(absc,ord);
+    }
 
     /**
      * Crée le mur qui se trouve en haut de la case concernée indentifiée por les cord en attribut
@@ -145,11 +169,11 @@ public class MapPacman extends Map {
     }
 
     public void fillListPosFruitSuperPoint(){
-        for(PosFruitNSuperPoint posFruitNSuperPoint : readFileMapPacman.getTabFruitNSupPoint()){
-            double fausseAbsc = posFruitNSuperPoint.getCoordinate().getX();
-            double fausseOrd = posFruitNSuperPoint.getCoordinate().getY();
+        for(PosFruitNSuperPointNPacManNFantoms posFruitNSuperPointNPacManNFantoms : readFileMapPacman.getTabFruitNSupPoint()){
+            double fausseAbsc = posFruitNSuperPointNPacManNFantoms.getCoordinate().getX();
+            double fausseOrd = posFruitNSuperPointNPacManNFantoms.getCoordinate().getY();
             Coordinate nouv = new Coordinate(getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-7.5+fausseAbsc*(getLongueurMur()-getEpaisseurMur()),getEpaisseurMur()+(getLongueurMur()-2*getEpaisseurMur())/2-7.5+fausseOrd*(getLongueurMur()-getEpaisseurMur()));
-            this.posFruitNSuperPointArrayList.add(new PosFruitNSuperPoint(nouv,posFruitNSuperPoint.getCharacter()));
+            this.posFruitNSuperPointNPacManNFantomsArrayList.add(new PosFruitNSuperPointNPacManNFantoms(nouv, posFruitNSuperPointNPacManNFantoms.getCharacter()));
         }
     }
 
@@ -235,13 +259,13 @@ public class MapPacman extends Map {
     }
 
     public void initFruitNSuperPoint(){
-        for(PosFruitNSuperPoint posFruitNSuperPoint : this.posFruitNSuperPointArrayList){
-            switch (posFruitNSuperPoint.getCharacter()){
+        for(PosFruitNSuperPointNPacManNFantoms posFruitNSuperPointNPacManNFantoms : this.posFruitNSuperPointNPacManNFantomsArrayList){
+            switch (posFruitNSuperPointNPacManNFantoms.getCharacter()){
                 case 'C':
-                    FruitNSuperPointArrayList.add(new Cerise(posFruitNSuperPoint.getCoordinate(),getMapScene()));
+                    FruitNSuperPointArrayList.add(new Cerise(posFruitNSuperPointNPacManNFantoms.getCoordinate(),getMapScene()));
                     break;
                 case 'P':
-                    FruitNSuperPointArrayList.add(new SuperPoint(posFruitNSuperPoint.getCoordinate(),getMapScene()));
+                    FruitNSuperPointArrayList.add(new SuperPoint(posFruitNSuperPointNPacManNFantoms.getCoordinate(),getMapScene()));
                     break;
             }
         }

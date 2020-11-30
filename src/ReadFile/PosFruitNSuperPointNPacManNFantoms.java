@@ -2,11 +2,11 @@ package ReadFile;
 
 import GraphicsEngine.Coordinate;
 
-public class PosFruitNSuperPoint {
+public class PosFruitNSuperPointNPacManNFantoms {
     Coordinate coordinate;
     Character character;
 
-    public PosFruitNSuperPoint(Coordinate coordinate, Character character){
+    public PosFruitNSuperPointNPacManNFantoms(Coordinate coordinate, Character character){
         this.coordinate = coordinate;
         this.character = character;
     }
