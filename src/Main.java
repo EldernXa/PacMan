@@ -7,7 +7,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Menu menu = new Menu(primaryStage, true, true, "Pacman");
+        Menu menu = new Menu(primaryStage, false, false, "Pacman");
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
