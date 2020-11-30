@@ -6,6 +6,7 @@ import GraphicsEngine.GameImage;
 import GraphicsEngine.Map;
 import GraphicsEngine.VisualObject;
 import PhysicsEngine.MouvingObject;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -20,6 +21,7 @@ public class Action {
     private final int dir;
     private final Scene scene;
     private final String carac;
+    private EventHandler<KeyEvent> eventHandler;
 
 
     public Action(Scene scene, String carac, double x, double y, int dir, String nameAction, MouvingObject mouvingObject){
@@ -92,9 +94,11 @@ public class Action {
     }
 
     public void runEvent (Scene scene, String carac,int dir){
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
+        eventHandler = keyEvent -> {
             eventAppear(keyEvent, carac);
-        });
+        };
+        Map.addEventHandler(eventHandler);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler);
     }
     public void runEvent (Scene scene,int dir){
         scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {

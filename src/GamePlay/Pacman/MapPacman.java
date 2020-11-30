@@ -6,7 +6,9 @@ import ReadFile.PosFruitNSuperPoint;
 import ReadFile.PosMursAssocies;
 import ReadFile.ReadFileMap;
 import ReadFile.ReadFileMapPacman;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 

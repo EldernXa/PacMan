@@ -1,8 +1,10 @@
 package GraphicsEngine;
 
 import ReadFile.ReadFileMap;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -18,6 +20,7 @@ public abstract class Map {
     private double carreaux;
     private double epaisseurMur;
     private double longueurMur;
+    private static final ArrayList<EventHandler<KeyEvent>> listEventHandler = new ArrayList<>();
 
     public Map(){
     }
@@ -35,6 +38,18 @@ public abstract class Map {
         stage.setScene(mapScene);
         stage.centerOnScreen();
         stage.sizeToScene();
+    }
+
+    public static void addEventHandler(EventHandler<KeyEvent> eventHandler){
+        listEventHandler.add(eventHandler);
+    }
+
+    public static void clearEventHandler(){
+        listEventHandler.clear();
+    }
+
+    public static ArrayList<EventHandler<KeyEvent>> getListEventHandler(){
+        return listEventHandler;
     }
 
     public abstract void creationDeMap();

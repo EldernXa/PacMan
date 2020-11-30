@@ -1,6 +1,7 @@
 package GamePlay.Pacman;
 
 import GraphicsEngine.*;
+import PhysicsEngine.Action;
 import PhysicsEngine.ActionContinue;
 import PhysicsEngine.MouvingObject;
 import ReadFile.ReadFileCommandes;
@@ -48,7 +49,7 @@ public class PacMan extends MouvingObject {
     public void incrementPoints(){
         nbPointsMap++;
         if(getNbPointsMap()==getNbPointsMapMax()){
-            ConclusionPacman conclusion = new ConclusionPacman(stage,true,nbPoints.get());
+            ConclusionPacman conclusion = new ConclusionPacman(stage,true,nbPoints.get(), this);
         }
     }
 
