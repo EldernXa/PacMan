@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -35,12 +36,15 @@ ConclusionPacman implements Conclusion {
     private Label titre = new Label();
     private Stage stage= new Stage();
     private Button exit = new Button("QUITTER");
+    private final PacMan pacMan;
 
 
-    public ConclusionPacman(Stage stageJeu, boolean bool,int nbPoints){
-
+    public ConclusionPacman(Stage stageJeu, boolean bool,int nbPoints, PacMan pacMan){
         MenuChoixDuJeu menuChoixDuJeu= new MenuChoixDuJeu(stage);
-
+        this.pacMan = pacMan;
+        for(EventHandler<KeyEvent> eventHandler : Map.getListEventHandler()){
+            stageJeu.getScene().removeEventHandler(KeyEvent.KEY_PRESSED, eventHandler);
+        }
         VisualObject.stopTimelineParallel();
         VisualObject.clearTimelineParallel();
         clickRejouer(stageJeu);

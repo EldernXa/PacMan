@@ -16,11 +16,12 @@ public class ScorePacman implements Score {
     HBox score = new HBox(370);
     HBox vies = new HBox(5);
     ImageViewSizePos logoCoeur = new ImageViewSizePos();
+    private final PacMan pacMan;
 
 
     public ScorePacman(Stage stage, VisualObject visualObject){
         logoCoeur.setImageView("./data/Logos/heart.png");
-        PacMan pacMan = (PacMan)visualObject;
+        pacMan = (PacMan)visualObject;
         nbVies.setText(String.valueOf(pacMan.getNbVies()));
         nbPoints.setText(String.valueOf(pacMan.getNbPoints()));
         setHbox();
@@ -53,7 +54,7 @@ public class ScorePacman implements Score {
             if(!t1.equals(number)){
                 nbVies.setText(String.valueOf(pacMan.getNbVies_restantes()));
                 if(pacMan.getNbVies_restantes() == 0){
-                    ConclusionPacman conclusion = new ConclusionPacman(stage,false,pacMan.getNbPoints());
+                    ConclusionPacman conclusion = new ConclusionPacman(stage,false,pacMan.getNbPoints(), pacMan);
                 }
 
             }

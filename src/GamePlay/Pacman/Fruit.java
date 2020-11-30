@@ -22,6 +22,7 @@ public class Fruit extends UnmouvingObj {
             super.getImageView().setVisible(false);
         }
         return false;*/
+        // test
         return false;
     }
 

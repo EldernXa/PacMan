@@ -15,7 +15,6 @@ public class ReadFileMapPacman extends ReadFileMap{
     public ReadFileMapPacman(String mapFolderPath){
         this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
         this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
-        System.out.println(pointsNFruit.getPath());
         initTabMurFctCoord();
         initTabNoPointFruitNSupPoint();
     }
@@ -106,7 +105,8 @@ public class ReadFileMapPacman extends ReadFileMap{
             }
             mapFileScanner.close();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println("Le fichier n'existe pas");
+            System.exit(0); // quitte l'application
         }
     }
 
