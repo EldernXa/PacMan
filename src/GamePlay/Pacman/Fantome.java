@@ -14,8 +14,6 @@ public class Fantome extends MouvingObject {
     private float valueTps = (float) 10;
     private Coordinate goal;
     private Coordinate fantome;
-    //private Timeline timeline;
-    //private int indTimeline;
     private char lastCharacter;
     private PacMan pacMan;
     private static int direction;
@@ -25,20 +23,11 @@ public class Fantome extends MouvingObject {
     public Fantome(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene);
         this.scene = scene;
-        //setGoal(pacMan.getCoordinate());
         this.mapPacman = map;
         this.pacMan = pacMan;
         this.fantome = getGameImage().getCoordinate();
-        //new ActionContinueFantome(getGameImage(),scene,valueTps,this,map,Chase(pacmanCoordinate,map.getWrongCoorFromReal(getFantome()).getListOfWalls()));
-        //Test(scene, map);
-        /*setRandomGoal();
-        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,0,map,pacMan));
-        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,1,map,pacMan));
-        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,2,map,pacMan));
-        addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,3,map,pacMan));*/
         //setJ();
         setIA();
-        //caughtInBetween(null);
     }
 
     public void setJ(){
@@ -54,7 +43,7 @@ public class Fantome extends MouvingObject {
     }
 
     public void setIA(){
-        setRandomGoal();
+        //setRandomGoal();
         clearListAction();
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 0, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 1, mapPacman, pacMan));
@@ -98,6 +87,7 @@ public class Fantome extends MouvingObject {
 
 
         public double getEuclidianDistance (Coordinate newFantome){
+
 
             for (int i = 0 ; i < mapPacman.getRealCoord().size();i++){
                 if(mapPacman.getRealCoord().get(i).compare(pacMan.getCoordinate())){
@@ -364,17 +354,20 @@ public class Fantome extends MouvingObject {
         this.lastCharacter = lastCharacter;
     }
     public Coordinate anticipation(PacMan pacMan,int cases){
+        //pacMan.getCoordinate().affichageCoord();
         switch (pacMan.getDir()){
             case 0:
-                double x0 = mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate().getX() ;
-                double y0 = mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate().getY() ;
+                //caughtInBetween(pacMan).affichageCoord();
+                double x0 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getX() ;
+                double y0 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getY() ;
                 return   new Coordinate(x0+cases,y0);
                 /*double x0 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getX() ;
                 double y0 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getY() ;
                 return   new Coordinate(x0+cases,y0);*/
             case 1:
-                double x1 = mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate().getX() ;
-                double y1 = mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate().getY() ;
+                //caughtInBetween(pacMan).affichageCoord();
+                double x1 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getX() ;
+                double y1 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getY() ;
                 return  new Coordinate(x1,y1+cases);
                 /*double x1 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getX() ;
                 double y1 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getY() ;
@@ -382,16 +375,18 @@ public class Fantome extends MouvingObject {
 
 
             case 2:
-                double x2 = mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate().getX() ;
-                double y2 = mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate().getY() ;
+                pacMan.getCoordinate().affichageCoord();
+                double x2 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getX() ;
+                double y2 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getY() ;
                 return  new Coordinate(x2-cases,y2);
                 /*ouble x2 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getX() ;
                 double y2 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getY() ;
                 return  new Coordinate(x2-cases,y2);*/
 
             case 3:
-                double x3 = mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate().getX() ;
-                double y3 = mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate().getY() ;
+                //caughtInBetween(pacMan).affichageCoord();
+                double x3 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getX() ;
+                double y3 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getY() ;
                 return  new Coordinate(x3,y3-cases);
                /* double x3 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getX() ;
                 double y3 = mapPacman.getWrongCoorFromReal(pacMan.getGameImage().getCoordinate()).getPointCoordinate().getY() ;
@@ -403,34 +398,40 @@ public class Fantome extends MouvingObject {
 
     }
     public Coordinate Transition(FantomeChasseur fantomeRouge){
-        double facteurX = fantomeRouge.getGameImage().getCoordinate().getX() -  anticipation(pacMan,1).getX();
-        double facteurY = fantomeRouge.getGameImage().getCoordinate().getY() -  anticipation(pacMan,1).getY();
+        //fantomeRouge.getFantome().affichageCoord();
+        double facteurX = mapPacman.getWrongCoorFromReal(fantomeRouge.getGameImage().getCoordinate()).getPointCoordinate().getX() -  anticipation(pacMan,1).getX();
+        double facteurY = mapPacman.getWrongCoorFromReal(fantomeRouge.getGameImage().getCoordinate()).getPointCoordinate().getY() -  anticipation(pacMan,1).getY();
         return new Coordinate(anticipation(pacMan,1).getX()+facteurX,anticipation(pacMan,1).getY()+facteurY);
     }
 
-    public Coordinate caughtInBetween(MouvingObject mouvingObject){
-        if (mapPacman.getWrongCoorFromReal(mouvingObject.getGameImage().getCoordinate()).getPointCoordinate() == null){
-                switch (mouvingObject.getDir()){
-                    case 0:
-                        double newXd = mouvingObject.getGameImage().getCoordinate().getX() + 50.0;
-                        return new Coordinate(newXd,mouvingObject.getGameImage().getCoordinate().getY());
-                    case 1:
-                        double newYb = mouvingObject.getGameImage().getCoordinate().getY() + 50.0;
-                        return new Coordinate(mouvingObject.getGameImage().getCoordinate().getX(),newYb);
-                    case 2:
-                        double newXg = mouvingObject.getGameImage().getCoordinate().getX() - 50.0;
-                        return new Coordinate(newXg,mouvingObject.getGameImage().getCoordinate().getY());
-                    case 3:
-                        double newYh = mouvingObject.getGameImage().getCoordinate().getY() - 50.0;
-                        return new Coordinate(mouvingObject.getGameImage().getCoordinate().getX(),newYh);
-                }
+    /*public Coordinate caughtInBetween(MouvingObject mouvingObject){
 
-        }else {
-            return mapPacman.getWrongCoorFromReal(mouvingObject.getGameImage().getCoordinate()).getPointCoordinate();
-        }
+                return mapPacman.getWrongCoorFromReal(mouvingObject.getGameImage().getCoordinate()).getPointCoordinate();
 
-        return null;
-    }
+
+           switch (mouvingObject.getDir()){
+                case 0:
+                    double newXd = mouvingObject.getGameImage().getCoordinate().getX() + 50.0;
+                    return new Coordinate(newXd,mouvingObject.getGameImage().getCoordinate().getY());
+                case 1:
+                    double newYb = mouvingObject.getGameImage().getCoordinate().getY() + 50.0;
+                    return new Coordinate(mouvingObject.getGameImage().getCoordinate().getX(),newYb);
+                case 2:
+                    double newXg = mouvingObject.getGameImage().getCoordinate().getX() - 50.0;
+                    return new Coordinate(newXg,mouvingObject.getGameImage().getCoordinate().getY());
+                case 3:
+                    double newYh = mouvingObject.getGameImage().getCoordinate().getY() - 50.0;
+                    return new Coordinate(mouvingObject.getGameImage().getCoordinate().getX(),newYh);
+                default:
+                    System.out.println("ici");
+                    return null;
+            }
+
+
+
+
+
+    }*/
 
 
 }

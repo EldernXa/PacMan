@@ -80,13 +80,13 @@ public class FantomeCalcul extends Fantome{
 
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
-        if (timeline.getKeyFrames().get(0).getTime().equals(  startTime)){
+        //if (timeline.getKeyFrames().get(0).getTime().equals(  startTime)){
             setGoal(Transition(fantomeRouge));
             return super.Chase(listOfWalls);
-        }else {
+       /* }else {
             setRandomGoal();
             return super.Chase(listOfWalls);
-        }
+        }*/
 
     }
    public void scatterMode(){
