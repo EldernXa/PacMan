@@ -38,7 +38,8 @@ public class MapPacman extends Map {
         /*** Test pour ajouté un fantome (ici un autre pac-man)***/
         visualObjects.add(imgPacman);
         getMapPane().setStyle("-fx-background-color: black");
-        Fantome imgFantome = new Fantome("./data/SpriteMouvement/FantomeJoueur/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
+        //Fantome imgFantome = new Fantome("./data/SpriteMouvement/FantomeJoueur/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
+        FantomeRouge imgFantome = new FantomeRouge("./data/SpriteMouvement/FantomeRouge/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
         getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome.getImageView());
         visualObjects.add(imgFantome);
         score(imgPacman);

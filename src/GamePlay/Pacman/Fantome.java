@@ -36,7 +36,8 @@ public class Fantome extends MouvingObject {
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,1,map,pacMan));
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,2,map,pacMan));
         addAction( new ActionContinueFantome(getGameImage(),scene,valueTps,this,3,map,pacMan));*/
-        setJ();
+        //setJ();
+        setIA();
     }
 
     public void setJ(){
@@ -95,13 +96,17 @@ public class Fantome extends MouvingObject {
 
 
 
-        public double getEuclidianDistance (Coordinate coordinate){
+        public double getEuclidianDistance (Coordinate newFantome){
 
-            double xGF = Math.pow(mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() - coordinate.getX(), 2);
-            double yGF = Math.pow(mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY() - coordinate.getY(), 2);
-            return Math.sqrt(xGF + yGF);
+            for (int i = 0 ; i < mapPacman.getRealCoord().size();i++){
+                if(mapPacman.getRealCoord().get(i).compare(pacMan.getCoordinate())){
+                    double xGF = Math.pow(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getX() - newFantome.getX(), 2);
+                    double yGF = Math.pow(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getY() - newFantome.getY(), 2);
+                    return Math.sqrt(xGF + yGF);
 
-
+                }
+            }
+            return 0;
         }
         public boolean objectifReach(Coordinate coordinate){
             if(getEuclidianDistance(coordinate) == 0.0){
@@ -277,7 +282,7 @@ public class Fantome extends MouvingObject {
 
             if (character.contains('D')) {
 
-                double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() - getGameImage().getValueMove();
+                double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() + getGameImage().getValueMove();
                 double  newX = Math.abs(realNewX);
                 //double newX = coordinate.getX() - Double.valueOf(getGameImage().getValueMove());
                 Coordinate Newcoordinate = new Coordinate(newX, mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY());
@@ -291,7 +296,7 @@ public class Fantome extends MouvingObject {
             }
             if (character.contains('G')) {
 
-                double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() + getGameImage().getValueMove();
+                double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() - getGameImage().getValueMove();
                 double  newX = Math.abs(realNewX);
                 //double newX = coordinate.getX() + Double.valueOf(getGameImage().getValueMove());
                 Coordinate Newcoordinate = new Coordinate(newX, mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY());
