@@ -57,9 +57,9 @@ public class FantomeAveugle extends Fantome {
         //System.out.println(isNear(new Coordinate(0,1),new Coordinate(0,3),2));
            // try{
                 //System.out.println(isNear(mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate(),3));
-                if (isNear(mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate(),mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate(),3)) {
+                if (isNear(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate(),mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate(),3)) {
                     System.out.println("Vrai");
-                    setGoal(mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate());
+                    setGoal(pacMan.getCoordinate());
                     return super.Chase(listOfWalls);
                 }else {
                     System.out.println("Faux1");

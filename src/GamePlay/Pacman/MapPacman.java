@@ -40,11 +40,11 @@ public class MapPacman extends Map {
         getMapPane().setStyle("-fx-background-color: black");
         //Fantome imgFantome = new Fantome("./data/SpriteMouvement/FantomeJoueur/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
         FantomeChasseur imgFantome1 = new FantomeChasseur("./data/SpriteMouvement/FantomeRouge/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1+50, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
-        FantomeCalcul imgFantome = new FantomeCalcul("./data/SpriteMouvement/FantomeBleu/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman,imgFantome1);
+        //FantomeCalcul imgFantome = new FantomeCalcul("./data/SpriteMouvement/FantomeBleu/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman,imgFantome1);
         //FantomeAveugle imgFantome = new FantomeAveugle("./data/SpriteMouvement/FantomeOrange/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
-        getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome.getImageView(),imgFantome1.getImageView());
+        getMapPane().getChildren().addAll(imgPacman.getImageView(),imgFantome1.getImageView());
         visualObjects.add(imgFantome1);
-        visualObjects.add(imgFantome);
+        //visualObjects.add(imgFantome);
         score(imgPacman);
     }
     public MapPacman(Stage stage, Difficulte difficulte){
@@ -65,10 +65,10 @@ public class MapPacman extends Map {
         //Fantome imgFantome = new Fantome("./data/SpriteMouvement/FantomeJoueur/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
         FantomeChasseur imgFantome1 = new FantomeChasseur("./data/SpriteMouvement/FantomeRouge/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1+50, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
         //FantomeAveugle imgFantome = new FantomeAveugle("./data/SpriteMouvement/FantomeOrange/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
-        FantomeCalcul imgFantome = new FantomeCalcul("./data/SpriteMouvement/FantomeBleu/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman,imgFantome1);
-        getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome.getImageView(),imgFantome1.getImageView());
+        //FantomeCalcul imgFantome = new FantomeCalcul("./data/SpriteMouvement/FantomeBleu/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman,imgFantome1);
+        getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome1.getImageView());
         visualObjects.add(imgFantome1);
-        visualObjects.add(imgFantome);
+        //visualObjects.add(imgFantome);
         score(imgPacman);
     }
 

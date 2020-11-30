@@ -162,17 +162,29 @@ public class ActionContinueFantome extends Action {
     }
 
     public boolean asMove(){
-        try{
-            if(!map.getWrongCoorFromReal(getGameImage().getCoordinate()).getPointCoordinate().compare(previous)){
+        //if (validMove()){
+            try{
+                if(!map.getWrongCoorFromReal(getGameImage().getCoordinate()).getPointCoordinate().compare(previous)){
+                    return true;
+                }
+
+            }catch (Exception e){
+
+
+            }
+
+        //}
+            return false;
+
+    }
+
+    public boolean validMove(){
+        for (int i = 0 ; i < map.getRealCoord().size(); i++){
+            if ((map.getRealCoord().get(i)).compare(pacMan.getCoordinate())){
                 return true;
             }
 
-        }catch (Exception e){
-
-
         }
         return false;
-
-
     }
 }

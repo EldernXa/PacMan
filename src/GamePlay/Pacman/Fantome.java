@@ -43,7 +43,7 @@ public class Fantome extends MouvingObject {
     }
 
     public void setIA(){
-        setRandomGoal();
+        //setRandomGoal();
         clearListAction();
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 0, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 1, mapPacman, pacMan));
@@ -354,7 +354,7 @@ public class Fantome extends MouvingObject {
         this.lastCharacter = lastCharacter;
     }
     public Coordinate anticipation(PacMan pacMan,int cases){
-
+        //pacMan.getCoordinate().affichageCoord();
         switch (pacMan.getDir()){
             case 0:
                 //caughtInBetween(pacMan).affichageCoord();
@@ -375,7 +375,7 @@ public class Fantome extends MouvingObject {
 
 
             case 2:
-                //caughtInBetween(pacMan).affichageCoord();
+                pacMan.getCoordinate().affichageCoord();
                 double x2 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getX() ;
                 double y2 = mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getY() ;
                 return  new Coordinate(x2-cases,y2);
@@ -398,6 +398,7 @@ public class Fantome extends MouvingObject {
 
     }
     public Coordinate Transition(FantomeChasseur fantomeRouge){
+        //fantomeRouge.getFantome().affichageCoord();
         double facteurX = mapPacman.getWrongCoorFromReal(fantomeRouge.getGameImage().getCoordinate()).getPointCoordinate().getX() -  anticipation(pacMan,1).getX();
         double facteurY = mapPacman.getWrongCoorFromReal(fantomeRouge.getGameImage().getCoordinate()).getPointCoordinate().getY() -  anticipation(pacMan,1).getY();
         return new Coordinate(anticipation(pacMan,1).getX()+facteurX,anticipation(pacMan,1).getY()+facteurY);
