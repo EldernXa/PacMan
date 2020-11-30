@@ -20,6 +20,7 @@ public abstract class Map {
     private double carreaux;
     private double epaisseurMur;
     private double longueurMur;
+    static public Difficulte diff;
     private static final ArrayList<EventHandler<KeyEvent>> listEventHandler = new ArrayList<>();
 
     public Map(){
@@ -27,6 +28,21 @@ public abstract class Map {
 
 
     public Map(Stage stage, String mapFolderPath,double carreaux, double epaisseurMur, double longueurMur){
+        this.carreaux = carreaux;
+        this.epaisseurMur = epaisseurMur;
+        this.longueurMur = longueurMur;
+        this.stage = stage;
+        initReadFile(mapFolderPath);
+        this.mapPane = initMapPane();
+        creationDeMap();
+        mapScene = initMapScene();
+        stage.setScene(mapScene);
+        stage.centerOnScreen();
+        stage.sizeToScene();
+    }
+    public Map(Stage stage, Difficulte difficulte,double carreaux, double epaisseurMur, double longueurMur){
+        diff = difficulte;
+        String mapFolderPath = "./data/Map/" + diff.getName() + "_";
         this.carreaux = carreaux;
         this.epaisseurMur = epaisseurMur;
         this.longueurMur = longueurMur;

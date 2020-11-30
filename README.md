@@ -9,9 +9,7 @@ Utilisez la commande suivante dans le dossier.
 ```
 ### Windows
 
-```bash
-./run_windows.sh
-```
+Vous pouvez le lancer directement en cliquant sur le .bat
 
 ## Les contributeurs
 Ce projet est effectué par le groupe de Projet EQ36 composé de :

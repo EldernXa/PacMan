@@ -44,6 +44,26 @@ public class MapPacman extends Map {
         visualObjects.add(imgFantome);
         score(imgPacman);
     }
+    public MapPacman(Stage stage, Difficulte difficulte){
+        super(stage, difficulte,32,18,68);
+
+        this.pacmanInitCoord = new Coordinate((getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur()))+1, 8*getEpaisseurMur()+7*(getLongueurMur()-2*getEpaisseurMur()) +1);
+        fillListPointsCoord();
+        fillListWithRealCoord();
+        initPoints();
+        afficherPoints();
+        fillListPosFruitSuperPoint();
+        initFruitNSuperPoint();
+        afficherFruitNSuperPoint();
+        PacMan imgPacman = new PacMan("./data/SpriteMouvement/Pacman/", new Coordinate(this.pacmanInitCoord.getX(), this.pacmanInitCoord.getY()), getMapScene(), pointArrayList.size(), stage);
+        /*** Test pour ajouté un fantome (ici un autre pac-man)***/
+        visualObjects.add(imgPacman);
+        getMapPane().setStyle("-fx-background-color: black");
+        Fantome imgFantome = new Fantome("./data/SpriteMouvement/FantomeJoueur/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
+        getMapPane().getChildren().addAll(imgPacman.getImageView(), imgFantome.getImageView());
+        visualObjects.add(imgFantome);
+        score(imgPacman);
+    }
 
     /**
      * Crée tout les murs de la map en lisant une liste extraite d'un fichier texte
