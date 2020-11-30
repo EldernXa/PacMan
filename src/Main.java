@@ -8,7 +8,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Menu menu = new Menu(primaryStage, true, true, "Pacman");
-        //MenuChoixDuJeu menuChoixDuJeu = new MenuChoixDuJeu(primaryStage);
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
