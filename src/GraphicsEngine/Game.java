@@ -7,6 +7,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class for the game
+ */
 public class Game {
     String name;
     ArrayList<Difficulte> listDifficultes = new ArrayList();
@@ -27,6 +30,10 @@ public class Game {
         this.name = name;
     }
 
+    /**
+     * it set the list of difficulties for the game
+     * @param name name of the game
+     */
     public void setListDifficultesFromString(String name) {
         try {
             File myObj = new File("./data/Jeux/"+name+"/ListeDifficultes.txt");

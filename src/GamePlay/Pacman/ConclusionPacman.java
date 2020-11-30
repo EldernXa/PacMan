@@ -24,6 +24,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.Objects;
 
+/**
+ * Build the conclusion of Pacman
+ */
 public class
 ConclusionPacman implements Conclusion {
     private StackPane pane = new StackPane();
@@ -65,6 +68,12 @@ ConclusionPacman implements Conclusion {
         pane.setStyle("-fx-background-color: black");
         pane.getChildren().addAll(hbox,titre);
     }
+
+    /**
+     *
+     * @param bool value of yes/no if we won the game
+     * @param nbPoints value of number of points that the player obtained
+     */
     public void labelForGame(boolean bool, int nbPoints){
         if(bool){
             titre.setText("Vous avez gagné ! \nVous avez obtenu : "  +nbPoints +" Points.");
@@ -79,6 +88,11 @@ ConclusionPacman implements Conclusion {
 
 
     }
+
+    /**
+     *
+     * @param stageJeu new stage for new window
+     */
     public void clickRejouer(Stage stageJeu){
         rejouer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -101,6 +115,12 @@ ConclusionPacman implements Conclusion {
             }
         });
     } */
+
+    /**
+     *
+     * @param stageJeu new stage for new window
+     * @param menuChoixDuJeu value of the new Menu
+     */
     public void clickRetourMenuChoix(Stage stageJeu, MenuChoixDuJeu menuChoixDuJeu){
         retourMenuChoix.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -113,6 +133,10 @@ ConclusionPacman implements Conclusion {
         });
     }
 
+    /**
+     *
+     * @param stageJeu new stage for new window
+     */
     public void clickRetourMenu(Stage stageJeu){
         retourMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -133,6 +157,9 @@ ConclusionPacman implements Conclusion {
         });
     }
 
+    /**
+     * exit the application
+     */
     public void clickExit(){
         exit.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -142,6 +169,10 @@ ConclusionPacman implements Conclusion {
             }
         });
     }
+
+    /**
+     * set the buttons
+     */
     public void setHbox(){
         hbox.getChildren().addAll(rejouer);
         if(Menu.getMenuJeu())

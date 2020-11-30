@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * class for the Pacman
+ */
+
 public class PacMan extends MouvingObject {
 
     private final int nbViesMax = 3;
@@ -46,6 +50,9 @@ public class PacMan extends MouvingObject {
         this.coordinate = coordinate;
     }
 
+    /**
+     * increments the number of points by 1
+     */
     public void incrementPoints(){
         nbPointsMap++;
         if(getNbPointsMap()==getNbPointsMapMax()){
@@ -61,12 +68,20 @@ public class PacMan extends MouvingObject {
         return nbPointsMap;
     }
 
+    /**
+     *
+     * @param coordinate position of the new coordinate
+     */
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = new Coordinate(coordinate.getX(),coordinate.getY());
         super.getImageView().setX(coordinate.getX());
         super.getImageView().setY(coordinate.getY());
         super.move(coordinate.getX(),coordinate.getY());
     }
+
+    /**
+     * when the pacman dies
+     */
     public void death(){
         setCoordinate(super.getGameImage().getCoordInit());
         diminueVies();
@@ -91,6 +106,11 @@ public class PacMan extends MouvingObject {
         return nbPoints.get();
     }
 
+    /**
+     *
+     * @param visualObjects image of the colliion object
+     * @return
+     */
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
         if(visualObjects!=null && visualObjects.getClass()==Fantome.class){
@@ -105,6 +125,11 @@ public class PacMan extends MouvingObject {
         }
         return false;
     }
+
+    /**
+     *
+     * @param nb number of the points that we want to add
+     */
     public void ajoutPoint(int nb){
 
         nbPoints.set(nbPoints.get()+nb);
@@ -140,6 +165,10 @@ public class PacMan extends MouvingObject {
     public boolean isSuperPacman() {
         return superPacman;
     }
+
+    /**
+     * allows the pacman to turn into a superpacman for 5 seconds
+     */
     public void superPacman(){
         setSuperPacman(true);
         new Thread(new Runnable() {

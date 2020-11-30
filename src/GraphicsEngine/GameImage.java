@@ -18,7 +18,7 @@ public class GameImage {
     /**
      *
      * @param path image String
-     * @param coordinate this position
+     * @param coordinate his position
      * @param valueMove the value of move (speed or other thing)
      */
     public GameImage(String path, Coordinate coordinate, int valueMove){

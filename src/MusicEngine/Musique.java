@@ -5,6 +5,9 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 
+/**
+ * class for the music
+ */
 public class Musique {
     String path;
     public static MediaPlayer mediaPlayer;
@@ -21,6 +24,10 @@ public class Musique {
         return path;
     }
 
+
+    /**
+     * allows to play the music on a loop
+     */
     public void lancerMusique()
     {
         if(!playing) {
@@ -32,15 +39,29 @@ public class Musique {
             });
         }
     }
+
+    /**
+     * allows to switch of media
+     * @param nomMedia the new media played
+     */
     public void modifMusique(Media nomMedia){
         mediaPlayer.stop();
         mediaPlayer = new MediaPlayer(nomMedia);
     }
+
+    /**
+     * allows to stop the music
+     */
     public void stopMusique(){
         mediaPlayer.stop();
         playing=false;
         mediaPlayer.setMute(false);
     }
+
+    /**
+     *
+     * @param mute value yes/no il we want to mute or demute
+     */
     public void mute(boolean mute){
         mediaPlayer.setMute(mute);
     }

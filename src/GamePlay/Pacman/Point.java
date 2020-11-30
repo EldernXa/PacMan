@@ -5,6 +5,9 @@ import PhysicsEngine.UnmouvingObj;
 import GraphicsEngine.VisualObject;
 import javafx.scene.Scene;
 
+/**
+ * class for the points on the map
+ */
 public class Point extends UnmouvingObj {
     private boolean passe = false;
 
@@ -16,6 +19,10 @@ public class Point extends UnmouvingObj {
         super(path, coordinate, scene);
     }
 
+    /**
+     * @param visualObjects image of the collision image
+     * @return
+     */
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
 
