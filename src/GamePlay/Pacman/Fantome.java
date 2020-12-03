@@ -433,6 +433,22 @@ public class Fantome extends MouvingObject {
 
     }*/
 
+    public Character priorityMove(ArrayList<Character> characters){
+        if(characters.contains('H')){
+            return 'H';
+        }
+        if(characters.contains('G')){
+            return 'G';
+        }
+        if(characters.contains('B')){
+            return 'B';
+        }
+        if(characters.contains('D')){
+            return 'D';
+        }
+    return '_';
+    }
+
 
 }
 
