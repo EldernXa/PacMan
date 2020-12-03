@@ -94,12 +94,7 @@ public class FantomeCalcul extends Fantome{
         }*/
 
     }
-   public void scatterMode(){
-        setGoal(this.coordinateScatter1);
-        if (objectifReach(coordinateScatter1)&&this.fuite){
-            setGoal(coordinateScatter1);
-        }
-    }
+
 
 
 }

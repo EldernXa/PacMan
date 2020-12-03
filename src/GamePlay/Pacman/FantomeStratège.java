@@ -31,12 +31,7 @@ public class FantomeStratège extends Fantome{
         return super.Chase(listOfWalls);
     }
 
-    public void scatterMode(){
-        setGoal(this.coordinateScatter1);
-        if (objectifReach(coordinateScatter1)&&this.fuite){
-            setGoal(coordinateScatter1);
-        }
-    }
+
 
 
 }
