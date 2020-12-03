@@ -10,11 +10,10 @@ import java.util.ArrayList;
  * il poursuit Pac-man quand celui-ci est à moins de 2 blocs de lui,
  * sinon il garde sa routine ***/
 public class FantomeAveugle extends Fantome {
-    private boolean fuite;
-    private int counterPoint;
+
     private PacMan pacMan;
     private MapPacman mapPacman;
-    private Coordinate coordinateScatter1 = new Coordinate(19,419);
+    private Coordinate coordinateScatter1 = new Coordinate(19,369);
 
 
     public FantomeAveugle(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
@@ -22,17 +21,12 @@ public class FantomeAveugle extends Fantome {
         setRandomGoal();
         this.pacMan = pacMan;
         this.mapPacman = map;
-        counterPoint = 0;
+
+
 
     }
 
-    public int getCounterPoint() {
-        return counterPoint;
-    }
 
-    public void setCounterPoint() {
-        this.counterPoint = pacMan.getNbPoints();
-    }
 
     public PacMan getPacMan() {
         return pacMan;
@@ -42,61 +36,52 @@ public class FantomeAveugle extends Fantome {
         this.pacMan = pacMan;
     }
 
-    public MapPacman getMapPacman() {
-        return mapPacman;
-    }
-
-    public void setMapPacman(MapPacman mapPacman) {
-        this.mapPacman = mapPacman;
-    }
 
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
-        /*if (getCounterPoint() >= 3 * (pacMan.getNbPointsMapMax() / 4)) {*/
 
-            ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
-        //System.out.println(isNear(new Coordinate(0,1),new Coordinate(0,3),2));
-           // try{
-                //System.out.println(isNear(mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate(),3));
-        if(pacMan.isSuperPacman()){
-            super.setGoal(coordinateScatter1);
-        }else {
-            if (isNear(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate(), mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate(), 3)) {
-                System.out.println("Vrai");
-                super.setGoal(pacMan.getCoordinate());
+        if (pacMan.getNbPoints() >= 3 * (pacMan.getNbPointsMapMax() / 4)) {
+
+            if (pacMan.isSuperPacman()) {
+
+                super.setGoal(coordinateScatter1);
+
             } else {
-                System.out.println("Faux1");
+
+                isNear();
+            }
+
+            return super.Chase(listOfWalls);
+
+
+
+
+        }else {
+            super.setGoal(getFantome());
+            return super.Chase(listOfWalls);
+        }
+
+
+    }
+
+        public void isNear(){
+
+            if (getEuclidianDistanceFromPacMan(getFantome()) > 3.0 || getEuclidianDistanceFromPacMan(getFantome()) == 0.0) {
+
                 setRandomGoal();
+
+
+            } else {
+
+                setGoal(pacMan.getCoordinate());
 
 
             }
-        }
-        return super.Chase(listOfWalls);
 
-            /*}catch (Exception e){
-                System.out.println("Faux2");
-                setRandomGoal();
-                return super.Chase(listOfWalls);
-            }*/
-
-
-       /* }else {
-            int nulL = -1;
-            return nulL;
-        }*/
-    }
-
-    public boolean isNear(Coordinate coordinate,Coordinate coordinate1,double range) {
-
-
-        if ((Math.abs(coordinate.getX() - coordinate1.getX()) <= range) && (Math.abs(coordinate.getY() - coordinate1.getY()) <= range)) {
-            return true;
-        } else {
-            return false;
 
         }
+
+
     }
 
-
-}
 
