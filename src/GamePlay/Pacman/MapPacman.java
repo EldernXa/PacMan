@@ -39,10 +39,11 @@ public class MapPacman extends Map {
         creationPacmanNFantoms();
         visualObjects.add(thePacman);
         getMapPane().setStyle("-fx-background-color: black");
-        FantomeChasseur imgFantome = new FantomeChasseur("./data/SpriteMouvement/FantomeRouge/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,thePacman);
+        //FantomeChasseur imgFantome = new FantomeChasseur("./data/SpriteMouvement/FantomeRouge/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1), getMapScene(), this,thePacman);
         //FantomeRose imgFantome = new FantomeRose("./data/SpriteMouvement/FantomeRose/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
-        getMapPane().getChildren().addAll(thePacman.getImageView(), imgFantome.getImageView());
+        getMapPane().getChildren().addAll(thePacman.getImageView(), thePacman.getImageView());
         visualObjects.add(thePacman);
+
         score(thePacman);
     }
     public MapPacman(Stage stage, Difficulte difficulte){
@@ -99,9 +100,21 @@ public class MapPacman extends Map {
                 case 'P':
                     thePacman = new PacMan("./data/SpriteMouvement/Pacman/", calcExactCoord(posFSPPF.getCoordinate()),getMapScene(),pointArrayList.size(),getStage());
                     break;
-                case 'F':
+                case 'J':
                     fantomsList.add(new Fantome("./data/SpriteMouvement/FantomeJoueur/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman));
                     break;
+                case 'C':
+                    fantomsList.add(new FantomeChasseur("./data/SpriteMouvement/FantomeRouge/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman));
+                    break;
+                case 'A':
+                    fantomsList.add(new FantomeAveugle("./data/SpriteMouvement/FantomeOrange/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman));
+                    break;
+                case 'S':
+                    fantomsList.add(new FantomeStratège("./data/SpriteMouvement/FantomeRose/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman));
+                    break;
+                /*case 'L':
+                    fantomsList.add(new FantomeCalcul("./data/SpriteMouvement/FantomeBleu/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman,));
+                    break;*/
             }
         }
     }

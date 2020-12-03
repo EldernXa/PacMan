@@ -23,6 +23,7 @@ public class FantomeAveugle extends Fantome {
         this.pacMan = pacMan;
         this.mapPacman = map;
         counterPoint = 0;
+        System.out.println("cc");
     }
 
     public int getCounterPoint() {

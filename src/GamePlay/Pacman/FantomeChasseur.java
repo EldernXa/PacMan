@@ -15,7 +15,7 @@ public class FantomeChasseur extends Fantome {
     private Coordinate goal;
     private MapPacman mapPacman;
     private PacMan pacMan;
-    private Coordinate coordinateScatter1 = new Coordinate(8,0);
+    private Coordinate coordinateScatter1 = new Coordinate(419,19);
     private Coordinate coordinate;
 
 
@@ -36,16 +36,19 @@ public class FantomeChasseur extends Fantome {
 
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
+        //System.out.println(pacMan.isSuperPacman());
+        super.setGoal(coordinateScatter1);
+        /*if (pacMan.isSuperPacman()) {
+            super.getFantome().affichageCoord();
+            super.setGoal(coordinateScatter1);
+            System.out.println("J'ai peur");
+        }else {
+            super.setGoal(pacMan.getGameImage().getCoordinate());
+        }*/
 
-        super.setGoal(pacMan.getGameImage().getCoordinate());
         return super.Chase(listOfWalls);
     }
 
-    public void scatterMode(){
-        setGoal(this.coordinateScatter1);
-        if (objectifReach(coordinateScatter1)&&this.fuite){
-            setGoal(coordinateScatter1);
-        }
-    }
+
 }
 
