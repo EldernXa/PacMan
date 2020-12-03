@@ -93,6 +93,7 @@ public class Fantome extends MouvingObject {
 
             for (int i = 0 ; i < mapPacman.getRealCoord().size();i++){
                 if(mapPacman.getRealCoord().get(i).compare(pacMan.getCoordinate())){
+
                     double xGF = Math.pow(mapPacman.getWrongCoorFromReal(getGoal()).getPointCoordinate().getX() - newFantome.getX(), 2);
                     double yGF = Math.pow(mapPacman.getWrongCoorFromReal(getGoal()).getPointCoordinate().getY() - newFantome.getY(), 2);
                     return Math.sqrt(xGF + yGF);
