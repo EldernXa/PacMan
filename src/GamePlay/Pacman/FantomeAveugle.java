@@ -14,7 +14,7 @@ public class FantomeAveugle extends Fantome {
     private int counterPoint;
     private PacMan pacMan;
     private MapPacman mapPacman;
-    private Coordinate coordinateScatter1 = new Coordinate(0,7);
+    private Coordinate coordinateScatter1 = new Coordinate(19,419);
 
 
     public FantomeAveugle(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
@@ -23,7 +23,7 @@ public class FantomeAveugle extends Fantome {
         this.pacMan = pacMan;
         this.mapPacman = map;
         counterPoint = 0;
-        System.out.println("cc");
+
     }
 
     public int getCounterPoint() {
@@ -58,16 +58,20 @@ public class FantomeAveugle extends Fantome {
         //System.out.println(isNear(new Coordinate(0,1),new Coordinate(0,3),2));
            // try{
                 //System.out.println(isNear(mapPacman.getWrongCoorFromReal(caughtInBetween(pacMan)).getPointCoordinate(),3));
-                if (isNear(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate(),mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate(),3)) {
-                    System.out.println("Vrai");
-                    setGoal(pacMan.getCoordinate());
-                    return super.Chase(listOfWalls);
-                }else {
-                    System.out.println("Faux1");
-                    setRandomGoal();
-                    return super.Chase(listOfWalls);
+        if(pacMan.isSuperPacman()){
+            super.setGoal(coordinateScatter1);
+        }else {
+            if (isNear(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate(), mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate(), 3)) {
+                System.out.println("Vrai");
+                super.setGoal(pacMan.getCoordinate());
+            } else {
+                System.out.println("Faux1");
+                setRandomGoal();
 
-                }
+
+            }
+        }
+        return super.Chase(listOfWalls);
 
             /*}catch (Exception e){
                 System.out.println("Faux2");

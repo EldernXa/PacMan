@@ -24,6 +24,7 @@ public class FantomeChasseur extends Fantome {
         super(path, coordinate, scene, map, pacMan);
         //this.coordinate = this.getGameImage().getCoordinate();
         super.setGoal(pacMan.getGameImage().getCoordinate());
+        //super.setGoal(coordinateScatter1);
         this.mapPacman = map;
         this.pacMan = pacMan;
 
@@ -36,15 +37,13 @@ public class FantomeChasseur extends Fantome {
 
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
-        //System.out.println(pacMan.isSuperPacman());
-        super.setGoal(coordinateScatter1);
-        /*if (pacMan.isSuperPacman()) {
-            super.getFantome().affichageCoord();
+
+        if (pacMan.isSuperPacman()) {
             super.setGoal(coordinateScatter1);
-            System.out.println("J'ai peur");
+
         }else {
             super.setGoal(pacMan.getGameImage().getCoordinate());
-        }*/
+        }
 
         return super.Chase(listOfWalls);
     }

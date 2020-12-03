@@ -91,13 +91,17 @@ public class Fantome extends MouvingObject {
 
             for (int i = 0 ; i < mapPacman.getRealCoord().size();i++){
                 if(mapPacman.getRealCoord().get(i).compare(pacMan.getCoordinate())){
-                    double xGF = Math.pow(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getX() - newFantome.getX(), 2);
-                    double yGF = Math.pow(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getY() - newFantome.getY(), 2);
+                    double xGF = Math.pow(mapPacman.getWrongCoorFromReal(getGoal()).getPointCoordinate().getX() - newFantome.getX(), 2);
+                    double yGF = Math.pow(mapPacman.getWrongCoorFromReal(getGoal()).getPointCoordinate().getY() - newFantome.getY(), 2);
                     return Math.sqrt(xGF + yGF);
 
                 }
             }
-            return 0;
+            /*double xGF = Math.pow(getGoal().getX() - newFantome.getX(), 2);
+            double yGF = Math.pow(getGoal().getY() - newFantome.getY(), 2);
+            return Math.sqrt(xGF + yGF);*/
+
+           return 0;
         }
         public boolean objectifReach(Coordinate coordinate){
             if(getEuclidianDistance(coordinate) == 0.0){
@@ -108,7 +112,7 @@ public class Fantome extends MouvingObject {
         }
 
         public int Chase ( ArrayList<Character> listOfWalls){
-        getGoal().affichageCoord();
+
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
             switch (bestAction(getGoal(), charactersFeasable)){
                 case 'H':
@@ -238,6 +242,7 @@ public class Fantome extends MouvingObject {
     }
 
     public Character bestAction (Coordinate coordinate, ArrayList<Character> character){
+
             character = removeBackwardDirection(character,oppositeDirection(getLastCharacter()));
             double smallerDistance = 1000000;
             Character chaR = new Character(' ');
@@ -245,8 +250,9 @@ public class Fantome extends MouvingObject {
 
                 double realNewY = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY()  - getGameImage().getValueMove();
                 double  newY = Math.abs(realNewY);
-                //double newY = coordinate.getY() - getGameImage().getValueMove();
+                //double newY = coordinate.getY() - 50.0;
                 Coordinate Newcoordinate = new Coordinate(mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX(), newY);
+                //Coordinate Newcoordinate = new Coordinate(coordinate.getX(), newY);
 
                 //System.out.println(smallerDistance);
                 if (getEuclidianDistance(Newcoordinate) < smallerDistance) {
@@ -262,9 +268,9 @@ public class Fantome extends MouvingObject {
 
             double realNewX = mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX() + getGameImage().getValueMove();
             double  newX = Math.abs(realNewX);
-            //double newX = coordinate.getX() - Double.valueOf(getGameImage().getValueMove());
+            //double newX = coordinate.getX() - 50.0;
             Coordinate Newcoordinate = new Coordinate(newX, mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY());
-
+            //Coordinate Newcoordinate = new Coordinate( newX,coordinate.getY());
             if (getEuclidianDistance(Newcoordinate) < smallerDistance) {
 
                 smallerDistance = getEuclidianDistance(Newcoordinate);
@@ -278,7 +284,7 @@ public class Fantome extends MouvingObject {
                 double  newY = Math.abs(realNewY);
                 //double newY = coordinate.getY() + Double.valueOf(getGameImage().getValueMove());
                 Coordinate Newcoordinate = new Coordinate(mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getX(), newY);
-
+                //Coordinate Newcoordinate = new Coordinate(coordinate.getX(), newY);
                 if (getEuclidianDistance(Newcoordinate) < smallerDistance) {
 
                     smallerDistance = getEuclidianDistance(Newcoordinate);
@@ -294,7 +300,7 @@ public class Fantome extends MouvingObject {
                 double  newX = Math.abs(realNewX);
                 //double newX = coordinate.getX() + Double.valueOf(getGameImage().getValueMove());
                 Coordinate Newcoordinate = new Coordinate(newX, mapPacman.getWrongCoorFromReal(getFantome()).getPointCoordinate().getY());
-
+                //Coordinate Newcoordinate = new Coordinate( newX,coordinate.getY());
                 if (getEuclidianDistance(Newcoordinate) < smallerDistance) {
 
                     chaR = 'G';

@@ -14,7 +14,7 @@ public class FantomeStratège extends Fantome{
     private boolean fuite;
     private PacMan pacMan;
     private MapPacman mapPacman;
-    private Coordinate coordinateScatter1 = new Coordinate(0,0);
+    private Coordinate coordinateScatter1 = new Coordinate(19,19);
     public FantomeStratège(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene, map, pacMan);
         this.mapPacman=map;
@@ -23,6 +23,9 @@ public class FantomeStratège extends Fantome{
     }
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
+        if (pacMan.isSuperPacman()){
+            super.setGoal(coordinateScatter1);
+        }
 
         setGoal(anticipation(pacMan,2));
         return super.Chase(listOfWalls);
