@@ -41,8 +41,12 @@ public class MapPacman extends Map {
         getMapPane().setStyle("-fx-background-color: black");
         //FantomeChasseur imgFantome = new FantomeChasseur("./data/SpriteMouvement/FantomeRouge/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1), getMapScene(), this,thePacman);
         //FantomeRose imgFantome = new FantomeRose("./data/SpriteMouvement/FantomeRose/", new Coordinate(getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur())+1, 3*(getLongueurMur()-2*getEpaisseurMur())+4*18+1+50), getMapScene(), this,imgPacman);
-        getMapPane().getChildren().addAll(thePacman.getImageView(), thePacman.getImageView());
+        getMapPane().getChildren().addAll(thePacman.getImageView());
         //visualObjects.add(thePacman);
+        for(MouvingObject mouvingObject : fantomsList){
+            getMapPane().getChildren().addAll(mouvingObject.getImageView());
+            visualObjects.add(mouvingObject);
+        }
 
         score(thePacman);
     }
