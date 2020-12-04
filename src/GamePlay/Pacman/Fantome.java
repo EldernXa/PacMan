@@ -43,7 +43,7 @@ public class Fantome extends MouvingObject {
     }
 
     public void setIA(){
-        //setRandomGoal();
+
         clearListAction();
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 0, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 1, mapPacman, pacMan));
@@ -121,7 +121,9 @@ public class Fantome extends MouvingObject {
         public int Chase ( ArrayList<Character> listOfWalls){
 
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
-            switch (bestAction(charactersFeasable)){
+            Coordinate entrance = new Coordinate(4,2);
+
+            switch (bestAction(inFrontSpawn(entrance,charactersFeasable))){
                 case 'H':
                     setLastCharacter('H');
                     int temp = 3;
@@ -436,6 +438,15 @@ public class Fantome extends MouvingObject {
 
        }
        return mapPacman.getWrongCoorFromReal(mapPacman.getRealCoord().get(indexCloser)).getPointCoordinate();
+   }
+
+   public ArrayList<Character> inFrontSpawn(Coordinate coordinate,ArrayList<Character> characters){
+
+       if (closeFakeCoordinate(getFantome()).compare(coordinate)){
+           characters.remove(0);
+
+       }
+       return characters;
    }
 
 
