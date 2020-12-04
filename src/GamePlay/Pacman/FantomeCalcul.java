@@ -52,17 +52,17 @@ public class FantomeCalcul extends Fantome{
 
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
-        if (pacMan.getNbPoints() >= 20){
+        //if (pacMan.getNbPoints() >= 20){
             if(pacMan.isSuperPacman()){
                 setGoal(coordinateScatter1);
                 }else {
                 setGoal(Transition(fantomeRouge));
                 }
 
-                }else {
+                /*}else {
                 setGoal(getFantome());
 
-             }
+             }*/
         return super.Chase(listOfWalls);
     }
 

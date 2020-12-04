@@ -362,13 +362,12 @@ public class Fantome extends MouvingObject {
     }
     public Coordinate anticipation(PacMan pacMan,int cases){
         double pas = 50.0*cases;
-        //pacMan.getCoordinate().affichageCoord();
         switch (pacMan.getDir()){
             case 0:
-                //caughtInBetween(pacMan).affichageCoord();
                 double x0 = pacMan.getCoordinate().getX() ;
                 double y0 = pacMan.getCoordinate().getY() ;
                 if(x0+ pas <= 419.0){
+
                     return   new Coordinate(x0+pas,y0);
             }
                 return   new Coordinate(x0,y0);
@@ -419,40 +418,13 @@ public class Fantome extends MouvingObject {
 
     }
     public Coordinate Transition(FantomeChasseur fantomeRouge){
-        //fantomeRouge.getFantome().affichageCoord();
-        double facteurX = mapPacman.getWrongCoorFromReal(fantomeRouge.getGameImage().getCoordinate()).getPointCoordinate().getX() -  anticipation(pacMan,1).getX();
-        double facteurY = mapPacman.getWrongCoorFromReal(fantomeRouge.getGameImage().getCoordinate()).getPointCoordinate().getY() -  anticipation(pacMan,1).getY();
-        return new Coordinate(anticipation(pacMan,1).getX()+facteurX,anticipation(pacMan,1).getY()+facteurY);
+        Coordinate coordinate = closeFakeCoordinate(fantomeRouge.getGameImage().getCoordinate());
+        Coordinate coordinate1 = closeFakeCoordinate(anticipation(pacMan,1));
+        double facteurX =  coordinate1.getX() - coordinate.getX() ;
+        double facteurY =  coordinate1.getY() - coordinate.getY() ;
+        return new Coordinate(coordinate1.getX() +facteurX,coordinate1.getY()+facteurY);
     }
 
-    /*public Coordinate closeFakeCoordinate(Coordinate coordinate){
-        double distance = 100000.0;
-        int indexCloser = 0 ;
-        for (int i = 0 ; i < mapPacman.getRealCoord().size(); i++){
-            if(getEuclidianDistance(coordinate,mapPacman.getRealCoord().get(i))< distance){
-                distance = getEuclidianDistance(coordinate,mapPacman.getRealCoord().get(i));
-                indexCloser = i;
-            }
-
-        }
-        return mapPacman.getRealCoord().get(indexCloser);
-    }*/
-
-   /* public Character priorityMove(ArrayList<Character> characters){
-        if(characters.contains('H')){
-            return 'H';
-        }
-        if(characters.contains('G')){
-            return 'G';
-        }
-        if(characters.contains('B')){
-            return 'B';
-        }
-        if(characters.contains('D')){
-            return 'D';
-        }
-    return '_';
-    }*/
    public Coordinate closeFakeCoordinate(Coordinate coordinate){
        double distance = 100000.0;
        int indexCloser = 0 ;
