@@ -81,7 +81,6 @@ public class ActionContinueFantome extends Action {
                                 setPrevious(getGameImage().getCoordinate());
                                 if(asMove()) {
                                     int temp = ((Fantome) mouvingObject).Chase(map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
-
                                     Fantome.setDirection(temp);
                                     VisualObject.removeTimeline(timeline);
                                     for (Action a : mouvingObject.getListAction()) {

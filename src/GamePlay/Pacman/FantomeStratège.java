@@ -27,6 +27,8 @@ public class FantomeStratège extends Fantome{
             super.setGoal(coordinateScatter1);
         }
         setGoal(anticipation(pacMan,2));
+        pacMan.getCoordinate().affichageCoord();
+        getGoal().affichageCoord();
         return super.Chase(listOfWalls);
     }
 
