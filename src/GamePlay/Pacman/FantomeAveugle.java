@@ -18,7 +18,6 @@ public class FantomeAveugle extends Fantome {
 
     public FantomeAveugle(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene, map, pacMan);
-        setRandomGoal();
         this.pacMan = pacMan;
         this.mapPacman = map;
 
@@ -40,7 +39,7 @@ public class FantomeAveugle extends Fantome {
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
 
-        if (pacMan.getNbPoints() >= 3 * (pacMan.getNbPointsMapMax() / 4)) {
+        //if (pacMan.getNbPoints() >= 3 * (pacMan.getNbPointsMapMax() / 4)) {
 
             if (pacMan.isSuperPacman()) {
 
@@ -56,26 +55,19 @@ public class FantomeAveugle extends Fantome {
 
 
 
-        }else {
-            super.setGoal(getFantome());
+       /* }else {
+            super.setRandomGoal();
             return super.Chase(listOfWalls);
-        }
+        }*/
 
 
     }
 
         public void isNear(){
-
-            if (getEuclidianDistanceFromPacMan(getFantome()) > 3.0 || getEuclidianDistanceFromPacMan(getFantome()) == 0.0) {
-
-                setRandomGoal();
-
-
-            } else {
-
+            if (getEuclidianDistanceFromPacMan(getFantome())<= 2.5){
                 setGoal(pacMan.getCoordinate());
-
-
+            }else{
+                setRandomGoal();
             }
 
 

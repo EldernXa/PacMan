@@ -88,18 +88,6 @@ public class Fantome extends MouvingObject {
         public double getEuclidianDistanceFromGoal (Coordinate newFantome){
 
 
-           /* for (int i = 0 ; i < mapPacman.getRealCoord().size();i++){
-                if(mapPacman.getRealCoord().get(i).compare(getGoal())){
-
-                    double xGF = Math.pow(mapPacman.getWrongCoorFromReal(getGoal()).getPointCoordinate().getX() - newFantome.getX(), 2);
-                    double yGF = Math.pow(mapPacman.getWrongCoorFromReal(getGoal()).getPointCoordinate().getY() - newFantome.getY(), 2);
-                    return Math.sqrt(xGF + yGF);
-
-                }
-            }
-
-
-           return 0;*/
             Coordinate temp = closeFakeCoordinate(getGoal());
             double xGF = Math.pow(temp.getX() - newFantome.getX(), 2);
             double yGF = Math.pow(temp.getY() - newFantome.getY(), 2);
@@ -109,23 +97,10 @@ public class Fantome extends MouvingObject {
         }
     public double getEuclidianDistanceFromPacMan (Coordinate newFantome){
 
-
-       /* for (int i = 0 ; i < mapPacman.getRealCoord().size();i++){
-            if(mapPacman.getRealCoord().get(i).compare(pacMan.getCoordinate())){
-
-                double xGF = Math.pow(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getX() - mapPacman.getWrongCoorFromReal(newFantome).getPointCoordinate().getX(), 2);
-                double yGF = Math.pow(mapPacman.getWrongCoorFromReal(pacMan.getCoordinate()).getPointCoordinate().getY() - mapPacman.getWrongCoorFromReal(newFantome).getPointCoordinate().getY(), 2);
-
-                return Math.sqrt(xGF + yGF);
-
-            }
-        }
-
-
-        return 0;*/
-        Coordinate temp = closeFakeCoordinate(pacMan.getCoordinate());
-        double xGF = Math.pow(temp.getX() - newFantome.getX(), 2);
-        double yGF = Math.pow(temp.getY() - newFantome.getY(), 2);
+        Coordinate temp = closeFakeCoordinate(pacMan.getGameImage().getCoordinate());
+        Coordinate temp1 = closeFakeCoordinate(newFantome);
+        double xGF = Math.pow(temp.getX() - temp1.getX(), 2);
+        double yGF = Math.pow(temp.getY() - temp1.getY(), 2);
         return Math.sqrt(xGF + yGF);
     }
 
