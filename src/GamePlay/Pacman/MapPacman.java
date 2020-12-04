@@ -113,9 +113,10 @@ public class MapPacman extends Map {
                 case 'S':
                     fantomsList.add(new FantomeStratège("./data/SpriteMouvement/FantomeRose/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman));
                     break;
-                /*case 'L':
-                    fantomsList.add(new FantomeCalcul("./data/SpriteMouvement/FantomeBleu/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman,));
-                    break;*/
+                case 'L':
+                    fantomsList.add(new FantomeChasseur("./data/SpriteMouvement/FantomeRouge/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman));
+                    fantomsList.add(new FantomeCalcul("./data/SpriteMouvement/FantomeBleu/",calcExactCoord(posFSPPF.getCoordinate()), getMapScene(), this,thePacman,(FantomeChasseur) fantomsList.get(0)));
+                    break;
             }
         }
     }

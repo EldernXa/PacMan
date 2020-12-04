@@ -162,7 +162,7 @@ public class ActionContinueFantome extends Action {
     }
 
     public boolean asMove(){
-        //if (validMove()){
+
             try{
                 if(!map.getWrongCoorFromReal(getGameImage().getCoordinate()).getPointCoordinate().compare(previous)){
                     return true;
@@ -173,9 +173,22 @@ public class ActionContinueFantome extends Action {
 
             }
 
-        //}
+
             return false;
 
+    }
+
+    public Coordinate closeFakeCoordinate(Coordinate coordinate){
+        double distance = 100000.0;
+        int indexCloser = 0 ;
+        for (int i = 0 ; i < map.getRealCoord().size(); i++){
+            if(((Fantome)mouvingObject).getEuclidianDistance(coordinate,map.getRealCoord().get(i))< distance){
+                distance = ((Fantome)mouvingObject).getEuclidianDistance(coordinate,map.getRealCoord().get(i));
+                indexCloser = i;
+            }
+
+        }
+        return map.getRealCoord().get(indexCloser);
     }
 
     public boolean validMove(){
