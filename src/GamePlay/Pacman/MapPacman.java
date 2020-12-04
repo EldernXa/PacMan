@@ -318,6 +318,7 @@ public class MapPacman extends Map {
 
     public void score(VisualObject visualObject){
         ScorePacman score = new ScorePacman(getStage(),visualObject);
+        score.getScore().setSpacing(getMapScene().getWidth()-100);
         getMapPane().getChildren().add(score.getScore());
 
 

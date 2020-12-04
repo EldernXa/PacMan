@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class ScorePacman implements Score {
     Label nbVies = new Label();
     Label nbPoints = new Label();
-    HBox score = new HBox(370);
+    HBox score = new HBox();
     HBox vies = new HBox(5);
     ImageViewSizePos logoCoeur = new ImageViewSizePos();
     private final PacMan pacMan;
