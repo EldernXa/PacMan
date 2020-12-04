@@ -34,7 +34,9 @@ public class FantomeChasseur extends Fantome {
             super.setGoal(coordinateScatter1);
 
         }else {
-            super.setGoal(pacMan.getGameImage().getCoordinate());
+
+                super.setGoal(pacMan.getGameImage().getCoordinate());
+
         }
 
         return super.Chase(listOfWalls);

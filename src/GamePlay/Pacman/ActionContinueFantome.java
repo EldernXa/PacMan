@@ -79,8 +79,12 @@ public class ActionContinueFantome extends Action {
                                 mouvingObject.setActualAction(this);
                                 super.doWhenEventOccur(dir);
                                 setPrevious(getGameImage().getCoordinate());
+
+
                                 if(asMove()) {
+
                                     int temp = ((Fantome) mouvingObject).Chase(map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls());
+
                                     Fantome.setDirection(temp);
                                     VisualObject.removeTimeline(timeline);
                                     for (Action a : mouvingObject.getListAction()) {
@@ -178,18 +182,7 @@ public class ActionContinueFantome extends Action {
 
     }
 
-    public Coordinate closeFakeCoordinate(Coordinate coordinate){
-        double distance = 100000.0;
-        int indexCloser = 0 ;
-        for (int i = 0 ; i < map.getRealCoord().size(); i++){
-            if(((Fantome)mouvingObject).getEuclidianDistance(coordinate,map.getRealCoord().get(i))< distance){
-                distance = ((Fantome)mouvingObject).getEuclidianDistance(coordinate,map.getRealCoord().get(i));
-                indexCloser = i;
-            }
 
-        }
-        return map.getRealCoord().get(indexCloser);
-    }
 
     public boolean validMove(){
         for (int i = 0 ; i < map.getRealCoord().size(); i++){
