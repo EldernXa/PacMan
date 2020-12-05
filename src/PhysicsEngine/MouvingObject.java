@@ -79,7 +79,8 @@ public abstract class MouvingObject extends VisualObject {
     }
 
     public void nextImage(int dir){
-        super.getGameImage().setImage(animation.nextImage(dir));
+        if(animation.verifAnimation(dir))
+            super.getGameImage().setImage(animation.nextImage(dir));
     }
 
     public void previousImage(int dir){

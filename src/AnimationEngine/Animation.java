@@ -38,12 +38,19 @@ public class Animation {
     }
 
     public Image nextImage(int dir){
-        return listImage.get(dir).get(++ind%(listImage.get(dir).size()));
+        if(listImage.get(dir).size()!=0)
+            ind = (ind+1)%listImage.get(dir).size();
+        return listImage.get(dir).get(ind);
     }
 
+    public boolean verifAnimation(int dir){
+        return listImage.get(dir).size()!=0;
+    }
 
     public Image previousImage(int dir){
-        return listImage.get(dir).get(Math.abs(--ind)%(listImage.get(dir).size()));
+        if(listImage.get(dir).size()!=0)
+            ind = (Math.abs(ind-1)%(listImage.get(dir).size()));
+        return listImage.get(dir).get(ind);
     }
 
 
