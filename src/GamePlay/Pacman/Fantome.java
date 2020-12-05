@@ -49,6 +49,7 @@ public class Fantome extends MouvingObject {
 
     public void setIA(){
         clearListAction();
+        isPlayable = false;
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 0, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 1, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 2, mapPacman, pacMan));
