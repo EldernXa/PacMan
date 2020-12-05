@@ -22,12 +22,13 @@ public abstract class Map {
     private double longueurMur;
     static public Difficulte diff;
     private static final ArrayList<EventHandler<KeyEvent>> listEventHandler = new ArrayList<>();
+    private static boolean multi;
 
     public Map(){
     }
 
 
-    public Map(Stage stage, String mapFolderPath,double carreaux, double epaisseurMur, double longueurMur){
+    public Map(Stage stage, String mapFolderPath,double carreaux, double epaisseurMur, double longueurMur, boolean multi){
         this.carreaux = carreaux;
         this.epaisseurMur = epaisseurMur;
         this.longueurMur = longueurMur;
@@ -39,8 +40,9 @@ public abstract class Map {
         stage.setScene(mapScene);
         stage.centerOnScreen();
         stage.sizeToScene();
+        this.multi = multi;
     }
-    public Map(Stage stage, Difficulte difficulte,double carreaux, double epaisseurMur, double longueurMur){
+    public Map(Stage stage, Difficulte difficulte,double carreaux, double epaisseurMur, double longueurMur, boolean multi){
         diff = difficulte;
         String mapFolderPath = "./data/Map/" + diff.getName() + "_";
         this.carreaux = carreaux;
@@ -54,6 +56,7 @@ public abstract class Map {
         stage.setScene(mapScene);
         stage.centerOnScreen();
         stage.sizeToScene();
+        this.multi = multi;
     }
 
     public static void addEventHandler(EventHandler<KeyEvent> eventHandler){
@@ -122,5 +125,7 @@ public abstract class Map {
         this.stage = stage;
     }
 
-
+    public static boolean isMulti() {
+        return multi;
+    }
 }

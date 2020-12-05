@@ -39,7 +39,7 @@ public class ConclusionPacman extends Conclusion {
     }
 
     public Map initMap(Stage stageJeu){
-        return new MapPacman(stageJeu, "./data/Map/"+Map.diff.getName()+"_");
+        return new MapPacman(stageJeu, "./data/Map/"+Map.diff.getName()+"_",Map.isMulti());
     }
 
     /*public void clickRetourDiff(Stage stageJeu,Game game,MenuChoixDuJeu menuChoixDuJeu){

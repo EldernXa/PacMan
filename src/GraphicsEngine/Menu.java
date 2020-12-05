@@ -45,7 +45,7 @@ public class Menu {
             stage.setScene(menuDuJeu.getMenuDuJeuScene());
         }
         else if (menuLevel)
-            menuForLevel = new MenuChoixDifficulte(stage, game, scene);
+            menuForLevel = new MenuChoixDifficulte(stage, game, scene,false);
         else {
             String nameFileMap = "Map" + game.getName();
             try {

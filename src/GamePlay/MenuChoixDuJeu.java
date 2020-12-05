@@ -144,7 +144,7 @@ public class MenuChoixDuJeu {
                             notYet(currentGame, Screen.getPrimary().getVisualBounds().getWidth(), Screen.getPrimary().getVisualBounds().getHeight());
                         }else{
 
-                            MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, currentGame, menuScene);
+                            MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, currentGame, menuScene,false);
                         }
                     }else{
                         if(!verifGameFinish(currentGame)){

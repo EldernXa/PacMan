@@ -30,13 +30,14 @@ public class MenuChoixDifficulte {
     private final Scene sceneBack;
     private final Game game;
     private final Stage stage;
+    private boolean multi;
 
 
 
-    public MenuChoixDifficulte(Stage stage, Game game, Scene scenep) {
+    public MenuChoixDifficulte(Stage stage, Game game, Scene scenep, boolean multi) {
         this.stage = stage;
         this.game= game;
-
+        this.multi = multi;
         scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         sceneBack= scenep;
         ImageViewSizePos fond = new ImageViewSizePos("./data/Logos/"+ game.getName() + "menudujeu.jpg",scene.getWidth(),scene.getHeight());
@@ -83,7 +84,7 @@ public class MenuChoixDifficulte {
                     if(Musique.mediaPlayer!=null)
                         Musique.mediaPlayer.stop();
                     //MapPacman currentMap = new MapPacman(stage,"./data/Map/" + difficulte.getName() + "_");
-                    MapPacman currentMap = new MapPacman(stage, difficulte );
+                    MapPacman currentMap = new MapPacman(stage, difficulte,multi );
 
                 }
             });

@@ -26,8 +26,9 @@ public class MapPacman extends Map {
     private ArrayList<MouvingObject> fantomsList = new ArrayList<>();
 
 
-    public MapPacman(Stage stage, String mapFolderPath){
-        super(stage, mapFolderPath,32,18,68);
+
+    public MapPacman(Stage stage, String mapFolderPath,boolean multi){
+        super(stage, mapFolderPath,32,18,68,multi);
         this.pacmanInitCoord = new Coordinate((getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur()))+1, 8*getEpaisseurMur()+7*(getLongueurMur()-2*getEpaisseurMur()) +1);
         fillListPointsCoord();
         fillListWithRealCoord();
@@ -51,8 +52,8 @@ public class MapPacman extends Map {
 
         score(thePacman);
     }
-    public MapPacman(Stage stage, Difficulte difficulte){
-        super(stage, difficulte,32,18,68);
+    public MapPacman(Stage stage, Difficulte difficulte, boolean multi){
+        super(stage, difficulte,32,18,68,multi);
 
         this.pacmanInitCoord = new Coordinate((getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur()))+1, 8*getEpaisseurMur()+7*(getLongueurMur()-2*getEpaisseurMur()) +1);
         fillListPointsCoord();
@@ -70,6 +71,9 @@ public class MapPacman extends Map {
         for(MouvingObject mouvingObject : fantomsList){
             getMapPane().getChildren().addAll(mouvingObject.getImageView());
             visualObjects.add(mouvingObject);
+        }
+        if(multi){
+            ((Fantome) fantomsList.get(0)).setJ();
         }
         //visualObjects.add(thePacman);
         score(thePacman);

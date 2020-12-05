@@ -67,6 +67,7 @@ public class MenuDuJeu {
         clickRetourner(sceneBack);
         clickRevenir();
         clickSingle();
+        clickMulti();
         exitRevenir();
 
         pane.getChildren().add(buttonContainers);
@@ -97,7 +98,7 @@ public class MenuDuJeu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(Menu.getMenuLevel() || !verifGameFinish(jeu)) {
-                    MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, jeu, menuDuJeuScene);
+                    MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, jeu, menuDuJeuScene,false);
                     diff(stage, menuChoixDifficulte,revenir,screenWidth,screenHeight);
                 }
                 else{
@@ -106,11 +107,36 @@ public class MenuDuJeu {
                         Musique.mediaPlayer.stop();
                     try {
                         Class <?>classMap = Class.forName("GamePlay." + jeu.getName() + "." + nameFileMap);
-                        Class<?>[] parameters = new Class[]{Stage.class, String.class};
+                        Class<?>[] parameters = new Class[]{Stage.class, String.class, Boolean.class};
                         Constructor<?> constructor = classMap.getConstructor(parameters);
-                        Map map = (Map)constructor.newInstance(stage, "./data/Map/");
+                        Map map = (Map)constructor.newInstance(stage, "./data/Map/", false);
                         stage.setScene(map.getMapScene());
-                        System.out.println("test");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    public void clickMulti(){
+        multiPlayer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(Menu.getMenuLevel() || !verifGameFinish(jeu)) {
+                    MenuChoixDifficulte menuChoixDifficulte = new MenuChoixDifficulte(stage, jeu, menuDuJeuScene,true);
+                    diff(stage, menuChoixDifficulte,revenir,screenWidth,screenHeight);
+                }
+                else{
+                    String nameFileMap = "Map" + jeu.getName();
+                    if(Musique.mediaPlayer!=null)
+                        Musique.mediaPlayer.stop();
+                    try {
+                        Class <?>classMap = Class.forName("GamePlay." + jeu.getName() + "." + nameFileMap);
+                        Class<?>[] parameters = new Class[]{Stage.class, String.class,Boolean.class};
+                        Constructor<?> constructor = classMap.getConstructor(parameters);
+                        Map map = (Map)constructor.newInstance(stage, "./data/Map/",true);
+                        stage.setScene(map.getMapScene());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
