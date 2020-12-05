@@ -4,6 +4,7 @@ import GraphicsEngine.Coordinate;
 import GameEngine.Game;
 import GraphicsEngine.ImageViewSizePos;
 import ReadFile.ReadFileCommandes;
+import ReadFile.ReadFileOptions;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,22 +31,30 @@ public class MenuParametresCommandes {
     private final ImageViewSizePos revenir = new ImageViewSizePos("./data/Logos/return.png",50,50,new Coordinate(2,2));
     ReadFileCommandes readFileCommandes;
     Label label1 = new Label("Cliquez sur un bouton et appuyez sur une touche.");
-
+    ReadFileOptions readFileOptions;
 
 
     public MenuParametresCommandes(Stage stage,Scene sceneBack, Game game) {
         scene.getStylesheets().add(new File("./ressources/style.css").toURI().toString());
         pane.setStyle("-fx-background-color: lightgray");
         readFileCommandes = new ReadFileCommandes("./data/Controles/" +game.getName() +"/controles.txt" ,true);
+        readFileOptions = new ReadFileOptions(game.getName());
 
-        label1.setFont(Font.font("Arial",20));
-        Label titre = new Label("Player 1");
-        titre.setFont(Font.font("Arial",30));
-        vboxSolo.getChildren().addAll(titre);
+
+        if(readFileOptions.isState("single")){
+            Label titre = new Label("Player 1");
+            titre.setFont(Font.font("Arial",30));
+            vboxSolo.getChildren().addAll(titre);
+        }
+
+
         setCommandes(readFileCommandes.getDirectionSolo(),readFileCommandes.getToucheSolo(),true);
-        Label titre1 = new Label("Player 2");
-        titre1.setFont(Font.font("Arial",30));
-        vboxMulti.getChildren().addAll(titre1);
+        if(readFileOptions.isState("multi")){
+            Label titre1 = new Label("Player 2");
+            titre1.setFont(Font.font("Arial",30));
+            vboxMulti.getChildren().addAll(titre1);
+        }
+
 
         setCommandes(readFileCommandes.getDirectionMulti(),readFileCommandes.getToucheMulti(),false);
         vbox.getChildren().addAll(vboxSolo,vboxMulti);
@@ -54,6 +63,11 @@ public class MenuParametresCommandes {
         pane.getChildren().add(revenir.getImageView());
         pane.getChildren().add(label1);
         StackPane.setAlignment(revenir.getImageView(),Pos.TOP_LEFT);
+
+        if(!readFileOptions.isState("multi") && !readFileOptions.isState("single")){
+            label1.setText("Ce jeu n'est pas encore prêt");
+        }
+        label1.setFont(Font.font("Arial",20));
         label1.setAlignment(Pos.CENTER);
         StackPane.setAlignment(label1,Pos.CENTER);
     }
