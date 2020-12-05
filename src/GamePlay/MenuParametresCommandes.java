@@ -1,7 +1,7 @@
 package GamePlay;
 
 import GraphicsEngine.Coordinate;
-import GraphicsEngine.Game;
+import GameEngine.Game;
 import GraphicsEngine.ImageViewSizePos;
 import ReadFile.ReadFileCommandes;
 import javafx.event.EventHandler;

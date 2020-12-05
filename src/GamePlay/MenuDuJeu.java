@@ -1,4 +1,5 @@
 package GamePlay;
+import GameEngine.Game;
 import GraphicsEngine.*;
 import MusicEngine.Musique;
 import ReadFile.ReadFileOptions;
@@ -20,9 +21,6 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
-import java.util.Objects;
-
-import static GraphicsEngine.Menu.getMenuLevel;
 
 public class MenuDuJeu {
     private final StackPane pane = new StackPane();

@@ -1,5 +1,6 @@
-package GraphicsEngine;
+package GameEngine;
 
+import GraphicsEngine.ImageViewSizePos;
 import MusicEngine.Musique;
 
 import java.io.File;

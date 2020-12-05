@@ -1,5 +1,6 @@
 package GraphicsEngine;
 
+import GameEngine.Game;
 import GamePlay.MenuChoixDifficulte;
 import GamePlay.MenuChoixDuJeu;
 import GamePlay.MenuDuJeu;
@@ -46,7 +47,7 @@ public class Menu {
         else if (menuLevel)
             menuForLevel = new MenuChoixDifficulte(stage, game, scene);
         else {
-            String nameFileMap = "Map" + game.name;
+            String nameFileMap = "Map" + game.getName();
             try {
                 Class <?>classMap = Class.forName("GamePlay." + game.getName() + "." + nameFileMap);
                 Class<?>[] parameters = new Class[]{Stage.class, String.class};

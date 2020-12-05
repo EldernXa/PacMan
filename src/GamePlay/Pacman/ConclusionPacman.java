@@ -1,5 +1,6 @@
 package GamePlay.Pacman;
 
+import GameEngine.Game;
 import GraphicsEngine.*;
 import GraphicsEngine.Map;
 import MusicEngine.Musique;

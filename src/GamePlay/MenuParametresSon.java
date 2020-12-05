@@ -1,7 +1,7 @@
 package GamePlay;
 
 import GraphicsEngine.Coordinate;
-import GraphicsEngine.Game;
+import GameEngine.Game;
 import GraphicsEngine.ImageViewSizePos;
 import MusicEngine.Musique;
 import javafx.beans.InvalidationListener;
@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;

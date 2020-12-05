@@ -1,4 +1,4 @@
-package GraphicsEngine;
+package GameEngine;
 
 import javafx.scene.Scene;
 

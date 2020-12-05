@@ -1,8 +1,8 @@
 package GraphicsEngine;
 
+import GameEngine.Difficulte;
 import ReadFile.ReadFileMap;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;

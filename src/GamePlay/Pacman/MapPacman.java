@@ -1,5 +1,6 @@
 package GamePlay.Pacman;
 
+import GameEngine.Difficulte;
 import GraphicsEngine.*;
 import PhysicsEngine.MouvingObject;
 import PhysicsEngine.UnmouvingObj;

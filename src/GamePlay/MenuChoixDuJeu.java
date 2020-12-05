@@ -1,7 +1,7 @@
 package GamePlay;
 
 import GraphicsEngine.Coordinate;
-import GraphicsEngine.Game;
+import GameEngine.Game;
 import GraphicsEngine.ImageViewSizePos;
 import GraphicsEngine.Menu;
 import MusicEngine.Musique;
@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -27,9 +26,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class MenuChoixDuJeu {

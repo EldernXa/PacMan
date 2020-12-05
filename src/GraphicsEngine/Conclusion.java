@@ -1,5 +1,6 @@
 package GraphicsEngine;
 
+import GameEngine.Game;
 import GamePlay.MenuChoixDuJeu;
 import GamePlay.MenuDuJeu;
 import javafx.application.Platform;
