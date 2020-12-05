@@ -19,9 +19,11 @@ public class Fantome extends MouvingObject {
     private static int direction;
     private MapPacman mapPacman;
     private final Scene scene;
+    private boolean isPlayable;
 
     public Fantome(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene);
+        isPlayable = false;
         this.scene = scene;
         this.mapPacman = map;
         this.pacMan = pacMan;
@@ -29,7 +31,11 @@ public class Fantome extends MouvingObject {
         setIA();
     }
 
+    public boolean getPlayable(){
+        return isPlayable;
+    }
     public void setJ(){
+        isPlayable = true;
         clearListAction();
         ReadFileCommandes pacmanControle = new ReadFileCommandes("./data/Controles/Pacman/controles.txt",true);
         for(int i = 0; i<pacmanControle.getDirectionMulti().size(); i++){
@@ -42,7 +48,6 @@ public class Fantome extends MouvingObject {
     }
 
     public void setIA(){
-
         clearListAction();
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 0, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 1, mapPacman, pacMan));

@@ -29,8 +29,10 @@ public abstract class Conclusion {
     private final Label titre;
     private final Stage stage;
     private final Button exit;
+    private final boolean bool;
 
-    public Conclusion(Stage stageJeu){
+    public Conclusion(Stage stageJeu, boolean bool){
+        this.bool = bool;
         pane = new StackPane();
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/4, Screen.getPrimary().getVisualBounds().getHeight()/4);
         rejouer = new Button("REJOUER");
@@ -57,6 +59,10 @@ public abstract class Conclusion {
         clickExit();
         stage.setScene(scene);
         stage.show();
+    }
+
+    public boolean getBool(){
+        return bool;
     }
 
     public void labelForGame(){

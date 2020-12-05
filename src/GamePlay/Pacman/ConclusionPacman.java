@@ -16,12 +16,10 @@ import java.util.Objects;
  */
 public class ConclusionPacman extends Conclusion {
 
-    private final boolean bool;
     private final int nbPoints;
 
     public ConclusionPacman(Stage stageJeu, boolean bool,int nbPoints, PacMan pacMan){
-        super(stageJeu);
-        this.bool = bool;
+        super(stageJeu, bool);
         this.nbPoints = nbPoints;
         super.labelForGame();
     }
@@ -31,7 +29,7 @@ public class ConclusionPacman extends Conclusion {
     }
 
     public void initLabel(Label lbl){
-        if(bool){
+        if(getBool()){
             lbl.setText("Vous avez gagné ! \nVous avez obtenu : " + getNbPoints()+" Points.");
             lbl.setTextFill(Color.GREEN);
         }else{
