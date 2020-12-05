@@ -22,6 +22,7 @@ public class ConclusionPacman extends Conclusion {
         super(stageJeu, bool);
         this.nbPoints = nbPoints;
         super.labelForGame();
+        super.nextLevel(stageJeu);
     }
 
     public int getNbPoints(){
@@ -41,6 +42,8 @@ public class ConclusionPacman extends Conclusion {
     public Map initMap(Stage stageJeu){
         return new MapPacman(stageJeu, "./data/Map/"+Map.diff.getName()+"_",Map.isMulti());
     }
+
+
 
     /*public void clickRetourDiff(Stage stageJeu,Game game,MenuChoixDuJeu menuChoixDuJeu){
         retourDiff.setOnMouseClicked(new EventHandler<MouseEvent>() {

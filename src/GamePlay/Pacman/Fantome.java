@@ -320,6 +320,7 @@ public class Fantome extends MouvingObject {
             }
             else {
                 pacman.death();
+                death();
             }
 
         }

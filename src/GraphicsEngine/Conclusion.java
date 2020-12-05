@@ -1,5 +1,6 @@
 package GraphicsEngine;
 
+import GameEngine.Difficulte;
 import GameEngine.Game;
 import GamePlay.MenuChoixDuJeu;
 import GamePlay.MenuDuJeu;
@@ -22,6 +23,7 @@ public abstract class Conclusion {
     private final StackPane pane;
     private final Scene scene;
     private final Button rejouer;
+    private final Button nextLevel;
     private final Button retourMenuChoix;
     private final Button retourMenu;
     private final HBox hbox;
@@ -36,6 +38,7 @@ public abstract class Conclusion {
         pane = new StackPane();
         scene = new Scene(pane, Screen.getPrimary().getVisualBounds().getWidth()/4, Screen.getPrimary().getVisualBounds().getHeight()/4);
         rejouer = new Button("REJOUER");
+        nextLevel = new Button("NIVEAU SUIVANT");
         retourMenuChoix = new Button("CHOIX DU JEU");
         retourMenu = new Button("MENU DU JEU");
         hbox = new HBox(10);
@@ -127,6 +130,32 @@ public abstract class Conclusion {
             stage.close();
             Map.getVisualObjects().clear();
             Map map = initMap(stageJeu);
+        });
+    }
+
+    public void nextLevel(Stage stageJeu){
+
+        Game game = initGame();
+        int indice = 0;
+        for(int i = 0;i < game.getListDifficultes().size();i ++){
+            if(Map.diff.getName().compareTo(game.getListDifficultes().get(i).getName()) == 0 ){
+                indice = i;
+            }
+        }
+
+        if(indice < game.getListDifficultes().size()-1 && bool){
+            hbox.getChildren().add(nextLevel);
+        }
+
+        int finalIndice = indice;
+        nextLevel.setOnMouseClicked(mouseEvent -> {
+            stage.close();
+            Map.getVisualObjects().clear();
+            Map.diff = game.getListDifficultes().get(finalIndice +1);
+            Map map = initMap(stageJeu);
+
+
+
         });
     }
 
