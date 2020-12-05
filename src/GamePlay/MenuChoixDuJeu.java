@@ -154,9 +154,9 @@ public class MenuChoixDuJeu {
                             try {
                                 Musique.mediaPlayer.stop();
                                 Class<?> classMap = Class.forName("GamePlay." + currentGame.getName() + "." + nameFileMap);
-                                Class<?>[] parameters = new Class[]{Stage.class, String.class};
+                                Class<?>[] parameters = new Class[]{Stage.class, String.class, boolean.class};
                                 Constructor<?> constructor = classMap.getConstructor(parameters);
-                                constructor.newInstance(stage, "./data/Map/");
+                                constructor.newInstance(stage, "./data/Map/", false);
 
                             } catch (Exception e) {
                                 e.printStackTrace();

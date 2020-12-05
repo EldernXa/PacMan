@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
 import java.util.LinkedList;
+import java.util.Locale;
 
 
 public class ActionContinue extends Action{
@@ -18,7 +19,7 @@ public class ActionContinue extends Action{
     private Timeline timeline;
     private int indTimeline;
     private final MouvingObject mouvingObject;
-    private final LinkedList<KeyCode> listKeyEvent;
+    private final LinkedList<String> listKeyEvent;
 
     public ActionContinue(Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject){
         super(scene, carac, x, y, dir, nameAction, mouvingObject);
@@ -104,7 +105,6 @@ public class ActionContinue extends Action{
     public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
         timeline.getKeyFrames().clear();
-        //VisualObject.removeTimeline(timeline);
         VisualObject.startTimelineParallel();
         mouvingObject.setActualAction(null);
         mouvingObject.setActionNext(null);
@@ -112,8 +112,8 @@ public class ActionContinue extends Action{
 
     @Override
     public void eventAppear(KeyEvent keyEvent, String carac){
-        if(!listKeyEvent.contains(keyEvent.getCode())){
-            listKeyEvent.push(keyEvent.getCode());
+        if(!listKeyEvent.contains(keyEvent.getCode().getChar().toLowerCase()) && verif(keyEvent, carac)){
+            listKeyEvent.push(keyEvent.getCode().getChar().toLowerCase());
             super.eventAppear(keyEvent, carac);
         }
     }
@@ -122,7 +122,8 @@ public class ActionContinue extends Action{
     public void runEvent(Scene scene, String carac, int dir){
         super.runEvent(scene, carac, dir);
         scene.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> {
-            listKeyEvent.remove(keyEvent.getCode());
+            if(verif(keyEvent, carac))
+                listKeyEvent.remove(keyEvent.getCode().getChar().toLowerCase());
         });
     }
 

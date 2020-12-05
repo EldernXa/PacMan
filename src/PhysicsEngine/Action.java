@@ -22,6 +22,7 @@ public class Action {
     private final Scene scene;
     private final String carac;
     private EventHandler<KeyEvent> eventHandler;
+    private boolean start = false;
 
 
     public Action(Scene scene, String carac, double x, double y, int dir, String nameAction, MouvingObject mouvingObject){
@@ -100,10 +101,18 @@ public class Action {
         Map.addEventHandler(eventHandler);
         scene.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler);
     }
+
     public void runEvent (Scene scene,int dir){
         scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
-            eventAppear(keyEvent,"");
+            if(!start) {
+                eventAppear(keyEvent, "");
+                start = true;
+            }
         });
+    }
+
+    public boolean verif(KeyEvent keyEvent, String carac){
+        return keyEvent.getCode().getChar().toLowerCase().compareTo(carac.toLowerCase())==0;
     }
 
     public void eventAppear(KeyEvent keyEvent, String carac){

@@ -27,7 +27,7 @@ public class MapPacman extends Map {
 
 
 
-    public MapPacman(Stage stage, String mapFolderPath,boolean multi){
+    public MapPacman(Stage stage, String mapFolderPath, boolean multi){
         super(stage, mapFolderPath,32,18,68,multi);
         this.pacmanInitCoord = new Coordinate((getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur()))+1, 8*getEpaisseurMur()+7*(getLongueurMur()-2*getEpaisseurMur()) +1);
         fillListPointsCoord();

@@ -107,7 +107,7 @@ public class MenuDuJeu {
                         Musique.mediaPlayer.stop();
                     try {
                         Class <?>classMap = Class.forName("GamePlay." + jeu.getName() + "." + nameFileMap);
-                        Class<?>[] parameters = new Class[]{Stage.class, String.class, Boolean.class};
+                        Class<?>[] parameters = new Class[]{Stage.class, String.class, boolean.class};
                         Constructor<?> constructor = classMap.getConstructor(parameters);
                         Map map = (Map)constructor.newInstance(stage, "./data/Map/", false);
                         stage.setScene(map.getMapScene());
@@ -133,7 +133,7 @@ public class MenuDuJeu {
                         Musique.mediaPlayer.stop();
                     try {
                         Class <?>classMap = Class.forName("GamePlay." + jeu.getName() + "." + nameFileMap);
-                        Class<?>[] parameters = new Class[]{Stage.class, String.class,Boolean.class};
+                        Class<?>[] parameters = new Class[]{Stage.class, String.class, boolean.class};
                         Constructor<?> constructor = classMap.getConstructor(parameters);
                         Map map = (Map)constructor.newInstance(stage, "./data/Map/",true);
                         stage.setScene(map.getMapScene());

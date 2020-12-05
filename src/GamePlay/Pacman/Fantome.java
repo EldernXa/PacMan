@@ -1,13 +1,13 @@
 package GamePlay.Pacman;
-    import GraphicsEngine.*;
+import GraphicsEngine.*;
 
 
-    import PhysicsEngine.ActionContinue;
-    import PhysicsEngine.MouvingObject;
-    import ReadFile.ReadFileCommandes;
-    import javafx.scene.Scene;
+import PhysicsEngine.ActionContinue;
+import PhysicsEngine.MouvingObject;
+import ReadFile.ReadFileCommandes;
+import javafx.scene.Scene;
 
-    import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Fantome extends MouvingObject {
