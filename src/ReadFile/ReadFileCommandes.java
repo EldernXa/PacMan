@@ -34,10 +34,7 @@ public class ReadFileCommandes {
             read();
 
         } catch (IOException e) {
-            direction = null;
-            touche = null;
-            xCoord = null;
-            yCoord = null;
+
         }
     }
 
