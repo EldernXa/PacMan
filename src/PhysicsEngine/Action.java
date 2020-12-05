@@ -168,10 +168,11 @@ public class Action {
 
     public boolean collision (VisualObject a){
         for(VisualObject v : Map.visualObjects){
-                if(intersect(a, v)) {
+            if(a!=v) {
+                if (intersect(a, v)) {
                     return true;
                 }
-
+            }
         }
         return false;
     }

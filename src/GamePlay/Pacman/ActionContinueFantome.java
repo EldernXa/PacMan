@@ -31,8 +31,6 @@ public class ActionContinueFantome extends Action {
         setPacMan(pacMan);
         //doWhenEventOccur(dir);
 
-
-
     }
 
     public void setPacMan(PacMan pacMan) {

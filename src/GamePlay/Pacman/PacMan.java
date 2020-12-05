@@ -92,10 +92,6 @@ public class PacMan extends MouvingObject {
 
     }
 
-    public boolean isSuperPacMan(){
-        return superPacman;
-    }
-
     public Coordinate getCoordinate() {
         return coordinate;
     }
@@ -120,12 +116,13 @@ public class PacMan extends MouvingObject {
      */
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
-        if(visualObjects!=null && visualObjects.getClass()==Fantome.class){
+        if(visualObjects!=null && (visualObjects.getClass()==Fantome.class||visualObjects.getClass().getGenericSuperclass()==Fantome.class)){
             Fantome fantome = ((Fantome) visualObjects);
             if(isSuperPacman()){
                 fantome.death();
             }
             else {
+                fantome.death();
                 death();
             }
 
@@ -182,6 +179,7 @@ public class PacMan extends MouvingObject {
         for(VisualObject v : Map.visualObjects){
             if(v.getClass().getGenericSuperclass() == Fantome.class){
                 ((Fantome)v).changeSpriteAnimation("./data/SpriteMouvement/FantomePeur/");
+                ((Fantome)v).initAnimation();
             }
         }
         new Thread(() -> {
@@ -195,6 +193,7 @@ public class PacMan extends MouvingObject {
             for(VisualObject v : Map.getVisualObjects()){
                 if(v.getClass().getGenericSuperclass() == Fantome.class){
                     ((Fantome)v).initSpriteAnimation();
+                    ((Fantome)v).initAnimation();
                 }
             }
         }).start();

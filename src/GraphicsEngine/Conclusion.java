@@ -142,8 +142,8 @@ public abstract class Conclusion {
                 indice = i;
             }
         }
-
         if(indice < game.getListDifficultes().size()-1 && bool){
+            System.out.println("mmm");
             hbox.getChildren().add(nextLevel);
         }
 

@@ -1,6 +1,7 @@
 package GamePlay.Pacman;
 
 import GameEngine.Difficulte;
+import GameEngine.Game;
 import GraphicsEngine.*;
 import PhysicsEngine.MouvingObject;
 import PhysicsEngine.UnmouvingObj;
@@ -30,6 +31,14 @@ public class MapPacman extends Map {
     public MapPacman(Stage stage, String mapFolderPath, boolean multi){
         super(stage, mapFolderPath,32,18,68,multi);
         this.pacmanInitCoord = new Coordinate((getEpaisseurMur()*5+4*(getLongueurMur()-2*getEpaisseurMur()))+1, 8*getEpaisseurMur()+7*(getLongueurMur()-2*getEpaisseurMur()) +1);
+        String[] tabString = mapFolderPath.split("/");
+        String value = tabString[3].split("_")[0];
+        Game game = new Game("Pacman");
+        for(Difficulte d : game.getListDifficultes()){
+            if(d.getName().equals(value))
+                diff = d;
+        }
+        System.out.println("--- " + diff.getName());
         fillListPointsCoord();
         fillListWithRealCoord();
         initPoints();
