@@ -244,7 +244,11 @@ public class MenuDuJeu {
         retouner.setPrefWidth(buttonContainers.getPrefWidth());
         hbox.setPrefWidth(buttonContainers.getPrefWidth());
         hbox.setAlignment(Pos.CENTER);
-        buttonContainers.getChildren().addAll(singlePlayer,multiPlayer);
+        buttonContainers.getChildren().add(singlePlayer);
+
+        if(readFileOptions.isState("multi"))
+            buttonContainers.getChildren().add(multiPlayer);
+
         if(Menu.getMenuChoiceGame())
             buttonContainers.getChildren().add(retouner);
         buttonContainers.getChildren().add(hbox);
