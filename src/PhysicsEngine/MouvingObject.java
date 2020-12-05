@@ -41,6 +41,14 @@ public abstract class MouvingObject extends VisualObject {
         super.getGameImage().setImage(animation.getInitImage());
     }
 
+    public void changeSpriteAnimation(String path){
+        animation.changeAnimation(path);
+    }
+
+    public void initSpriteAnimation(){
+        animation.initAnimation();
+    }
+
     public void setActionNext(Action action){
         actionNext = action;
     }

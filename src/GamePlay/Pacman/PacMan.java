@@ -5,10 +5,13 @@ import PhysicsEngine.Action;
 import PhysicsEngine.ActionContinue;
 import PhysicsEngine.MouvingObject;
 import ReadFile.ReadFileCommandes;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.concurrent.TimeUnit;
 
@@ -87,6 +90,10 @@ public class PacMan extends MouvingObject {
         diminueVies();
         super.initAnimation();
 
+    }
+
+    public boolean isSuperPacMan(){
+        return superPacman;
     }
 
     public Coordinate getCoordinate() {
@@ -171,16 +178,24 @@ public class PacMan extends MouvingObject {
      */
     public void superPacman(){
         setSuperPacman(true);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //mettre la nouvelle image du superpacman
-                try {
-                    TimeUnit.SECONDS.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+
+        for(VisualObject v : Map.visualObjects){
+            if(v.getClass().getGenericSuperclass() == Fantome.class){
+                ((Fantome)v).changeSpriteAnimation("./data/SpriteMouvement/FantomePeur/");
+            }
+        }
+        new Thread(() -> {
+            //mettre la nouvelle image du superpacman
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            setSuperPacman(false);
+            for(VisualObject v : Map.getVisualObjects()){
+                if(v.getClass().getGenericSuperclass() == Fantome.class){
+                    ((Fantome)v).initSpriteAnimation();
                 }
-                setSuperPacman(false);
             }
         }).start();
 

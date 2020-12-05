@@ -10,9 +10,11 @@ public class Animation {
 
     private final ArrayList<ArrayList<Image>> listImage;
     private int ind;
+    private final String initPath;
 
     public Animation(String path) {
         ind = 0;
+        initPath = path;
         listImage = new ArrayList<>();
         changeAnimation(path);
     }
@@ -29,6 +31,10 @@ public class Animation {
                 listImage.get(Integer.parseInt(f.getName().split("sprite")[1])).add(new Image(fImage.toURI().toString()));
             }
         }
+    }
+
+    public void initAnimation(){
+        changeAnimation(initPath);
     }
 
     public Image nextImage(int dir){

@@ -26,7 +26,6 @@ public class Fantome extends MouvingObject {
         this.mapPacman = map;
         this.pacMan = pacMan;
         this.fantome = getGameImage().getCoordinate();
-        //setJ();
         setIA();
     }
 
