@@ -61,22 +61,34 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @param imageViewSizePos nouvelle image.
+     */
     public void setImage(ImageViewSizePos imageViewSizePos) {
         this.imageJeu.getImageView().setImage(imageViewSizePos.getImageView().getImage());
     }
 
-    public void setListDifficultes(ArrayList<Difficulte> listDifficultes) {
-        this.listDifficultes = listDifficultes;
-    }
-
+    /**
+     *
+     * @return la liste des difficultés.
+     */
     public ArrayList<Difficulte> getListDifficultes() {
         return listDifficultes;
     }
 
+    /**
+     *
+     * @return l'image du jeu.
+     */
     public ImageViewSizePos getImageJeu() {
         return imageJeu;
     }
 
+    /**
+     *
+     * @return la liste des musiques.
+     */
     public ArrayList<Musique> getListMusiques() {
         return listMusiques;
     }
@@ -85,6 +97,10 @@ public class Game {
         this.listMusiques = listMusiques;
     }
 
+    /**
+     *
+     * @param imageJeu nouvelle image.
+     */
     public void setImageJeu(ImageViewSizePos imageJeu) {
         this.imageJeu = imageJeu;
     }
