@@ -22,6 +22,16 @@ public class ActionContinueFantome extends Action {
     private int dir;
     private Coordinate previous;
 
+
+    /**
+     *
+     * @param scene permet de déclencher l'évènement pour l'action.
+     * @param tps la durée de l'animation (tous les tps faire quelque chose).
+     * @param mouvingObject  image qui tente de se déplacer
+     * @param dir la direction du fantôme
+     * @param map la carte correspondante au niveau
+     * @param pacMan le pacman
+     */
     public ActionContinueFantome(GameImage image, Scene scene, float tps, MouvingObject mouvingObject, int dir,MapPacman map,PacMan pacMan){
         super(scene, mouvingObject,dir);
         this.tps = tps;
@@ -33,17 +43,35 @@ public class ActionContinueFantome extends Action {
 
     }
 
+    /**
+     * Affecte la variable pacman
+     * @param pacMan
+     */
     public void setPacMan(PacMan pacMan) {
         this.pacMan = pacMan;
     }
+
+    /**
+     *
+     * @return La coordonnée précédente du fantôme.
+     */
 
     public Coordinate getPrevious() {
         return previous;
     }
 
+    /**
+     * Affecte la coordonnée actuel à la variable previous.
+     * @param previous
+     */
+
     public void setPrevious(Coordinate previous) {
         this.previous = previous;
     }
+    /**
+     * Réécriture de la classe mère Action. Même principe mais pour réaliser des actions continues pour l'IA.
+     * @param dir direction de l'action.
+     */
 
     @Override
     public void doWhenEventOccur(int dir) {
@@ -119,7 +147,9 @@ public class ActionContinueFantome extends Action {
         return timeline;
     }
 
-
+    /**
+     * Lorsque l'action est bloquée par une collision.
+     */
     @Override
    public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
@@ -143,6 +173,11 @@ public class ActionContinueFantome extends Action {
         }
         //doWhenEventOccur(temp);
     }
+
+    /**
+     * Méthode donnant le déplacement , lors
+     * d'un nouveau mouvement .
+     */
     public void newMove(){
             VisualObject.removeTimeline(timeline);
             //System.out.println(((Fantome)mouvingObject).bestAction(getGameImage().getCoordinate(),map.getWrongCoorFromReal(getGameImage().getCoordinate()).getListOfWalls()));
@@ -153,7 +188,11 @@ public class ActionContinueFantome extends Action {
             //System.out.println(getX()+" "+getY());
             doWhenEventOccur(temp);
         }
-
+    /**
+     *
+     * @param keyEvent évènement de clavier actuelle.
+     * @param carac touche de clavier de cette action.
+     */
 
     @Override
     public void eventAppear(KeyEvent keyEvent, String carac) {
@@ -162,6 +201,10 @@ public class ActionContinueFantome extends Action {
         }
     }
 
+    /**
+     *
+     * @return True si le fantôme à bougé et False autrement
+     */
     public boolean asMove(){
 
             try{
@@ -179,7 +222,10 @@ public class ActionContinueFantome extends Action {
 
     }
 
-
+    /**
+     *
+     * @return True si la coordonnée correspond à une coordonnée dans la grille et False autrement
+     */
 
     public boolean validMove(){
         for (int i = 0 ; i < map.getRealCoord().size(); i++){

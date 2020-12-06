@@ -15,6 +15,15 @@ public class FantomeAveugle extends Fantome {
     private MapPacman mapPacman;
     private Coordinate coordinateScatter1 = new Coordinate(19,369);
 
+    /**
+     *
+     * @param path Permet de charger le sprite désiré
+     * @param coordinate Permet de savoir ou charger le sprite
+     * @param scene Permet d'ajouter notre fantôme
+     * @param map Cela sert à passer des coordonnées réelles à celles de grilles
+     * @param pacMan Cela sert à passer les coordonnées du PacMan au fantôme
+     */
+
 
     public FantomeAveugle(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene, map, pacMan);
@@ -26,16 +35,29 @@ public class FantomeAveugle extends Fantome {
     }
 
 
-
+    /**
+     *
+     * @return Le pacman
+     */
     public PacMan getPacMan() {
         return pacMan;
     }
 
+    /**
+     *
+     * @param pacMan
+     * Affecte le pacman
+     */
     public void setPacMan(PacMan pacMan) {
         this.pacMan = pacMan;
     }
 
-
+    /**
+     *
+     * @param listOfWalls
+     * @return La direction à prendre ,
+     * afin que le fantôme atteigne son objectif.
+     */
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
 
@@ -47,7 +69,7 @@ public class FantomeAveugle extends Fantome {
 
             } else {
 
-                isNear();
+                isNear(2.5);
             }
 
             return super.Chase(listOfWalls);
@@ -63,8 +85,14 @@ public class FantomeAveugle extends Fantome {
 
     }
 
-        public void isNear(){
-            if (getEuclidianDistanceFromPacMan(getFantome())<= 2.5){
+    /**
+     *
+     * @param distance
+     * Défini l'objectif sur pacman si celui-ci est trop proche ,
+     * autrement défini un objectif aléatoire.
+     */
+        public void isNear(double distance){
+            if (getEuclidianDistanceFromPacMan(getFantome())<= distance){
                 setGoal(pacMan.getCoordinate());
             }else{
                 setRandomGoal();
