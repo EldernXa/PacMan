@@ -1,18 +1,18 @@
 package PhysicsEngine;
 
-//import ReadFile.ReadFileMapPacman;
 import GraphicsEngine.Coordinate;
 import GraphicsEngine.GameImage;
 import GraphicsEngine.Map;
 import GraphicsEngine.VisualObject;
-import PhysicsEngine.MouvingObject;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Représente une action possible dans le jeu.
+ */
 public class Action {
-
 
     private final double x;
     private final double y;
@@ -25,6 +25,16 @@ public class Action {
     private boolean start = false;
 
 
+    /**
+     * Constructeur initiale (liée au évènement)
+     * @param scene modifier la scene actuelle (tel que déplacer une image présente sur la scene).
+     * @param carac touche du clavier qui permet l'action.
+     * @param x valeur de déplacement sur x.
+     * @param y valeur de déplacement sur y.
+     * @param dir la direction du déplacement.
+     * @param nameAction le nom de l'action.
+     * @param mouvingObject l'image qui tente de se déplacer.
+     */
     public Action(Scene scene, String carac, double x, double y, int dir, String nameAction, MouvingObject mouvingObject){
             this.nameAction = nameAction;
             this.x = x;
@@ -36,6 +46,12 @@ public class Action {
             runEvent(scene, carac, dir);
         }
 
+    /**
+     * Utilisée pour l'IA
+     * @param scene modifier la scene actuelle (tel que déplacer une image présente sur la scene).
+     * @param mouvingObject l'image qui tente de se déplacer.
+     * @param dir La direction souhaitée.
+     */
     public Action(Scene scene, MouvingObject mouvingObject, int dir){
         this.nameAction = "Action_IA";
         this.dir = dir;
@@ -70,14 +86,28 @@ public class Action {
 
     }
 
+    /**
+     *
+     * @return le caractère qui déclenche l'action.
+     */
     public String getCarac(){
         return carac;
     }
 
+    /**
+     *
+     * @return l'image qui est associée à cette action.
+     */
     public MouvingObject getMouvingObject(){
         return mouvingObject;
     }
 
+    /**
+     *
+     * @param x coordonnées en x.
+     * @param y coordonnées en y.
+     * @return vrai si la position (x, y) entre en collision avec une image qu'il ne devrait pas.
+     */
     public boolean collisionImgView(double x, double y){
         ImageView imgV = new ImageView(mouvingObject.getGameImage().getImgView().getImage());
         imgV.setX(x);
@@ -86,14 +116,28 @@ public class Action {
     }
 
 
+    /**
+     *
+     * @return la scene utilisée dans cette action.
+     */
     public Scene getScene() {
         return scene;
     }
 
+    /**
+     *
+     * @return la direction de cette action.
+     */
     public int getDir(){
             return dir;
     }
 
+    /**
+     * Déclenche l'évènement de clavier.
+     * @param scene permet de lancer l'évènement.
+     * @param carac touche qui va lancer l'action.
+     * @param dir la direction demandée.
+     */
     public void runEvent (Scene scene, String carac,int dir){
         eventHandler = keyEvent -> {
             eventAppear(keyEvent, carac);
@@ -102,6 +146,11 @@ public class Action {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, eventHandler);
     }
 
+    /**
+     * Déclenche l'évènement de clavier (pour l'IA - l'appuie sur n'importe quel touche le fais démarrer).
+     * @param scene permet de lancer l'évènement.
+     * @param dir la direction demandée.
+     */
     public void runEvent (Scene scene,int dir){
         scene.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
             if(!start) {
@@ -111,10 +160,11 @@ public class Action {
         });
     }
 
-    public boolean verif(KeyEvent keyEvent, String carac){
-        return keyEvent.getCode().getChar().toLowerCase().compareTo(carac.toLowerCase())==0;
-    }
-
+    /**
+     * lancement de l'évènement actuelle si la touche de clavier appuyée est la même que carac.
+     * @param keyEvent évènement de clavier actuelle.
+     * @param carac touche de clavier de cette action.
+     */
     public void eventAppear(KeyEvent keyEvent, String carac){
         if (keyEvent.getCode().getChar().toLowerCase().compareTo(
                 carac.toLowerCase()) == 0) {
@@ -122,15 +172,26 @@ public class Action {
         }
     }
 
-
+    /**
+     * Permet de lancer le mouvement après vérification de l'évènement.
+     * @param dir direction de l'action.
+     */
     public void doWhenEventOccur ( int dir){
         move(mouvingObject.getGameImage().getCoordinate().getX() + x, mouvingObject.getGameImage().getCoordinate().getY() + y, dir);
     }
 
+    /**
+     *
+     * @return la valeur du x du déplacement de l'action.
+     */
     public double getX () {
         return x;
     }
 
+    /**
+     *
+     * @return la valeur du y du déplacement de l'action.
+     */
     public double getY () {
         return y;
     }
@@ -141,6 +202,13 @@ public class Action {
 
     }
 
+
+    /**
+     * Permet le déplacement de l'image en fonction de l'action en changeant les sprites pour les animations.
+     * @param x valeur du x du déplacement.
+     * @param y valeur du y du déplacement.
+     * @param dir direction du déplacement.
+     */
     private void move ( double x, double y, int dir){
         Coordinate c = new Coordinate(mouvingObject.getGameImage().getCoordinate().getX(), mouvingObject.getGameImage().getCoordinate().getY());
         if (x >= 0 && y >= 0) {
@@ -153,19 +221,35 @@ public class Action {
         }
     }
 
+    /**
+     * passe à l'image d'Animation suivante.
+     * @param dir direction du mouvement.
+     */
     public void nextImage(int dir){
         mouvingObject.nextImage(dir);
     }
 
+    /**
+     * passe à l'image d'Animation précédente.
+     * @param dir direction du mouvement.
+     */
     public void previousImage(int dir){
         mouvingObject.previousImage(dir);
     }
 
+    /**
+     *
+     * @return le gameImage associée au mouvingObject de l'action.
+     */
     public GameImage getGameImage () {
         return mouvingObject.getGameImage();
     }
 
-
+    /**
+     *
+     * @param a une image
+     * @return vrai si a est en collision avec une autre images (quelle ne devrait pas), faux sinon.
+     */
     public boolean collision (VisualObject a){
         for(VisualObject v : Map.visualObjects){
             if(a!=v) {
@@ -176,6 +260,12 @@ public class Action {
         }
         return false;
     }
+
+    /**
+     *
+     * @param a une image
+     * @return vrai si a est en collision avec une autre images (quelle ne devrait pas), faux sinon.
+     */
     public boolean collision(ImageView a){
         for(VisualObject v : Map.visualObjects){
             if(intersect(a, v)) {
@@ -186,12 +276,25 @@ public class Action {
         return false;
     }
 
+    /**
+     *
+     * @param a une image.
+     * @param b une image.
+     * @return vrai si a est en collision avec b (et que b n'est pas franchissable), faux sinon.
+     */
     public boolean intersect(VisualObject a, VisualObject b) {
         if (a.getImageView().getBoundsInParent().intersects(b.getImageView().getBoundsInParent())) {
             return b.effectCollision(a);
         }
         return false;
     }
+
+    /**
+     *
+     * @param a une image.
+     * @param b une image.
+     * @return vrai si a est en collision avec b (et que b n'est pas franchissable), faux sinon.
+     */
     public boolean intersect(ImageView a, VisualObject b) {
         if (a.getBoundsInParent().intersects(b.getImageView().getBoundsInParent())) {
 
