@@ -1,26 +1,36 @@
 package PhysicsEngine;
 
-import GraphicsEngine.GameImage;
 import GraphicsEngine.VisualObject;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
 import java.util.LinkedList;
-import java.util.Locale;
 
 
+/**
+ * Permet des actions prolongées (qui continue tant qu'il y a une collision ou que l'on change d'action).
+ */
 public class ActionContinue extends Action{
 
     private final float tps;
     private Timeline timeline;
-    private int indTimeline;
     private final MouvingObject mouvingObject;
     private final LinkedList<String> listKeyEvent;
 
+    /**
+     * Permet la mise en place de l'action.
+     * @param scene permet de déclencher l'évènement pour l'action.
+     * @param carac touche du clavier pour déclencher l'action.
+     * @param x valeur de déplacement sur x.
+     * @param y valeur de déplacement sur y.
+     * @param dir direction de déplacement de l'action.
+     * @param nameAction nom de l'action.
+     * @param tps la durée de l'animation (tous les tps faire quelque chose).
+     * @param mouvingObject image qui tente de se déplacer.
+     */
     public ActionContinue(Scene scene, String carac, double x, double y, int dir, String nameAction, float tps, MouvingObject mouvingObject){
         super(scene, carac, x, y, dir, nameAction, mouvingObject);
         listKeyEvent = new LinkedList<>();
@@ -28,12 +38,18 @@ public class ActionContinue extends Action{
         this.tps = tps;
     }
 
+    /**
+     *
+     * @return timeline de l'action.
+     */
     public Timeline getTimeline(){
         return timeline;
     }
-    public int getIndTimeline(){
-        return indTimeline;
-    }
+
+    /**
+     * Réécriture de la classe mère Action. Même principe mais pour réaliser des actions continues.
+     * @param dir direction de l'action.
+     */
     @Override
     public void doWhenEventOccur(int dir){
         if (!collisionImgView(getGameImage().getCoordinate().getX() + getX(), getGameImage().getCoordinate().getY() + getY())) {
@@ -79,7 +95,7 @@ public class ActionContinue extends Action{
                     }
             ));
             if(!VisualObject.containsTimeline(timeline))
-                indTimeline = VisualObject.addTimeline(timeline, mouvingObject);
+                VisualObject.addTimeline(timeline, mouvingObject);
             VisualObject.startTimelineParallel();
         }else{
             if(mouvingObject.getActualAction()!=this && mouvingObject.getActualAction()!=null)
@@ -87,6 +103,10 @@ public class ActionContinue extends Action{
         }
     }
 
+    /**
+     * Passe à l'image d'Animation suivante avec un intervalle de temps.
+     * @param dir direction du mouvement.
+     */
     @Override
     public void nextImage(int dir){
         if(mouvingObject.getTpsAnimate()%10==0){
@@ -94,6 +114,10 @@ public class ActionContinue extends Action{
         }
     }
 
+    /**
+     * Passe à l'image d'Animation précédente avec un intervalle de temps.
+     * @param dir direction du mouvement.
+     */
     @Override
     public void previousImage(int dir){
         if(mouvingObject.getTpsAnimate()%10==0){
@@ -101,6 +125,9 @@ public class ActionContinue extends Action{
         }
     }
 
+    /**
+     * Lorsque l'action est bloquée par une collision.
+     */
     @Override
     public void doWhenBlock(){
         VisualObject.stopTimelineParallel();
@@ -110,20 +137,30 @@ public class ActionContinue extends Action{
         mouvingObject.setActionNext(null);
     }
 
+    /**
+     *
+     * @param keyEvent évènement de clavier actuelle.
+     * @param carac touche de clavier de cette action.
+     */
     @Override
     public void eventAppear(KeyEvent keyEvent, String carac){
-        if(!listKeyEvent.contains(keyEvent.getCode().getChar().toLowerCase()) && verif(keyEvent, carac)){
+        if(!listKeyEvent.contains(keyEvent.getCode().getChar().toLowerCase())){
             listKeyEvent.push(keyEvent.getCode().getChar().toLowerCase());
             super.eventAppear(keyEvent, carac);
         }
     }
 
+    /**
+     *
+     * @param scene permet de lancer l'évènement.
+     * @param carac touche qui va lancer l'action.
+     * @param dir la direction demandée.
+     */
     @Override
     public void runEvent(Scene scene, String carac, int dir){
         super.runEvent(scene, carac, dir);
         scene.addEventHandler(KeyEvent.KEY_RELEASED, keyEvent -> {
-            if(verif(keyEvent, carac))
-                listKeyEvent.remove(keyEvent.getCode().getChar().toLowerCase());
+                    listKeyEvent.remove(keyEvent.getCode().getChar().toLowerCase());
         });
     }
 
