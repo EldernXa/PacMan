@@ -1,24 +1,19 @@
 package GamePlay.Pacman;
 
 import GraphicsEngine.*;
-import PhysicsEngine.Action;
 import PhysicsEngine.ActionContinue;
 import PhysicsEngine.MouvingObject;
 import ReadFile.ReadFileCommandes;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * class for the Pacman
  */
-
 public class PacMan extends MouvingObject {
 
     private final int nbViesMax = 3;
@@ -105,6 +100,10 @@ public class PacMan extends MouvingObject {
     }
 
 
+    /**
+     *
+     * @return nb de points du Pacman.
+     */
     public int getNbPoints() {
         return nbPoints.get();
     }
@@ -112,7 +111,7 @@ public class PacMan extends MouvingObject {
     /**
      *
      * @param visualObjects image of the colliion object
-     * @return
+     * @return true si on peut passer, false sinon.
      */
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
@@ -139,8 +138,9 @@ public class PacMan extends MouvingObject {
         nbPoints.set(nbPoints.get()+nb);
     }
 
-
-
+    /**
+     * diminue la vie de PacMan.
+     */
     public void diminueVies() {
 
          nbVies_restantes.set(nbVies_restantes.get()-1);
@@ -166,6 +166,10 @@ public class PacMan extends MouvingObject {
         changeListenerVies = null;
     }
 
+    /**
+     *
+     * @return true si Pacman est en super pacman, false sinon.
+     */
     public boolean isSuperPacman() {
         return superPacman;
     }
