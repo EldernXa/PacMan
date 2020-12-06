@@ -10,6 +10,12 @@ import java.io.File;
 
 public abstract class UnmouvingObj extends VisualObject {
 
+    /**
+     *
+     * @param path chemin de l'image.
+     * @param coordinate coordonnées initiale de l'image.
+     * @param scene scene de l'image.
+     */
     public UnmouvingObj(String path, Coordinate coordinate, Scene scene){
         super(path, coordinate, scene);
         super.getGameImage().setImage(new Image(new File(path).toURI().toString()));
