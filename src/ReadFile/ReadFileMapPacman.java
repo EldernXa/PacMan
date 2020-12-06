@@ -7,6 +7,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Classe permettant la lecture de tous les fichier servant à la création de la map pacman et de tous
+ * les objets dessus
+ */
 public class ReadFileMapPacman extends ReadFileMap{
     private ArrayList<Coordinate> tabCoordNoPoint = new ArrayList<>();
     private ArrayList<PosFruitNSuperPointNPacManNFantoms> tabFruitNSupPoint = new ArrayList<>();
@@ -15,6 +19,12 @@ public class ReadFileMapPacman extends ReadFileMap{
     private File pointsNFruit;
     private File pacmanAndFantoms;
 
+    /**
+     * Constructeur qui a partir d'un lien vers le dossier contenant les fichiers contenant les informations relatives
+     * à la map de pacman initialise la liste des murs lu, initialise la liste des points interdits et des coordonnées des fruits
+     * et initialise les coordonnées deu Pacman et des différents fantomes
+     * @param mapFolderPath
+     */
     public ReadFileMapPacman(String mapFolderPath){
         this.mapFile = new File(mapFolderPath + "PacmanMap.txt");
         this.pointsNFruit = new File(mapFolderPath + "Point&Fruit.txt");
@@ -31,11 +41,17 @@ public class ReadFileMapPacman extends ReadFileMap{
         }*/
     }
 
+    /**
+     * Initialisation des tableaux de fruit et des pos interdites pour les points
+     */
     public void initTabNoPointFruitNSupPoint(){
         initTabCoordNoPoint();
         initTabFruitNSupPoint();
     }
 
+    /**
+     * Initialise le tableau des coordonnées interdites pour les points
+     */
     public void initTabCoordNoPoint(){
         try{
             Scanner pointNFruitScanner = new Scanner(pointsNFruit);
@@ -55,6 +71,11 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
     }
 
+    /**
+     * Ajout à la listes des coordonnée interdite pour les points dans le cas ou la coordonnée n'appartiendrait pas déjà à la liste,
+     * permet d'éviter les doublons
+     * @param coordinate
+     */
     public void ajouterATabCoordNoPoint(Coordinate coordinate){
         boolean add = true;
         for(Coordinate cood : tabCoordNoPoint){
@@ -67,6 +88,9 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
     }
 
+    /**
+     * Initialise la liste des fruits et des super point
+     */
     public void initTabFruitNSupPoint(){
         try {
             Scanner pointNFruitScanner = new Scanner(pointsNFruit);
@@ -87,6 +111,11 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
     }
 
+    /**
+     * Permet de récupérer le character dans le cas ou le fichier n'aurait pas une liste de character
+     * @param currentLine
+     * @return
+     */
     public char recupererCharacter(String currentLine){
         int i = 0;
             while(currentLine.charAt(i) != ':'){
@@ -96,6 +125,10 @@ public class ReadFileMapPacman extends ReadFileMap{
             return currentLine.charAt(i);
     }
 
+    /**
+     * Récupère les abscisse et ordonnées notées dans le ficher et récupère la liste des characters également
+     * ajoute un PosMursAssocies avec les informations récupérées
+     */
     public void initTabMurFctCoord(){
         try {
             Scanner mapFileScanner = new Scanner(mapFile);
@@ -123,6 +156,9 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
     }
 
+    /**
+     * Lit dans le fichier correspondant les positions du Pacman et des fantomes
+     */
     public void initPosPacManNFantoms(){
         try {
             Scanner pacManNFantomScanner = new Scanner(pacmanAndFantoms);
@@ -137,6 +173,11 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
     }
 
+    /**
+     * Initialise la liste des Pacman et des fantomes en fonction des informations lu dans le fichier correspondant
+     * @param coordinate
+     * @param currentLine
+     */
     public void initTabPacmanNFantoms(Coordinate coordinate, String currentLine ){
         int i = 0;
         while(currentLine.charAt(i) != ':'){
@@ -155,6 +196,11 @@ public class ReadFileMapPacman extends ReadFileMap{
         }
     }
 
+    /**
+     * Récupere l'abscisse en lisant dans le fichier
+     * @param currentLine
+     * @return
+     */
     public double recupererAbsc(String currentLine){
         int i = 0;
         int absc;
@@ -172,6 +218,11 @@ public class ReadFileMapPacman extends ReadFileMap{
         return absc;
     }
 
+    /**
+     * Récupère l'ordonées en lisant dans le fichier
+     * @param currentline
+     * @return
+     */
     public double recupererOrd(String currentline){
         int i = 0 ;
         int ord;
@@ -188,6 +239,11 @@ public class ReadFileMapPacman extends ReadFileMap{
         return ord;
     }
 
+    /**
+     * Récupère la liste des character correspondant au différennts murs en lisant dans le fichier
+     * @param currentLine
+     * @return
+     */
     public ArrayList<Character> recupererListOfWalls(String currentLine){
         ArrayList<Character> tamponList = new ArrayList<>();
         int i = 0;
@@ -208,30 +264,58 @@ public class ReadFileMapPacman extends ReadFileMap{
         return tamponList;
     }
 
+    /**
+     * Récupère l'array liste des Fruits et Super Points
+     * @return
+     */
     public ArrayList<PosFruitNSuperPointNPacManNFantoms> getTabFruitNSupPoint() {
         return tabFruitNSupPoint;
     }
 
+    /**
+     * Récupère l'array liste des coordonnées ou il ne doit pas y avoir de points
+     * @return
+     */
     public ArrayList<Coordinate> getTabCoordNoPoint() {
         return tabCoordNoPoint;
     }
 
+    /**
+     * Récupère l'abscisse maximale en faisant un appel à la méthode de la classe étendue
+     * @return
+     */
     public double getAbscMax() {
         return super.getAbscMax();
     }
 
+    /**
+     * Récupère l'ordonnée macimale en faisant un appel à la méthode de la classe étendue
+     * @return
+     */
     public double getOrdMax() {
         return super.getOrdMax();
     }
 
+    /**
+     * Récupère la liste des PosMurAssocies
+     * @return
+     */
     public ArrayList<PosMursAssocies> getTabMurFctCoord() {
         return super.getTabMurFctCoord();
     }
 
+    /**
+     * Récupère L'array liste des Position avec des pacman ou des fantomes associes au coordonnées
+     * @return
+     */
     public ArrayList<PosFruitNSuperPointNPacManNFantoms> getTabPacmanNFantoms() {
         return tabPacmanNFantoms;
     }
 
+    /**
+     * Récupère le fichier ou l'on lit les murs
+     * @return
+     */
     public File getMapFile() {
         return mapFile;
     }
