@@ -29,6 +29,11 @@ public class FantomeChasseur extends Fantome {
 
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
+        //System.out.println(pacMan.getNbPoints());
+       /* if(pacMan.getNbPoints() >= 2){
+            //super.setWaiting(false);
+            System.out.println("J'attend plus");*/
+
 
         if (pacMan.isSuperPacman()) {
             super.setGoal(coordinateScatter1);
@@ -38,6 +43,10 @@ public class FantomeChasseur extends Fantome {
                 super.setGoal(pacMan.getGameImage().getCoordinate());
 
         }
+        /*}else {
+            System.out.println("J'attend");
+            //super.setWaiting(true);
+        }*/
 
         return super.Chase(listOfWalls);
     }

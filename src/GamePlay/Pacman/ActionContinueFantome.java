@@ -55,7 +55,6 @@ public class ActionContinueFantome extends Action {
             timeline.getKeyFrames().add(new KeyFrame(
                     Duration.millis(tps),
                     temps -> {
-                        //((FantomeRouge)mouvingObject).getGoal().affichageCoord();
                         mouvingObject.incrementTpsAnimate((mouvingObject.getTpsAnimate()+1)%(int)tps);
                         if(mouvingObject.getActionNext()!=null && mouvingObject.verifActionNext(getGameImage().getCoordinate().getX() + mouvingObject.getActionNext().getX(),
                                 getGameImage().getCoordinate().getY()+mouvingObject.getActionNext().getY())){

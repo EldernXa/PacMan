@@ -59,6 +59,10 @@ public class Action {
         this.mouvingObject = mouvingObject;
         this.carac = null;
         switch (dir){
+            /*case -1:
+                this.x = 0;
+                this.y = 0;
+                break;*/
             case 0:
                 this.x = getGameImage().getValueMove();
                 this.y = 0;
@@ -76,8 +80,8 @@ public class Action {
                 this.y = -getGameImage().getValueMove();
                 break;
             default:
-                this.x = 0;
-                this.y = 0;
+                this.x = -1;
+                this.y = -1;
                 break;
         }
 

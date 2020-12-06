@@ -20,7 +20,18 @@ public class Fantome extends MouvingObject {
     private MapPacman mapPacman;
     private final Scene scene;
     private boolean isPlayable;
+    private boolean isWaiting;
 
+    /**
+     *
+     * @param path  Permet de charger le sprite désiré
+     * @param coordinate Permet de savoir ou charger le sprite
+     * @param scene Permet d'ajouter notre fantôme
+     * @param map Cela sert à passer des coordonnées réelles à celles de grilles
+     * @param pacMan Cela sert à passer les coordonnées du PacMan au fantôme
+     *
+     *
+     */
     public Fantome(String path, Coordinate coordinate, Scene scene, MapPacman map, PacMan pacMan) {
         super(path, coordinate, scene);
         isPlayable = false;
@@ -31,9 +42,20 @@ public class Fantome extends MouvingObject {
         setIA();
     }
 
+    /**
+     *Cette methode nous permet de connaître
+     * si le fantôme est dans l'état jouable ou non .
+     * @return un boolean
+     */
     public boolean getPlayable(){
         return isPlayable;
     }
+
+    /**
+     * Cette méthode initialise le fantôme
+     * joueur . Cette méthode n'est appelé qu'une seule fois ;
+     * lors de la création du fantôme.
+     */
     public void setJ(){
         isPlayable = true;
         clearListAction();
@@ -47,29 +69,74 @@ public class Fantome extends MouvingObject {
         }
     }
 
+    /**
+     * Cette méthode initialise le fantôme
+     * autonome . Cette méthode n'est appelé qu'une seule fois ;
+     * lors de la création du fantôme.
+     */
     public void setIA(){
         clearListAction();
         isPlayable = false;
+        addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, -1, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 0, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 1, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 2, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 3, mapPacman, pacMan));
     }
 
+
+    /**
+     *
+     * @return La scène actuel
+     */
     public Scene getScene(){
         return scene;
     }
 
+    /**
+     *
+     * @param direction
+     *  Cette méthode permet d'attribuer une direction
+     *  au fantôme.
+     */
     public static void setDirection(int direction) {
         Fantome.direction = direction;
     }
 
+    /**
+     *
+     * @return direction
+     * Cette méthode permet  d'obtenir,
+     * la direction du fantôme.
+     */
     public static int getDirection() {
         return direction;
     }
 
+    /**
+     *
+     * @return un boolean
+     * Cette méthode permet de savoir ,
+     * si le fantôme est dans un état d'attente ou non .
+     */
+    public boolean isWaiting() {
+        return isWaiting;
+    }
 
+    /**
+     *
+     * @param waiting
+     * Cette méthode permet de signaler
+     * au fantôme s'il doit attendre ou non .
+     */
+    public void setWaiting(boolean waiting) {
+        isWaiting = waiting;
+    }
 
+    /**
+     * Cette méthode permet de d'affecter
+     * un objectif aléatoire dans la carte.
+     */
     public void setRandomGoal() {
 
         Random random = new Random();
@@ -79,17 +146,33 @@ public class Fantome extends MouvingObject {
 
     }
 
+    /**
+     *
+     * @param coordinate
+     * Cette méthode permet d'affecter
+     * un objectif , selon la coordonnée donnée .
+     *
+     */
+
     public void setGoal(Coordinate coordinate){
         this.goal = coordinate;
     }
 
-
-        public Coordinate getGoal () {
+    /**
+     *
+     * @return Les coordonnées de l'objectif
+     *
+     */
+     public Coordinate getGoal () {
             return goal;
         }
 
 
-
+    /**
+     *
+     * @param newFantome
+     * @return La distance entre le fantôme et son objectif .
+     */
         public double getEuclidianDistanceFromGoal (Coordinate newFantome){
 
 
@@ -100,6 +183,12 @@ public class Fantome extends MouvingObject {
 
 
         }
+
+    /**
+     *
+     * @param newFantome
+     * @return La distance entre le fantôme et Pacman .
+     */
     public double getEuclidianDistanceFromPacMan (Coordinate newFantome){
 
         Coordinate temp = closeFakeCoordinate(pacMan.getGameImage().getCoordinate());
@@ -109,6 +198,12 @@ public class Fantome extends MouvingObject {
         return Math.sqrt(xGF + yGF);
     }
 
+    /**
+     *
+     * @param coordinate
+     * @param coordinate1
+     * @return La distance entre deux coordonnées .
+     */
     public double getEuclidianDistance (Coordinate coordinate,Coordinate coordinate1){
                 double xGF = Math.pow(coordinate.getX() - coordinate1.getX(), 2);
                 double yGF = Math.pow(coordinate.getY() - coordinate1.getY(), 2);
@@ -116,11 +211,19 @@ public class Fantome extends MouvingObject {
 
     }
 
-
+    /**
+     *
+     * @param listOfWalls
+     * @return Le numéro de l'action à effectuer
+     * pour atteindre son objectif.
+     */
         public int Chase ( ArrayList<Character> listOfWalls){
 
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
             Coordinate entrance = new Coordinate(4,2);
+            if(isWaiting()){
+                return -1;
+            }
 
             switch (bestAction(inFrontSpawn(entrance,charactersFeasable))){
                 case 'H':
@@ -147,7 +250,11 @@ public class Fantome extends MouvingObject {
         }
 
 
-
+    /**
+     *
+     * @param list (la liste des murs à un endroit donné)
+     * @return Une liste des actions possibles à un endroit donné
+     */
 
         public ArrayList<Character> actionPossible (ArrayList <Character> list) {
             ArrayList<Character> characters = new ArrayList<>();
@@ -245,10 +352,21 @@ public class Fantome extends MouvingObject {
 
         }
 
+    /**
+     *
+     * @return Le dernier character utilisé.
+     */
     public Character getLastCharacter() {
         return lastCharacter;
     }
 
+    /**
+     *
+     * @param character
+     * @return Le meilleur choix d'action possible.
+     * Avec un ordre de priorité si les actions sont à
+     * la même distance.(Haut>Droite>Bas>Gauche)
+     */
     public Character bestAction (ArrayList<Character> character){
 
             character = removeBackwardDirection(character,oppositeDirection(getLastCharacter()));
@@ -311,6 +429,13 @@ public class Fantome extends MouvingObject {
 
         }
 
+    /**
+     *
+     * @param visualObjects
+     * @return Faux s'il n'y à pas eu de collision
+     * Autrement cela implique soit la mort du Pacman
+     * ou bien du fantôme.
+     */
     @Override
     public boolean effectCollision(VisualObject visualObjects) {
         if(visualObjects!=null && visualObjects.getClass()==PacMan.class){
@@ -328,12 +453,22 @@ public class Fantome extends MouvingObject {
 
         return false;
     }
+
+    /**
+     * Cette méthode effectue la réinitialisation
+     * du fantôme, tels que les coordonnées et l'animation.
+     */
     public void death(){
         setCoordinate(super.getGameImage().getCoordInit());
         super.initAnimation();
 
     }
 
+    /**
+     *
+     * @param coordinate
+     * Cette méthode permet d'affecter au fantôme des coordonnées.
+     */
     public void setCoordinate(Coordinate coordinate) {
         this.fantome = new Coordinate(coordinate.getX(),coordinate.getY());
         super.getImageView().setX(coordinate.getX());
@@ -341,6 +476,12 @@ public class Fantome extends MouvingObject {
         super.move(coordinate.getX(),coordinate.getY());
     }
 
+    /**
+     *
+     * @param character
+     * @return La direction opposé ,
+     * d'une direction donné.
+     */
     public Character oppositeDirection(char character){
 
         char newChar = new Character( ' ');
@@ -351,18 +492,40 @@ public class Fantome extends MouvingObject {
         return newChar;
     }
 
+    /**
+     *
+     * @param characters
+     * @param character
+     * @return Une nouvelle arraylist sans le character opposé.
+     */
     public ArrayList<Character> removeBackwardDirection(ArrayList<Character> characters,Character character){
         characters.remove(character);
         return characters;
     }
 
+    /**
+     *
+     * @return La coordonné du fantôme.
+     */
     public Coordinate getFantome() {
         return fantome;
     }
 
+    /**
+     *
+     * @param lastCharacter
+     * Enregistre le dernier character utilisé
+     */
     public void setLastCharacter(char lastCharacter) {
         this.lastCharacter = lastCharacter;
     }
+
+    /**
+     *
+     * @param pacMan
+     * @param cases
+     * @return La coordonnée anticipé de x cases du Pacman.
+     */
     public Coordinate anticipation(PacMan pacMan,int cases){
         double pas = 50.0*cases;
         switch (pacMan.getDir()){
@@ -403,6 +566,16 @@ public class Fantome extends MouvingObject {
         return new Coordinate(-1,-1);
 
     }
+
+
+    /**
+     *
+     * @param fantomeRouge
+     * @return Une coordonnée .
+     * On regarde la coordonnée ou se trouvera le Pacman dans une cases,
+     * puis on regarde le vecteur depuis cette coordonnée et celle du fantôme
+     * chasseur , et on multiplie ce vecteur par deux afin d'obtenir la coordonnée désiré.
+     */
     public Coordinate Transition(FantomeChasseur fantomeRouge){
         Coordinate coordinate = closeFakeCoordinate(fantomeRouge.getGameImage().getCoordinate());
         Coordinate coordinate1 = closeFakeCoordinate(anticipation(pacMan,1));
@@ -411,6 +584,14 @@ public class Fantome extends MouvingObject {
         return new Coordinate(coordinate1.getX() +facteurX,coordinate1.getY()+facteurY);
     }
 
+    /**
+     *
+     * @param coordinate
+     * @return Une coordonné
+     * On prend une coordonnée réelle
+     * et on renvoie la coordonnée
+     * de la grille la plus proche.
+     */
    public Coordinate closeFakeCoordinate(Coordinate coordinate){
        double distance = 100000.0;
        int indexCloser = 0 ;
@@ -424,6 +605,14 @@ public class Fantome extends MouvingObject {
        return mapPacman.getWrongCoorFromReal(mapPacman.getRealCoord().get(indexCloser)).getPointCoordinate();
    }
 
+    /**
+     *
+     * @param coordinate
+     * @param characters
+     * @return Les actions possbiles lorsque le fantôme
+     * se retrouve devant le spawn.
+     * Afin d'empecher le fantôme d'y retourner.
+     */
    public ArrayList<Character> inFrontSpawn(Coordinate coordinate,ArrayList<Character> characters){
 
        if (closeFakeCoordinate(getFantome()).compare(coordinate)){
