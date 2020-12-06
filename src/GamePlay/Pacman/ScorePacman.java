@@ -14,24 +14,22 @@ import javafx.stage.Stage;
  * class for score points
  */
 
-public class ScorePacman implements Score {
+public class ScorePacman extends Score {
     Label nbVies = new Label();
     Label nbPoints = new Label();
-    HBox score = new HBox();
     HBox vies = new HBox(5);
     ImageViewSizePos logoCoeur = new ImageViewSizePos();
     private final PacMan pacMan;
 
 
     public ScorePacman(Stage stage, VisualObject visualObject){
+        super(stage);
         logoCoeur.setImageView("./data/Logos/heart.png");
         pacMan = (PacMan)visualObject;
         nbVies.setText(String.valueOf(pacMan.getNbVies()));
         nbPoints.setText(String.valueOf(pacMan.getNbPoints()));
         setHbox();
         modifyRealTimeValue(pacMan,stage);
-
-
     }
 
     /**
@@ -42,13 +40,15 @@ public class ScorePacman implements Score {
         nbPoints.setTextFill(Color.WHITE);
         nbPoints.setMinWidth(40);
         vies.getChildren().addAll(logoCoeur.getImageView(),nbVies);
-        score.getChildren().addAll(nbPoints,vies);
-        score.setPrefSize(40,40);
         logoCoeur.setSize(20,20);
         nbPoints.setFont(Font.font("Arial",20));
         nbVies.setFont(Font.font("Arial",20));
-        score.setTranslateX(14);
-        score.setTranslateY(5);
+        super.addNode(nbPoints);
+        super.addNode(vies);
+        super.setHBox();
+        super.getScore().setPrefSize(40, 40);
+        super.getScore().setTranslateX(14);
+        super.getScore().setTranslateY(5);
     }
 
     /**
@@ -75,16 +75,4 @@ public class ScorePacman implements Score {
         pacMan.setListenerNbVies(changeListenerVies);
     }
 
-    /**
-     *
-     * @return the score
-     */
-    public HBox getScore() {
-        return score;
-    }
-
-    /*static void refresh(VisualObject visualObject){
-        nbVies.setText(String.valueOf(pacMan.getNbVies()));
-        nbPoints.setText(String.valueOf(pacMan.getNbPoints()));
-    }*/
 }
