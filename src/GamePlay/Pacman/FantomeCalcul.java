@@ -87,6 +87,9 @@ public class FantomeCalcul extends Fantome{
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
         //if (pacMan.getNbPoints() >= 20){
+            if(isInSpawn(getFantome())){
+            super.setGoal(getCoordinateInFrontSpawn());
+            }
             if(pacMan.isSuperPacman()){
                 setGoal(coordinateScatter1);
                 }else {

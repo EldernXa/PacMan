@@ -42,6 +42,10 @@ public class FantomeStratège extends Fantome{
      */
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
+        if(isInSpawn(getFantome())){
+            System.out.println("Ici");
+            super.setGoal(getCoordinateInFrontSpawn());
+        }
         if (pacMan.isSuperPacman()){
             super.setGoal(coordinateScatter1);
         }

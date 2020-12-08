@@ -220,12 +220,12 @@ public class Fantome extends MouvingObject {
         public int Chase ( ArrayList<Character> listOfWalls){
 
             ArrayList<Character> charactersFeasable = actionPossible(listOfWalls);
-            Coordinate entrance = new Coordinate(4,2);
-            if(isWaiting()){
+            Coordinate entrance = getCoordinateInFrontSpawn();
+           if(isWaiting()){
                 return -1;
             }
 
-            switch (bestAction(inFrontSpawn(entrance,charactersFeasable))){
+            switch (bestAction(charactersFeasable)){
                 case 'H':
                     setLastCharacter('H');
                     int temp = 3;
@@ -635,6 +635,38 @@ public class Fantome extends MouvingObject {
 
         return coordinates;
 
+   }
+
+    /**
+     *
+     * @return une coordonée
+     * En fonction de la difficulte
+     */
+
+   public Coordinate getCoordinateInFrontSpawn(){
+       Coordinate entrance;
+       if(mapPacman.diff.getName().equals("FACILE")){
+           entrance = new Coordinate(4,2);
+       }else {
+           entrance = new Coordinate(6,5);
+       }
+        return entrance;
+   }
+
+   public boolean isInSpawn(Coordinate coordinate){
+       if(mapPacman.diff.getName().equals("FACILE")){
+           if(closeFakeCoordinate(coordinate).compare(new Coordinate(4,3)))return true;
+           if(closeFakeCoordinate(coordinate).compare(new Coordinate(3,3)))return true;
+           if(closeFakeCoordinate(coordinate).compare(new Coordinate(5,3)))return true;
+           return false;
+
+       }else {
+           if(closeFakeCoordinate(coordinate).compare(new Coordinate(6,6)))return true;
+           if(closeFakeCoordinate(coordinate).compare(new Coordinate(5,6)))return true;
+           if(closeFakeCoordinate(coordinate).compare(new Coordinate(7,6)))return true;
+           return false;
+
+       }
    }
 
 

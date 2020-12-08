@@ -62,6 +62,9 @@ public class FantomeAveugle extends Fantome {
     public int Chase(ArrayList<Character> listOfWalls) {
 
         //if (pacMan.getNbPoints() >= 3 * (pacMan.getNbPointsMapMax() / 4)) {
+            if(isInSpawn(getFantome())){
+            super.setGoal(getCoordinateInFrontSpawn());
+            }
 
             if (pacMan.isSuperPacman()) {
 
