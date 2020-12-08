@@ -622,5 +622,20 @@ public class Fantome extends MouvingObject {
        return characters;
    }
 
+    /**
+     *
+     * @return La liste des coordonnées de fuites des fantômes
+     */
+   public ArrayList<Coordinate> coordinatesOfFear(){
+       ArrayList<Coordinate> coordinates = new ArrayList<>();
+       coordinates.add(mapPacman.getRealCoord().get(0)); /*** Ajout du coin haut gauche ***/
+       coordinates.add(new Coordinate(mapPacman.getRealCoord().get(mapPacman.getRealCoord().size()-1).getX(),mapPacman.getRealCoord().get(0).getY()));/*** Ajout du coin haut droite  ***/
+       coordinates.add(new Coordinate(mapPacman.getRealCoord().get(0).getX(),mapPacman.getRealCoord().get(mapPacman.getRealCoord().size()-1).getY()));/*** Ajout du coin bas gauche  ***/
+       coordinates.add(new Coordinate(mapPacman.getRealCoord().get(mapPacman.getRealCoord().size()-1)));/*** Ajout du coin bas droite  ***/
+
+        return coordinates;
+
+   }
+
 
 }
