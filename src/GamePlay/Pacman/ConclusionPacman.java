@@ -18,6 +18,13 @@ public class ConclusionPacman extends Conclusion {
 
     private final int nbPoints;
 
+    /**
+     *
+     * @param stageJeu stage du jeu actuelle.
+     * @param bool réussite ou échec.
+     * @param nbPoints nbPoints du pacman (pour l'affichage).
+     * @param pacMan pacman.
+     */
     public ConclusionPacman(Stage stageJeu, boolean bool,int nbPoints, PacMan pacMan){
         super(stageJeu, bool);
         this.nbPoints = nbPoints;
@@ -25,10 +32,18 @@ public class ConclusionPacman extends Conclusion {
         super.nextLevel(stageJeu);
     }
 
+    /**
+     *
+     * @return nbPoints
+     */
     public int getNbPoints(){
         return nbPoints;
     }
 
+    /**
+     *
+     * @param lbl label à modifier par le jeu.
+     */
     public void initLabel(Label lbl){
         if(getBool()){
             lbl.setText("Vous avez gagné ! \nVous avez obtenu : " + getNbPoints()+" Points.");
@@ -39,24 +54,19 @@ public class ConclusionPacman extends Conclusion {
         }
     }
 
+    /**
+     *
+     * @param stageJeu stage du jeu actuelle.
+     * @return une nouvelle map.
+     */
     public Map initMap(Stage stageJeu){
         return new MapPacman(stageJeu, "./data/Map/"+Map.diff.getName()+"_",Map.isMulti());
     }
 
-
-
-    /*public void clickRetourDiff(Stage stageJeu,Game game,MenuChoixDuJeu menuChoixDuJeu){
-        retourDiff.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                MenuDuJeu menuDuJeu = new MenuDuJeu(stage,game,menuChoixDuJeu.getMenuScene());
-                MenuChoixDifficulte menuChoixDifficulte= new MenuChoixDifficulte(stage,game,menuDuJeu.getMenuDuJeuScene());
-                stageJeu.close();
-                stage.setScene(menuChoixDifficulte.getScene());
-            }
-        });
-    } */
-
+    /**
+     *
+     * @return un game.
+     */
     public Game initGame(){
         Game game = new Game("Pacman");
         game.setImageJeu(new ImageViewSizePos("./data/Jeux/"+game.getName() +"/menuchoixdujeu.jpg", 500, 250));

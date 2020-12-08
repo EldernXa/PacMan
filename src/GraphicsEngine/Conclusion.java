@@ -17,7 +17,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-
+/**
+ * Ce qui termine le jeu.
+ */
 public abstract class Conclusion {
 
     private final StackPane pane;
@@ -33,6 +35,11 @@ public abstract class Conclusion {
     private final Button exit;
     private final boolean bool;
 
+    /**
+     *
+     * @param stageJeu stage du jeu actuelle.
+     * @param bool true si réussite, false sinon.
+     */
     public Conclusion(Stage stageJeu, boolean bool){
         this.bool = bool;
         pane = new StackPane();
@@ -64,21 +71,35 @@ public abstract class Conclusion {
         stage.show();
     }
 
+    /**
+     *
+     * @return réussite ou échec.
+     */
     public boolean getBool(){
         return bool;
     }
 
+    /**
+     * Met en place le label de fin.
+     */
     public void labelForGame(){
         initLabel(titre);
         titre.setFont(Font.font("Arial",20));
     }
 
+    /**
+     *
+     * @param lbl label à modifier par le jeu.
+     */
     public abstract void initLabel(Label lbl);
 
     public Scene getScene() {
         return scene;
     }
 
+    /**
+     * Permet de quitter lors du clic sur le bouton exit.
+     */
     public void clickExit(){
         exit.setOnMouseClicked(mouseEvent->{
             Platform.exit();
@@ -133,6 +154,10 @@ public abstract class Conclusion {
         });
     }
 
+    /**
+     * Permet d'accèder au niveau suivant (si il y en a un).
+     * @param stageJeu stage du jeu actuelle.
+     */
     public void nextLevel(Stage stageJeu){
 
         Game game = initGame();
@@ -159,6 +184,11 @@ public abstract class Conclusion {
         });
     }
 
+    /**
+     *
+     * @param stageJeu stage du jeu actuelle.
+     * @return une nouvelle map (pour rejouer ou passer au niveau suivant).
+     */
     public abstract Map initMap(Stage stageJeu);
 
     /**
