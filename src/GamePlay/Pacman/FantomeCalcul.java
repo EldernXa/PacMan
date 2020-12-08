@@ -19,7 +19,7 @@ public class FantomeCalcul extends Fantome{
 
     private PacMan pacMan;
     private FantomeChasseur fantomeRouge;
-    private Coordinate coordinateScatter1 = new Coordinate(419,419);
+    private Coordinate coordinateScatter1 ;
 
     /**
      *
@@ -36,7 +36,7 @@ public class FantomeCalcul extends Fantome{
 
         this.pacMan = pacMan;
         this.fantomeRouge = fantomeRouge;
-
+        this.coordinateScatter1 = coordinatesOfFear().get(coordinatesOfFear().size()-1);
 
     }
 

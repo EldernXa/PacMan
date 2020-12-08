@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class FantomeChasseur extends Fantome {
 
     private PacMan pacMan;
-    private Coordinate coordinateScatter1 = new Coordinate(419,19);
+    private Coordinate coordinateScatter1 ;
 
 
     /**
@@ -28,6 +28,7 @@ public class FantomeChasseur extends Fantome {
         super(path, coordinate, scene, map, pacMan);
         super.setGoal(pacMan.getGameImage().getCoordinate());
         this.pacMan = pacMan;
+        this.coordinateScatter1 = coordinatesOfFear().get(1);
 
 
     }

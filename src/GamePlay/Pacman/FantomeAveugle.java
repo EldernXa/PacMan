@@ -13,7 +13,7 @@ public class FantomeAveugle extends Fantome {
 
     private PacMan pacMan;
     private MapPacman mapPacman;
-    private Coordinate coordinateScatter1 = new Coordinate(19,369);
+    private Coordinate coordinateScatter1 ;
 
     /**
      *
@@ -29,7 +29,7 @@ public class FantomeAveugle extends Fantome {
         super(path, coordinate, scene, map, pacMan);
         this.pacMan = pacMan;
         this.mapPacman = map;
-
+        this.coordinateScatter1 = coordinatesOfFear().get(2);
 
 
     }
