@@ -14,7 +14,7 @@ public class FantomeStratège extends Fantome{
     private boolean fuite;
     private PacMan pacMan;
     private MapPacman mapPacman;
-    private Coordinate coordinateScatter1 = new Coordinate(19,19);
+    private Coordinate coordinateScatter1 ;
 
 
     /**
@@ -29,7 +29,9 @@ public class FantomeStratège extends Fantome{
         super(path, coordinate, scene, map, pacMan);
         this.mapPacman=map;
         this.pacMan = pacMan;
+        this.coordinateScatter1 = coordinatesOfFear().get(0);
         setGoal(anticipation(pacMan,2));
+
     }
 
     /**
@@ -40,6 +42,10 @@ public class FantomeStratège extends Fantome{
      */
     @Override
     public int Chase(ArrayList<Character> listOfWalls) {
+        if(isInSpawn(getFantome())){
+            System.out.println("Ici");
+            super.setGoal(getCoordinateInFrontSpawn());
+        }
         if (pacMan.isSuperPacman()){
             super.setGoal(coordinateScatter1);
         }

@@ -231,4 +231,6 @@ public abstract class Map {
     public static boolean isMulti() {
         return multi;
     }
+
+
 }

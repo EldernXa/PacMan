@@ -80,8 +80,8 @@ public class Action {
                 this.y = -getGameImage().getValueMove();
                 break;
             default:
-                this.x = -1;
-                this.y = -1;
+                this.x = 0;
+                this.y = 0;
                 break;
         }
 
