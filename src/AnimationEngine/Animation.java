@@ -68,7 +68,10 @@ public class Animation {
      * @return true si l'animation est faisable, false sinon.
      */
     public boolean verifAnimation(int dir){
-        return listImage.get(dir).size()!=0;
+        if(listImage.size() >= dir){
+            return listImage.get(dir).size()!=0;
+        }
+        return false;
     }
 
     /**
