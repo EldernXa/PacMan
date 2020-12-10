@@ -347,6 +347,14 @@ public class Fantome extends MouvingObject {
                 return characters;
 
             }
+            if(list.size() == 0){
+                characters.add('H');
+                characters.add('D');
+                characters.add('B');
+                characters.add('G');
+
+                return characters;
+            }
 
             return characters;
 
