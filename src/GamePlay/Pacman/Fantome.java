@@ -66,6 +66,8 @@ public class Fantome extends MouvingObject {
                     pacmanControle.getToucheMulti().get(i), pacmanControle.getxCoordSolo().get(i),
                     pacmanControle.getyCoordMulti().get(i), i, pacmanControle.getDirectionSolo().get(i),
                     valueTps, this));
+            changeSpriteAnimation("./data/SpriteMouvement/FantomeJoueur/");
+            initAnimation();
         }
     }
 
@@ -82,6 +84,8 @@ public class Fantome extends MouvingObject {
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 1, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 2, mapPacman, pacMan));
         addAction(new ActionContinueFantome(getGameImage(), getScene(), valueTps, this, 3, mapPacman, pacMan));
+        initSpriteAnimation();
+        initAnimation();
     }
 
 
